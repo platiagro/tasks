@@ -25,7 +25,10 @@
     ├── mlp-classifier
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── mlp-regressor
+    ├── mlp-regressor
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── random-forest-classifier
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
