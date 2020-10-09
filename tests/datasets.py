@@ -34,6 +34,23 @@ def iris():
     return response.json()
 
 
+def titanic():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/titanic.csv"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/titanic.csv", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/titanic.csv", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def clean():
     shutil.rmtree("/tmp/data")
 

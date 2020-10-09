@@ -3,7 +3,6 @@ import unittest
 import uuid
 
 import papermill
-import requests
 
 from tests import datasets
 
@@ -21,6 +20,7 @@ class TestAutoMLClassifier(unittest.TestCase):
         os.environ["RUN_ID"] = RUN_ID
 
         datasets.iris()
+        datasets.titanic()
 
     def tearDown(self):
         datasets.clean()
@@ -35,15 +35,38 @@ class TestAutoMLClassifier(unittest.TestCase):
                 dataset="/tmp/data/iris.csv",
                 target="Species",
 
-                filter_type = "remover",
-                model_features = "",
+                filter_type="remover",
+                model_features="",
 
-                one_hot_features = "",
+                one_hot_features="",
 
-                time_left_for_this_task = 60,
-                per_run_time_limit = 60,
-                ensemble_size = 50,
+                time_left_for_this_task=60,
+                per_run_time_limit=60,
+                ensemble_size=50,
 
-                method = "predict_proba",
+                method="predict_proba",
+            ),
+        )
+
+    def test_experiment_titanic(self):
+        experiment_path = "automl-classifier/Experiment.ipynb"
+
+        papermill.execute_notebook(
+            experiment_path,
+            "/dev/null",
+            parameters=dict(
+                dataset="/tmp/data/titanic.csv",
+                target="Survived",
+
+                filter_type="remover",
+                model_features="",
+
+                one_hot_features="",
+
+                time_left_for_this_task=60,
+                per_run_time_limit=60,
+                ensemble_size=50,
+
+                method="predict_proba",
             ),
         )
