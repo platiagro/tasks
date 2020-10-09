@@ -8,6 +8,9 @@
     │   ├── Experiment.ipynb      <- Scripts to train models
     │   └── Deployment.ipynb      <- Scripts to make predictions
     └── automl-regressor
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── logistic-regression
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
