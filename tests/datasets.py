@@ -1,0 +1,42 @@
+import os
+import shutil
+
+import minio
+import requests
+
+BUCKET_NAME = "anonymous"
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "localhost:9000")
+MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minio")
+MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY", "minio123")
+
+MINIO_CLIENT = minio.Minio(
+    endpoint=MINIO_ENDPOINT,
+    access_key=MINIO_ACCESS_KEY,
+    secret_key=MINIO_SECRET_KEY,
+    secure=False,
+)
+
+
+def iris():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/iris.csv"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/iris.csv", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/iris.csv", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
+def clean():
+    shutil.rmtree("/tmp/data")
+
+    objects_to_delete = MINIO_CLIENT.list_objects(BUCKET_NAME, prefix='datasets', recursive=True)
+    for obj in objects_to_delete:
+        MINIO_CLIENT.remove_object(BUCKET_NAME, obj.object_name)
