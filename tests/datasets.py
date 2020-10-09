@@ -51,6 +51,23 @@ def titanic():
     return response.json()
 
 
+def boston():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/boston.csv"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/boston.csv", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/boston.csv", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def clean():
     shutil.rmtree("/tmp/data")
 
