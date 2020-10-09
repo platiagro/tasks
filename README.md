@@ -13,7 +13,10 @@
     ├── logistic-regression
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── linear-regression
+    ├── linear-regression
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── svc
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
