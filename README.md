@@ -22,7 +22,10 @@
     ├── svr
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── mlp-classifier
+    ├── mlp-classifier
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── mlp-regressor
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
