@@ -19,7 +19,10 @@
     ├── svc
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── svr
+    ├── svr
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── mlp-classifier
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
