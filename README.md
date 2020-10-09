@@ -16,7 +16,10 @@
     ├── linear-regression
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── svc
+    ├── svc
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── svr
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
