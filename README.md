@@ -31,9 +31,11 @@
     ├── random-forest-classifier
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── random-forest-regressor
-        ├── Experiment.ipynb
-        └── Deployment.ipynb
+    ├── random-forest-regressor
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── descriptive-analysis
+        └── Experiment.ipynb
 
 ## Testing
 
