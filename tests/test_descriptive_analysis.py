@@ -58,4 +58,3 @@ class TestDescriptiveAnalysis(unittest.TestCase):
                 dataset="/tmp/data/boston.csv",
             ),
         )
-

@@ -34,15 +34,15 @@ class TestSVR(unittest.TestCase):
                 dataset="/tmp/data/boston.csv",
                 target="medv",
 
-                filter_type = "remover",
-                model_features = "",
+                filter_type="remover",
+                model_features="",
 
-                one_hot_features = "",
+                one_hot_features="",
 
-                kernel = "rbf",
-                degree = 3,
-                gamma = "auto",
-                C = 1.0,
-                max_iter = -1,
+                kernel="rbf",
+                degree=3,
+                gamma="auto",
+                C=1.0,
+                max_iter=-1,
             ),
         )

@@ -34,14 +34,14 @@ class TestRandomForestRegressor(unittest.TestCase):
                 dataset="/tmp/data/boston.csv",
                 target="medv",
 
-                filter_type = "remover",
-                model_features = "",
+                filter_type="remover",
+                model_features="",
 
-                one_hot_features = "",
+                one_hot_features="",
 
-                n_estimators = 10,
-                criterion = "mse",
-                max_depth = None,
-                max_features = "auto",
+                n_estimators=10,
+                criterion="mse",
+                max_depth=None,
+                max_features="auto",
             ),
         )

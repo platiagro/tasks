@@ -35,19 +35,19 @@ class TestMLPClassifier(unittest.TestCase):
                 dataset="/tmp/data/iris.csv",
                 target="Species",
 
-                filter_type = "remover",
-                model_features = "",
+                filter_type="remover",
+                model_features="",
 
-                one_hot_features = "",
+                one_hot_features="",
 
-                hidden_layer_sizes = 100,
-                activation = "relu",
-                solver = "adam",
-                learning_rate = "constant",
-                max_iter = 200,
-                shuffle = True,
+                hidden_layer_sizes=100,
+                activation="relu",
+                solver="adam",
+                learning_rate="constant",
+                max_iter=200,
+                shuffle=True,
 
-                method = "predict_proba",
+                method="predict_proba",
             ),
         )
 
@@ -61,18 +61,18 @@ class TestMLPClassifier(unittest.TestCase):
                 dataset="/tmp/data/titanic.csv",
                 target="Survived",
 
-                filter_type = "remover",
-                model_features = "",
+                filter_type="remover",
+                model_features="",
 
-                one_hot_features = "",
+                one_hot_features="",
 
-                hidden_layer_sizes = 100,
-                activation = "relu",
-                solver = "adam",
-                learning_rate = "constant",
-                max_iter = 200,
-                shuffle = True,
+                hidden_layer_sizes=100,
+                activation="relu",
+                solver="adam",
+                learning_rate="constant",
+                max_iter=200,
+                shuffle=True,
 
-                method = "predict_proba",
+                method="predict_proba",
             ),
         )
