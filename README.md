@@ -39,7 +39,10 @@
     ├── feature-tools
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── filter-selection
+    ├── filter-selection
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── grouping-categorical-features
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
