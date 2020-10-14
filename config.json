@@ -302,5 +302,22 @@
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
         "image": "platiagro/platiagro-notebook-image:0.1.0"
+    },
+    {
+        "name": "Seleção de Atributos por Correlação",
+        "description": "Remove todas as features de baixa variação e altamente correlacionadas",
+        "experimentNotebook": "/samples/pre-selection/Experiment.ipynb",
+        "deploymentNotebook": "/samples/pre-selection/Deployment.ipynb",
+        "tags": [
+            "FEATURE_ENGINEERING"
+        ],
+        "commands": [
+            "sh",
+            "-c"
+        ],
+        "arguments": [
+            "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
+        ],
+        "image": "platiagro/platiagro-notebook-image:0.1.0"
     }
 ]
