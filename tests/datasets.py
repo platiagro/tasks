@@ -85,6 +85,23 @@ def hotel_bookings():
     return response.json()
 
 
+def imdb():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/imdb.csv"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/imdb.csv", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/imdb.csv", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def clean():
     shutil.rmtree("/tmp/data")
 
