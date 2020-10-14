@@ -102,9 +102,26 @@ def imdb():
     return response.json()
 
 
+def coco():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/coco.zip"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/coco.zip", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/coco.zip", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def clean():
     shutil.rmtree("/tmp/data")
 
-    objects_to_delete = MINIO_CLIENT.list_objects(BUCKET_NAME, prefix='datasets', recursive=True)
+    objects_to_delete = MINIO_CLIENT.list_objects(BUCKET_NAME, prefix="datasets", recursive=True)
     for obj in objects_to_delete:
         MINIO_CLIENT.remove_object(BUCKET_NAME, obj.object_name)
