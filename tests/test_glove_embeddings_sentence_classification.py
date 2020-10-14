@@ -25,7 +25,7 @@ class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "glove-embeddings-sentence-classification/Experiment.ipynb"
+        experiment_path = "tasks/glove-embeddings-sentence-classification/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
