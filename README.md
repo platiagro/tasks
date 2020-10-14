@@ -72,7 +72,10 @@
         ├── transformation-graph
         │   ├── Experiment.ipynb
         │   └── Deployment.ipynb
-        └── variance-threshold
+        ├── variance-threshold
+        │   ├── Experiment.ipynb
+        │   └── Deployment.ipynb
+        └── glove-embeddings-sentence-classification
            ├── Experiment.ipynb
            └── Deployment.ipynb
 
