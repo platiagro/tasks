@@ -68,6 +68,23 @@ def boston():
     return response.json()
 
 
+def hotel_bookings():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/hotel_bookings.csv"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/hotel_bookings.csv", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/hotel_bookings.csv", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def clean():
     shutil.rmtree("/tmp/data")
 
