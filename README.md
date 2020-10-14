@@ -57,7 +57,10 @@
     ├── normalizer
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── pre-selection
+    ├── pre-selection
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── rfe-selector
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
