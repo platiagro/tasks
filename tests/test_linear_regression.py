@@ -25,7 +25,7 @@ class TestLinearRegression(unittest.TestCase):
         datasets.clean()
 
     def test_boston(self):
-        experiment_path = "linear-regression/Experiment.ipynb"
+        experiment_path = "tasks/linear-regression/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

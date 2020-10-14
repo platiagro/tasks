@@ -25,7 +25,7 @@ class TestMLPRegressor(unittest.TestCase):
         datasets.clean()
 
     def test_boston(self):
-        experiment_path = "mlp-regressor/Experiment.ipynb"
+        experiment_path = "tasks/mlp-regressor/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

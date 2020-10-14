@@ -27,7 +27,7 @@ class TestVarianceThreshold(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "variance-threshold/Experiment.ipynb"
+        experiment_path = "tasks/variance-threshold/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -41,7 +41,7 @@ class TestVarianceThreshold(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "variance-threshold/Experiment.ipynb"
+        experiment_path = "tasks/variance-threshold/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -55,7 +55,7 @@ class TestVarianceThreshold(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path = "variance-threshold/Experiment.ipynb"
+        experiment_path = "tasks/variance-threshold/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

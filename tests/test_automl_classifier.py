@@ -26,7 +26,7 @@ class TestAutoMLClassifier(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "automl-classifier/Experiment.ipynb"
+        experiment_path = "tasks/automl-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -49,7 +49,7 @@ class TestAutoMLClassifier(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "automl-classifier/Experiment.ipynb"
+        experiment_path = "tasks/automl-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

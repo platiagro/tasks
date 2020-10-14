@@ -26,7 +26,7 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "feature-tools/Experiment.ipynb"
+        experiment_path = "tasks/feature-tools/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -40,7 +40,7 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        experiment_path = "feature-tools/Experiment.ipynb"
+        experiment_path = "tasks/feature-tools/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

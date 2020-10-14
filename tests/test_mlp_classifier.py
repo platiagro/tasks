@@ -26,7 +26,7 @@ class TestMLPClassifier(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "mlp-classifier/Experiment.ipynb"
+        experiment_path = "tasks/mlp-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -52,7 +52,7 @@ class TestMLPClassifier(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "mlp-classifier/Experiment.ipynb"
+        experiment_path = "tasks/mlp-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

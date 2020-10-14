@@ -26,7 +26,7 @@ class TestRandomForestClassifier(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "random-forest-classifier/Experiment.ipynb"
+        experiment_path = "tasks/random-forest-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -51,7 +51,7 @@ class TestRandomForestClassifier(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "random-forest-classifier/Experiment.ipynb"
+        experiment_path = "tasks/random-forest-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

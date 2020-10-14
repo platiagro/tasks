@@ -28,7 +28,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "isolation-forest-clustering/Experiment.ipynb"
+        experiment_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -43,7 +43,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "isolation-forest-clustering/Experiment.ipynb"
+        experiment_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -58,7 +58,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path = "isolation-forest-clustering/Experiment.ipynb"
+        experiment_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -73,7 +73,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         )
 
     def test_hotel_bookings(self):
-        experiment_path = "isolation-forest-clustering/Experiment.ipynb"
+        experiment_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

@@ -25,7 +25,7 @@ class TestSVR(unittest.TestCase):
         datasets.clean()
 
     def test_boston(self):
-        experiment_path = "svr/Experiment.ipynb"
+        experiment_path = "tasks/svr/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

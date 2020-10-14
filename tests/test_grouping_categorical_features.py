@@ -26,7 +26,7 @@ class TestGroupingCategoricalFeatures(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_titanic(self):
-        experiment_path = "grouping-categorical-features/Experiment.ipynb"
+        experiment_path = "tasks/grouping-categorical-features/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -45,7 +45,7 @@ class TestGroupingCategoricalFeatures(unittest.TestCase):
         )
 
     def test_hotel_bookings(self):
-        experiment_path = "grouping-categorical-features/Experiment.ipynb"
+        experiment_path = "tasks/grouping-categorical-features/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

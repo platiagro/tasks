@@ -27,7 +27,7 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "descriptive-analysis/Experiment.ipynb"
+        experiment_path = "tasks/descriptive-analysis/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -38,7 +38,7 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "descriptive-analysis/Experiment.ipynb"
+        experiment_path = "tasks/descriptive-analysis/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -49,7 +49,7 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path = "descriptive-analysis/Experiment.ipynb"
+        experiment_path = "tasks/descriptive-analysis/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

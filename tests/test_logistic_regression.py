@@ -26,7 +26,7 @@ class TestLogisticRegression(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "logistic-regression/Experiment.ipynb"
+        experiment_path = "tasks/logistic-regression/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -53,7 +53,7 @@ class TestLogisticRegression(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "logistic-regression/Experiment.ipynb"
+        experiment_path = "tasks/logistic-regression/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

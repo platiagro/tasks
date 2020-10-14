@@ -27,7 +27,7 @@ class TestFilterSelection(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "filter-selection/Experiment.ipynb"
+        experiment_path = "tasks/filter-selection/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -39,7 +39,7 @@ class TestFilterSelection(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "filter-selection/Experiment.ipynb"
+        experiment_path = "tasks/filter-selection/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -51,7 +51,7 @@ class TestFilterSelection(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        experiment_path = "filter-selection/Experiment.ipynb"
+        experiment_path = "tasks/filter-selection/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

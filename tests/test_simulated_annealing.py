@@ -26,7 +26,7 @@ class TestSimulatedAnnealing(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "simulated-annealing/Experiment.ipynb"
+        experiment_path = "tasks/simulated-annealing/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -42,7 +42,7 @@ class TestSimulatedAnnealing(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        experiment_path = "simulated-annealing/Experiment.ipynb"
+        experiment_path = "tasks/simulated-annealing/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

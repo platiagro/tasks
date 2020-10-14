@@ -27,7 +27,7 @@ class TestRFESelector(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "rfe-selector/Experiment.ipynb"
+        experiment_path = "tasks/rfe-selector/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -42,7 +42,7 @@ class TestRFESelector(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "rfe-selector/Experiment.ipynb"
+        experiment_path = "tasks/rfe-selector/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -57,7 +57,7 @@ class TestRFESelector(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path = "rfe-selector/Experiment.ipynb"
+        experiment_path = "tasks/rfe-selector/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,

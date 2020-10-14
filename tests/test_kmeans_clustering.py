@@ -27,7 +27,7 @@ class TestKmeansClustering(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "kmeans-clustering/Experiment.ipynb"
+        experiment_path = "tasks/kmeans-clustering/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -43,7 +43,7 @@ class TestKmeansClustering(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "kmeans-clustering/Experiment.ipynb"
+        experiment_path = "tasks/kmeans-clustering/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
@@ -59,7 +59,7 @@ class TestKmeansClustering(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path = "kmeans-clustering/Experiment.ipynb"
+        experiment_path = "tasks/kmeans-clustering/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
