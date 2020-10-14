@@ -6,3 +6,4 @@ category-encoders==2.2.2
 smac>=0.12,<0.13
 auto-sklearn==0.7.0
 featuretools==0.14.0
+networkx==2.4
