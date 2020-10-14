@@ -25,7 +25,7 @@ class TestTextPreProcessor(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_imdb(self):
-        experiment_path = "text-pre-processor/Experiment.ipynb"
+        experiment_path = "tasks/text-pre-processor/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
