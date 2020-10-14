@@ -72,9 +72,11 @@
         ├── transformation-graph
         │   ├── Experiment.ipynb
         │   └── Deployment.ipynb
-        └── variance-threshold
-           ├── Experiment.ipynb
-           └── Deployment.ipynb
+        ├── variance-threshold
+        │   ├── Experiment.ipynb
+        │   └── Deployment.ipynb
+        └── text-pre-processor
+           └── Experiment.ipynb
 
 ## Testing
 
