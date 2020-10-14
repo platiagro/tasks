@@ -25,7 +25,7 @@ class TestYOLOv4(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_coco(self):
-        experiment_path = "yolo_v4/Experiment.ipynb"
+        experiment_path = "tasks/yolo_v4/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
