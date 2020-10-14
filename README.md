@@ -51,7 +51,10 @@
     ├── isolation-forest-clustering
     │   ├── Experiment.ipynb
     │   └── Deployment.ipynb
-    └── kmeans-clustering
+    ├── kmeans-clustering
+    │   ├── Experiment.ipynb
+    │   └── Deployment.ipynb
+    └── normalizer
         ├── Experiment.ipynb
         └── Deployment.ipynb
 
