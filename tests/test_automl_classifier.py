@@ -40,9 +40,9 @@ class TestAutoMLClassifier(unittest.TestCase):
 
                 one_hot_features="",
 
-                time_left_for_this_task=60,
-                per_run_time_limit=60,
-                ensemble_size=50,
+                time_left_for_this_task=30,
+                per_run_time_limit=30,
+                ensemble_size=5,
 
                 method="predict_proba",
             ),
@@ -63,9 +63,9 @@ class TestAutoMLClassifier(unittest.TestCase):
 
                 one_hot_features="",
 
-                time_left_for_this_task=60,
-                per_run_time_limit=60,
-                ensemble_size=50,
+                time_left_for_this_task=30,
+                per_run_time_limit=30,
+                ensemble_size=5,
 
                 method="predict_proba",
             ),
