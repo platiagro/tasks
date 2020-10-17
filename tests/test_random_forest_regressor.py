@@ -25,10 +25,10 @@ class TestRandomForestRegressor(unittest.TestCase):
         datasets.clean()
 
     def test_boston(self):
-        experiment_path = "tasks/random-forest-regressor/Experiment.ipynb"
+        notebook_path = "tasks/random-forest-regressor/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",

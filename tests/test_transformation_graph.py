@@ -26,10 +26,10 @@ class TestTransformationGraph(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/transformation-graph/Experiment.ipynb"
+        notebook_path = "tasks/transformation-graph/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -42,10 +42,10 @@ class TestTransformationGraph(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        experiment_path = "tasks/transformation-graph/Experiment.ipynb"
+        notebook_path = "tasks/transformation-graph/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",

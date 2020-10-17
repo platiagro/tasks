@@ -25,10 +25,10 @@ class TestAutoMLRegressor(unittest.TestCase):
         datasets.clean()
 
     def test_boston(self):
-        experiment_path = "tasks/automl-regressor/Experiment.ipynb"
+        notebook_path = "tasks/automl-regressor/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",

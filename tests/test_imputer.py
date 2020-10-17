@@ -28,10 +28,10 @@ class TestImputer(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/imputer/Experiment.ipynb"
+        notebook_path = "tasks/imputer/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -46,10 +46,10 @@ class TestImputer(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "tasks/imputer/Experiment.ipynb"
+        notebook_path = "tasks/imputer/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -64,10 +64,10 @@ class TestImputer(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path = "tasks/imputer/Experiment.ipynb"
+        notebook_path = "tasks/imputer/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
@@ -82,10 +82,10 @@ class TestImputer(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        experiment_path = "tasks/imputer/Experiment.ipynb"
+        notebook_path = "tasks/imputer/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",

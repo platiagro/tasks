@@ -26,10 +26,10 @@ class TestAutoMLClassifier(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/automl-classifier/Experiment.ipynb"
+        notebook_path = "tasks/automl-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -49,10 +49,10 @@ class TestAutoMLClassifier(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "tasks/automl-classifier/Experiment.ipynb"
+        notebook_path = "tasks/automl-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",

@@ -26,10 +26,10 @@ class TestRandomForestClassifier(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/random-forest-classifier/Experiment.ipynb"
+        notebook_path = "tasks/random-forest-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -51,10 +51,10 @@ class TestRandomForestClassifier(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "tasks/random-forest-classifier/Experiment.ipynb"
+        notebook_path = "tasks/random-forest-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
