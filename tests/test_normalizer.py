@@ -55,7 +55,7 @@ class TestNormalizer(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path="normalizer/Experiment.ipynb"
+        experiment_path="tasks/normalizer/Experiment.ipynb"
 
         papermill.execute_notebook(
             experiment_path,
