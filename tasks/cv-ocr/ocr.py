@@ -134,7 +134,7 @@ class Class_Pytesseract_OCR:
 
 
     def show_bounding_box(self,img,bbox_list):
-        for i in range(bbox_list):
+        for i in bbox_list:
             img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
         
         cv2.imshow(img)
