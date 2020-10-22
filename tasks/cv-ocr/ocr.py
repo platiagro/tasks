@@ -124,13 +124,12 @@ class Class_Pytesseract_OCR:
         if step == "Deployment":
             img = img_reference
             
-            
         d = pytesseract.image_to_data(img, config=self.custom_config,output_type=Output.DICT)
         text = pytesseract.image_to_string(img, config=self.custom_config)
 
         if show_result_img:
             bbox_list = self._get_bounding_box(d)
-            self.show_bounding_box(self,img,bbox_list)
+            self.show_bounding_box(img,bbox_list)
         return d,text
 
 
