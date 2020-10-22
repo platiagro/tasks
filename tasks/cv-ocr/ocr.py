@@ -52,12 +52,8 @@ class Class_Pytesseract_OCR:
                   "Legacy + LSTM engines.":"2",
                   "Default, based on what is available.":"3"}
 
-        if self.language == "por":
-            !sudo apt-get install tesseract-ocr-por --quiet  #for portuguese
-        if self.language == "eng":
-            !sudo apt-get install tesseract-ocr-eng --quiet #for english
         
-        custom_config = (f"-l {language} --oem {ocr_engine_dict[ocr_engine]} --psm {segmentaion_mode_dict[segmentation_mode]}")
+        custom_config = (f"-l {self.language} --oem {ocr_engine_dict[self.ocr_engine]} --psm {segmentaion_mode_dict[self.segmentation_mode]}")
         custom_config = r'{}'.format(custom_config)
 
         return custom_config
@@ -121,9 +117,14 @@ class Class_Pytesseract_OCR:
         return mer_list,wer_list,wil_list,wip_list, np.mean(mer_list),np.mean(wer_list),np.mean(wil_list),np.mean(wip_list)
 
 
-    def predict(self,image_path,show_result_img = False):
-        img = cv2.imread(image_path)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    def predict(self,img_reference,step,show_result_img = False):
+        if step == "Experiment":
+            img = cv2.imread(img_reference)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        if step == "Deployment":
+            img = img_reference
+            
+            
         d = pytesseract.image_to_data(img, config=self.custom_config,output_type=Output.DICT)
         text = pytesseract.image_to_string(img, config=self.custom_config)
 
@@ -145,7 +146,7 @@ class Class_Pytesseract_OCR:
         all_bboxes_list = []
         self.y_pred = []
         for image_path in self.X:
-            d,text = self.predict(image_path)
+            d,text = self.predict(image_path,step)
             self.y_pred.append(text)
             bboxes_list = self._get_bounding_box(d)
             all_bboxes_list.append(bboxes_list)
