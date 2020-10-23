@@ -130,7 +130,7 @@ class Class_Pytesseract_OCR:
 
         if show_result_img:
             bbox_list = self._get_bounding_box(d)
-#            img_bytes_base64  = self.show_bounding_box(img,bbox_list)
+        #img_bytes_base64  = self.show_bounding_box(img,bbox_list)
             result = bbox_list, text
         else:
             result  = d, text
