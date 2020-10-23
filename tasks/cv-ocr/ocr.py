@@ -124,20 +124,32 @@ class Class_Pytesseract_OCR:
         if step == "Deployment":
             img = img_reference
             
+        
         d = pytesseract.image_to_data(img, config=self.custom_config,output_type=Output.DICT)
         text = pytesseract.image_to_string(img, config=self.custom_config)
 
         if show_result_img:
             bbox_list = self._get_bounding_box(d)
-            self.show_bounding_box(img,bbox_list)
-        return d,text
+#            img_bytes_base64  = self.show_bounding_box(img,bbox_list)
+            result = bbox_list, text
+        else:
+            result  = d, text
+            
+        
+        return result
 
 
     def show_bounding_box(self,img,bbox_list):
         for i in bbox_list:
-            img = cv2.rectangle(img, (i[0], i[1]), (i[0] + i[2], i[1] + i[3]), (0, 255, 0), 2)
-        cv2.imshow(img)
-        cv2.waitKey(0)
+            try:
+                img = cv2.rectangle(img, (i[0], i[1]), (i[0] + i[2], i[1] + i[3]), (0, 255, 0), 2)
+            except:
+                import pdb;pdb.set_trace()
+        
+        #  _, buffer = cv2.imencode('.png',img)
+        # img_bytes_base64 = base64.b64encode(buffer)
+        return img_bytes_base64
+        
 
 
     def _construct_result_dataframe(self,step):
