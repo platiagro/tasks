@@ -117,7 +117,7 @@ class Class_Pytesseract_OCR:
         return mer_list,wer_list,wil_list,wip_list, np.mean(mer_list),np.mean(wer_list),np.mean(wil_list),np.mean(wip_list)
 
 
-    def predict(self,img_reference,step,show_result_img = False):
+    def predict(self,img_reference,step,return_formats = None):
         if step == "Experiment":
             img = cv2.imread(img_reference)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -127,27 +127,26 @@ class Class_Pytesseract_OCR:
         
         d = pytesseract.image_to_data(img, config=self.custom_config,output_type=Output.DICT)
         text = pytesseract.image_to_string(img, config=self.custom_config)
-
-        if show_result_img:
+        
+        if return_formats:
             bbox_list = self._get_bounding_box(d)
-#            img_bytes_base64  = self.show_bounding_box(img,bbox_list)
-            result = bbox_list, text
+            if return_formats['bbox_return'] == "np_array":
+                result = bbox_list, text
+            if return_formats['bbox_return'] == "image":
+                img_bytes_base64  = self._overlay_image_with_bboxes(img,bbox_list,return_formats['image_return_format'])
+                result = img_bytes_base64, text 
         else:
-            result  = d, text
-            
+            result  = d, text       
         
         return result
 
 
-    def show_bounding_box(self,img,bbox_list):
+    def _overlay_image_with_bboxes(self,img,bbox_list,image_type):
         for i in bbox_list:
-            try:
-                img = cv2.rectangle(img, (i[0], i[1]), (i[0] + i[2], i[1] + i[3]), (0, 255, 0), 2)
-            except:
-                import pdb;pdb.set_trace()
+            img = cv2.rectangle(img, (i[0], i[1]), (i[0] + i[2], i[1] + i[3]), (0, 255, 0), 2)
         
-        #  _, buffer = cv2.imencode('.png',img)
-        # img_bytes_base64 = base64.b64encode(buffer)
+        _, buffer = cv2.imencode(image_type,img)
+        img_bytes_base64 = base64.b64encode(buffer)
         return img_bytes_base64
         
 
