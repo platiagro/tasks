@@ -147,7 +147,7 @@ class Class_Pytesseract_OCR:
             img = cv2.rectangle(img, (i[0], i[1]), (i[0] + i[2], i[1] + i[3]), (0, 255, 0), 2)
         
         _, buffer = cv2.imencode(image_type,img)
-        img_bytes_base64 = base64.b64encode(buffer)
+        img_bytes_base64 = base64.b64encode(buffer).decode()
         return img_bytes_base64
         
 
