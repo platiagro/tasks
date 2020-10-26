@@ -53,7 +53,7 @@ class MarianMTTranslator:
           chunck_sentences.append(sent.text)
       return chunck_sentences
 
-  def _predict(self,text_array=None):
+  def predict(self,text_array=None):
       if text_array:
         self.X = text_array
       #Move o modelo para a GPU
