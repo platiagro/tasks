@@ -4,6 +4,7 @@ import cv2
 import jiwer
 import numpy as np
 import pandas as pd
+import base64
 
 class Class_Pytesseract_OCR:
     def __init__(self, hyperparams,model_parameters):
