@@ -119,6 +119,39 @@ def coco():
     return response.json()
 
 
+def ocr():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/ocr_dataset.zip"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/ocr_dataset.zip", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/ocr_dataset.zip", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+    
+   
+def paracrawl():
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/paracrawl_en_pt_test.xlsx "
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    with open("/tmp/data/paracrawl_en_pt_test.xlsx", "wb") as f:
+        f.write(content)
+
+    response = requests.post(
+        "http://localhost:8080/datasets",
+        files={"file": open("/tmp/data/paracrawl_en_pt_test.xlsx", "rb")},
+    )
+    response.raise_for_status()
+    return response.json()
+
 def clean():
     shutil.rmtree("/tmp/data")
 
