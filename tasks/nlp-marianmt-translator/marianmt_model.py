@@ -13,6 +13,7 @@ class MarianMTTranslator:
     def __init__(self,hyperparams,model_params):
 
         #------- Data
+        
         self.X = None
         self.y_target = None
 
@@ -121,7 +122,7 @@ class MarianMTTranslator:
             for row_id,document_text in dict_result.items():
                 result[row_id] = document_text
 
-            return np.array(result)
+        return np.array(result)
 
     def _calc_bleu(self):
         results = np.zeros(len(self.y_target))
@@ -135,11 +136,11 @@ class MarianMTTranslator:
 
     def _construct_result_dataframe(self,step):
         if step == 'Experiment':
-            self.y_pred = self._predict()
+            self.y_pred = self.predict()
             self.bleu_array,self.avg_bleu = self._calc_bleu()
             self.df_result = pd.DataFrame({'source_text': self.X, 'target_text': self.y_target,'translated_text': self.y_pred,'bleu_score': self.bleu_array})
         if step == 'Deployment':
-            self.y_pred = self._predict() 
+            self.y_pred = self.predict() 
             self.df_result = pd.DataFrame({'source_text': self.X,'translated_text': self.y_pred}) 
 
     def get_result_dataframe(self,X,y=None,step = 'Experiment'):
