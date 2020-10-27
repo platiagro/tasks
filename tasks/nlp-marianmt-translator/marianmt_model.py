@@ -49,7 +49,7 @@ class MarianMTTranslator:
         
     def _chunkstring_spacy(self,text):
         chunck_sentences = []
-        doc = self.nlp(text)
+        doc = self.nlp(str(text))
         for sent in doc.sents:
             chunck_sentences.append(sent.text)
         return chunck_sentences
