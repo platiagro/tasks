@@ -101,7 +101,6 @@ def imdb():
     response.raise_for_status()
     return response.json()
 
-
 def coco():
     url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/coco.zip"
     content = requests.get(url).content
