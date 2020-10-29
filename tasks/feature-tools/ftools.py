@@ -34,7 +34,7 @@ class FeatureTools():
                     date_var=None,
                     names='id'):
 
-        self.data = data.dropna()
+        self.data = data
         self.feature_types = feature_types
         self.aux_ft = feature_types
         self.ftypes_list = feature_types[0].tolist()
@@ -52,6 +52,8 @@ class FeatureTools():
 
         self.target_indx = list(self.data.columns).index(target_var)
         self.target_type = self.ftypes_list[self.target_indx]
+
+        self.data = self.data.fillna(method='ffill').fillna(method='bfill')
 
         warnings.filterwarnings("ignore")
 
