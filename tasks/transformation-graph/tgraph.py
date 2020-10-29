@@ -39,6 +39,9 @@ class TGraph:
         self.group_var = group_var
         self.date_name = date_var
 
+        if self.date_name is not None and len(self.date_name) == 0:
+            self.date_name = None
+
         # Solution and methods parameters
         self.solution = data.copy()
         self.s_energy = 0
