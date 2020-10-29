@@ -46,6 +46,9 @@ class FeatureTools():
         if self.date_var is not None and len(self.date_var) == 0:
             self.date_var = None
 
+        elif self.date_var is not None:
+            self.date_var = self.date_var[0]
+
         if self.date_var is not None:
             self.data[self.date_var] = self.data[self.date_var].astype(str)
             self.data[self.date_var] = pd.to_datetime(self.data[self.date_var], infer_datetime_format=True)
