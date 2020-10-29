@@ -114,7 +114,7 @@ docker run -d -p 8080:8080 \
 -e "MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY" \
 -e "MINIO_SECRET_KEY=$MINIO_SECRET_KEY" \
 --network tasks \
-platiagro/datasets:0.1.0
+platiagro/datasets:0.2.0
 ```
 
 Use the following command to run all tests:
