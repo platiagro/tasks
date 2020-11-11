@@ -405,6 +405,57 @@
         ],
         "image": "platiagro/platiagro-notebook-image:0.1.0"
     },
+    {
+        "name": "Face Detection",
+        "description": "Utiliza a biblioteca facenet-pytorch, a qual disponibiliza o algorítimo MTCNN.",
+        "experimentNotebook": "/samples/cv-mtcnn-face-detection/Experiment.ipynb",
+        "deploymentNotebook": "/samples/cv-mtcnn-face-detection/Deployment.ipynb",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": [
+            "sh",
+            "-c"
+        ],
+        "arguments": [
+            "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
+        ],
+        "image": "platiagro/platiagro-notebook-image:0.1.0"
+    },
+    {
+        "name": "OCR (Optical Character Recognition)",
+        "description": "Utiliza a biblioteca Pytesseract para converter textos em imagem para string",
+        "experimentNotebook": "/samples/cv-ocr/Experiment.ipynb",
+        "deploymentNotebook": "/samples/cv-ocr/Deployment.ipynb",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": [
+            "sh",
+            "-c"
+        ],
+        "arguments": [
+            "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
+        ],
+        "image": "platiagro/platiagro-notebook-image:0.1.0"
+    },
+    {
+        "name": "YOLO (You Only Look Once)",
+        "description": "Utiliza uma biblioteca do Yolov4 para detecção e classificação de objetos em imagens",
+        "experimentNotebook": "/samples/default-yolo/Experiment.ipynb",
+        "deploymentNotebook": "/samples/default-yolo/Deployment.ipynb",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": [
+            "sh",
+            "-c"
+        ],
+        "arguments": [
+            "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
+        ],
+        "image": "platiagro/platiagro-notebook-image:0.1.0"
+    },
 	{
         "name": "Upload de arquivo",
         "description": "Importa arquivos para utilização em experimentos.",

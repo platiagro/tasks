@@ -33,9 +33,7 @@ class TestNLPTextPreProcessor(unittest.TestCase):
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
                 target = "target_OCR" ,
-                language = "english",
                 filter_type = "incluir",
-                
                 model_features = "input_image",
                 bbox_conf = 60,
                 segmentation_mode = "Assume a single uniform block of text.",
@@ -57,7 +55,6 @@ class TestNLPTextPreProcessor(unittest.TestCase):
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
                 target = "target_OCR" ,
-                language = "english",
                 filter_type = "incluir",
                 model_features = "input_image",
                 bbox_conf = 60,
