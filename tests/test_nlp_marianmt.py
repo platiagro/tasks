@@ -36,7 +36,6 @@ class TestAutoMLClassifier(unittest.TestCase):
                 prefix = ">>pt_br<<",
                 filter_type = "incluir",
                 model_features="text",
-                bbox_return = "image",
                 model_name = "Helsinki-NLP/opus-mt-en-ROMANCE",
                 seed = 7,
                 input_max_length = 127,
