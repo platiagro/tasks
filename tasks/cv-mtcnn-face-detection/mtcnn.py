@@ -97,7 +97,7 @@ class MTCNN_Model:
               boxes.append(b[max_prob_position])
               probs.append(np.max(p))
 
-        self.df_result = pd.DataFrame({'Input_image':self.input_images,'Subfolder': self.subfolders ,'Bboxes(x1,y1,x2,y2)':boxes,'Proababilities':probs})
+        self.df_result = pd.DataFrame({'Input_image':self.input_images,'Subfolder': self.subfolders ,'Bboxes(x1,y1,x2,y2)':boxes,'Probabilities':probs})
 
 
     def get_result_dataframe(self,X,step = 'Experiment'):
