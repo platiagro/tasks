@@ -10,6 +10,8 @@ import random
 
 
 class MarianMTTranslator:
+
+    
     def __init__(self,hyperparams,model_params):
 
         #------- Data
@@ -40,12 +42,13 @@ class MarianMTTranslator:
         self.bleu_array = None
         self.df_result  = None
 
-        #Configurando semente de randomização
+        # Configurando semente de randomização
         random.seed(self.seed)
         np.random.seed(self.seed)
         torch.random.manual_seed(self.seed)
         torch.cuda.manual_seed(self.seed)
         torch.backends.cudnn.deterministic = True
+        
         
     def _chunkstring_spacy(self,text):
         chunck_sentences = []
@@ -54,15 +57,19 @@ class MarianMTTranslator:
             chunck_sentences.append(sent.text)
         return chunck_sentences
 
+
     def predict(self,text_array=None):
+        
         if text_array:
             self.X = text_array
-        #Move o modelo para a GPU
+        
+        # Move o modelo para a GPU
         self.model.to(self.device)
         self.model.eval()
 
         result = [''] * len(self.X)
         for batch_number in tqdm(range(0, len(self.X), self.inference_batch_size)):
+
             #0) Controlando os intervalos
             batch_number_final = batch_number+self.inference_batch_size-1
             batch_number_final = batch_number_final if batch_number_final<len(self.X) else len(self.X)-1
@@ -80,7 +87,7 @@ class MarianMTTranslator:
 
             #3) Controladno tamanho dos chuncks
             splited_max_sentences_dict = {}
-            for row_id,sentences in doctext_chuncks.items():
+            for row_id, sentences in doctext_chuncks.items():
                 splited_max_sentences = []
                 for sentence in sentences:
                     sentence_length = len(sentence.split(' '))
@@ -124,7 +131,9 @@ class MarianMTTranslator:
 
         return np.array(result)
 
+
     def _calc_bleu(self):
+
         results = np.zeros(len(self.y_target))
         for iter in zip(enumerate(self.y_target),self.y_pred):
             aux,pred = iter
@@ -132,16 +141,21 @@ class MarianMTTranslator:
             target = aux[1]
             bleu_score = sacrebleu.corpus_bleu([pred], [[target]]).score
             results[row_number] = bleu_score
+
         return results, np.mean(results) 
 
+
     def _construct_result_dataframe(self,step):
+
         if step == 'Experiment':
             self.y_pred = self.predict()
             self.bleu_array,self.avg_bleu = self._calc_bleu()
             self.df_result = pd.DataFrame({'source_text': self.X, 'target_text': self.y_target,'translated_text': self.y_pred,'bleu_score': self.bleu_array})
+
         if step == 'Deployment':
             self.y_pred = self.predict() 
             self.df_result = pd.DataFrame({'source_text': self.X,'translated_text': self.y_pred}) 
+
 
     def get_result_dataframe(self,X,y=None,step = 'Experiment'):
 
