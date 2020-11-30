@@ -60,7 +60,7 @@ class MarianMTTranslator:
 
     def predict(self,text_array=None):
         
-        if text_array:
+        if text_array is not None and len(text_array) > 0:
             self.X = text_array
         
         # Move o modelo para a GPU
@@ -102,10 +102,10 @@ class MarianMTTranslator:
                     splited_max_sentences_dict[row_id] = splited_max_sentences
 
 
-            #4) Colocando o prefixo de tradução pt_br
+            #4) Colocando o prefixo de tradução
             for row_id,sentences in splited_max_sentences_dict.items():
                 for sentence in sentences:
-                    final_sent = ">>pt_br<<" + ' ' + sentence
+                    final_sent = self.prefix + ' ' + sentence
                     batchs.append(final_sent)
                     id_identifier.append(row_id)
 
