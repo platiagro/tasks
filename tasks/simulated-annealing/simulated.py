@@ -48,6 +48,12 @@ class SimulatedAnnealing:
         self.group_var = group_var
         self.date_name = date_var
 
+        if self.date_name is not None and len(self.date_name) == 0:
+            self.date_name = None
+
+        elif self.date_name is not None:
+            self.date_name = self.date_name[0]
+
         # Configure temperature
         quantity_records = np.round((100/(np.log(data.shape[0])))*3)
         quantity_features = np.round(100/np.log(data.shape[1]))

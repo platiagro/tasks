@@ -152,7 +152,6 @@ def paracrawl():
     response.raise_for_status()
     return response.json()
 
-
 def clean():
     shutil.rmtree("/tmp/data")
 

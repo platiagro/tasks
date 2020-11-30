@@ -39,6 +39,12 @@ class TGraph:
         self.group_var = group_var
         self.date_name = date_var
 
+        if self.date_name is not None and len(self.date_name) == 0:
+            self.date_name = None
+
+        elif self.date_name is not None:
+            self.date_name = self.date_name[0]
+
         # Solution and methods parameters
         self.solution = data.copy()
         self.s_energy = 0
@@ -86,6 +92,8 @@ class TGraph:
             self.solution[self.date_name] = self.solution[self.date_name].astype(str)
             self.date = pd.to_datetime(self.solution.pop(self.date_name), infer_datetime_format=True)
             self.ftypes_list.pop(date_indx)
+
+        self.solution = self.solution.fillna(method='ffill').fillna(method='bfill')
 
         # Encode all categorical and datetime features
         cat_feats_indexes = [indx for indx, x in enumerate(self.ftypes_list) if x != 'Numerical']
