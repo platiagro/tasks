@@ -34,10 +34,8 @@ class TestAutoMLClassifier(unittest.TestCase):
                 dataset= "/tmp/data/paracrawl_en_pt_test.xlsx",
                 target="target",
                 prefix = ">>pt_br<<",
-
                 filter_type = "incluir",
-                model_features="text",bbox_return = "image"
-
+                model_features="text",
                 model_name = "Helsinki-NLP/opus-mt-en-ROMANCE",
                 seed = 7,
                 input_max_length = 127,

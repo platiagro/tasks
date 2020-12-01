@@ -474,6 +474,23 @@
         "image": "platiagro/platiagro-notebook-image:0.1.0"
     },
 	{
+        "name": "MarianMT Translator",
+        "description": "Utilização do Modelo MarianMT para tradução do inglês para o português",
+        "experimentNotebook": "/samples/nlp-marianmt-translator/Experiment.ipynb",
+        "deploymentNotebook": "/samples/nlp-marianmt-translator/Deployment.ipynb",
+        "tags": [
+            "PREDICTOR"
+        ],
+        "commands": [
+            "sh",
+            "-c"
+        ],
+        "arguments": [
+            "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
+        ],
+        "image": "platiagro/platiagro-notebook-image:0.1.0"
+    },
+	{
         "name": "Upload de arquivo",
         "description": "Importa arquivos para utilização em experimentos.",
         "tags": [
