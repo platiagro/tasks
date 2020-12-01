@@ -87,6 +87,8 @@ class TGraph:
             self.date = pd.to_datetime(self.solution.pop(self.date_name), infer_datetime_format=True)
             self.ftypes_list.pop(date_indx)
 
+        self.solution = self.solution.fillna(method='ffill').fillna(method='bfill')
+
         # Encode all categorical and datetime features
         cat_feats_indexes = [indx for indx, x in enumerate(self.ftypes_list) if x != 'Numerical']
         if len(cat_feats_indexes) > 0:

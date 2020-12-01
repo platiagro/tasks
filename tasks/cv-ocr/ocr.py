@@ -4,9 +4,10 @@ import cv2
 import jiwer
 import numpy as np
 import pandas as pd
+import base64
 
 class Class_Pytesseract_OCR:
-    def __init__(self, hyperparams,model_parameters):
+    def __init__(self, hyperparams,model_parameters,return_formats):
         
         #---------dataset_infos
         self.X = None
@@ -20,6 +21,11 @@ class Class_Pytesseract_OCR:
 
         #---------hyperparams
         self.bbox_conf = hyperparams['bbox_conf']
+        
+        #---------return_formats
+        self.bbox_return = return_formats['bbox_return']
+        self.image_return_format = return_formats['image_return_format']
+        self.remove_linebreaks = return_formats['remove_linebreaks']        
 
 
         #------- Results
@@ -104,7 +110,7 @@ class Class_Pytesseract_OCR:
                 (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
                 bboxes_list.append((x, y, w, h))
         return bboxes_list
-             
+            
 
     def _get_metrics(self):
         mer_list,wer_list,wil_list,wip_list = [],[],[],[]
@@ -116,8 +122,13 @@ class Class_Pytesseract_OCR:
             wip_list.append(wip)
         return mer_list,wer_list,wil_list,wip_list, np.mean(mer_list),np.mean(wer_list),np.mean(wil_list),np.mean(wip_list)
 
-
-    def predict(self,img_reference,step,show_result_img = False):
+    def _remove_linebreaks_from_text(self,text):
+        if self.remove_linebreaks:
+            text = text.replace("\n"," ")
+            text = text.replace("\t"," ")
+        return text
+    
+    def predict(self,img_reference,step,return_formats = None):
         if step == "Experiment":
             img = cv2.imread(img_reference)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -127,27 +138,27 @@ class Class_Pytesseract_OCR:
         
         d = pytesseract.image_to_data(img, config=self.custom_config,output_type=Output.DICT)
         text = pytesseract.image_to_string(img, config=self.custom_config)
-
-        if show_result_img:
+        text = self._remove_linebreaks_from_text(text)
+        
+        if return_formats:
             bbox_list = self._get_bounding_box(d)
-        #img_bytes_base64  = self.show_bounding_box(img,bbox_list)
-            result = bbox_list, text
+            if return_formats['bbox_return'] == "np_array":
+                result = bbox_list, text
+            if return_formats['bbox_return'] == "image":
+                img_bytes_base64  = self._overlay_image_with_bboxes(img,bbox_list,return_formats['image_return_format'])
+                result = img_bytes_base64, text 
         else:
-            result  = d, text
-            
+            result  = d, text       
         
         return result
 
 
-    def show_bounding_box(self,img,bbox_list):
+    def _overlay_image_with_bboxes(self,img,bbox_list,image_type):
         for i in bbox_list:
-            try:
-                img = cv2.rectangle(img, (i[0], i[1]), (i[0] + i[2], i[1] + i[3]), (0, 255, 0), 2)
-            except:
-                import pdb;pdb.set_trace()
+            img = cv2.rectangle(img, (i[0], i[1]), (i[0] + i[2], i[1] + i[3]), (0, 255, 0), 2)
         
-        #  _, buffer = cv2.imencode('.png',img)
-        # img_bytes_base64 = base64.b64encode(buffer)
+        _, buffer = cv2.imencode(image_type,img)
+        img_bytes_base64 = base64.b64encode(buffer).decode()
         return img_bytes_base64
         
 
@@ -157,6 +168,7 @@ class Class_Pytesseract_OCR:
         self.y_pred = []
         for image_path in self.X:
             d,text = self.predict(image_path,step)
+            text = self._remove_linebreaks_from_text(text)
             self.y_pred.append(text)
             bboxes_list = self._get_bounding_box(d)
             all_bboxes_list.append(bboxes_list)
