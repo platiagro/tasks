@@ -8,14 +8,16 @@ from ftfy import fix_text
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
+
 class Preprocessor:
+
     def __init__(self,preprocessing_tasks,model_parameters):
+
         self.preprocessing_tasks = preprocessing_tasks
         self.model_parameters = model_parameters
         self.stopwords = None
         self._external_downloads()
         
-    
 
     def _external_downloads(self):  
         """Baixando stop words do idioma especificado e a wordnet para lemmatizaton
@@ -26,13 +28,13 @@ class Preprocessor:
             nltk.download('stopwords')
 
             # Get a list of stopwords for the defined language
-            self.stopwords = nltk.corpus.stopwords.words( self.model_parameters['language'])
+            self.stopwords = nltk.corpus.stopwords.words(self.model_parameters['language'])
 
         if self.preprocessing_tasks['lemmatization']:
             nltk.download('wordnet')
 
 
-    def _tokenize_text(self,text_list: list = None):
+    def _tokenize_text(self, text_list: list = None):
         """Tokenize Text without the hyperparâmeters defined.
 
         Args:
@@ -44,12 +46,11 @@ class Preprocessor:
 
         tokenize_list = list()
         for text in text_list:
-            text = text[0]
             text = fix_text(text)
             text = sub("<.*?>", " ", text) if self.preprocessing_tasks['remove_html'] else text
             text = sub("{.*?}", " ", text) if self.preprocessing_tasks['remove_css'] else text
             text = unidecode.unidecode(text) if self.preprocessing_tasks['remove_accents'] else text
-            text = sub("/\r\n|\n|\r|", "", text) if self.preprocessing_tasks['remove_line_braks'] else text
+            text = sub("/\r\n|\n|\r|", "", text) if self.preprocessing_tasks['remove_line_breaks'] else text
             text = (
                 sub("[" + string.punctuation + "]", "", text)
                 if self.preprocessing_tasks['remove_punctuation']
@@ -59,6 +60,7 @@ class Preprocessor:
             text = text.split(" ")
 
             tokenize_list.append(text)
+
         return tokenize_list
 
 
@@ -134,7 +136,7 @@ class Preprocessor:
         """
         return reduce(lambda x, y: x + y, sentence_list)
     
-    def preprocess(self,X):
+    def preprocess(self, X):
         """Perform Preprocessing Tasks.
 
         Args:
@@ -142,7 +144,7 @@ class Preprocessor:
         """
         vocab = self._tokenize_text(X)
         top_tokens = self._top_tokens_stopwords(vocab) if self.preprocessing_tasks['remove_top_words'] else None
-        vocab = self._remove_specific_tokens(vocab,top_tokens) if self.preprocessing_tasks['remove_top_words'] else vocab
+        vocab = self._remove_specific_tokens(vocab, top_tokens) if self.preprocessing_tasks['remove_top_words'] else vocab
         vocab = self._remove_specific_tokens(vocab, self.stopwords) if self.preprocessing_tasks['remove_stop_words'] else vocab
         vocab = self._apply_stemming(vocab) if self.preprocessing_tasks['stemming'] else vocab
         vocab = self._apply_lemmatization(vocab) if (self.preprocessing_tasks['lemmatization'] and not self.preprocessing_tasks['stemming']) else vocab
