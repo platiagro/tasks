@@ -14,3 +14,4 @@ ftfy==5.8
 pytesseract==0.3.6
 opencv-python==4.4.0.46
 xlrd==1.2.0
+jiwer==2.2.0
