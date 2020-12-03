@@ -42,6 +42,7 @@ jobs:
           MINIO_SECRET_KEY: minio123
       - name: Install dependencies
         run: |
+          sudo apt-get -y install tesseract-ocr tesseract-ocr-por tesseract-ocr-eng
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Test with pytest
