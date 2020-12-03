@@ -14,7 +14,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Regressor AutoML",
@@ -31,7 +31,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Regressão Logística",
@@ -48,7 +48,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Regressão Linear",
@@ -65,7 +65,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Classificador SVM",
@@ -82,7 +82,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Regressor SVM",
@@ -99,7 +99,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Classificador MLP",
@@ -116,7 +116,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Regressor MLP",
@@ -133,7 +133,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Classificador Random Forest",
@@ -150,7 +150,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Regressor Random Forest",
@@ -167,7 +167,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Análise Descritiva",
@@ -183,7 +183,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Feature Tools",
@@ -200,7 +200,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Seleção Manual de Atributos",
@@ -217,7 +217,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Agrupamento de Atributos Categóricos",
@@ -233,7 +233,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Imputação de Valores Faltantes",
@@ -250,7 +250,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Detecção de Anomalias por Isolation Forest",
@@ -267,7 +267,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Clusterização KMeans",
@@ -284,7 +284,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Normalizador de Amostras",
@@ -301,7 +301,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Seleção de Atributos por Correlação",
@@ -318,7 +318,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Seleção de Atributos por Método de Eliminação Recursiva",
@@ -335,7 +335,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Scaler Robusto",
@@ -352,7 +352,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Simulated Annealing",
@@ -369,7 +369,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Transformation Graph",
@@ -386,7 +386,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Seleção de Atributos por Limiar de Variância",
@@ -403,7 +403,7 @@
         "arguments": [
             "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
         ],
-        "image": "platiagro/platiagro-notebook-image:0.1.0"
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
     },
     {
         "name": "Face Detection",
@@ -500,7 +500,7 @@
 		"arguments": [
 			"from platiagro import download_dataset;download_dataset(\"$dataset\", \"$trainingDatasetDir/$dataset\");"
 		],
-		"image": "platiagro/datasets:0.1.0"
+		"image": "platiagro/datasets:0.2.0"
     },
 	{
         "name": "Google Drive",
@@ -512,6 +512,6 @@
 		"arguments": [
 			"from platiagro import download_dataset;download_dataset(\"$dataset\", \"$trainingDatasetDir/$dataset\");"
 		],
-		"image": "platiagro/datasets:0.1.0"
+		"image": "platiagro/datasets:0.2.0"
     }
 ]
