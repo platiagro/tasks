@@ -2,9 +2,9 @@ from torch.utils.data import Dataset
 from numpy import genfromtxt
 import torch
 
-class ImdbDataset(Dataset):
+class MyDataset(Dataset):
     def __init__(self, X, X_words,target = None,step = "Experiment"):
-        super(ImdbDataset, self).__init__()
+        super(MyDataset, self).__init__()
 
         self.x = [torch.tensor(line).type(torch.LongTensor) for line in X ]
         self.words = X_words
