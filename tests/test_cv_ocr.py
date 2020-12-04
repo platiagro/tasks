@@ -11,7 +11,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-class TestNLPTextPreProcessor(unittest.TestCase):
+class TestCVOCR(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -44,8 +44,8 @@ class TestNLPTextPreProcessor(unittest.TestCase):
 
             ),
         )
-       
-       
+
+
     def test_experiment_ocr_output_nparray(self):
         notebook_path = "tasks/cv-ocr/Experiment.ipynb"
 
@@ -66,5 +66,5 @@ class TestNLPTextPreProcessor(unittest.TestCase):
 
             ),
         )
-       
-       
+
+
