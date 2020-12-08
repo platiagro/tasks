@@ -81,7 +81,10 @@
 Install the testing requirements:
 
 ```bash
+apt-get -y install tesseract-ocr tesseract-ocr-por tesseract-ocr-eng
 pip install -r requirements.txt
+pip install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+pip install transformers==3.0.2
 ```
 
 Export these environment variables:

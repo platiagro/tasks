@@ -134,10 +134,10 @@ def ocr():
     )
     response.raise_for_status()
     return response.json()
-    
-   
+
+
 def paracrawl():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/paracrawl_en_pt_test.xlsx "
+    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/paracrawl_en_pt_test.xlsx"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
