@@ -513,5 +513,22 @@
 			"from platiagro import download_dataset;download_dataset(\"$dataset\", \"$trainingDatasetDir/$dataset\");"
 		],
 		"image": "platiagro/datasets:0.2.0-SNAPSHOT"
-    }
+    },
+    {
+        "name": "Criação de Atributos Temporais",
+        "description": "Criação de atributos temporais a partir da agregação por períodos (dia, semana, mês, trimestre ou ano). Para cada atributo categórico no dataset, são gerados novos atributos considerando-se janelas móveis de três, seis e noves períodos consecutivos.",
+        "experimentNotebook": "/samples/time-related-features/Experiment.ipynb",
+        "deploymentNotebook": "/samples/time-related-features/Deployment.ipynb",
+        "tags": [
+            "FEATURE_ENGINEERING"
+        ],
+        "commands": [
+            "sh",
+            "-c"
+        ],
+        "arguments": [
+            "papermill $notebookPath output.ipynb -b $parameters;\n                        status=$?;\n                        bash save-dataset.sh;\n                        bash save-figure.sh;\n                        bash make-cells-read-only.sh\n                        bash upload-to-jupyter.sh $experimentId $operatorId Experiment.ipynb;\n                        exit $status"
+        ],
+        "image": "platiagro/platiagro-notebook-image:0.2.0"
+    },
 ]
