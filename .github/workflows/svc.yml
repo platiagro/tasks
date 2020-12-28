@@ -1,4 +1,4 @@
-name: AutoML Classifier Tests
+name: SVM Classifier Tests
 
 on:
   push:

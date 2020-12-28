@@ -1,9 +1,9 @@
-name: AutoML Classifier Tests
+name: NLP MarianMT Translator Tests
 
 on:
   push:
     paths:
-      - tasks/automl-classifier/**
+      - tasks/nlp-marianmt-translator/**
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
           pip install transformers==3.0.2
       - name: Test with pytest
         run: |
-          pytest -v tests/test_automl_classifier.py
+          pytest -v tests/test_nlp_marianmt.py
         env:
           MINIO_ENDPOINT: localhost:9000
           MINIO_ACCESS_KEY: minio
