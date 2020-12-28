@@ -1,6 +1,9 @@
-name: Python application
+name: AutoML Classifier Tests
 
-on: [push]
+on:
+  push:
+    paths:
+      - tasks/automl-classifier/**
 
 jobs:
   build:
