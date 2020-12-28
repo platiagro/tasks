@@ -1,6 +1,9 @@
-name: Python application
+name: Simulated Annealing Tests
 
-on: [push]
+on:
+  push:
+    paths:
+      - tasks/simulated-annealing/**
 
 jobs:
   build:
@@ -35,18 +38,21 @@ jobs:
             -e "MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY" \
             -e "MINIO_SECRET_KEY=$MINIO_SECRET_KEY" \
             --network tasks \
-            platiagro/datasets:0.1.0
+            platiagro/datasets:0.2.0
         env:
           MINIO_ENDPOINT: minio:9000
           MINIO_ACCESS_KEY: minio
           MINIO_SECRET_KEY: minio123
       - name: Install dependencies
         run: |
+          sudo apt-get -y install tesseract-ocr tesseract-ocr-por tesseract-ocr-eng
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+          pip install transformers==3.0.2
       - name: Test with pytest
         run: |
-          pytest -v
+          pytest -v tests/test_simulated_annealing.py
         env:
           MINIO_ENDPOINT: localhost:9000
           MINIO_ACCESS_KEY: minio

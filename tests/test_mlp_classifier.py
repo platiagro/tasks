@@ -26,10 +26,10 @@ class TestMLPClassifier(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/mlp-classifier/Experiment.ipynb"
+        notebook_path = "tasks/mlp-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -52,10 +52,10 @@ class TestMLPClassifier(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "tasks/mlp-classifier/Experiment.ipynb"
+        notebook_path = "tasks/mlp-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",

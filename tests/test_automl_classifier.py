@@ -26,10 +26,10 @@ class TestAutoMLClassifier(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/automl-classifier/Experiment.ipynb"
+        notebook_path = "tasks/automl-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -40,19 +40,19 @@ class TestAutoMLClassifier(unittest.TestCase):
 
                 one_hot_features="",
 
-                time_left_for_this_task=60,
-                per_run_time_limit=60,
-                ensemble_size=50,
+                time_left_for_this_task=30,
+                per_run_time_limit=30,
+                ensemble_size=5,
 
                 method="predict_proba",
             ),
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "tasks/automl-classifier/Experiment.ipynb"
+        notebook_path = "tasks/automl-classifier/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -63,9 +63,9 @@ class TestAutoMLClassifier(unittest.TestCase):
 
                 one_hot_features="",
 
-                time_left_for_this_task=60,
-                per_run_time_limit=60,
-                ensemble_size=50,
+                time_left_for_this_task=30,
+                per_run_time_limit=30,
+                ensemble_size=5,
 
                 method="predict_proba",
             ),

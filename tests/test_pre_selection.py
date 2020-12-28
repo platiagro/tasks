@@ -27,10 +27,10 @@ class TestPreSelection(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/pre-selection/Experiment.ipynb"
+        notebook_path = "tasks/pre-selection/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -42,10 +42,10 @@ class TestPreSelection(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        experiment_path = "tasks/pre-selection/Experiment.ipynb"
+        notebook_path = "tasks/pre-selection/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -57,10 +57,10 @@ class TestPreSelection(unittest.TestCase):
         )
 
     def test_boston(self):
-        experiment_path = "tasks/pre-selection/Experiment.ipynb"
+        notebook_path = "tasks/pre-selection/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",

@@ -1,6 +1,5 @@
 # PlatIAgro Native Tasks
 
-[![Build Status](https://github.com/platiagro/tasks/workflows/Python%20application/badge.svg)](https://github.com/platiagro/tasks/actions?query=workflow%3A%22Python+application%22)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
     └── tasks
@@ -84,7 +83,10 @@
 Install the testing requirements:
 
 ```bash
+apt-get -y install tesseract-ocr tesseract-ocr-por tesseract-ocr-eng
 pip install -r requirements.txt
+pip install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+pip install transformers==3.0.2
 ```
 
 Export these environment variables:
@@ -117,7 +119,7 @@ docker run -d -p 8080:8080 \
 -e "MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY" \
 -e "MINIO_SECRET_KEY=$MINIO_SECRET_KEY" \
 --network tasks \
-platiagro/datasets:0.1.0
+platiagro/datasets:0.2.0
 ```
 
 Use the following command to run all tests:

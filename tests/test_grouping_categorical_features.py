@@ -26,10 +26,10 @@ class TestGroupingCategoricalFeatures(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_titanic(self):
-        experiment_path = "tasks/grouping-categorical-features/Experiment.ipynb"
+        notebook_path = "tasks/grouping-categorical-features/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -45,10 +45,10 @@ class TestGroupingCategoricalFeatures(unittest.TestCase):
         )
 
     def test_hotel_bookings(self):
-        experiment_path = "tasks/grouping-categorical-features/Experiment.ipynb"
+        notebook_path = "tasks/grouping-categorical-features/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",

@@ -11,7 +11,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-class TestDescriptiveAnalysis(unittest.TestCase):
+class TestFeatureTools(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -26,10 +26,10 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/feature-tools/Experiment.ipynb"
+        notebook_path = "tasks/feature-tools/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -40,10 +40,10 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        experiment_path = "tasks/feature-tools/Experiment.ipynb"
+        notebook_path = "tasks/feature-tools/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",

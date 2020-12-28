@@ -25,10 +25,10 @@ class TestMLPRegressor(unittest.TestCase):
         datasets.clean()
 
     def test_boston(self):
-        experiment_path = "tasks/mlp-regressor/Experiment.ipynb"
+        notebook_path = "tasks/mlp-regressor/Experiment.ipynb"
 
         papermill.execute_notebook(
-            experiment_path,
+            notebook_path,
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
