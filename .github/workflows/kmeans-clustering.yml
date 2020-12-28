@@ -1,0 +1,59 @@
+name: KMeans Clustering Tests
+
+on:
+  push:
+    paths:
+      - tasks/kmeans-clustering/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run MinIO image
+        run: |
+          docker network create tasks
+          docker run -d -p 9000:9000 \
+          --name minio \
+          -e "MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY" \
+          -e "MINIO_SECRET_KEY=$MINIO_SECRET_KEY" \
+          --network tasks \
+          minio/minio:RELEASE.2018-02-09T22-40-05Z server /data
+        env:
+          MINIO_ACCESS_KEY: minio
+          MINIO_SECRET_KEY: minio123
+      - name: Run Datasets image
+        run: |
+            docker run -d -p 8080:8080 \
+            --name datasets \
+            -e "MINIO_ENDPOINT=$MINIO_ENDPOINT" \
+            -e "MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY" \
+            -e "MINIO_SECRET_KEY=$MINIO_SECRET_KEY" \
+            --network tasks \
+            platiagro/datasets:0.2.0
+        env:
+          MINIO_ENDPOINT: minio:9000
+          MINIO_ACCESS_KEY: minio
+          MINIO_SECRET_KEY: minio123
+      - name: Install dependencies
+        run: |
+          sudo apt-get -y install tesseract-ocr tesseract-ocr-por tesseract-ocr-eng
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+          pip install transformers==3.0.2
+      - name: Test with pytest
+        run: |
+          pytest -v tests/test_kmeans_clustering.py
+        env:
+          MINIO_ENDPOINT: localhost:9000
+          MINIO_ACCESS_KEY: minio
+          MINIO_SECRET_KEY: minio123

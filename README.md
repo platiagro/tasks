@@ -1,6 +1,5 @@
 # PlatIAgro Native Tasks
 
-[![Build Status](https://github.com/platiagro/tasks/workflows/Python%20application/badge.svg)](https://github.com/platiagro/tasks/actions?query=workflow%3A%22Python+application%22)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
     └── tasks

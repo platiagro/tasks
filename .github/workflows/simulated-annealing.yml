@@ -1,6 +1,9 @@
-name: Python application
+name: Simulated Annealing Tests
 
-on: [push]
+on:
+  push:
+    paths:
+      - tasks/simulated-annealing/**
 
 jobs:
   build:
@@ -49,7 +52,7 @@ jobs:
           pip install transformers==3.0.2
       - name: Test with pytest
         run: |
-          pytest -v
+          pytest -v tests/test_simulated_annealing.py
         env:
           MINIO_ENDPOINT: localhost:9000
           MINIO_ACCESS_KEY: minio
