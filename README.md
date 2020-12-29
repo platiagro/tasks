@@ -31,8 +31,8 @@ Task | Status
 [RFE Selector](tasks/rfe-selector/) | ![RFE Selector](https://github.com/platiagro/tasks/workflows/RFE%20Selector/badge.svg)
 [Robust Scaler](tasks/robust-scaler/) | ![Robust Scaler](https://github.com/platiagro/tasks/workflows/Robust%20Scaler/badge.svg)
 [Simulated Annealing](tasks/simulated-annealing/) | ![Simulated Annealing](https://github.com/platiagro/tasks/workflows/Simulated%20Annealing/badge.svg)
-[SVC](tasks/svc/) | ![SVC](https://github.com/platiagro/tasks/workflows/SVC/badge.svg)
-[SVR](tasks/svr/) | ![SVR](https://github.com/platiagro/tasks/workflows/SVR/badge.svg)
+[SVM Classifier](tasks/svc/) | ![SVC](https://github.com/platiagro/tasks/workflows/SVM%20Classifier/badge.svg)
+[SVM Regressor](tasks/svr/) | ![SVR](https://github.com/platiagro/tasks/workflows/SVM%20Regressor/badge.svg)
 [Transformation Graph](tasks/transformation-graph/) | ![Transformation Graph](https://github.com/platiagro/tasks/workflows/Transformation%20Graph/badge.svg)
 [Variance Threshold](tasks/variance-threshold/) | ![Variance Threshold](https://github.com/platiagro/tasks/workflows/Variance%20Threshold/badge.svg)
 
