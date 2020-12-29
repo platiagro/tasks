@@ -36,8 +36,8 @@ class TestCVOCR(unittest.TestCase):
                 filter_type = "incluir",
                 model_features = "input_image",
                 bbox_conf = 60,
-                segmentation_mode = "Assume a single uniform block of text.",
-                ocr_engine = "Neural nets LSTM engine only.",
+                segmentation_mode = "Considere um único bloco de texto uniforme",
+                ocr_engine = "Mecanismo de redes neurais com apenas LSTM",
                 language = "por",
                 bbox_return = "image",
                 image_return_format = ".jpg"
@@ -58,8 +58,8 @@ class TestCVOCR(unittest.TestCase):
                 filter_type = "incluir",
                 model_features = "input_image",
                 bbox_conf = 60,
-                segmentation_mode = "Assume a single uniform block of text.",
-                ocr_engine = "Neural nets LSTM engine only.",
+                segmentation_mode = "Considere um único bloco de texto uniforme",
+                ocr_engine = "Mecanismo de redes neurais com apenas LSTM",
                 language = "por",
                 bbox_return = "np_array",
                 image_return_format = "N/A"
