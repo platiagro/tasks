@@ -1,4 +1,4 @@
-name: MLP Classifier Tests
+name: MLP Classifier
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Grouping Categorical Features Tests
+name: Grouping Categorical Features
 
 on:
   push:

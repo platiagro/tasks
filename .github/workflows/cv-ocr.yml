@@ -1,4 +1,4 @@
-name: Computer Vision OCR Tests
+name: OCR
 
 on:
   push:

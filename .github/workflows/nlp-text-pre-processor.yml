@@ -1,4 +1,4 @@
-name: NLP Text Pre-processor Tests
+name: Text Pre-processor
 
 on:
   push:

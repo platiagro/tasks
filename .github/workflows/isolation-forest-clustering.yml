@@ -1,4 +1,4 @@
-name: Isolation Forest Clustering Tests
+name: Isolation Forest Clustering
 
 on:
   push:

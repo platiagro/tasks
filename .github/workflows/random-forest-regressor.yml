@@ -1,4 +1,4 @@
-name: Random Forest Regressor Tests
+name: Random Forest Regressor
 
 on:
   push:

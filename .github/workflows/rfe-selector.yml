@@ -1,4 +1,4 @@
-name: RFE Selector Tests
+name: RFE Selector
 
 on:
   push:

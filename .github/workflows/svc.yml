@@ -1,4 +1,4 @@
-name: SVM Classifier Tests
+name: SVM Classifier
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: MLP Regressor Tests
+name: MLP Regressor
 
 on:
   push:
