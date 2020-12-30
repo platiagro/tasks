@@ -24,7 +24,6 @@ RUN jq -c ".[]" /artifacts/config.json | while read a; do \
     NAME=$(echo $a | jq -r .name); \
     echo "${URL}" >> urls.txt; \
     echo "    out=${NAME}" >> urls.txt; \
-    echo "    min-split-size=1M" >> urls.txt; \
     echo "    split=10" >> urls.txt; \
     echo "    max-connection-per-server=10" >> urls.txt; \
     done; \
