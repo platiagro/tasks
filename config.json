@@ -312,8 +312,8 @@
     {
         "name": "YOLO (You Only Look Once)",
         "description": "Utiliza uma biblioteca do Yolov4 para detecção e classificação de objetos em imagens.",
-        "experimentNotebook": "/samples/default-yolo/Experiment.ipynb",
-        "deploymentNotebook": "/samples/default-yolo/Deployment.ipynb",
+        "experimentNotebook": "/samples/cv-yolo/Experiment.ipynb",
+        "deploymentNotebook": "/samples/cv-yolo/Deployment.ipynb",
         "tags": [
             "COMPUTER_VISION"
         ],
