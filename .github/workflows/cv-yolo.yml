@@ -3,7 +3,7 @@ name: YOLO
 on:
   push:
     paths:
-      - tasks/default-yolo/**
+      - tasks/cv-yolo/**
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
           pip install transformers==3.0.2
       - name: Test with pytest
         run: |
-          pytest -v tests/test_default_yolo.py
+          pytest -v tests/test_cv_yolo.py
         env:
           MINIO_ENDPOINT: localhost:9000
           MINIO_ACCESS_KEY: minio
