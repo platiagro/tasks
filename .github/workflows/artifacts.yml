@@ -24,7 +24,7 @@ jobs:
         id: vars
         run: |
           VERSION=0.2.0
-          if [ ${{ github.ref }} = "refs/heads/master" ]; then
+          if [ ${{ github.ref }} = "refs/heads/main" ]; then
             echo ::set-output name=TAG::${VERSION}-SNAPSHOT
           elif [[ ${{ github.ref }} =~ ^refs/heads/v.*-branch$ ]]; then
             echo ::set-output name=TAG::${VERSION}
