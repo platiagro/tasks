@@ -11,7 +11,7 @@ ENV COMMIT=${COMMIT}
 ENV BRANCH=${BRANCH}
 
 RUN apt-get update && \
-    apt-get install wget unzip jq && \
+    apt-get install -y aria2 jq && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -21,9 +21,13 @@ COPY ./config.json /artifacts/config.json
 
 RUN jq -c ".[]" /artifacts/config.json | while read a; do \
     URL=$(echo $a | jq -r .url); \
-    FILE_PATH=$(echo $a | jq -r .file_name); \
-    wget -O "$FILE_PATH" "$URL"; \
-    done
+    NAME=$(echo $a | jq -r .name); \
+    echo "${URL}" >> urls.txt; \
+    echo "    out=${NAME}" >> urls.txt; \
+    echo "    split=10" >> urls.txt; \
+    echo "    max-connection-per-server=10" >> urls.txt; \
+    done; \
+    aria2c -d /artifacts --input-file=urls.txt
 
 COPY ./init.py /app/init.py
 

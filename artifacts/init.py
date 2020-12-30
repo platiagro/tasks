@@ -1,13 +1,14 @@
 import json
+import os
 import tempfile
 
 from minio import Minio
 
 MINIO_CLIENT = Minio(
-    endpoint=getenv("MINIO_ENDPOINT", "minio-service.kubeflow:9000"),
-    access_key=getenv("MINIO_ACCESS_KEY", "minio"),
-    secret_key=getenv("MINIO_SECRET_KEY", "minio123"),
-    region=getenv("MINIO_REGION_NAME", "us-east-1"),
+    endpoint=os.getenv("MINIO_ENDPOINT", "minio-service.kubeflow:9000"),
+    access_key=os.getenv("MINIO_ACCESS_KEY", "minio"),
+    secret_key=os.getenv("MINIO_SECRET_KEY", "minio123"),
+    region=os.getenv("MINIO_REGION_NAME", "us-east-1"),
     secure=False,
 )
 
