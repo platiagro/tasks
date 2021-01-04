@@ -25,7 +25,7 @@ class TestFineTuningAutoAugment(unittest.TestCase):
         datasets.clean()
 
     def test_experiment_hymenoptera(self):
-        notebook_path = "tasks/fine-tunning-autoaugment/Experiment.ipynb"
+        notebook_path = "tasks/cv-fast-autocv/Experiment.ipynb"
 
         papermill.execute_notebook(
             notebook_path,
