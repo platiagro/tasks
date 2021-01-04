@@ -19,19 +19,19 @@ class TestCVYOLO(unittest.TestCase):
         os.environ["OPERATOR_ID"] = OPERATOR_ID
         os.environ["RUN_ID"] = RUN_ID
 
-        datasets.ocr()
+        datasets.face_detection()
 
     def tearDown(self):
         datasets.clean()
 
     def test_experiment_ocr_output_image(self):
-        notebook_path = "tasks/cv-yolo/Experiment.ipynb"
+        notebook_path = "tasks/cv-mtcnn-face-detection/Experiment.ipynb"
 
         papermill.execute_notebook(
             notebook_path,
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/coco.zip",
+                dataset="/tmp/data/football_teams.zip",
             ),
         )
 
