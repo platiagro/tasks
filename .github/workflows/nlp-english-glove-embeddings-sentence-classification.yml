@@ -1,9 +1,9 @@
-name: Simulated Annealing
+name: English Sentence Classification
 
 on:
   push:
     paths:
-      - tasks/simulated-annealing/**
+      - tasks/nlp-english-glove-embeddings-sentence-classification/**
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
           pip install transformers==3.0.2
       - name: Test with pytest
         run: |
-          pytest -v tests/test_simulated_annealing.py
+          pytest -v tests/test_nlp_english_glove_embeddings_sentence_classification.py
         env:
           MINIO_ENDPOINT: localhost:9000
           MINIO_ACCESS_KEY: minio

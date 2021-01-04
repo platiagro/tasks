@@ -1,4 +1,4 @@
-name: Featuretools Tests
+name: Featuretools
 
 on:
   push:

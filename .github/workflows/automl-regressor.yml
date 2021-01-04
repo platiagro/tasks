@@ -1,4 +1,4 @@
-name: AutoML Regressor Tests
+name: AutoML Regressor
 
 on:
   push:

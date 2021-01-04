@@ -1,4 +1,4 @@
-name: Imputer Tests
+name: Imputer
 
 on:
   push:

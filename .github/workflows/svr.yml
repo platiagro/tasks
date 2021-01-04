@@ -1,4 +1,4 @@
-name: SVM Regressor Tests
+name: SVM Regressor
 
 on:
   push:

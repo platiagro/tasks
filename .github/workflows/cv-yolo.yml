@@ -1,9 +1,9 @@
-name: Simulated Annealing
+name: YOLO
 
 on:
   push:
     paths:
-      - tasks/simulated-annealing/**
+      - tasks/cv-yolo/**
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
           pip install transformers==3.0.2
       - name: Test with pytest
         run: |
-          pytest -v tests/test_simulated_annealing.py
+          pytest -v tests/test_cv_yolo.py
         env:
           MINIO_ENDPOINT: localhost:9000
           MINIO_ACCESS_KEY: minio
