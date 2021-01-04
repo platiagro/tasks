@@ -52,6 +52,7 @@ jobs:
           pip install transformers==3.0.2
           pip install wheel==0.36.2
           pip install yolov4==2.0.2
+          python setup.py bdist_wheel
       - name: Test with pytest
         run: |
           pytest -v tests/test_cv_yolo.py
