@@ -14,12 +14,8 @@ ftfy==5.8
 pytesseract==0.3.6
 opencv-python==4.4.0.46
 tensorflow==2.3.0
-wheel==0.36.0
 gdown==3.12.2
-emcee==3.0.2
 scikit-optimize==0.8.1
-pyDOE==0.3.8
-yolov4==2.0.2
 xlrd==1.2.0
 jiwer==2.2.0
 spacy==2.2.4
