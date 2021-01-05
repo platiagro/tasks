@@ -3,7 +3,7 @@ name: Fine Tuning - Fast AutoAugment
 on:
   push:
     paths:
-      - tasks/cv-finetuning-autoaugment/**
+      - tasks/cv-fast-autocv/**
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
           pip install transformers==3.0.2
       - name: Test with pytest
         run: |
-          pytest -v tests/test_cv_finetuning_autoaugment.py
+          pytest -v tests/test_cv_fast_autocv.py
         env:
           MINIO_ENDPOINT: localhost:9000
           MINIO_ACCESS_KEY: minio
