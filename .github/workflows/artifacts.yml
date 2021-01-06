@@ -37,11 +37,9 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v1
         with:
-          path: /
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: registry.hub.docker.com
           repository: platiagro/artifacts
           tags: ${{ steps.vars.outputs.TAG }}
-          dockerfile: Dockerfile
           build_args: COMMIT=${{ steps.vars.outputs.COMMIT }},BRANCH=${{ steps.vars.outputs.BRANCH }}
