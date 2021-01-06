@@ -1,4 +1,4 @@
-name: NLP MarianMT Translator Tests
+name: MarianMT Translator
 
 on:
   push:

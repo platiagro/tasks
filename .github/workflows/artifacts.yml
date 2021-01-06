@@ -1,0 +1,47 @@
+name: Artifacts
+
+on:
+  push:
+    paths:
+      - artifacts/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set output variables
+        id: vars
+        run: |
+          VERSION=0.2.0
+          if [ ${{ github.ref }} = "refs/heads/main" ]; then
+            echo ::set-output name=TAG::${VERSION}-SNAPSHOT
+          elif [[ ${{ github.ref }} =~ ^refs/heads/v.*-branch$ ]]; then
+            echo ::set-output name=TAG::${VERSION}
+          else
+            echo ::set-output name=TAG::${VERSION}-${{ github.sha }}
+          fi
+          echo ::set-output name=BRANCH::${{ github.ref }}
+          echo ::set-output name=COMMIT::${{ github.sha }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v1
+        with:
+          path: artifacts/
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: registry.hub.docker.com
+          repository: platiagro/artifacts
+          tags: ${{ steps.vars.outputs.TAG }}
+          dockerfile: artifacts/Dockerfile
+          build_args: COMMIT=${{ steps.vars.outputs.COMMIT }},BRANCH=${{ steps.vars.outputs.BRANCH }}

@@ -1,4 +1,4 @@
-name: KMeans Clustering Tests
+name: KMeans Clustering
 
 on:
   push:

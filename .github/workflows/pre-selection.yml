@@ -1,4 +1,4 @@
-name: Pre Selection Tests
+name: Pre Selection
 
 on:
   push:

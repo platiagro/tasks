@@ -312,8 +312,8 @@
     {
         "name": "YOLO (You Only Look Once)",
         "description": "Utiliza uma biblioteca do Yolov4 para detecção e classificação de objetos em imagens.",
-        "experimentNotebook": "/samples/default-yolo/Experiment.ipynb",
-        "deploymentNotebook": "/samples/default-yolo/Deployment.ipynb",
+        "experimentNotebook": "/samples/cv-yolo/Experiment.ipynb",
+        "deploymentNotebook": "/samples/cv-yolo/Deployment.ipynb",
         "tags": [
             "COMPUTER_VISION"
         ],
@@ -327,7 +327,7 @@
         "experimentNotebook": "/samples/nlp-marianmt-translator/Experiment.ipynb",
         "deploymentNotebook": "/samples/nlp-marianmt-translator/Deployment.ipynb",
         "tags": [
-            "NATURAL_LANGUAGE_PROCESSING"
+            "NLP"
         ],
         "commands": null,
         "arguments": null,
@@ -339,7 +339,7 @@
         "experimentNotebook": "/samples/nlp-text-pre-processor/Experiment.ipynb",
         "deploymentNotebook": "/samples/nlp-text-pre-processor/Deployment.ipynb",
         "tags": [
-            "NATURAL_LANGUAGE_PROCESSING"
+            "NLP"
         ],
         "commands": null,
         "arguments": null,
@@ -376,6 +376,18 @@
         "deploymentNotebook": "/samples/time-related-features/Deployment.ipynb",
         "tags": [
             "FEATURE_ENGINEERING"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0"
+    },
+    {
+        "name": "GloVe Embeddings Bag (Inglês)",
+        "description": "Classifica frases com base em Embeddings disponibilizados pela Universidade de Stanford",
+        "experimentNotebook": "/samples/glove-embeddings-sentence-classification/Experiment.ipynb",
+        "deploymentNotebook": "/samples/glove-embeddings-sentence-classification/Deployment.ipynb",
+        "tags": [
+            "NLP"
         ],
         "commands": null,
         "arguments": null,

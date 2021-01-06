@@ -1,4 +1,4 @@
-name: Robust Scaler Tests
+name: Robust Scaler
 
 on:
   push:

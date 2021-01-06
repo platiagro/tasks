@@ -1,4 +1,4 @@
-name: Logistic Regression Tests
+name: Logistic Regression
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Normalizer Tests
+name: Normalizer
 
 on:
   push:

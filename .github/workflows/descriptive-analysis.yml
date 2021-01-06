@@ -1,4 +1,4 @@
-name: Descriptive Analysis Tests
+name: Descriptive Analysis
 
 on:
   push:

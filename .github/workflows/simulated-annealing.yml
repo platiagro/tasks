@@ -1,4 +1,4 @@
-name: Simulated Annealing Tests
+name: Simulated Annealing
 
 on:
   push:

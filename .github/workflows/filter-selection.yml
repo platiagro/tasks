@@ -1,4 +1,4 @@
-name: Filter Selection Tests
+name: Filter Selection
 
 on:
   push:

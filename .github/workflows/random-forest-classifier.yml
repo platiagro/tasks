@@ -1,4 +1,4 @@
-name: Random Forest Classifier Tests
+name: Random Forest Classifier
 
 on:
   push:
