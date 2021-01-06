@@ -37,6 +37,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v1
         with:
+          path: /
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: registry.hub.docker.com
