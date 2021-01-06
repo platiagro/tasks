@@ -110,7 +110,8 @@ def put_artifact_in_jupyter(artifacts, mount_path):
     with TemporaryFile() as tar_buffer:
         with tarfile.open(fileobj=tar_buffer, mode='w') as tar:
             for artifact in artifacts:
-                tar.add(f"/artifacts/{artifact}", arcname=f"{artifact}")
+                name = artifact["name"]
+                tar.add(f"/artifacts/{name}", arcname=f"{name}")
 
         tar_buffer.seek(0)
         commands = []
