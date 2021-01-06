@@ -9,7 +9,13 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": [
+			{
+				"url": "http://nlp.stanford.edu/data/glove.6B.zip",
+				"name": "glove.6B.zip"
+			}
+		]
     },
     {
         "name": "Regressor AutoML",
@@ -21,7 +27,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Regressão Logística",
@@ -33,7 +40,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Regressão Linear",
@@ -45,7 +53,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Classificador SVM",
@@ -57,7 +66,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Regressor SVM",
@@ -69,7 +79,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Classificador MLP",
@@ -81,7 +92,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Regressor MLP",
@@ -93,7 +105,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Classificador Random Forest",
@@ -105,7 +118,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Regressor Random Forest",
@@ -117,7 +131,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Análise Descritiva",
@@ -128,7 +143,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Feature Tools",
@@ -140,7 +156,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Seleção Manual de Atributos",
@@ -152,7 +169,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Agrupamento de Atributos Categóricos",
@@ -163,7 +181,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Imputação de Valores Faltantes",
@@ -175,7 +194,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Detecção de Anomalias por Isolation Forest",
@@ -187,7 +207,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Clusterização KMeans",
@@ -199,7 +220,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Normalizador de Amostras",
@@ -211,7 +233,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Seleção de Atributos por Correlação",
@@ -223,7 +246,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Seleção de Atributos por Método de Eliminação Recursiva",
@@ -235,7 +259,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Scaler Robusto",
@@ -247,7 +272,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Simulated Annealing",
@@ -259,7 +285,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Transformation Graph",
@@ -271,7 +298,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Seleção de Atributos por Limiar de Variância",
@@ -283,7 +311,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Face Detection",
@@ -295,7 +324,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "OCR (Optical Character Recognition)",
@@ -307,7 +337,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "YOLO (You Only Look Once)",
@@ -319,7 +350,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
 	{
         "name": "MarianMT Translator",
@@ -331,7 +363,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Text Pre-processor",
@@ -343,7 +376,8 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
 	{
         "name": "Upload de arquivo",
@@ -355,7 +389,8 @@
         "arguments": [
             "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
         ],
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     },
     {
         "name": "Google Drive",
@@ -367,6 +402,7 @@
         "arguments": [
             "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
         ],
-        "image": "platiagro/platiagro-experiment-image:0.2.0"
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+		"artifacts": []
     }
 ]
