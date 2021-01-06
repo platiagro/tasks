@@ -42,4 +42,5 @@ jobs:
           registry: registry.hub.docker.com
           repository: platiagro/artifacts
           tags: ${{ steps.vars.outputs.TAG }}
+          dockerfile: ../Dockerfile
           build_args: COMMIT=${{ steps.vars.outputs.COMMIT }},BRANCH=${{ steps.vars.outputs.BRANCH }}
