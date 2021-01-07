@@ -66,3 +66,5 @@ with open("/samples/config.json") as f:
         for artifact in artifacts:
             a_name = artifact["name"]
             put_file_in_notebook(name, f"/artifacts/{a_name}", a_name)
+
+print("done!", flush=True)

@@ -29,7 +29,7 @@ RUN jq -c ".[] | .artifacts" /samples/config.json | while read artifacts; do \
         echo "    max-connection-per-server=10" >> urls.txt; \
         done; \
     done;\
-    aria2c -d /tasks --input-file=urls.txt
+    aria2c -d /artifacts --input-file=urls.txt
 
 COPY ./artifacts /app/artifacts
 COPY ./tasks /samples/

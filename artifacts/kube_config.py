@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Kube-config functions."""
 from kubernetes import config
-from werkzeug.exceptions import InternalServerError
 
 
 def load_kube_config():
@@ -29,4 +28,4 @@ def load_kube_config():
     try:
         config.load_incluster_config()
     except Exception:
-        raise InternalServerError("Failed to connect to cluster.")
+        raise Exception("Failed to connect to cluster.")
