@@ -8,7 +8,6 @@ from ast import literal_eval
 from kubernetes import client
 from kubernetes.client.rest import ApiException
 from kubernetes.stream import stream
-from werkzeug.exceptions import InternalServerError
 
 from kube_config import load_kube_config
 
@@ -82,7 +81,7 @@ def create_persistent_volume_claim(name, mount_path):
     except ApiException as e:
         body = literal_eval(e.body)
         message = body["message"]
-        raise InternalServerError(f"Error while trying to patch notebook server: {message}")
+        raise Exception(f"Error while trying to patch notebook server: {message}")
 
 
 def put_file_in_notebook(name, filePath, fileName):
