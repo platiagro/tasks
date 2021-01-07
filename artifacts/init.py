@@ -2,8 +2,6 @@
 from json import load
 from os import environ
 
-from werkzeug.exceptions import BadRequest
-
 from controllers.notebook import put_file_in_notebook
 from controllers.tasks import create_task
 
@@ -36,7 +34,8 @@ with open("/samples/config.json") as f:
                         commands=commands,
                         arguments=arguments,
                         is_default=True)
-        except BadRequest:
+        except Exception as e:
+            print(e)
             pass
 
     for task in tasks:

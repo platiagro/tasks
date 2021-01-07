@@ -111,10 +111,8 @@ def put_file_in_notebook(name, filePath, fileName):
         with tarfile.open(fileobj=tar_buffer, mode='w') as tar:
             tar.add(filePath, arcname=fileName)
 
-        tar_buffer.seek(0)
         commands = []
-        commands.append(tar_buffer.read())
-
+        commands.append(filePath)
         while resp.is_open():
             resp.update(timeout=10)
             if resp.peek_stdout():
@@ -122,9 +120,12 @@ def put_file_in_notebook(name, filePath, fileName):
             if resp.peek_stderr():
                 print("STDERR: %s" % resp.read_stderr())
             if commands:
-                c = commands.pop(0)
-                # print("Running command... %s\n" % c)
-                resp.write_stdin(c.decode(errors='ignore'))
+                commands.pop(0)
+                tar_buffer.seek(0)
+                data = tar_buffer.read(10000)
+                while data:
+                    resp.write_stdin(data)
+                    data = tar_buffer.read(10000)
             else:
                 break
         resp.close()

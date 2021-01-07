@@ -4,8 +4,6 @@ import re
 from datetime import datetime
 from json import dumps
 
-from werkzeug.exceptions import BadRequest
-
 from controllers.notebook import create_persistent_volume_claim
 from database import engine
 from utils import uuid_alpha
@@ -35,14 +33,14 @@ def create_task(**kwargs):
     is_default = kwargs.get("is_default", None)
 
     if not isinstance(name, str):
-        raise BadRequest("name is required")
+        raise Exception("name is required")
 
     if len(tags) == 0:
         tags = ["DEFAULT"]
 
     if any(tag not in VALID_TAGS for tag in tags):
         valid_str = ",".join(VALID_TAGS)
-        raise BadRequest(f"Invalid tag. Choose any of {valid_str}")
+        raise Exception(f"Invalid tag. Choose any of {valid_str}")
 
     # check if image is a valid docker image
     raise_if_invalid_docker_image(image)
@@ -51,7 +49,7 @@ def create_task(**kwargs):
     text = f'SELECT * FROM tasks WHERE name="{name}" LIMIT 1'
     result = conn.execute(text)
     if result.fetchone():
-        raise BadRequest("a task with that name already exists")
+        raise Exception("a task with that name already exists")
 
     # saves task info to the database
     task_id = str(uuid_alpha())
@@ -91,4 +89,4 @@ def raise_if_invalid_docker_image(image):
     pattern = re.compile("[a-z0-9.-]+([/]{1}[a-z0-9.-]+)+([:]{1}[a-z0-9.-]+){0,1}$")
 
     if image and pattern.match(image) is None:
-        raise BadRequest("invalid docker image name")
+        raise Exception("invalid docker image name")
