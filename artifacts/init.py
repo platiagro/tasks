@@ -12,25 +12,6 @@ DEPLOYMENT_NOTEBOOK = "config/Deployment.ipynb"
 EXPERIMENT_NOTEBOOK = "config/Experiment.ipynb"
 
 
-def read_notebook(notebook_path):
-    """
-    Reads the contents of a notebook.
-
-    Parameters
-    ----------
-    notebook_path :str
-        The path to the notebook file.
-
-    Returns
-    -------
-    bytes
-        The notebook content as bytes.
-    """
-    with open(notebook_path, "rb") as f:
-        notebook = load(f)
-    return notebook
-
-
 with open("/samples/config.json") as f:
     tasks = load(f)
 
@@ -85,4 +66,4 @@ with open("/samples/config.json") as f:
     if artifacts and len(artifacts) > 0:
         for artifact in artifacts:
             a_name = artifact["name"]
-            put_file_in_notebook(name, f"/artifacts/{name}", a_name)
+            put_file_in_notebook(name, f"/artifacts/{a_name}", a_name)

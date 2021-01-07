@@ -10,9 +10,8 @@ from controllers.notebook import create_persistent_volume_claim
 from database import engine
 from utils import uuid_alpha
 
-PREFIX = "tasks"
-VALID_TAGS = ["DATASETS", "DEFAULT", "DESCRIPTIVE_STATISTICS", "FEATURE_ENGINEERING",
-              "PREDICTOR", "COMPUTER_VISION", "NLP"]
+VALID_TAGS = ["DATASETS", "DEFAULT", "DESCRIPTIVE_STATISTICS",
+              "FEATURE_ENGINEERING", "PREDICTOR", "COMPUTER_VISION", "NLP"]
 
 
 def create_task(**kwargs):
