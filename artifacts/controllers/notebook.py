@@ -85,7 +85,7 @@ def create_persistent_volume_claim(name, mount_path):
         raise InternalServerError(f"Error while trying to patch notebook server: {message}")
 
 
-def put_artifact_in_jupyter(artifacts, mount_path):
+def put_file_in_notebook(name, filePath, fileName):
     load_kube_config()
     api_instance = client.CoreV1Api()
 
@@ -97,7 +97,7 @@ def put_artifact_in_jupyter(artifacts, mount_path):
         except ApiException:
             time.sleep(5)
 
-    exec_command = ['tar', 'xvf', '-', '-C', mount_path]
+    exec_command = ['tar', 'xvf', '-', '-C', f"/home/jovyan/{name}"]
     resp = stream(api_instance.connect_get_namespaced_pod_exec,
                   "server-0",
                   NOTEBOOK_NAMESPACE,
@@ -109,16 +109,14 @@ def put_artifact_in_jupyter(artifacts, mount_path):
 
     with TemporaryFile() as tar_buffer:
         with tarfile.open(fileobj=tar_buffer, mode='w') as tar:
-            for artifact in artifacts:
-                name = artifact["name"]
-                tar.add(f"/artifacts/{name}", arcname=f"{name}")
+            tar.add(filePath, arcname=fileName)
 
         tar_buffer.seek(0)
         commands = []
         commands.append(tar_buffer.read())
 
         while resp.is_open():
-            resp.update(timeout=1)
+            resp.update(timeout=10)
             if resp.peek_stdout():
                 print("STDOUT: %s" % resp.read_stdout())
             if resp.peek_stderr():
