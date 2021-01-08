@@ -78,12 +78,12 @@ class GloveFinetuner(pl.LightningModule):
             )
 
         # ---------- Datafame de comparação para o teste
-        columns = [ "ORIGINAL_TARGET","ORIGINAL_CODE","PREDICTED_TARGET","PREDICTED_CODE" ] + [label.upper() for label in self.label_encoder.classes_]
+        columns = [ "ORIGINAL_TARGET","ORIGINAL_CODE","PREDICTED_TARGET","PREDICTED_CODE" ] + [label.upper() + "_PROB" for label in self.label_encoder.classes_]
         self.df_valid = pd.DataFrame(columns=columns)
         self.df_test = pd.DataFrame(columns=columns)
 
         # ---------- Englobamentoda rede para classificação(se necessário)
-        weight = self.glove_vectors  # pesos fixos pré treinados
+        weight = self.glove_vectors 
         embedding_dim = self.glove_dim
         output_classes_number = len(self.label_encoder.classes_)
         self.embedding_bag = torch.nn.EmbeddingBag.from_pretrained(
@@ -92,7 +92,7 @@ class GloveFinetuner(pl.LightningModule):
         self.layer1 = torch.nn.Linear(embedding_dim, self.hidden_dim)
         self.layer2 = torch.nn.Linear(
             self.hidden_dim, output_classes_number
-        )  # 2 porque são duas classes na saída
+        )
 
         layers = [self.layer1, self.layer2]
 
