@@ -121,10 +121,10 @@ def put_file_in_notebook(name, filePath, fileName):
             if commands:
                 commands.pop(0)
                 tar_buffer.seek(0)
-                data = tar_buffer.read(10000)
+                data = tar_buffer.read(1000000)
                 while data:
                     resp.write_stdin(data)
-                    data = tar_buffer.read(10000)
+                    data = tar_buffer.read(1000000)
             else:
                 break
         resp.close()
