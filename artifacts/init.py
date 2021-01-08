@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
-import asyncio
 import multiprocessing
+import os
 from json import load
-from os import environ
 
 from controllers.notebook import put_file_in_notebook
 from controllers.tasks import create_task
 
 DEFAULT_IMAGE = f'platiagro/platiagro-experiment-image:0.2.0'
-DEPLOYMENT_NOTEBOOK = "config/Deployment.ipynb"
-EXPERIMENT_NOTEBOOK = "config/Experiment.ipynb"
 CONFIG_PATH = "/samples/config.json"
 
 
@@ -18,17 +15,16 @@ def insert_tasks():
         tasks = load(f)
 
         for task in tasks:
-            name = task["name"]
+            arguments = task["arguments"]
+            commands = task["commands"]
             description = task["description"]
+            name = task["name"]
             tags = task["tags"]
 
             if "image" in task:
                 image = task["image"]
             else:
-                image = environ.get("PLATIAGRO_NOTEBOOK_IMAGE", DEFAULT_IMAGE)
-
-            commands = task["commands"]
-            arguments = task["arguments"]
+                image = os.environ.get("PLATIAGRO_NOTEBOOK_IMAGE", DEFAULT_IMAGE)
 
             try:
                 create_task(name=name,
@@ -56,32 +52,15 @@ if __name__ == "__main__":
             name = task["name"]
             tags = task["tags"]
 
-            try:
-                experiment_notebook = task["experimentNotebook"]
-            except KeyError:
-                experiment_notebook = None
-            try:
-                deployment_notebook = task["deploymentNotebook"]
-            except KeyError:
-                deployment_notebook = None
-
-            # loads a sample notebook if none was sent
-            if experiment_notebook is None and "DATASETS" not in tags:
-                experiment_notebook = EXPERIMENT_NOTEBOOK
-            if deployment_notebook is None and "DATASETS" not in tags:
-                deployment_notebook = DEPLOYMENT_NOTEBOOK
-
-            if "DATASETS" not in tags:
-                t = multiprocessing.Process(
-                    target=put_file_in_notebook,
-                    args=(name, experiment_notebook, "Experiment.ipynb")
-                )
-                jobs.append(t)
-                t = multiprocessing.Process(
-                    target=put_file_in_notebook,
-                    args=(name, deployment_notebook, "Deployment.ipynb")
-                )
-                jobs.append(t)
+            path = task.get("path")
+            if path:
+                for root, dirs, files in os.walk(path):
+                    for filename in files:
+                        t = multiprocessing.Process(
+                            target=put_file_in_notebook,
+                            args=(name, os.path.join(root, filename), filename)
+                        )
+                        jobs.append(t)
 
             if artifacts and len(artifacts) > 0:
                 for artifact in artifacts:
@@ -98,4 +77,5 @@ if __name__ == "__main__":
     # Ensure all of the threads have finished
     for j in jobs:
         j.join()
+
     print("done!", flush=True)

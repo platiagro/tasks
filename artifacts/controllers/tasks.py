@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """Tasks controller."""
+import random
 import re
+import uuid
 from datetime import datetime
 from json import dumps
 
 from controllers.notebook import create_persistent_volume_claim
 from database import engine
-from utils import uuid_alpha
 
 VALID_TAGS = ["DATASETS", "DEFAULT", "DESCRIPTIVE_STATISTICS",
               "FEATURE_ENGINEERING", "PREDICTOR", "COMPUTER_VISION", "NLP"]
@@ -71,6 +72,21 @@ def create_task(**kwargs):
                                    mount_path=f"/home/jovyan/{name}")
 
     return
+
+
+def uuid_alpha():
+    """
+    Generates an uuid that always starts with an alpha char.
+
+    Returns
+    -------
+    str
+    """
+    uuid_ = str(uuid.uuid4())
+    if not uuid_[0].isalpha():
+        c = random.choice(["a", "b", "c", "d", "e", "f"])
+        uuid_ = f"{c}{uuid_[1:]}"
+    return uuid_
 
 
 def raise_if_invalid_docker_image(image):
