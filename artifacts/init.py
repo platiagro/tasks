@@ -88,7 +88,7 @@ if __name__ == "__main__":
                     a_name = artifact["name"]
                     t = multiprocessing.Process(
                         target=put_file_in_notebook,
-                        args=(name, f"../glove_s50.zip", a_name)
+                        args=(name, f"/artifacts/{a_name}", a_name)
                     )
                     jobs.append(t)
 
