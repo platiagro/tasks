@@ -3,7 +3,7 @@ FROM python:3.7-buster
 LABEL maintainer="fabiol@cpqd.com.br"
 
 # Stamps the commit SHA into the labels and ENV vars
-ARG BRANCH="master"
+ARG BRANCH="main"
 ARG COMMIT=""
 LABEL branch=${BRANCH}
 LABEL commit=${COMMIT}
@@ -15,25 +15,29 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY ./artifacts/requirements.txt /app/requirements.txt
+COPY ./init-job/requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
-COPY ./config.json /samples/config.json
-RUN jq -c ".[] | .artifacts" /samples/config.json | while read artifacts; do \
-        echo $artifacts | jq -c ".[]" | while read a; do \
-        URL=$(echo $a | jq -r .url); \
-        NAME=$(echo $a | jq -r .name); \
-        echo "${URL}" >> urls.txt; \
-        echo "    out=${NAME}" >> urls.txt; \
-        echo "    split=10" >> urls.txt; \
-        echo "    max-connection-per-server=10" >> urls.txt; \
+COPY ./tasks /tasks
+COPY ./config.json /tasks/config.json
+
+# Downloads artifacts in task dir
+RUN jq -c ".[]" /tasks/config.json | while read TASK; do \
+        echo ${TASK} | jq -r ".artifacts" | jq -c ".[]" | while read ARTIFACT; do \
+            echo "${ARTIFACT}" | jq -r .url >> urls.txt; \
+            printf "    out=" >> urls.txt; \
+            printf "${TASK}" | jq -c -r .path | tr -d '\n' >> urls.txt; \
+            printf "/" >> urls.txt; \
+            printf "${ARTIFACT}" | jq -c -r .name >> urls.txt; \
+            echo "    split=10" >> urls.txt; \
+            echo "    max-connection-per-server=10" >> urls.txt; \
         done; \
-    done;\
-    aria2c -d /artifacts --input-file=urls.txt
+    done; \
+    cat urls.txt; \
+    aria2c --input-file=urls.txt
 
-COPY ./artifacts /app/artifacts
-COPY ./tasks /samples/
-WORKDIR /app/artifacts
+COPY ./init-job /app/
+WORKDIR /app/
 
-ENTRYPOINT ["python", "init.py"]
+ENTRYPOINT ["python", "main.py"]
 CMD []

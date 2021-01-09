@@ -1,28 +1,42 @@
 # -*- coding: utf-8 -*-
-"""Tasks controller."""
+import datetime
+import json
+import os
 import random
-import re
 import uuid
-from datetime import datetime
-from json import dumps
 
-from controllers.notebook import create_persistent_volume_claim
-from database import engine
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-VALID_TAGS = ["DATASETS", "DEFAULT", "DESCRIPTIVE_STATISTICS",
-              "FEATURE_ENGINEERING", "PREDICTOR", "COMPUTER_VISION", "NLP"]
+DB_HOST = os.getenv("MYSQL_DB_HOST", "mysql.kubeflow")
+DB_NAME = os.getenv("MYSQL_DB_NAME", "platiagro")
+DB_USER = os.getenv("MYSQL_DB_USER", "root")
+DB_PASS = os.getenv("MYSQL_DB_PASSWORD", "")
+DB_URL = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"
+engine = create_engine(DB_URL,
+                       convert_unicode=True,
+                       pool_size=20,
+                       pool_recycle=300)
+db_session = scoped_session(sessionmaker(autocommit=False,
+                                         autoflush=False,
+                                         bind=engine))
+Base = declarative_base()
+Base.query = db_session.query_property()
 
 
-def create_task(**kwargs):
+def insert_task(**kwargs):
     """
-    Creates a new task in our database/object storage.
+    Inserts a new task in database.
+
     Parameters
     ----------
     **kwargs
         Arbitrary keyword arguments.
+
     Raises
     ------
-    BadRequest
+    Exception
         When the `**kwargs` (task attributes) are invalid.
     """
     name = kwargs.get("name", None)
@@ -36,16 +50,6 @@ def create_task(**kwargs):
     if not isinstance(name, str):
         raise Exception("name is required")
 
-    if len(tags) == 0:
-        tags = ["DEFAULT"]
-
-    if any(tag not in VALID_TAGS for tag in tags):
-        valid_str = ",".join(VALID_TAGS)
-        raise Exception(f"Invalid tag. Choose any of {valid_str}")
-
-    # check if image is a valid docker image
-    raise_if_invalid_docker_image(image)
-
     conn = engine.connect()
     text = f'SELECT * FROM tasks WHERE name="{name}" LIMIT 1'
     result = conn.execute(text)
@@ -54,10 +58,10 @@ def create_task(**kwargs):
 
     # saves task info to the database
     task_id = str(uuid_alpha())
-    created_at = datetime.now()
-    arguments_json = dumps(arguments).replace('\\', '\\\\')
-    commands_json = dumps(commands)
-    tags_json = dumps(tags)
+    created_at = datetime.datetime.now()
+    arguments_json = json.dumps(arguments).replace('\\', '\\\\')
+    commands_json = json.dumps(commands)
+    tags_json = json.dumps(tags)
     experiment_notebook = f'/home/jovyan/{name}/Experiment.ipynb'
     deployment_notebook = f'/home/jovyan/{name}/Deployment.ipynb'
     text = (
@@ -67,11 +71,7 @@ def create_task(**kwargs):
     conn.execute(text)
     conn.close()
 
-    # mounts a volume for the task in the notebook server
-    create_persistent_volume_claim(name=f"task-{task_id}",
-                                   mount_path=f"/home/jovyan/{name}")
-
-    return
+    return task_id
 
 
 def uuid_alpha():
@@ -87,22 +87,3 @@ def uuid_alpha():
         c = random.choice(["a", "b", "c", "d", "e", "f"])
         uuid_ = f"{c}{uuid_[1:]}"
     return uuid_
-
-
-def raise_if_invalid_docker_image(image):
-    """
-    Raise an error if a str does not meet the standards for a docker image name.
-    Example: (username/organization)/name-of-the-image:tag
-    Parameters
-    ----------
-    image : str or None
-        The image name.
-    Raises
-    ------
-    BadRequest
-        When a given image is a invalid one.
-    """
-    pattern = re.compile("[a-z0-9.-]+([/]{1}[a-z0-9.-]+)+([:]{1}[a-z0-9.-]+){0,1}$")
-
-    if image and pattern.match(image) is None:
-        raise Exception("invalid docker image name")

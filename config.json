@@ -2,352 +2,352 @@
     {
         "name": "Classificador AutoML",
         "description": "Utiliza o auto-sklearn para obter um ou mais modelos classificadores já otimizados.",
-        "path": "/samples/automl-classifier",
+        "path": "/tasks/automl-classifier",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Regressor AutoML",
         "description": "Utiliza o auto-sklearn para obter um ou mais modelos regressores já otimizados.",
-        "path": "/samples/automl-regressor",
+        "path": "/tasks/automl-regressor",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Regressão Logística",
         "description": "Treina um modelo de Regressão Logística para classificação usando scikit-learn.",
-        "path": "/samples/logistic-regression",
+        "path": "/tasks/logistic-regression",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Regressão Linear",
         "description": "Treina um modelo de Regressão Linear para regressão usando scikit-learn.",
-        "path": "/samples/linear-regression",
+        "path": "/tasks/linear-regression",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Classificador SVM",
         "description": "Treina um modelo Support Vector Classification usando scikit-learn.",
-        "path": "/samples/svc",
+        "path": "/tasks/svc",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Regressor SVM",
         "description": "Treina um modelo Support Vector Regression usando scikit-learn.",
-        "path": "/samples/svr",
+        "path": "/tasks/svr",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Classificador MLP",
         "description": "Treina um modelo classificador Multi-layer Perceptron (MLP) usando scikit-learn.",
-        "path": "/samples/mlp-classifier",
+        "path": "/tasks/mlp-classifier",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Regressor MLP",
         "description": "Treina um modelo regressor Multi-layer Perceptron (MLP) usando scikit-learn.",
-        "path": "/samples/mlp-regressor",
+        "path": "/tasks/mlp-regressor",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Classificador Random Forest",
         "description": "Treina um modelo classificador Random Forest usando scikit-learn.",
-        "path": "/samples/random-forest-classifier",
+        "path": "/tasks/random-forest-classifier",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Regressor Random Forest",
         "description": "Treina um modelo regressor Random Forest usando scikit-learn.",
-        "path": "/samples/random-forest-regressor",
+        "path": "/tasks/random-forest-regressor",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Análise Descritiva",
         "description": "Gera estatísticas descritivas para um determinado conjunto de dados.",
-        "path": "/samples/descriptive-analysis",
+        "path": "/tasks/descriptive-analysis",
         "tags": [
             "DESCRIPTIVE_STATISTICS"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Feature Tools",
         "description": "Usa a biblioteca Feature Tools para Feature Engineering.",
-        "path": "/samples/feature-tools",
+        "path": "/tasks/feature-tools",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Seleção Manual de Atributos",
         "description": "Remove as features específicas do conjunto de dados.",
-        "path": "/samples/filter-selection",
+        "path": "/tasks/filter-selection",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Agrupamento de Atributos Categóricos",
         "description": "Faz o agrupamento de features categóricas com elevado número de classes.",
-        "path": "/samples/grouping-categorical-features",
+        "path": "/tasks/grouping-categorical-features",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Imputação de Valores Faltantes",
         "description": "Imputa valores ausentes usando média, mediana ou mais frequente.",
-        "path": "/samples/imputer",
+        "path": "/tasks/imputer",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Detecção de Anomalias por Isolation Forest",
         "description": "Treina um modelo Isolation Forest para detecção de anomalias usando scikit-learn.",
-        "path": "/samples/isolation-forest-clustering",
+        "path": "/tasks/isolation-forest-clustering",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Clusterização KMeans",
         "description": "Treina um modelo KMeans para clusterização usando scikit-learn.",
-        "path": "/samples/kmeans-clustering",
+        "path": "/tasks/kmeans-clustering",
         "tags": [
             "PREDICTOR"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Normalizador de Amostras",
         "description": "Normaliza amostras individualmente para o modelo de norma de unidade usando scikit-learn.",
-        "path": "/samples/normalizer",
+        "path": "/tasks/normalizer",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Seleção de Atributos por Correlação",
         "description": "Remove todas as features de baixa variação e altamente correlacionadas.",
-        "path": "/samples/pre-selection",
+        "path": "/tasks/pre-selection",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Seleção de Atributos por Método de Eliminação Recursiva",
         "description": "Realiza a seleção de features baseado no método de eliminação recursiva usando um estimador Random Forest.",
-        "path": "/samples/rfe-selector",
+        "path": "/tasks/rfe-selector",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Scaler Robusto",
         "description": "Dimensiona features usando estatísticas robustas para outliers.",
-        "path": "/samples/robust-scaler",
+        "path": "/tasks/robust-scaler",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Simulated Annealing",
         "description": "Aplica a estratégia simulated annealing para Feature Engineering.",
-        "path": "/samples/simulated-annealing",
+        "path": "/tasks/simulated-annealing",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Transformation Graph",
         "description": "Usa uma estratégia de gráfico de transformação para o Feature Engineering.",
-        "path": "/samples/transformation-graph",
+        "path": "/tasks/transformation-graph",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Seleção de Atributos por Limiar de Variância",
         "description": "Remove todos os atributos de baixa variância.",
-        "path": "/samples/variance-threshold",
+        "path": "/tasks/variance-threshold",
         "tags": [
             "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Face Detection",
         "description": "Utiliza a biblioteca facenet-pytorch, a qual disponibiliza o algorítimo MTCNN.",
-        "path": "/samples/cv-mtcnn-face-detection",
+        "path": "/tasks/cv-mtcnn-face-detection",
         "tags": [
             "COMPUTER_VISION"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "OCR (Optical Character Recognition)",
         "description": "Utiliza a biblioteca Pytesseract para converter textos em imagem para string.",
-        "path": "/samples/cv-ocr",
+        "path": "/tasks/cv-ocr",
         "tags": [
             "COMPUTER_VISION"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "YOLO (You Only Look Once)",
         "description": "Utiliza uma biblioteca do Yolov4 para detecção e classificação de objetos em imagens.",
-        "path": "/samples/cv-yolo",
+        "path": "/tasks/cv-yolo",
         "tags": [
             "COMPUTER_VISION"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
-	{
+    {
         "name": "MarianMT Translator",
         "description": "Utilização do Modelo MarianMT para tradução de diversas linguagens.",
-        "path": "/samples/nlp-marianmt-translator",
+        "path": "/tasks/nlp-marianmt-translator",
         "tags": [
             "NLP"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Text Pre-processor",
         "description": "Disponibiliza de diversas técnicas de pré-processamento textual.",
-        "path": "/samples/nlp-text-pre-processor",
+        "path": "/tasks/nlp-text-pre-processor",
         "tags": [
             "NLP"
         ],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
-	{
+    {
         "name": "Upload de arquivo",
         "description": "Importa arquivos para utilização em experimentos.",
         "tags": [
@@ -358,7 +358,7 @@
             "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
         ],
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "Google Drive",
@@ -371,12 +371,12 @@
             "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
         ],
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-		"artifacts": []
+        "artifacts": []
     },
     {
         "name": "GloVe Embeddings Bag (Inglês)",
         "description": "Classifica frases com base em Embeddings GloVe disponibilizados pela Universidade de Stanford",
-        "path": "/samples/glove-embeddings-sentence-classification",
+        "path": "/tasks/glove-embeddings-sentence-classification",
         "tags": [
             "NLP"
         ],
@@ -384,30 +384,30 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
         "artifacts": [
-			{
-				"url": "http://nlp.stanford.edu/data/glove.6B.zip",
-				"name": "glove.6B.zip"
-			},
-			{
-				"url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s50.zip",
-				"name": "glove_s50.zip"
-			},
-			{
-				"url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s100.zip",
-				"name": "glove_s100.zip"
-			},
-			{
-				"url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s300.zip",
-				"name": "glove_s300.zip"
-			},
-			{
-				"url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s600.zip",
-				"name": "glove_s600.zip"
-			},
-			{
-				"url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s1000.zip",
-				"name": "glove_s1000.zip"
-			}
-		]
+            {
+                "url": "http://nlp.stanford.edu/data/glove.6B.zip",
+                "name": "glove.6B.zip"
+            },
+            {
+                "url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s50.zip",
+                "name": "glove_s50.zip"
+            },
+            {
+                "url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s100.zip",
+                "name": "glove_s100.zip"
+            },
+            {
+                "url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s300.zip",
+                "name": "glove_s300.zip"
+            },
+            {
+                "url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s600.zip",
+                "name": "glove_s600.zip"
+            },
+            {
+                "url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s1000.zip",
+                "name": "glove_s1000.zip"
+            }
+        ]
     }
 ]
