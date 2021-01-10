@@ -2,9 +2,10 @@
 import json
 import multiprocessing
 import os
+import warnings
 
 from database import insert_task
-from notebook import create_persistent_volume_claim, put_file_in_notebook
+from notebook import create_persistent_volume_claim, copy_file_inside_pod
 
 CONFIG_PATH = "/tasks/config.json"
 
@@ -24,56 +25,61 @@ def create_tasks():
             tags = task["tags"]
             image = task["image"]
 
-            try:
-                task_id = insert_task(
-                    name=name,
-                    description=description,
-                    tags=tags,
-                    image=image,
-                    commands=commands,
-                    arguments=arguments,
-                    is_default=True,
-                )
+            task_id = insert_task(
+                name=name,
+                description=description,
+                tags=tags,
+                image=image,
+                commands=commands,
+                arguments=arguments,
+                is_default=True,
+            )
+
+            if task_id is None:
+                warnings.warn(f"{name} already exists. Skipping...")
+            else:
+                print(f"Creating {name}...", flush=True)
 
                 # mounts a volume for the task in the notebook server
-                create_persistent_volume_claim(name=f"task-{task_id}",
-                                               mount_path=f"/home/jovyan/{name}")
-            except Exception as e:
-                print(e)
-                pass
+                create_persistent_volume_claim(
+                    name=f"task-{task_id}",
+                    mount_path=f"/home/jovyan/{name}",
+                )
+
+                # Prepare jobs to copy task files and artifacts
+                jobs = []
+                path = task.get("path")
+                if path:
+                    for root, dirs, files in os.walk(path):
+                        for filename in files:
+                            # Local filepath
+                            filepath = os.path.join(root, filename)
+                            # Filepath inside pod
+                            pod_root = root.lstrip(path)
+                            destination_path = os.path.join(name, pod_root, filename)
+
+                            # copy_file_inside_pod(filepath, destination_path)
+
+                            t = multiprocessing.Process(
+                                target=copy_file_inside_pod,
+                                args=(filepath, destination_path)
+                            )
+                            jobs.append(t)
+
+                # Start the jobs
+                for j in jobs:
+                    j.start()
+
+                # Ensure all of the jobs have finished
+                for j in jobs:
+                    j.join()
 
 
 def main():
     """
     Job that creates tasks in PlatIAgro from a config file.
     """
-    t = multiprocessing.Process(target=create_tasks)
-    t.start()
-    t.join()
-
-    # Prepare jobs to copy task files and artifacts
-    jobs = []
-    with open(CONFIG_PATH) as f:
-        tasks = json.load(f)
-        for task in tasks:
-            name = task["name"]
-            path = task.get("path")
-            if path:
-                for root, dirs, files in os.walk(path):
-                    for filename in files:
-                        t = multiprocessing.Process(
-                            target=put_file_in_notebook,
-                            args=(name, os.path.join(root, filename), filename)
-                        )
-                        jobs.append(t)
-
-    # Start the threads
-    for j in jobs:
-        j.start()
-
-    # Ensure all of the threads have finished
-    for j in jobs:
-        j.join()
+    create_tasks()
 
     print("done!", flush=True)
 

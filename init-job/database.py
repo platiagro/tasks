@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-DB_HOST = os.getenv("MYSQL_DB_HOST", "mysql.kubeflow")
+DB_HOST = os.getenv("MYSQL_DB_HOST", "mysql.platiagro")
 DB_NAME = os.getenv("MYSQL_DB_NAME", "platiagro")
 DB_USER = os.getenv("MYSQL_DB_USER", "root")
 DB_PASS = os.getenv("MYSQL_DB_PASSWORD", "")
@@ -27,17 +27,17 @@ Base.query = db_session.query_property()
 
 def insert_task(**kwargs):
     """
-    Inserts a new task in database.
+    Inserts a new task in database. Avoids duplicate task names.
 
     Parameters
     ----------
     **kwargs
         Arbitrary keyword arguments.
 
-    Raises
+    Returns
     ------
-    Exception
-        When the `**kwargs` (task attributes) are invalid.
+    str or None
+        Inserted task_id or None when the task already exists.
     """
     name = kwargs.get("name", None)
     description = kwargs.get("description", None)
@@ -47,14 +47,11 @@ def insert_task(**kwargs):
     arguments = kwargs.get("arguments", None)
     is_default = kwargs.get("is_default", None)
 
-    if not isinstance(name, str):
-        raise Exception("name is required")
-
     conn = engine.connect()
     text = f'SELECT * FROM tasks WHERE name="{name}" LIMIT 1'
     result = conn.execute(text)
     if result.fetchone():
-        raise Exception("a task with that name already exists")
+        return None
 
     # saves task info to the database
     task_id = str(uuid_alpha())
