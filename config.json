@@ -1,5 +1,31 @@
 [
     {
+        "name": "Upload de arquivo",
+        "description": "Importa arquivos para utilização em experimentos.",
+        "tags": [
+            "DATASETS"
+        ],
+        "commands": ["python3", "-c"],
+        "arguments": [
+            "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
+        ],
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": []
+    },
+    {
+        "name": "Google Drive",
+        "description": "Importa arquivos do Google Drive para utilização em experimentos.",
+        "tags": [
+            "DATASETS"
+        ],
+        "commands": ["python3", "-c"],
+        "arguments": [
+            "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
+        ],
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": []
+    },
+    {
         "name": "Classificador AutoML",
         "description": "Utiliza o auto-sklearn para obter um ou mais modelos classificadores já otimizados.",
         "path": "/tasks/automl-classifier",
@@ -344,32 +370,6 @@
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
-    },
-    {
-        "name": "Upload de arquivo",
-        "description": "Importa arquivos para utilização em experimentos.",
-        "tags": [
-            "DATASETS"
-        ],
-        "commands": ["python3", "-c"],
-        "arguments": [
-            "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
-        ],
-        "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
-    },
-    {
-        "name": "Google Drive",
-        "description": "Importa arquivos do Google Drive para utilização em experimentos.",
-        "tags": [
-            "DATASETS"
-        ],
-        "commands": ["python3", "-c"],
-        "arguments": [
-            "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
-        ],
         "image": "platiagro/platiagro-experiment-image:0.2.0",
         "artifacts": []
     },
