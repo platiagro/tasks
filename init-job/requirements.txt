@@ -1,0 +1,6 @@
+# ORM
+SQLAlchemy==1.3.13
+# MySQL driver
+PyMySQL==0.9.3
+# Kubernetes python client
+kubernetes==12.0.1
