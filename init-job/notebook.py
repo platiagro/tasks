@@ -89,7 +89,6 @@ def create_persistent_volume_claim(name, mount_path):
             },
         ]
 
-        # FIXME: Gets stuck here frequently
         custom_api.patch_namespaced_custom_object(
             group="kubeflow.org",
             version="v1",
