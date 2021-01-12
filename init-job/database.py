@@ -61,8 +61,8 @@ def insert_task(**kwargs):
     commands_json = json.dumps(commands)
     parameters_json = json.dumps(parameters)
     tags_json = json.dumps(tags)
-    experiment_notebook = f'/home/jovyan/{name}/Experiment.ipynb'
-    deployment_notebook = f'/home/jovyan/{name}/Deployment.ipynb'
+    experiment_notebook = f'Experiment.ipynb'
+    deployment_notebook = f'Deployment.ipynb'
     text = (
         f"INSERT INTO tasks (uuid, name, description, image, commands, arguments, parameters, tags, experiment_notebook_path, deployment_notebook_path, is_default, created_at, updated_at) "
         f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
