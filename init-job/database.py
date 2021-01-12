@@ -46,6 +46,7 @@ def insert_task(**kwargs):
     commands = kwargs.get("commands", None)
     arguments = kwargs.get("arguments", None)
     is_default = kwargs.get("is_default", None)
+    parameters = kwargs.get("parameters", [])
 
     conn = engine.connect()
     text = f'SELECT * FROM tasks WHERE name="{name}" LIMIT 1'
@@ -56,16 +57,32 @@ def insert_task(**kwargs):
     # saves task info to the database
     task_id = str(uuid_alpha())
     created_at = datetime.datetime.now()
-    arguments_json = json.dumps(arguments).replace('\\', '\\\\')
+    arguments_json = json.dumps(arguments)
     commands_json = json.dumps(commands)
+    parameters_json = json.dumps(parameters)
     tags_json = json.dumps(tags)
     experiment_notebook = f'/home/jovyan/{name}/Experiment.ipynb'
     deployment_notebook = f'/home/jovyan/{name}/Deployment.ipynb'
     text = (
-        f"INSERT INTO tasks (uuid, name, description, image, commands, arguments, tags, experiment_notebook_path, deployment_notebook_path, is_default, created_at, updated_at) "
-        f"VALUES ('{task_id}', '{name}', '{description}', '{image}', '{commands_json}', '{arguments_json}', '{tags_json}', '{experiment_notebook}', '{deployment_notebook}', {is_default}, '{created_at}', '{created_at}')"
+        f"INSERT INTO tasks (uuid, name, description, image, commands, arguments, parameters, tags, experiment_notebook_path, deployment_notebook_path, is_default, created_at, updated_at) "
+        f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     )
-    conn.execute(text)
+    conn.execute(
+        text,
+        task_id,
+        name,
+        description,
+        image,
+        commands_json,
+        arguments_json,
+        parameters_json,
+        tags_json,
+        experiment_notebook,
+        deployment_notebook,
+        is_default,
+        created_at,
+        created_at,
+    )
     conn.close()
 
     return task_id

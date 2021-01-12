@@ -22,7 +22,8 @@ COPY ./tasks /tasks
 COPY ./config.json /tasks/config.json
 
 # Downloads artifacts in task dir
-RUN jq -c ".[]" /tasks/config.json | while read TASK; do \
+RUN touch urls.txt; \
+    jq -c ".[]" /tasks/config.json | while read TASK; do \
         echo ${TASK} | jq -r ".artifacts" | jq -c ".[]" | while read ARTIFACT; do \
             echo "${ARTIFACT}" | jq -r .url >> urls.txt; \
             printf "    out=" >> urls.txt; \

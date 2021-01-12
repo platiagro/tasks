@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 """Kubeflow notebook server utility functions."""
+import json
+import os
+import random
+import re
 import tarfile
 import time
+import uuid
 import warnings
 from tempfile import TemporaryFile
 
@@ -182,3 +187,127 @@ def copy_file_inside_pod(filepath, destination_path):
         container_stream.close()
 
     print(f"Copied {filepath} to {destination_path}!", flush=True)
+
+
+def init_notebook_metadata(task_id, notebook_path):
+    """
+    Sets random experiment_id and operator_id to notebooks metadata.
+    Dicts are passed by reference, so no need to return.
+
+    Parameters
+    ----------
+    task_id : str
+    notebook_path : str
+    """
+    experiment_id = uuid_alpha()
+    operator_id = uuid_alpha()
+
+    with open(notebook_path) as f:
+        notebook = json.load(f)
+
+    # sets these values to notebooks
+    if notebook is not None:
+        notebook["metadata"]["experiment_id"] = experiment_id
+        notebook["metadata"]["operator_id"] = operator_id
+        notebook["metadata"]["task_id"] = task_id
+
+    with open(notebook_path, "w") as f:
+        notebook = json.dump(notebook, f)
+
+
+def uuid_alpha():
+    """
+    Generates an uuid that always starts with an alpha char.
+
+    Returns
+    -------
+    str
+    """
+    uuid_ = str(uuid.uuid4())
+    if not uuid_[0].isalpha():
+        c = random.choice(["a", "b", "c", "d", "e", "f"])
+        uuid_ = f"{c}{uuid_[1:]}"
+    return uuid_
+
+
+def parse_parameters(notebook_path):
+    """
+    Parses and returns the parameters declared in a notebook.
+
+    Parameters
+    ----------
+    notebook_path : str
+
+    Returns
+    -------
+    list:
+        A list of parameters (name, default, type, label, description).
+    """
+    if not os.path.exists(notebook_path):
+        return []
+
+    with open(notebook_path) as f:
+        notebook = json.load(f)
+
+    parameters = []
+    cells = notebook.get("cells", [])
+    for cell in cells:
+        cell_type = cell["cell_type"]
+        tags = cell["metadata"].get("tags", [])
+        if cell_type == "code" and "parameters" in tags:
+            source = cell["source"]
+
+            parameters.extend(read_parameters_from_source(source))
+
+    return parameters
+
+
+def read_parameters_from_source(source):
+    """
+    Lists the parameters declared in source code.
+
+    Parameters
+    ----------
+    source : list
+        Source code lines.
+
+    Returns
+    -------
+    list:
+        A list of parameters (name, default, type, label, description).
+    """
+    parameters = []
+    # Regex to capture a parameter declaration
+    # Inspired by Google Colaboratory Forms
+    # Example of a parameter declaration:
+    # name = "value" #@param ["1st option", "2nd option"] {type:"string", label:"Foo Bar", description:"Foo Bar"}
+    pattern = re.compile(r"^(\w+)\s*=\s*(.+)\s*#@param(?:(\s+\[.*\]))?(\s+\{.*\})")
+
+    for line in source:
+        match = pattern.search(line)
+        if match:
+            try:
+                name = match.group(1)
+                default = match.group(2)
+                options = match.group(3)
+                metadata = match.group(4)
+
+                parameter = {"name": name}
+
+                if default and default != "None":
+                    if default in ["True", "False"]:
+                        default = default.lower()
+                    parameter["default"] = json.loads(default)
+
+                if options:
+                    parameter["options"] = json.loads(options)
+
+                # adds quotes to metadata keys
+                metadata = re.sub(r"(\w+):", r'"\1":', metadata)
+                parameter.update(json.loads(metadata))
+
+                parameters.append(parameter)
+            except json.JSONDecodeError:
+                pass
+
+    return parameters

@@ -5,7 +5,8 @@ import os
 import warnings
 
 from database import insert_task
-from notebook import create_persistent_volume_claim, copy_file_inside_pod
+from notebook import create_persistent_volume_claim, copy_file_inside_pod, \
+    init_notebook_metadata, parse_parameters
 
 CONFIG_PATH = "/tasks/config.json"
 
@@ -24,6 +25,12 @@ def create_tasks():
             name = task["name"]
             tags = task["tags"]
             image = task["image"]
+            path = task.get("path")
+            parameters = []
+
+            if path:
+                experiment_notebook_path = f"{path}/Experiment.ipynb"
+                parameters = parse_parameters(experiment_notebook_path)
 
             task_id = insert_task(
                 name=name,
@@ -33,6 +40,7 @@ def create_tasks():
                 commands=commands,
                 arguments=arguments,
                 is_default=True,
+                parameters=parameters,
             )
 
             if task_id is None:
@@ -48,7 +56,6 @@ def create_tasks():
 
                 # Prepare jobs to copy task files and artifacts
                 jobs = []
-                path = task.get("path")
                 if path:
                     for root, dirs, files in os.walk(path):
                         for filename in files:
@@ -58,7 +65,8 @@ def create_tasks():
                             pod_root = root.lstrip(path)
                             destination_path = os.path.join(name, pod_root, filename)
 
-                            # copy_file_inside_pod(filepath, destination_path)
+                            if filename in {"Experiment.ipynb", "Deployment.ipynb"}:
+                                init_notebook_metadata(task_id, notebook_path=filepath)
 
                             t = multiprocessing.Process(
                                 target=copy_file_inside_pod,
