@@ -8,9 +8,10 @@ import numpy as np
 from PIL import Image
 
 from checkpoint import Checkpoint
-
+from sklearn.metrics import classification_report
 
 class ModelInfos():
+
     def model_info(self, models_path):
         files = os.listdir(models_path)
         for fl in files:
@@ -135,7 +136,6 @@ class Model():
                     model.optimizer = optimizer
                     model.phase = phase
                     self.checkpoint.save_checkpoint(self.model_arch, police, model)
-        print()
         model.history = history
         time_elapsed = time.time() - since
         print('Training completed in {:.0f}m {:.0f}s'.format(
@@ -170,26 +170,40 @@ class Model():
             return topk_index, topk_prob, real_class
     
     def predict_batch(self, multi_gpu, model_path,
-                      dataloaders, dataset_sizes):
-        """Run inference for test set of images"""
+                      dataloaders, dataset_sizes, class_names):
+        """Run inference for a batch of images"""
         checkpoint = Checkpoint(self.model_arch, multi_gpu)
         model = checkpoint.load_checkpoint(self.model_arch, model_path)
         model.eval()
-
         phase = 'test'
-        running_corrects = 0
-        running_wrongs = 0
+
+        # for statistics
+        y_trues = []
+        y_preds = []
+        confusion_matrix = torch.zeros(len(class_names), len(class_names))
+
         # Iterate over data.
-        for inputs, labels in dataloaders[phase]:
+        for i, (inputs, labels) in enumerate(dataloaders[phase]):
+            y_trues.append(labels.tolist())
             inputs = inputs.to(self.device)
             labels = labels.to(self.device)
-
+            
             with torch.no_grad():
                 outs = model(inputs)
                 _, preds = torch.max(outs, 1)
+                y_preds.append(preds.tolist())
+                for t, p in zip(labels.view(-1), preds.view(-1)):
+                    confusion_matrix[t.long(), p.long()] += 1
 
-            # statistics
-            running_corrects += torch.sum(preds == labels.data)
-            running_wrongs += torch.sum(preds != labels.data)
-            acc = running_corrects.double() / dataset_sizes[phase]
-        return int(running_corrects), int(running_wrongs), float(acc)
+        y_preds = [pred_value for preds_list in y_preds for pred_value in preds_list]
+        y_trues = [true_value for true_list in y_trues for true_value in true_list]
+        acc_per_class = (confusion_matrix.diag()/confusion_matrix.sum(1)).numpy()
+
+        print("\n### Confusion matrix: ###\n", confusion_matrix.numpy())
+        print("\n### Acc per class: ###")
+        for i, name in enumerate(class_names):
+            print("Class: {0} -> Acc: {1}".format(class_names[i], acc_per_class[i]))
+        print()
+        print("\n### Classification report: ###\n")
+        print(classification_report(y_trues, y_preds, target_names=class_names))
+        
