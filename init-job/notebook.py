@@ -145,8 +145,8 @@ def copy_file_inside_pod(filepath, destination_path):
     load_kube_config()
     api_instance = client.CoreV1Api()
 
-    # The following command extracts the contents of STDIN to /home/jovyan/
-    exec_command = ["tar", "xvf", "-", "-C", f"/home/jovyan"]
+    # The following command extracts the contents of STDIN to /home/jovyan/tasks
+    exec_command = ["tar", "xvf", "-", "-C", f"/home/jovyan/tasks"]
 
     container_stream = stream(
         api_instance.connect_get_namespaced_pod_exec,

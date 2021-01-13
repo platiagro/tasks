@@ -51,7 +51,7 @@ def create_tasks():
                 # mounts a volume for the task in the notebook server
                 create_persistent_volume_claim(
                     name=f"task-{task_id}",
-                    mount_path=f"/home/jovyan/{name}",
+                    mount_path=f"/home/jovyan/tasks/{name}",
                 )
 
                 # Prepare jobs to copy task files and artifacts
