@@ -47,6 +47,8 @@ def insert_task(**kwargs):
     arguments = kwargs.get("arguments", None)
     is_default = kwargs.get("is_default", None)
     parameters = kwargs.get("parameters", [])
+    experiment_notebook_path = kwargs.get("experiment_notebook_path", None)
+    deployment_notebook_path = kwargs.get("deployment_notebook_path", None)
 
     conn = engine.connect()
     text = f'SELECT * FROM tasks WHERE name="{name}" LIMIT 1'
@@ -61,8 +63,7 @@ def insert_task(**kwargs):
     commands_json = json.dumps(commands)
     parameters_json = json.dumps(parameters)
     tags_json = json.dumps(tags)
-    experiment_notebook = f'Experiment.ipynb'
-    deployment_notebook = f'Deployment.ipynb'
+
     text = (
         f"INSERT INTO tasks (uuid, name, description, image, commands, arguments, parameters, tags, experiment_notebook_path, deployment_notebook_path, is_default, created_at, updated_at) "
         f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -77,8 +78,8 @@ def insert_task(**kwargs):
         arguments_json,
         parameters_json,
         tags_json,
-        experiment_notebook,
-        deployment_notebook,
+        experiment_notebook_path,
+        deployment_notebook_path,
         is_default,
         created_at,
         created_at,

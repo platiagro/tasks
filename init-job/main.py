@@ -29,8 +29,12 @@ def create_tasks():
             parameters = []
 
             if path:
-                experiment_notebook_path = f"{path}/Experiment.ipynb"
-                parameters = parse_parameters(experiment_notebook_path)
+                experiment_notebook_path = "Experiment.ipynb"
+                deployment_notebook_path = "Deployment.ipynb"
+                parameters = parse_parameters(f"{path}/{experiment_notebook_path}")
+            else:
+                experiment_notebook_path = None
+                deployment_notebook_path = None
 
             task_id = insert_task(
                 name=name,
@@ -41,6 +45,8 @@ def create_tasks():
                 arguments=arguments,
                 is_default=True,
                 parameters=parameters,
+                experiment_notebook_path=experiment_notebook_path,
+                deployment_notebook_path=deployment_notebook_path,
             )
 
             if task_id is None:

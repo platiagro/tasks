@@ -114,8 +114,8 @@ def create_persistent_volume_claim(name, mount_path):
                 )
 
                 if pod.status.phase == "Running" \
-                    and all([c.state.running for c in pod.status.container_statuses]) \
-                    and any([v for v in pod.spec.volumes if v.name == f"{name}"]):
+                   and all([c.state.running for c in pod.status.container_statuses]) \
+                   and any([v for v in pod.spec.volumes if v.name == f"{name}"]):
                     print(f"Mounted volume vol-{name} in notebook server!", flush=True)
                     break
             except ApiException:
