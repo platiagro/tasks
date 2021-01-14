@@ -1,12 +1,14 @@
 import cv2
 import numpy as np
 import pandas as pd
+import albumentations as A
+from albumentations.pytorch.transforms import ToTensorV2
 
 import torch
 from torch.utils.data import Dataset
 
 
-class WheatDataset(Dataset):
+class DatasetManager(Dataset):
 
 
     def __init__(self, dataframe, image_dir, transforms=None, step = "Experiment"):
