@@ -1,92 +1,100 @@
 # -*- coding: utf-8 -*-
 import json
-import multiprocessing
 import os
-import warnings
 
 from database import insert_task
-from notebook import create_persistent_volume_claim, copy_file_inside_pod, \
-    init_notebook_metadata, parse_parameters
+from notebook import create_persistent_volume_claim, copy_files_inside_pod, \
+    parse_parameters, patch_notebook_server, set_notebook_metadata, uuid_alpha
 
 CONFIG_PATH = "/tasks/config.json"
 
 
 def create_tasks():
     """
-    Reads config file, inserts tasks in database, and a allocates a volume.
+    Inserts tasks in database, allocates volumes, mounts them in notebook server.
     """
     with open(CONFIG_PATH) as f:
         tasks = json.load(f)
 
-        for task in tasks:
-            arguments = task["arguments"]
-            commands = task["commands"]
-            description = task["description"]
-            name = task["name"]
-            tags = task["tags"]
-            image = task["image"]
-            path = task.get("path")
-            parameters = []
+    volume_mounts = []
 
-            if path:
-                experiment_notebook_path = "Experiment.ipynb"
-                deployment_notebook_path = "Deployment.ipynb"
-                parameters = parse_parameters(f"{path}/{experiment_notebook_path}")
-            else:
-                experiment_notebook_path = None
-                deployment_notebook_path = None
+    for task in tasks:
+        arguments = task["arguments"]
+        commands = task["commands"]
+        description = task["description"]
+        name = task["name"]
+        tags = task["tags"]
+        image = task["image"]
+        path = task.get("path")
+        parameters = []
 
-            task_id = insert_task(
-                name=name,
-                description=description,
-                tags=tags,
-                image=image,
-                commands=commands,
-                arguments=arguments,
-                is_default=True,
-                parameters=parameters,
-                experiment_notebook_path=experiment_notebook_path,
-                deployment_notebook_path=deployment_notebook_path,
+        if path:
+            experiment_notebook_path = "Experiment.ipynb"
+            deployment_notebook_path = "Deployment.ipynb"
+            parameters = parse_parameters(f"{path}/{experiment_notebook_path}")
+        else:
+            experiment_notebook_path = None
+            deployment_notebook_path = None
+
+        task_id = insert_task(
+            name=name,
+            description=description,
+            tags=tags,
+            image=image,
+            commands=commands,
+            arguments=arguments,
+            is_default=True,
+            parameters=parameters,
+            experiment_notebook_path=experiment_notebook_path,
+            deployment_notebook_path=deployment_notebook_path,
+        )
+        task["task_id"] = task_id
+
+        volume_name = f"vol-task-{task_id}"
+        mount_path = f"/home/jovyan/tasks/{name}"
+
+        create_persistent_volume_claim(
+            name=volume_name,
+        )
+        volume_mounts.append({
+            "name": volume_name,
+            "mount_path": mount_path,
+        })
+
+    # Adds volume mount to the notebook server
+    patch_notebook_server(volume_mounts)
+
+    # Copies task files and artifacts
+    for task in tasks:
+        name = task["name"]
+        path = task.get("path")
+        if path:
+            copy_files_inside_pod(
+                local_path=path,
+                destination_path=name,
+                task_name=name,
             )
 
-            if task_id is None:
-                warnings.warn(f"{name} already exists. Skipping...")
-            else:
-                print(f"Creating {name}...", flush=True)
+            experiment_id = uuid_alpha()
+            operator_id = uuid_alpha()
 
-                # mounts a volume for the task in the notebook server
-                create_persistent_volume_claim(
-                    name=f"vol-task-{task_id}",
-                    mount_path=f"/home/jovyan/tasks/{name}",
+            if os.path.exists(f"{path}/Experiment.ipynb"):
+                notebook_path = f"{name}/Experiment.ipynb"
+                set_notebook_metadata(
+                    notebook_path=notebook_path,
+                    task_id=task_id,
+                    experiment_id=experiment_id,
+                    operator_id=operator_id,
                 )
 
-                # Prepare jobs to copy task files and artifacts
-                jobs = []
-                if path:
-                    for root, dirs, files in os.walk(path):
-                        for filename in files:
-                            # Local filepath
-                            filepath = os.path.join(root, filename)
-                            # Filepath inside pod
-                            pod_root = root.lstrip(path)
-                            destination_path = os.path.join(name, pod_root, filename)
-
-                            if filename in {"Experiment.ipynb", "Deployment.ipynb"}:
-                                init_notebook_metadata(task_id, notebook_path=filepath)
-
-                            t = multiprocessing.Process(
-                                target=copy_file_inside_pod,
-                                args=(filepath, destination_path)
-                            )
-                            jobs.append(t)
-
-                # Start the jobs
-                for j in jobs:
-                    j.start()
-
-                # Ensure all of the jobs have finished
-                for j in jobs:
-                    j.join()
+            if os.path.exists(f"{path}/Deployment.ipynb"):
+                notebook_path = f"{name}/Deployment.ipynb"
+                set_notebook_metadata(
+                    notebook_path=notebook_path,
+                    task_id=task_id,
+                    experiment_id=experiment_id,
+                    operator_id=operator_id,
+                )
 
 
 def main():

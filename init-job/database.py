@@ -51,10 +51,11 @@ def insert_task(**kwargs):
     deployment_notebook_path = kwargs.get("deployment_notebook_path", None)
 
     conn = engine.connect()
-    text = f'SELECT * FROM tasks WHERE name="{name}" LIMIT 1'
+    text = f'SELECT uuid FROM tasks WHERE name="{name}" LIMIT 1'
     result = conn.execute(text)
-    if result.fetchone():
-        return None
+    row = result.fetchone()
+    if row:
+        return row[0]
 
     # saves task info to the database
     task_id = str(uuid_alpha())

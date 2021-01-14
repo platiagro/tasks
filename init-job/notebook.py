@@ -36,20 +36,28 @@ class ApiClientForJsonPatch(client.ApiClient):
                                 collection_formats, _preload_content, _request_timeout)
 
 
-def create_persistent_volume_claim(name, mount_path):
+def create_persistent_volume_claim(name):
     """
-    Creates a persistent volume claim and mounts it to the notebook server.
+    Creates a persistent volume claim.
 
     Parameters
     ----------
     name : str
-    mount_path : str
     """
-    print(f"Creating volume vol-{name}...", flush=True)
+    print(f"Creating volume {name}...", flush=True)
     load_kube_config()
 
     api_instance = client.CoreV1Api()
-    custom_api = client.CustomObjectsApi(api_client=ApiClientForJsonPatch())
+
+    try:
+        api_instance.read_namespaced_persistent_volume_claim(
+            name=name,
+            namespace=NOTEBOOK_NAMESPACE,
+        )
+        warnings.warn(f"Volume {name} already exists...")
+        return
+    except ApiException:
+        pass
 
     try:
         body = {
@@ -71,16 +79,51 @@ def create_persistent_volume_claim(name, mount_path):
             namespace=NOTEBOOK_NAMESPACE,
             body=body,
         )
+    except ApiException as e:
+        body = literal_eval(e.body)
+        message = body["message"]
+        raise Exception(f"Error while trying to patch notebook server: {message}")
 
-        print(f"Mounting volume {name} in notebook server...", flush=True)
-        body = [
+
+def patch_notebook_server(volume_mounts):
+    """
+    Adds a list of volume mounts to the notebook server.
+
+    Parameters
+    ----------
+    volume_mounts : list
+    """
+    print("Adding volumes to notebook server...", flush=True)
+    load_kube_config()
+
+    api_instance = client.CoreV1Api()
+    custom_api = client.CustomObjectsApi(api_client=ApiClientForJsonPatch())
+
+    try:
+        body = custom_api.get_namespaced_custom_object(
+            group="kubeflow.org",
+            version="v1",
+            namespace=NOTEBOOK_NAMESPACE,
+            plural="notebooks",
+            name=NOTEBOOK_NAME,
+        )
+        # filters volume mounts that were already added
+        volume_mounts = [m for m in volume_mounts if not any(v for v in body["spec"]["template"]["spec"]["volumes"] if m["name"] == v["name"])]
+    except ApiException as e:
+        body = literal_eval(e.body)
+        message = body["message"]
+        raise Exception(f"Error while trying to patch notebook server: {message}")
+
+    body = []
+    for v in volume_mounts:
+        body.extend([
             {
                 "op": "add",
                 "path": "/spec/template/spec/volumes/-",
                 "value": {
-                    "name": name,
+                    "name": v["name"],
                     "persistentVolumeClaim": {
-                        "claimName": name,
+                        "claimName": v["name"],
                     },
                 },
             },
@@ -88,60 +131,61 @@ def create_persistent_volume_claim(name, mount_path):
                 "op": "add",
                 "path": "/spec/template/spec/containers/0/volumeMounts/-",
                 "value": {
-                    "mountPath": mount_path,
-                    "name": name,
+                    "mountPath": v["mount_path"],
+                    "name": v["name"],
                 },
             },
-        ]
+        ])
 
-        custom_api.patch_namespaced_custom_object(
-            group="kubeflow.org",
-            version="v1",
-            namespace=NOTEBOOK_NAMESPACE,
-            plural="notebooks",
-            name=NOTEBOOK_NAME,
-            body=body,
-            _request_timeout=5,
-        )
+    if len(body) > 0:
+        try:
+            custom_api.patch_namespaced_custom_object(
+                group="kubeflow.org",
+                version="v1",
+                namespace=NOTEBOOK_NAMESPACE,
+                plural="notebooks",
+                name=NOTEBOOK_NAME,
+                body=body,
+                _request_timeout=5,
+            )
+        except ApiException as e:
+            body = literal_eval(e.body)
+            message = body["message"]
+            raise Exception(f"Error while trying to patch notebook server: {message}")
 
-        # Wait for the pod to be ready and have all containers running
-        while True:
-            try:
-                pod = api_instance.read_namespaced_pod(
-                    name=NOTEBOOK_POD_NAME,
-                    namespace=NOTEBOOK_NAMESPACE,
-                    _request_timeout=5,
-                )
+    # Wait for the pod to be ready and have all containers running
+    while True:
+        try:
+            pod = api_instance.read_namespaced_pod(
+                name=NOTEBOOK_POD_NAME,
+                namespace=NOTEBOOK_NAMESPACE,
+                _request_timeout=5,
+            )
 
-                if pod.status.phase == "Running" \
-                   and all([c.state.running for c in pod.status.container_statuses]) \
-                   and any([v for v in pod.spec.volumes if v.name == f"{name}"]):
-                    print(f"Mounted volume vol-{name} in notebook server!", flush=True)
-                    break
-            except ApiException:
-                pass
-            finally:
-                warnings.warn(f"Waiting for notebook server to be ready...")
-                time.sleep(5)
-
-    except ApiException as e:
-        body = literal_eval(e.body)
-        message = body["message"]
-        raise Exception(f"Error while trying to patch notebook server: {message}")
+            if pod.status.phase == "Running" \
+               and all([c.state.running for c in pod.status.container_statuses]):
+                print(f"Mounted volumes in notebook server!", flush=True)
+                break
+        except ApiException:
+            pass
+        finally:
+            warnings.warn(f"Waiting for notebook server to be ready...")
+            time.sleep(5)
 
 
-def copy_file_inside_pod(filepath, destination_path):
+def copy_files_inside_pod(local_path, destination_path, task_name):
     """
-    Copies a local file to a pod in notebook server.
+    Copies local files to a pod in notebook server.
     Based on this example:
     https://github.com/prafull01/Kubernetes-Utilities/blob/master/kubectl_cp_as_python_client.py
 
     Parameters
     ----------
-    filepath : str
+    local_path : str
     destination_path : str
+    task_name : task_name
     """
-    print(f"Copying {filepath} to {destination_path}...", flush=True)
+    print(f"Copying {local_path} to {destination_path}...", flush=True)
     load_kube_config()
     api_instance = client.CoreV1Api()
 
@@ -164,7 +208,16 @@ def copy_file_inside_pod(filepath, destination_path):
     with TemporaryFile() as tar_buffer:
         # Prepares an uncompressed tarfile that will be written to STDIN
         with tarfile.open(fileobj=tar_buffer, mode="w") as tar:
-            tar.add(filepath, arcname=destination_path)
+
+            for root, dirs, files in os.walk(local_path):
+                for filename in files:
+                    # Local filepath
+                    filepath = os.path.join(root, filename)
+                    # Filepath inside pod
+                    pod_root = root.lstrip(local_path)
+                    destination_path = os.path.join(task_name, pod_root, filename)
+
+                    tar.add(filepath, arcname=destination_path)
 
         # Rewinds to beggining of tarfile
         tar_buffer.seek(0)
@@ -186,33 +239,65 @@ def copy_file_inside_pod(filepath, destination_path):
                 break
         container_stream.close()
 
-    print(f"Copied {filepath} to {destination_path}!", flush=True)
+    print(f"Copied {local_path} to {destination_path}!", flush=True)
 
 
-def init_notebook_metadata(task_id, notebook_path):
+def set_notebook_metadata(notebook_path, task_id, experiment_id, operator_id):
     """
-    Sets random experiment_id and operator_id to notebooks metadata.
-    Dicts are passed by reference, so no need to return.
+    Sets metadata values in notebook file.
 
     Parameters
     ----------
-    task_id : str
     notebook_path : str
+    task_id : str
+    experiment_id : str
+    operator_id : str
     """
-    experiment_id = uuid_alpha()
-    operator_id = uuid_alpha()
+    print(f"Setting metadata in {notebook_path}...", flush=True)
+    load_kube_config()
+    api_instance = client.CoreV1Api()
 
-    with open(notebook_path) as f:
-        notebook = json.load(f)
+    # The following command sets task_id in the metadata of a notebook
+    python_script = (
+        f"import json; "
+        f"f = open('/home/jovyan/tasks/{notebook_path}'); "
+        f"n = json.load(f); "
+        f"n['metadata']['task_id'] = '{task_id}'; "
+        f"n['metadata']['experiment_id'] = '{experiment_id}'; "
+        f"n['metadata']['operator_id'] = '{operator_id}'; "
+        f"f.close(); "
+        f"f = open('/home/jovyan/tasks/{notebook_path}', 'w'); "
+        f"json.dump(n, f, indent=1); "
+        f"f.close()"
+    )
+    exec_command = [
+        "python",
+        "-c",
+        python_script,
+    ]
 
-    # sets these values to notebooks
-    if notebook is not None:
-        notebook["metadata"]["experiment_id"] = experiment_id
-        notebook["metadata"]["operator_id"] = operator_id
-        notebook["metadata"]["task_id"] = task_id
+    container_stream = stream(
+        api_instance.connect_get_namespaced_pod_exec,
+        name=NOTEBOOK_POD_NAME,
+        namespace=NOTEBOOK_NAMESPACE,
+        command=exec_command,
+        container=NOTEBOOK_CONAINER_NAME,
+        stderr=True,
+        stdin=False,
+        stdout=True,
+        tty=False,
+        _preload_content=False,
+    )
 
-    with open(notebook_path, "w") as f:
-        notebook = json.dump(notebook, f)
+    while container_stream.is_open():
+        container_stream.update(timeout=10)
+        if container_stream.peek_stdout():
+            warnings.warn("STDOUT: %s" % container_stream.read_stdout())
+        if container_stream.peek_stderr():
+            warnings.warn("STDERR: %s" % container_stream.read_stderr())
+    container_stream.close()
+
+    print(f"Set metadata in {notebook_path}!", flush=True)
 
 
 def uuid_alpha():
