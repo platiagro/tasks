@@ -3,7 +3,7 @@ from numpy import genfromtxt
 import torch
 
 class MyDataset(Dataset):
-    def __init__(self, X, X_words,target = None,step = "Experiment"):
+    def __init__(self, X, X_words, target = None, step = "Experiment"):
         super(MyDataset, self).__init__()
 
         self.x = [torch.tensor(line).type(torch.LongTensor) for line in X ]

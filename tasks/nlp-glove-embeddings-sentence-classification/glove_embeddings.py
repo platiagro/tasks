@@ -12,7 +12,6 @@ class GloveEmbeddings(object):
         self.device = device
         self.glove_dim = glove_dim
         self.glove_weights_file_name = glove_weights_file_name
-        self.glove_dir = "./glove_dir"
         self.glove_path  = None
         self.glove_infos = None
         
@@ -26,9 +25,11 @@ class GloveEmbeddings(object):
             unzip_to_folder(f"./{self.glove_weights_file_name}","./")
             name_without_extension = self.glove_weights_file_name.split(".")[0]
             self.glove_path = f"./{name_without_extension}.txt"
+            self.glove_weights_file_name = f"{name_without_extension}.txt"
         
         if ".txt" in self.glove_weights_file_name:
             self.glove_path = f"./{self.glove_weights_file_name}"
+            
 
     def _load_glove_vector(self):
         self._set_glove_path()
