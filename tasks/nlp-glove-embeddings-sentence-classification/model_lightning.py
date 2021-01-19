@@ -20,12 +20,14 @@ class GloveFinetuner(pl.LightningModule):
         self.learning_rate = hyperparams["learning_rate"]
         self.train_batch_size = hyperparams["train_batch_size"]
         self.eval_batch_size = hyperparams["eval_batch_size"]
-        self.hidden_dim = hyperparams["hidden_dim"]
+        self.hiddem_activation_function = hyperparams["hiddem_activation_function"]
+        self.hidden_dims = hyperparams["hidden_dims"]
 
         # ---------- model_parameters
         self.loss_funtion = model_parameters["criterion"]
         self.label_encoder = model_parameters["label_encoder"]
         self.glove_infos = model_parameters["glove_infos"]
+        
 
         # ---------- dataset_infos
         self.all_data = dataset_infos["all_data"]
@@ -85,19 +87,31 @@ class GloveFinetuner(pl.LightningModule):
 
         # ---------- Englobamentoda rede para classificação(se necessário)
         weight = self.glove_infos["glove_vectors"]
-        embedding_dim = self.glove_infos["glove_dim"]
-        output_classes_number = len(self.label_encoder.classes_)
+        self.embedding_dim = self.glove_infos["glove_dim"]
+        self.output_classes_number = len(self.label_encoder.classes_)
         self.embedding_bag = torch.nn.EmbeddingBag.from_pretrained(
             weight, mode="mean", freeze=True
         )
-        self.layer1 = torch.nn.Linear(embedding_dim, self.hidden_dim)
-        self.layer2 = torch.nn.Linear(
-            self.hidden_dim, output_classes_number
-        )
+        
+        self.net = self._build_mlp()
+    
+    def _build_mlp(self):
+        """Build a feedforward neural network."""
+        if self.hiddem_activation_function == "relu":
+            act = torch.nn.ReLU
+        if self.hiddem_activation_function == "tanh":
+            act = torch.nn.Tanh
+        
+        layers = [torch.nn.Linear(self.embedding_dim, self.hidden_dims[0]), act()]
 
-        layers = [self.layer1, self.layer2]
+        for j in range(len(self.hidden_dims)-1):
+            # act = activation if j < len(sizes)-2 else output_activation
+            layers += [torch.nn.Linear(self.hidden_dims[j], self.hidden_dims[j+1]), act()]
+        
+        layers += [torch.nn.Linear(self.hidden_dims[-1],self.output_classes_number)]
+        net = torch.nn.Sequential(*layers)
+        return net
 
-        self.net = torch.nn.Sequential(*layers)
 
     def predict(self, X_inference_glove_ids, X_inference_glove_words):
         self.step = "Deployment"
@@ -118,8 +132,7 @@ class GloveFinetuner(pl.LightningModule):
 
     def forward(self, word_ids, offsets):
         X_emb = self.embedding_bag(word_ids, offsets)
-        hidden = torch.relu(self.layer1(X_emb))
-        logits = self.layer2(hidden)
+        logits = self.net(X_emb)
         return logits
 
     def training_step(self, batch, batch_nb):
