@@ -54,7 +54,7 @@ def create_persistent_volume_claim(name, mount_path):
     try:
         body = {
             "metadata": {
-                "name": f"vol-{name}",
+                "name": name,
             },
             "spec": {
                 "accessModes": [
@@ -72,7 +72,7 @@ def create_persistent_volume_claim(name, mount_path):
             body=body,
         )
 
-        print(f"Mounting volume vol-{name} in notebook server...", flush=True)
+        print(f"Mounting volume {name} in notebook server...", flush=True)
         body = [
             {
                 "op": "add",
@@ -80,7 +80,7 @@ def create_persistent_volume_claim(name, mount_path):
                 "value": {
                     "name": name,
                     "persistentVolumeClaim": {
-                        "claimName": f"vol-{name}",
+                        "claimName": name,
                     },
                 },
             },
