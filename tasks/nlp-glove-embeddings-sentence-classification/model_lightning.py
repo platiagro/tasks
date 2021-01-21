@@ -1,7 +1,10 @@
+import os
+import random
 import functools
 import traceback
 from multiprocessing import cpu_count
 
+import numpy as np
 import pandas as pd
 import psutil
 import pytorch_lightning as pl
@@ -9,6 +12,7 @@ import torch
 from sklearn.metrics import accuracy_score
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import WeightedRandomSampler
+
 
 
 class GloveFinetuner(pl.LightningModule):
@@ -22,6 +26,7 @@ class GloveFinetuner(pl.LightningModule):
         self.eval_batch_size = hyperparams["eval_batch_size"]
         self.hiddem_activation_function = hyperparams["hiddem_activation_function"]
         self.hidden_dims = hyperparams["hidden_dims"]
+        self.seed = hyperparams["seed"]
 
         # ---------- model_parameters
         self.loss_funtion = model_parameters["criterion"]
@@ -41,8 +46,11 @@ class GloveFinetuner(pl.LightningModule):
         # ---------- other_infos
         self.predict_proba = torch.nn.Softmax(dim=1)
         self.step = "Experiment"
+        
+        # ---------- fixing seeds
+        self.seed_everything()
 
-        # ---------- Dados para gráfico de Acurácia e Loss
+        # ---------- Creating Dataframe for saving accuracy and loss
         self.df_performance_train_batch = pd.DataFrame(
             columns=["train_batch_loss", "train_batch_acc"]
         )
@@ -56,7 +64,7 @@ class GloveFinetuner(pl.LightningModule):
             columns=["valid_epoch_loss", "valid_epoch_acc"]
         )
 
-        # ---------- Carregamento datasets
+        # ---------- getting datasets
         self.targets_sampler = self.all_data[2]
         if self.overfit:
             self.train_dataset = self.CustomDataset(
@@ -80,12 +88,12 @@ class GloveFinetuner(pl.LightningModule):
             )
             
 
-        # ---------- Datafame de comparação para o teste
+        # ---------- Creating comparision dataframe with expected and predicted results
         columns = [ "ORIGINAL_TARGET","ORIGINAL_CODE","PREDICTED_TARGET","PREDICTED_CODE" ] + [label.upper() + "_PROB" for label in self.label_encoder.classes_]
         self.df_valid = pd.DataFrame(columns=columns)
         self.df_test = pd.DataFrame(columns=columns)
 
-        # ---------- Englobamentoda rede para classificação(se necessário)
+        # ---------- mlp
         weight = self.glove_infos["glove_vectors"]
         self.embedding_dim = self.glove_infos["glove_dim"]
         self.output_classes_number = len(self.label_encoder.classes_)
@@ -297,7 +305,7 @@ class GloveFinetuner(pl.LightningModule):
                 self.df_test = self.df_test.append(pd.Series(row_info,index=self.df_test.columns), ignore_index=True)
                
             
-            retorno = {"test_acc_batch": acc}
+            final_return = {"test_acc_batch": acc}
 
         if self.step == "Deployment":
             inputs, offsets = batch
@@ -319,9 +327,9 @@ class GloveFinetuner(pl.LightningModule):
                 row_info = [not_apply, not_apply,predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
                 self.df_test = self.df_test.append(pd.Series(row_info,index=self.df_test.columns), ignore_index=True)
 
-            retorno = None
+            final_return = None
 
-        return retorno
+        return final_return
 
     def test_epoch_end(self, outputs):
         if not outputs:
@@ -344,12 +352,12 @@ class GloveFinetuner(pl.LightningModule):
 
     def my_collate(self, batch):
         # len soma de todas as palavras
-        lista_words = []
-        [lista_words.extend(item[1]) for item in batch]
+        list_words = []
+        [list_words.extend(item[1]) for item in batch]
 
         # len soma de todas as palavras
-        lista_words_ids = [item[0] for item in batch]
-        lista_words_ids_vector = torch.cat(lista_words_ids)
+        list_words_ids = [item[0] for item in batch]
+        list_words_ids_vector = torch.cat(list_words_ids)
 
         if self.step == "Experiment":
             # len batch_size
@@ -357,16 +365,26 @@ class GloveFinetuner(pl.LightningModule):
             target = torch.stack(target)
 
         # len batch_size
-        offsets = [0] + [len(entry) for entry in lista_words_ids]
+        offsets = [0] + [len(entry) for entry in list_words_ids]
         offsets = torch.tensor(offsets[:-1]).cumsum(dim=0)
 
         if self.step == "Experiment":
-            retorno = lista_words_ids_vector, offsets, target
+            final_return = list_words_ids_vector, offsets, target
         if self.step == "Deployment":
-            retorno = lista_words_ids_vector, offsets
+            final_return = list_words_ids_vector, offsets
 
-        return retorno
-
+        return final_return
+        
+    def seed_everything(self):
+        random.seed(self.seed)
+        os.environ['PYTHONHASHSEED'] = str(self.seed)
+        np.random.seed(self.seed)
+        torch.manual_seed(self.seed)
+        torch.cuda.manual_seed(self.seed)
+        torch.cuda.manual_seed_all(self.seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+        
     def gpu_mem_restore(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
