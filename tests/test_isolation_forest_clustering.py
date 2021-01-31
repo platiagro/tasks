@@ -24,14 +24,15 @@ class TestIsolationForestClustering(unittest.TestCase):
         datasets.boston()
         datasets.hotel_bookings()
 
+        os.chdir("tasks/isolation-forest-clustering")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_iris(self):
-        notebook_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -43,10 +44,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        notebook_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -58,10 +57,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         )
 
     def test_boston(self):
-        notebook_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
@@ -73,10 +70,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         )
 
     def test_hotel_bookings(self):
-        notebook_path = "tasks/isolation-forest-clustering/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",

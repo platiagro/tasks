@@ -21,14 +21,15 @@ class TestFineTuningAutoAugment(unittest.TestCase):
 
         datasets.hymenoptera()
 
+        os.chdir("tasks/cv-fast-autocv")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_hymenoptera(self):
-        notebook_path = "tasks/cv-fast-autocv/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hymenoptera_data.zip",

@@ -22,14 +22,15 @@ class TestAutoMLClassifier(unittest.TestCase):
         datasets.iris()
         datasets.titanic()
 
+        os.chdir("tasks/automl-classifier")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_iris(self):
-        notebook_path = "tasks/automl-classifier/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -49,10 +50,8 @@ class TestAutoMLClassifier(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        notebook_path = "tasks/automl-classifier/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",

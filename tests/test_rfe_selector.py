@@ -23,14 +23,15 @@ class TestRFESelector(unittest.TestCase):
         datasets.titanic()
         datasets.boston()
 
+        os.chdir("tasks/rfe-selector")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_iris(self):
-        notebook_path = "tasks/rfe-selector/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -42,10 +43,8 @@ class TestRFESelector(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        notebook_path = "tasks/rfe-selector/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -57,10 +56,8 @@ class TestRFESelector(unittest.TestCase):
         )
 
     def test_boston(self):
-        notebook_path = "tasks/rfe-selector/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
