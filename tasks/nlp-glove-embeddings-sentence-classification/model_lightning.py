@@ -89,9 +89,9 @@ class GloveFinetuner(pl.LightningModule):
             
 
         # ---------- Creating comparision dataframe with expected and predicted results
-        columns = [ "ORIGINAL_TARGET","ORIGINAL_CODE","PREDICTED_TARGET","PREDICTED_CODE" ] + [label.upper() + "_PROB" for label in self.label_encoder.classes_]
-        self.df_valid = pd.DataFrame(columns=columns)
-        self.df_test = pd.DataFrame(columns=columns)
+        self.response_columns = [ "ORIGINAL_TARGET","ORIGINAL_CODE","PREDICTED_TARGET","PREDICTED_CODE" ] + [label.upper() + "_PROB" for label in self.label_encoder.classes_]
+        self.df_valid = pd.DataFrame(columns=self.response_columns)
+        self.df_test = pd.DataFrame(columns=self.response_columns)
 
         # ---------- mlp
         weight = self.glove_infos["glove_vectors"]
@@ -123,6 +123,7 @@ class GloveFinetuner(pl.LightningModule):
 
     def predict(self, X_inference_glove_ids, X_inference_glove_words):
         self.step = "Deployment"
+        self.df_test = pd.DataFrame(columns=self.response_columns)
         inference_dataset = self.CustomDataset(
             X_inference_glove_ids, X_inference_glove_words,step=self.step
         )
