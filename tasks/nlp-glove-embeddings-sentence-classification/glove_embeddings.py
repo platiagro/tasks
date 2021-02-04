@@ -3,8 +3,6 @@ from gensim.models import KeyedVectors
 from sys import platform
 from platiagro.io import unzip_to_folder
 import torch
-import string
-
 
 class GloveEmbeddings(object):
     def __init__(self,glove_dim:int,glove_weights_file_name:str,device:str):
@@ -58,14 +56,13 @@ class GloveEmbeddings(object):
         self.glove_infos = glove_infos
     
     def _separate_punctuation_from_words(self,text):
-        for punct in list(string.punctuation):
-    	    text = text.replace(punct,f" {punct} ")
+        punctuation_list = '!(),.:;?'
+        for punct in list(punctuation_list):
+            text = text.replace(punct,f" {punct} ")
 
         return text
             
     def _tokenize_text(self,text_list: list = None):
-
-
         tokenize_list = list()
         for text in text_list:
             text = text[0]
