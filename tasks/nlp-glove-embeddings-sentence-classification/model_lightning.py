@@ -137,7 +137,7 @@ class GloveFinetuner(pl.LightningModule):
         for batch in dataloader:
             batch = [elem.to(self.device) for elem in batch] 
             self.test_step(batch, None)
-        return self.df_test
+        return self.df_test.to_numpy()
 
     def forward(self, word_ids, offsets):
         X_emb = self.embedding_bag(word_ids, offsets)
