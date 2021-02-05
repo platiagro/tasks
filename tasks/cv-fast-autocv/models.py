@@ -199,11 +199,5 @@ class Model():
         y_trues = [true_value for true_list in y_trues for true_value in true_list]
         acc_per_class = (confusion_matrix.diag()/confusion_matrix.sum(1)).numpy()
 
-        print("\n### Confusion matrix: ###\n", confusion_matrix.numpy())
-        print("\n### Acc per class: ###")
-        for i, name in enumerate(class_names):
-            print("Class: {0} -> Acc: {1}".format(class_names[i], acc_per_class[i]))
-        print()
-        print("\n### Classification report: ###\n")
-        print(classification_report(y_trues, y_preds, target_names=class_names))
-        
+        report = classification_report(y_trues, y_preds, target_names=class_names, output_dict=True)
+        return acc_per_class, confusion_matrix.numpy(), report
