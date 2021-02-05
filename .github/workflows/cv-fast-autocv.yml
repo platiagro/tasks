@@ -1,4 +1,4 @@
-name: Fine Tuning - Fast AutoAugment
+name: Fast AutoCV
 
 on:
   push:
