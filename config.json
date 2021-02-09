@@ -5,10 +5,8 @@
         "tags": [
             "DATASETS"
         ],
-        "commands": ["python3", "-c"],
-        "arguments": [
-            "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
-        ],
+        "commands": null,
+        "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
         "artifacts": []
     },
@@ -18,10 +16,8 @@
         "tags": [
             "DATASETS"
         ],
-        "commands": ["python3", "-c"],
-        "arguments": [
-            "import json, os; import platiagro; dataset = json.loads(os.environ[\"PARAMETER_dataset\"]); platiagro.download_dataset(dataset, f\"/tmp/data/{dataset}\")"
-        ],
+        "commands": null,
+        "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
         "artifacts": []
     },

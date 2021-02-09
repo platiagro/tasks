@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - init-job/**
+      - config.json
 
 jobs:
   build:
