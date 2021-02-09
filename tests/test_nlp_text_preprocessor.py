@@ -21,14 +21,15 @@ class TestNLPTextPreProcessor(unittest.TestCase):
 
         datasets.imdb()
 
+        os.chdir("tasks/nlp-text-pre-processor")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_imdb(self):
-        notebook_path = "tasks/nlp-text-pre-processor/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/imdb.csv",
@@ -49,6 +50,6 @@ class TestNLPTextPreProcessor(unittest.TestCase):
                 remove_css = True,
             ),
         )
-       
-       
-       
+
+
+

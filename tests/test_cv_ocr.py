@@ -21,14 +21,15 @@ class TestCVOCR(unittest.TestCase):
 
         datasets.ocr()
 
+        os.chdir("tasks/cv-ocr")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_ocr_output_image(self):
-        notebook_path = "tasks/cv-ocr/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
@@ -45,12 +46,9 @@ class TestCVOCR(unittest.TestCase):
             ),
         )
 
-
     def test_experiment_ocr_output_nparray(self):
-        notebook_path = "tasks/cv-ocr/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
@@ -66,5 +64,3 @@ class TestCVOCR(unittest.TestCase):
 
             ),
         )
-
-

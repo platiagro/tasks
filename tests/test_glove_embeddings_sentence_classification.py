@@ -23,12 +23,13 @@ class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
 
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_iris(self):
-        experiment_path = "tasks/glove-embeddings-sentence-classification/Experiment.ipynb"
+        os.chdir("tasks/glove-embeddings-sentence-classification")
 
         papermill.execute_notebook(
-            experiment_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/imdb.csv",

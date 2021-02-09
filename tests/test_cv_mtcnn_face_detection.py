@@ -21,14 +21,15 @@ class TestCVYOLO(unittest.TestCase):
 
         datasets.face_detection()
 
+        os.chdir("tasks/cv-mtcnn-face-detection")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_ocr_output_image(self):
-        notebook_path = "tasks/cv-mtcnn-face-detection/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/football_teams.zip",
