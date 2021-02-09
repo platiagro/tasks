@@ -4,7 +4,6 @@ from sys import platform
 from platiagro.io import unzip_to_folder
 import torch
 
-
 class GloveEmbeddings(object):
     def __init__(self,glove_dim:int,glove_weights_file_name:str,device:str):
         super(GloveEmbeddings , self).__init__()
@@ -56,10 +55,18 @@ class GloveEmbeddings(object):
         
         self.glove_infos = glove_infos
     
+    def _separate_punctuation_from_words(self,text):
+        punctuation_list = '!(),.:;?'
+        for punct in list(punctuation_list):
+            text = text.replace(punct,f" {punct} ")
+
+        return text
+            
     def _tokenize_text(self,text_list: list = None):
         tokenize_list = list()
         for text in text_list:
             text = text[0]
+            text = self._separate_punctuation_from_words(text)
             text = text.split(" ")
             tokenize_list.append(text)
         return tokenize_list
