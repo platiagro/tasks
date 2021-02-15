@@ -24,6 +24,7 @@ jobs:
       - name: Set output variables
         id: vars
         run: |
+          pip install pytest
           VERSION=0.2.0
           if [ ${{ github.ref }} = "refs/heads/main" ]; then
             echo ::set-output name=TAG::${VERSION}-SNAPSHOT

@@ -9,6 +9,7 @@ Task | Status | License
 [YOLO](tasks/default-yolo/) | ![YOLO](https://github.com/platiagro/tasks/workflows/YOLO/badge.svg) | TBD
 [Descriptive Analysis](tasks/descriptive-analysis/) | ![Descriptive Analysis](https://github.com/platiagro/tasks/workflows/Descriptive%20Analysis/badge.svg) | TBD
 [Featuretools](tasks/feature-tools/) | ![Featuretools](https://github.com/platiagro/tasks/workflows/Featuretools/badge.svg) | TBD
+[Fast AutoCV](tasks/cv-fast-autocv/) | ![Fast AutoCV](https://github.com/platiagro/tasks/workflows/Fast AutoCV/badge.svg) | TBD
 [Filter Selection](tasks/filter-selection/) | ![Filter Selection](https://github.com/platiagro/tasks/workflows/Filter%20Selection/badge.svg) | TBD
 [Grouping Categorical Features](tasks/grouping-categorical-features/) | ![Grouping Categorical Features](https://github.com/platiagro/tasks/workflows/Grouping%20Categorical%20Features/badge.svg) | TBD
 [Imputer](tasks/imputer/) | ![Imputer](https://github.com/platiagro/tasks/workflows/Imputer/badge.svg) | TBD
