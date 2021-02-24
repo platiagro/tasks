@@ -3,8 +3,8 @@ name: Random Forest Regressor
 on:
   push:
     paths:
-      - .github/random-forest-regressor.yml
       - tasks/random-forest-regressor/**
+      - tests/datasets.py
       - tests/test_random_forest_regressor.py
 
 jobs:

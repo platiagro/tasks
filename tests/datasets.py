@@ -1,114 +1,187 @@
+import io
+import json
 import os
 import shutil
 
+import minio
+import pandas as pd
+import platiagro.featuretypes
 import requests
+
+BUCKET_NAME = "anonymous"
+PREFIX = "datasets"
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "localhost:9000")
+MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minio")
+MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY", "minio123")
+
+MINIO_CLIENT = minio.Minio(
+    endpoint=MINIO_ENDPOINT,
+    access_key=MINIO_ACCESS_KEY,
+    secret_key=MINIO_SECRET_KEY,
+    secure=False,
+)
 
 
 def iris():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/iris.csv"
+    name = "iris.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/iris.csv", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
 
 
 def titanic():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/titanic.csv"
+    name = "titanic.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/titanic.csv", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
 
 
 def boston():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/boston.csv"
+    name = "boston.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/boston.csv", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
 
 
 def hotel_bookings():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/hotel_bookings.csv"
+    name = "hotel_bookings.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/hotel_bookings.csv", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
 
 
 def imdb():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/imdb.csv"
+    name = "imdb.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/imdb.csv", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
 
 
 def coco():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/coco.zip"
+    name = "coco.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/coco.zip", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name)
 
 
 def ocr():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/ocr_dataset.zip"
+    name = "ocr_dataset.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/ocr_dataset.zip", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name)
 
 
 def face_detection():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/football_teams.zip"
+    name = "football_teams.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/football_teams.zip", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name)
 
 
 def paracrawl():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/paracrawl_en_pt_test.xlsx"
+    name = "paracrawl_en_pt_test.xlsx"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/paracrawl_en_pt_test.xlsx", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
 
-    response = requests.post(
-        "http://localhost:8080/datasets",
-        files={"file": open("/tmp/data/paracrawl_en_pt_test.xlsx", "rb")},
-    )
-    response.raise_for_status()
-    return response.json()
+    metadata(name=name)
 
 
 def hymenoptera():
-    url = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/hymenoptera_data.zip"
+    name = "hymenoptera_data.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
     os.makedirs("/tmp/data", exist_ok=True)
 
-    with open("/tmp/data/hymenoptera_data.zip", "wb") as f:
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
         f.write(content)
+
+    metadata(name=name)
+
+
+def metadata(name, df=None):
+    # encodes metadata to JSON format
+    root_metadata = {
+        "filename": name,
+        "read_only": False,
+    }
+
+    if isinstance(df, pd.DataFrame):
+        root_metadata["columns"] = df.columns.tolist()
+        root_metadata["total"] = len(df.index)
+        root_metadata["featuretypes"] = platiagro.featuretypes.infer_featuretypes(df)
+
+    object_name = f"{PREFIX}/{name}/{name}.metadata"
+    buffer = io.BytesIO(json.dumps(root_metadata).encode())
+    MINIO_CLIENT.put_object(
+        bucket_name=BUCKET_NAME,
+        object_name=object_name,
+        data=buffer,
+        length=buffer.getbuffer().nbytes,
+    )
 
 
 def clean():

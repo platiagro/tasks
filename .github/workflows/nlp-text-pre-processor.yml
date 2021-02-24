@@ -3,8 +3,8 @@ name: Text Pre-processor
 on:
   push:
     paths:
-      - .github/nlp-text-pre-processor.yml
       - tasks/nlp-text-pre-processor/**
+      - tests/datasets.py
       - tests/test_nlp_text_preprocessor.py
 
 jobs:

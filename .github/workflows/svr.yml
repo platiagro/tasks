@@ -3,8 +3,8 @@ name: SVM Regressor
 on:
   push:
     paths:
-      - .github/svr.yml
       - tasks/svr/**
+      - tests/datasets.py
       - tests/test_svr.py
 
 jobs:

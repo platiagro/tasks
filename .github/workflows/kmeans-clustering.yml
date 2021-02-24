@@ -3,8 +3,8 @@ name: KMeans Clustering
 on:
   push:
     paths:
-      - .github/kmeans-clustering.yml
       - tasks/kmeans-clustering/**
+      - tests/datasets.py
       - tests/test_kmeans_clustering.py
 
 jobs:

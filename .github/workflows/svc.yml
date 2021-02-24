@@ -3,8 +3,8 @@ name: SVM Classifier
 on:
   push:
     paths:
-      - .github/svc.yml
       - tasks/svc/**
+      - tests/datasets.py
       - tests/test_svc.py
 
 jobs:

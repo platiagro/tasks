@@ -3,8 +3,8 @@ name: Random Forest Classifier
 on:
   push:
     paths:
-      - .github/random-forest-classifier.yml
       - tasks/random-forest-classifier/**
+      - tests/datasets.py
       - tests/test_random_forest_classifier.py
 
 jobs:

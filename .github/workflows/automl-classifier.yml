@@ -3,8 +3,8 @@ name: AutoML Classifier
 on:
   push:
     paths:
-      - .github/automl-classifier.yml
       - tasks/automl-classifier/**
+      - tests/datasets.py
       - tests/test_automl_classifier.py
 
 jobs:

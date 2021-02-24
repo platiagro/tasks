@@ -3,8 +3,8 @@ name: English Sentence Classification
 on:
   push:
     paths:
-      - .github/nlp-english-glove-embeddings-sentence-classification.yml
       - tasks/nlp-english-glove-embeddings-sentence-classification/**
+      - tests/datasets.py
       - tests/test_nlp_english_glove_embeddings_sentence_classification.py
 
 jobs:

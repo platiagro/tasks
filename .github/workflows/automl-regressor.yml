@@ -3,8 +3,8 @@ name: AutoML Regressor
 on:
   push:
     paths:
-      - .github/automl-regressor.yml
       - tasks/automl-regressor/**
+      - tests/datasets.py
       - tests/test_automl_regressor.py
 
 jobs:

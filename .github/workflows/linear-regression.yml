@@ -3,8 +3,8 @@ name: Linear Regression
 on:
   push:
     paths:
-      - .github/linear-regression.yml
       - tasks/linear-regression/**
+      - tests/datasets.py
       - tests/test_kmeans_clustering.py
 
 jobs:

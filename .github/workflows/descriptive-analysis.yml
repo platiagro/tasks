@@ -3,8 +3,8 @@ name: Descriptive Analysis
 on:
   push:
     paths:
-      - .github/descriptive-analysis.yml
       - tasks/descriptive-analysis/**
+      - tests/datasets.py
       - tests/test_descriptive_analysis.py
 
 jobs:

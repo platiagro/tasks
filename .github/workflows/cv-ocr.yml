@@ -3,8 +3,8 @@ name: OCR
 on:
   push:
     paths:
-      - .github/cv-ocr.yml
       - tasks/cv-ocr/**
+      - tests/datasets.py
       - tests/test_cv_ocr.py
 
 jobs:

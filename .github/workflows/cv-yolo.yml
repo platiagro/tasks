@@ -3,8 +3,8 @@ name: YOLO
 on:
   push:
     paths:
-      - .github/cv-yolo.yml
       - tasks/cv-yolo/**
+      - tests/datasets.py
       - tests/test_cv_yolo.py
 
 jobs:

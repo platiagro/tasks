@@ -3,8 +3,8 @@ name: Pre Selection
 on:
   push:
     paths:
-      - .github/pre-selection.yml
       - tasks/pre-selection/**
+      - tests/datasets.py
       - tests/test_pre_selection.py
 
 jobs:

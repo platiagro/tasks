@@ -3,8 +3,8 @@ name: Variance Threshold
 on:
   push:
     paths:
-      - .github/variance-threshold.yml
       - tasks/variance-threshold/**
+      - tests/datasets.py
       - tests/test_variance_threshold.py
 
 jobs:

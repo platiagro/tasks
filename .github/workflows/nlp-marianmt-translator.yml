@@ -3,8 +3,8 @@ name: MarianMT Translator
 on:
   push:
     paths:
-      - .github/nlp-marianmt-translator.yml
       - tasks/nlp-marianmt-translator/**
+      - tests/datasets.py
       - tests/test_nlp_marianmt.py
 
 jobs:

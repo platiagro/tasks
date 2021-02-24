@@ -3,8 +3,8 @@ name: Transformation Graph
 on:
   push:
     paths:
-      - .github/transformation-graph.yml
       - tasks/transformation-graph/**
+      - tests/datasets.py
       - tests/test_transformation_graph.py
 
 jobs:

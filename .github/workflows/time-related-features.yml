@@ -1,11 +1,11 @@
-name: Logistic Regression
+name: Time Related Features
 
 on:
   push:
     paths:
-      - tasks/logistic-regression/**
+      - tasks/time-related-features/**
       - tests/datasets.py
-      - tests/test_logistic_regression.py
+      - tests/test_time_related_features.py
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest
-          pytest -v tests/test_logistic_regression.py
+          pytest -v tests/test_time_related_features.py
         env:
           MINIO_ENDPOINT: play.min.io
           MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F

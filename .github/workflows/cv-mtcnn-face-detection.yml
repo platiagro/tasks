@@ -3,8 +3,8 @@ name: Face Detection
 on:
   push:
     paths:
-      - .github/cv-mtcnn-face-detection.yml
       - tasks/cv-mtcnn-face-detection/**
+      - tests/datasets.py
       - tests/test_cv_mtcnn_face_detection.py
 
 jobs:

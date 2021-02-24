@@ -3,8 +3,8 @@ name: Portuguese Sentence Classification
 on:
   push:
     paths:
-      - .github/nlp-portuguese-glove-embeddings-sentence-classification.yml
       - tasks/nlp-portuguese-glove-embeddings-sentence-classification/**
+      - tests/datasets.py
       - tests/test_nlp_portuguese_glove_embeddings_sentence_classification.py
 
 jobs:

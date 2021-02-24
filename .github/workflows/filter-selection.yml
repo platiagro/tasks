@@ -3,8 +3,8 @@ name: Filter Selection
 on:
   push:
     paths:
-      - .github/filter-selection.yml
       - tasks/filter-selection/**
+      - tests/datasets.py
       - tests/test_filter_selection.py
 
 jobs:

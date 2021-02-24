@@ -3,8 +3,8 @@ name: Normalizer
 on:
   push:
     paths:
-      - .github/normalizer.yml
       - tasks/normalizer/**
+      - tests/datasets.py
       - tests/test_normalizer.py
 
 jobs:

@@ -3,8 +3,8 @@ name: Fast AutoCV
 on:
   push:
     paths:
-      - .github/cv-fast-autocv.yml
       - tasks/cv-fast-autocv/**
+      - tests/datasets.py
       - tests/test_cv_fast_autocv.py
 
 jobs:

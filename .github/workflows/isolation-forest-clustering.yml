@@ -3,8 +3,8 @@ name: Isolation Forest Clustering
 on:
   push:
     paths:
-      - .github/isolation-forest-clustering.yml
       - tasks/isolation-forest-clustering/**
+      - tests/datasets.py
       - tests/test_isolation_forest_clustering.py
 
 jobs:

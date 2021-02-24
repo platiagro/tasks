@@ -3,8 +3,8 @@ name: Simulated Annealing
 on:
   push:
     paths:
-      - .github/simulated-annealing.yml
       - tasks/simulated-annealing/**
+      - tests/datasets.py
       - tests/test_simulated_annealing.py
 
 jobs:

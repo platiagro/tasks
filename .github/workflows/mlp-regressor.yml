@@ -3,8 +3,8 @@ name: MLP Regressor
 on:
   push:
     paths:
-      - .github/mlp-regressor.yml
       - tasks/mlp-regressor/**
+      - tests/datasets.py
       - tests/test_mlp_regressor.py
 
 jobs:

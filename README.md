@@ -9,7 +9,7 @@ Task | Status | License
 [YOLO](tasks/default-yolo/) | ![YOLO](https://github.com/platiagro/tasks/workflows/YOLO/badge.svg) | TBD
 [Descriptive Analysis](tasks/descriptive-analysis/) | ![Descriptive Analysis](https://github.com/platiagro/tasks/workflows/Descriptive%20Analysis/badge.svg) | TBD
 [Featuretools](tasks/feature-tools/) | ![Featuretools](https://github.com/platiagro/tasks/workflows/Featuretools/badge.svg) | TBD
-[Fast AutoCV](tasks/cv-fast-autocv/) | ![Fast AutoCV](https://github.com/platiagro/tasks/workflows/Fast AutoCV/badge.svg) | TBD
+[Fast AutoCV](tasks/cv-fast-autocv/) | ![Fast AutoCV](https://github.com/platiagro/tasks/workflows/Fast%20AutoCV/badge.svg) | TBD
 [Filter Selection](tasks/filter-selection/) | ![Filter Selection](https://github.com/platiagro/tasks/workflows/Filter%20Selection/badge.svg) | TBD
 [Grouping Categorical Features](tasks/grouping-categorical-features/) | ![Grouping Categorical Features](https://github.com/platiagro/tasks/workflows/Grouping%20Categorical%20Features/badge.svg) | TBD
 [Imputer](tasks/imputer/) | ![Imputer](https://github.com/platiagro/tasks/workflows/Imputer/badge.svg) | TBD
@@ -32,51 +32,28 @@ Task | Status | License
 [Simulated Annealing](tasks/simulated-annealing/) | ![Simulated Annealing](https://github.com/platiagro/tasks/workflows/Simulated%20Annealing/badge.svg) | TBD
 [SVM Classifier](tasks/svc/) | ![SVC](https://github.com/platiagro/tasks/workflows/SVM%20Classifier/badge.svg) | TBD
 [SVM Regressor](tasks/svr/) | ![SVR](https://github.com/platiagro/tasks/workflows/SVM%20Regressor/badge.svg) | TBD
+[Time Related Features](tasks/time-related-features/) | ![Time Related Features](https://github.com/platiagro/tasks/workflows/Time%20Related%20Features/badge.svg) | TBD
 [Transformation Graph](tasks/transformation-graph/) | ![Transformation Graph](https://github.com/platiagro/tasks/workflows/Transformation%20Graph/badge.svg) | TBD
 [Variance Threshold](tasks/variance-threshold/) | ![Variance Threshold](https://github.com/platiagro/tasks/workflows/Variance%20Threshold/badge.svg) | TBD
 
 ## Testing
 
+Download the docker image that has all requirements installed. In this example
+we use a public MinIO server, but you can replace it with any other MinIO server.
+
+```bash
+docker run --it --rm \
+    -e "MINIO_ENDPOINT=play.min.io" \
+    -e "MINIO_ACCESS_KEY=Q3AM3UQ867SPQQA43P2F" \
+    -e "MINIO_SECRET_KEY=zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG" \
+    -v $(pwd):/home/jovyan
+    platiagro/platiagro-notebook-image:0.2.0 bash
+```
+
 Install the testing requirements:
 
 ```bash
-apt-get -y install tesseract-ocr tesseract-ocr-por tesseract-ocr-eng
-pip install -r requirements.txt
-pip install torch==1.5.1+cpu torchvision==0.6.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
-pip install transformers==3.0.2
-```
-
-Export these environment variables:
-
-```bash
-export MINIO_ENDPOINT=localhost:9000
-export MINIO_ACCESS_KEY=minio
-export MINIO_SECRET_KEY=minio123
-```
-
-Start MinIO and Datasets API:
-
-```bash
-docker network create tasks
-```
-
-```bash
-docker run -d -p 9000:9000 \
---name minio \
--e "MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY" \
--e "MINIO_SECRET_KEY=$MINIO_SECRET_KEY" \
---network tasks \
-minio/minio:RELEASE.2018-02-09T22-40-05Z server /data
-```
-
-```bash
-docker run -d -p 8080:8080 \
---name datasets \
--e "MINIO_ENDPOINT=minio:9000" \
--e "MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY" \
--e "MINIO_SECRET_KEY=$MINIO_SECRET_KEY" \
---network tasks \
-platiagro/datasets:0.2.0
+pip3 install pytest
 ```
 
 Use the following command to run all tests:

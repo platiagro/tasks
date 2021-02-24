@@ -3,8 +3,8 @@ name: MLP Classifier
 on:
   push:
     paths:
-      - .github/mlp-classifier.yml
       - tasks/mlp-classifier/**
+      - tests/datasets.py
       - tests/test_mlp_classifier.py
 
 jobs:

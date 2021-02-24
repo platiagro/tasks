@@ -3,8 +3,8 @@ name: RFE Selector
 on:
   push:
     paths:
-      - .github/rfe-selector.yml
       - tasks/rfe-selector/**
+      - tests/datasets.py
       - tests/test_rfe_selector.py
 
 jobs:

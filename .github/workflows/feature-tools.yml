@@ -3,8 +3,8 @@ name: Featuretools
 on:
   push:
     paths:
-      - .github/feature-tools.yml
       - tasks/feature-tools/**
+      - tests/datasets.py
       - tests/test_feature_tools.py
 
 jobs:

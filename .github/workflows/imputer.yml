@@ -3,8 +3,8 @@ name: Imputer
 on:
   push:
     paths:
-      - .github/imputer.yml
       - tasks/imputer/**
+      - tests/datasets.py
       - tests/test_imputer.py
 
 jobs:
