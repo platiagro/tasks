@@ -23,14 +23,15 @@ class TestFilterSelection(unittest.TestCase):
         datasets.titanic()
         datasets.hotel_bookings()
 
+        os.chdir("tasks/filter-selection")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_iris(self):
-        notebook_path = "tasks/filter-selection/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -39,10 +40,8 @@ class TestFilterSelection(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        notebook_path = "tasks/filter-selection/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -51,10 +50,8 @@ class TestFilterSelection(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        notebook_path = "tasks/filter-selection/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",

@@ -21,14 +21,15 @@ class TestNLPMarianMT(unittest.TestCase):
 
         datasets.paracrawl()
 
+        os.chdir("tasks/nlp-marianmt-translator")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_paracrawl(self):
-        notebook_path = "tasks/nlp-marianmt-translator/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset= "/tmp/data/paracrawl_en_pt_test.xlsx",

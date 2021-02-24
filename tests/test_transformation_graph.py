@@ -22,14 +22,15 @@ class TestTransformationGraph(unittest.TestCase):
         datasets.iris()
         datasets.hotel_bookings()
 
+        os.chdir("tasks/transformation-graph")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_iris(self):
-        notebook_path = "tasks/transformation-graph/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -42,10 +43,8 @@ class TestTransformationGraph(unittest.TestCase):
         )
 
     def test_experiment_hotel_bookings(self):
-        notebook_path = "tasks/transformation-graph/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",

@@ -1,9 +1,10 @@
-name: Artifacts
+name: Tasks Init Job
 
 on:
   push:
     paths:
-      - artifacts/**
+      - init-job/**
+      - config.json
 
 jobs:
   build:
@@ -23,6 +24,7 @@ jobs:
       - name: Set output variables
         id: vars
         run: |
+          pip install pytest
           VERSION=0.2.0
           if [ ${{ github.ref }} = "refs/heads/main" ]; then
             echo ::set-output name=TAG::${VERSION}-SNAPSHOT
@@ -37,11 +39,9 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v1
         with:
-          path: artifacts/
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: registry.hub.docker.com
-          repository: platiagro/artifacts
+          repository: platiagro/tasks
           tags: ${{ steps.vars.outputs.TAG }}
-          dockerfile: artifacts/Dockerfile
           build_args: COMMIT=${{ steps.vars.outputs.COMMIT }},BRANCH=${{ steps.vars.outputs.BRANCH }}

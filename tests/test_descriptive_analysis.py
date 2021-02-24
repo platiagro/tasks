@@ -23,14 +23,15 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         datasets.titanic()
         datasets.boston()
 
+        os.chdir("tasks/descriptive-analysis")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_experiment_iris(self):
-        notebook_path = "tasks/descriptive-analysis/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
@@ -38,10 +39,8 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         )
 
     def test_experiment_titanic(self):
-        notebook_path = "tasks/descriptive-analysis/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
@@ -49,10 +48,8 @@ class TestDescriptiveAnalysis(unittest.TestCase):
         )
 
     def test_boston(self):
-        notebook_path = "tasks/descriptive-analysis/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",

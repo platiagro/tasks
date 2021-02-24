@@ -22,7 +22,7 @@ class Augmentation(object):
 class LoadData():
     """
     Class responsable for loading data,
-    apply necessary transforms and 
+    apply necessary transforms and
     create data loader for train and test
     """
     def __init__(self, dataroot):
@@ -79,5 +79,6 @@ class LoadData():
                 shuffle=True, num_workers=4) for x in ['test']}
         dataset_sizes = {x: len(image_datasets[x]) for x in ['test']}
         class_names = image_datasets['test'].classes
+        print("")
         print(class_names, dataset_sizes)
         return dataloaders, dataset_sizes, class_names

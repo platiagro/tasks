@@ -21,14 +21,15 @@ class TestLinearRegression(unittest.TestCase):
 
         datasets.boston()
 
+        os.chdir("tasks/linear-regression")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_boston(self):
-        notebook_path = "tasks/linear-regression/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",

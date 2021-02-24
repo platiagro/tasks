@@ -21,14 +21,15 @@ class TestSVR(unittest.TestCase):
 
         datasets.boston()
 
+        os.chdir("tasks/svr")
+
     def tearDown(self):
         datasets.clean()
+        os.chdir("../../")
 
     def test_boston(self):
-        notebook_path = "tasks/svr/Experiment.ipynb"
-
         papermill.execute_notebook(
-            notebook_path,
+            "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
