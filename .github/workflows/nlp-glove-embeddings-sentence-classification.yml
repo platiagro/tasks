@@ -1,11 +1,11 @@
-name: English Sentence Classification
+name: Glove Embeddings Sentence Classification
 
 on:
   push:
     paths:
-      - tasks/nlp-english-glove-embeddings-sentence-classification/**
+      - tasks/nlp-glove-embeddings-sentence-classification/**
       - tests/datasets.py
-      - tests/test_nlp_english_glove_embeddings_sentence_classification.py
+      - tests/test_glove_embeddings_sentence_classification.py
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest
-          pytest -v tests/test_nlp_english_glove_embeddings_sentence_classification.py
+          pytest -v tests/test_glove_embeddings_sentence_classification.py
         env:
           MINIO_ENDPOINT: play.min.io
           MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F

@@ -384,7 +384,7 @@
     {
         "name": "GloVe Embeddings Bag (Inglês)",
         "description": "Classifica frases com base em Embeddings GloVe disponibilizados pela Universidade de Stanford",
-        "path": "/tasks/glove-embeddings-sentence-classification",
+        "path": "/tasks/nlp-glove-embeddings-sentence-classification",
         "tags": [
             "NLP"
         ],

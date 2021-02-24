@@ -25,8 +25,8 @@ class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_iris(self):
-        os.chdir("tasks/glove-embeddings-sentence-classification")
+    def test_experiment_imdb(self):
+        os.chdir("tasks/nlp-glove-embeddings-sentence-classification")
 
         papermill.execute_notebook(
             "Experiment.ipynb",
