@@ -163,7 +163,6 @@ def hymenoptera():
 
 
 def metadata(name, df=None):
-    # encodes metadata to JSON format
     root_metadata = {
         "filename": name,
         "read_only": False,
