@@ -370,6 +370,18 @@
         "artifacts": []
     },
     {
+        "name": "Criação de Atributos Temporais",
+        "description": "Criação de atributos temporais a partir da agregação por períodos (dia, semana, mês, trimestre ou ano). Para cada atributo categórico no dataset, são gerados novos atributos considerando-se janelas móveis de três, seis e noves períodos consecutivos.",
+        "path": "/tasks/time-related-features",
+        "tags": [
+            "FEATURE_ENGINEERING"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": []
+    },
+    {
         "name": "GloVe Embeddings Bag (Inglês)",
         "description": "Classifica frases com base em Embeddings GloVe disponibilizados pela Universidade de Stanford",
         "path": "/tasks/glove-embeddings-sentence-classification",
