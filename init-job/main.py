@@ -26,6 +26,10 @@ def create_tasks():
         tags = task["tags"]
         image = task["image"]
         path = task.get("path")
+        cpu_limit = task.get("cpuLimit")
+        cpu_request = task.get("cpuRequest")
+        memory_limit = task.get("memoryLimit")
+        memory_request = task.get("memoryRequest")
         parameters = []
 
         if path:
@@ -47,6 +51,10 @@ def create_tasks():
             parameters=parameters,
             experiment_notebook_path=experiment_notebook_path,
             deployment_notebook_path=deployment_notebook_path,
+            cpu_limit=cpu_limit,
+            cpu_request=cpu_request,
+            memory_limit=memory_limit,
+            memory_request=memory_request,
         )
         task["task_id"] = task_id
 
