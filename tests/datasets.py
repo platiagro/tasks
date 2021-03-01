@@ -4,6 +4,7 @@ import os
 import shutil
 
 import minio
+import minio.error
 import pandas as pd
 import platiagro.featuretypes
 import requests
@@ -172,6 +173,11 @@ def metadata(name, df=None):
         root_metadata["columns"] = df.columns.tolist()
         root_metadata["total"] = len(df.index)
         root_metadata["featuretypes"] = platiagro.featuretypes.infer_featuretypes(df)
+
+    try:
+        MINIO_CLIENT.make_bucket(BUCKET_NAME)
+    except minio.error.BucketAlreadyOwnedByYou:
+        pass
 
     object_name = f"{PREFIX}/{name}/{name}.metadata"
     buffer = io.BytesIO(json.dumps(root_metadata).encode())
