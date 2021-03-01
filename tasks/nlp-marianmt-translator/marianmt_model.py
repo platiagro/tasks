@@ -32,7 +32,7 @@ class MarianMTTranslator:
 
         #------- Others
         self.nlp = English()
-        self.nlp.add_pipe(self.nlp.create_pipe('sentencizer'))
+        self.nlp.add_pipe('sentencizer')
         dev = "cuda:0" if torch.cuda.is_available() else "cpu"
         self.device = torch.device(dev)
 
@@ -111,7 +111,7 @@ class MarianMTTranslator:
 
             #5) Tradução utilizando o MarianMT
             for i in range(0, len(batchs), 64):
-                tokenized_text = self.tokenizer.prepare_translation_batch(batchs[i:i+64], max_length=self.output_max_length)
+                tokenized_text = self.tokenizer.prepare_seq2seq_batch(batchs[i:i+64], max_length=self.output_max_length, return_tensors="pt")
 
                 translated = self.model.generate(input_ids=tokenized_text['input_ids'].to(self.device), 
                                                   max_length=self.output_max_length, num_beams=1, 
