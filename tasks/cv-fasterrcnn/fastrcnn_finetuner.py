@@ -97,15 +97,18 @@ class FastRCNNFinetuner(pl.LightningModule):
         # replace the pre-trained head with a new one
         self.model.roi_heads.box_predictor = FastRCNNPredictor(in_features, self.num_classes)
 
-    def predict(self,df, image_dir):
+
+    def predict(self, df, image_dir):
+
         self.step = "Deployment"
-        inference_dataset = self.CustomDataset(df, image_dir,self.get_test_transform(),step = self.step)
+        inference_dataset = self.CustomDataset(df, image_dir, self.get_test_transform(),step = self.step)
         dataloader = DataLoader(inference_dataset, batch_size=self.test_batch_size,shuffle=False, num_workers=cpu_count(),collate_fn=self.my_collate)    
         for batch in dataloader:
             self.test_step(batch, None)
         return self.df_test
-            
-    def forward(self, images, image_ids,targets = None,info_requested='loss'):
+
+
+    def forward(self, images, image_ids, targets = None, info_requested='loss'):
         
         if info_requested == 'loss':
           self.model.train()
@@ -152,9 +155,11 @@ class FastRCNNFinetuner(pl.LightningModule):
 
               results.append(result)
           retorno = results
+
         return retorno
         
     def training_step(self, batch, batch_nb):
+
         # batch
         images, image_ids,targets  = batch
          
@@ -168,7 +173,9 @@ class FastRCNNFinetuner(pl.LightningModule):
 
         return {'loss': loss, 'train_loss_batch': loss,'log': tensorboard_logs}
      
+    
     def training_epoch_end(self, outputs):
+
         if not outputs: return {}
         
         temp_avg_loss_batch = [x['train_loss_batch'] for x in outputs]
@@ -181,7 +188,9 @@ class FastRCNNFinetuner(pl.LightningModule):
 
         return {'log': tensorboard_logs}
  
+
     def validation_step(self, batch, batch_nb):
+
         # batch
         images, image_ids,targets  = batch
          
@@ -212,7 +221,9 @@ class FastRCNNFinetuner(pl.LightningModule):
 
         return {'valid_iou_batch': mean_batch_ious, 'valid_loss_batch': loss}
 
+
     def validation_epoch_end(self, outputs):
+
         if not outputs: return {}
 
         temp_avg_loss_batch = [x['valid_loss_batch'] for x in outputs]
@@ -229,6 +240,9 @@ class FastRCNNFinetuner(pl.LightningModule):
 
 
     def test_step(self, batch, batch_nb):
+
+        to_return = None
+        
         # batch
         if self.step == "Experiment":
             # batch
@@ -257,14 +271,14 @@ class FastRCNNFinetuner(pl.LightningModule):
             mean_batch_ious = np.mean(ious)
             self.df_performance_test_batch = self.df_performance_test_batch.append(pd.Series([mean_batch_ious], index=self.df_performance_test_batch.columns), ignore_index=True)
 
-            retorno = {'test_iou_batch': mean_batch_ious}
+            to_return = {'test_iou_batch': mean_batch_ious}
                 
         if self.step == "Deployment":
             # batch
             images, image_ids  = batch
 
             # Inference
-            outputs = self.forward(images, image_ids,'predictions')
+            outputs = self.forward(images, image_ids, 'predictions')
             not_apply_list = ['N/A'] * len(outputs)
 
             #constructing dataframe
@@ -278,12 +292,12 @@ class FastRCNNFinetuner(pl.LightningModule):
                 prediction_string = output['PredictionString']
                 self.df_test = self.df_test.append(pd.Series([image_id,prediction_string,na], index=self.df_test.columns), ignore_index=True)
                 self.result_test.append({'image_id':image_id,'image':image,'pred_boxes':pred_boxes})
-
-            retorno = None
             
-        return retorno
+        return to_return
+
 
     def test_epoch_end(self, outputs):
+
         if not outputs: return {}
 
         if self.step == "Experiment":
@@ -296,15 +310,19 @@ class FastRCNNFinetuner(pl.LightningModule):
 
         return retorno
 
+
     def configure_optimizers(self):
+
         params = [p for p in self.parameters() if p.requires_grad]
         return torch.optim.SGD( params,
                                lr=self.learning_rate,
                                momentum=self.momentum,
                                weight_decay=self.weight_decay)
     
+
     def my_collate(self,batch):
         return tuple(zip(*batch))
+
 
     def gpu_mem_restore(func):
         @functools.wraps(func)
@@ -317,17 +335,20 @@ class FastRCNNFinetuner(pl.LightningModule):
                 raise type(val).with_traceback(tb) from None
         return wrapper
     
-        # Albumentations
+
+    # Albumentations
     def get_train_transform(self):
         return A.Compose([
             A.Flip(0.5),
             ToTensorV2(p=1.0)
         ], bbox_params={'format': 'pascal_voc', 'label_fields': ['labels']})
 
+
     def get_valid_transform(self):
         return A.Compose([
             ToTensorV2(p=1.0)
         ], bbox_params={'format': 'pascal_voc', 'label_fields': ['labels']})
+
 
     def get_test_transform(self):
         return A.Compose([
@@ -335,12 +356,14 @@ class FastRCNNFinetuner(pl.LightningModule):
             ToTensorV2(p=1.0)
         ])
     
+
     def format_prediction_string(self, boxes, scores):
       pred_strings = []
       for j in zip(scores, boxes):
           pred_strings.append("{0:.4f} {1} {2} {3} {4}".format(j[0], j[1][0], j[1][1], j[1][2], j[1][3]))
 
       return " ".join(pred_strings)
+
 
     @gpu_mem_restore
     def train_dataloader(self):
