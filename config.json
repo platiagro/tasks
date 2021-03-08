@@ -510,6 +510,22 @@
         "memoryRequest": "2G"
     },
     {
+        "name": "Fast AutoCV",
+        "description": "Classifica imagens utilizando as redes ResNet-18, ResNet-50 e VGG16",
+        "path": "/tasks/cv-fast-autocv",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "10G",
+        "memoryRequest": "10G"
+    },
+    {
         "name": "GloVe Embeddings Bag (Inglês)",
         "description": "Classifica frases com base em Embeddings GloVe disponibilizados pela Universidade de Stanford",
         "path": "/tasks/glove-embeddings-sentence-classification",
