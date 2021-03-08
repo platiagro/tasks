@@ -8,7 +8,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Google Drive",
@@ -19,7 +23,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Classificador AutoML",
@@ -31,7 +39,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Regressor AutoML",
@@ -43,7 +55,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Regressão Logística",
@@ -55,7 +71,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Regressão Linear",
@@ -67,7 +87,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Classificador SVM",
@@ -79,7 +103,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Regressor SVM",
@@ -91,7 +119,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Classificador MLP",
@@ -103,7 +135,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Regressor MLP",
@@ -115,7 +151,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Classificador Random Forest",
@@ -127,7 +167,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Regressor Random Forest",
@@ -139,7 +183,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Análise Descritiva",
@@ -151,7 +199,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Feature Tools",
@@ -163,7 +215,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Seleção Manual de Atributos",
@@ -175,7 +231,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Agrupamento de Atributos Categóricos",
@@ -187,7 +247,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Imputação de Valores Faltantes",
@@ -199,7 +263,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Detecção de Anomalias por Isolation Forest",
@@ -211,7 +279,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Clusterização KMeans",
@@ -223,7 +295,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Normalizador de Amostras",
@@ -235,7 +311,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Seleção de Atributos por Correlação",
@@ -247,7 +327,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Seleção de Atributos por Método de Eliminação Recursiva",
@@ -259,7 +343,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Scaler Robusto",
@@ -271,7 +359,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Simulated Annealing",
@@ -283,7 +375,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Transformation Graph",
@@ -295,7 +391,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Seleção de Atributos por Limiar de Variância",
@@ -307,7 +407,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Face Detection",
@@ -319,7 +423,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "OCR (Optical Character Recognition)",
@@ -331,7 +439,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "YOLO (You Only Look Once)",
@@ -343,7 +455,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "MarianMT Translator",
@@ -355,7 +471,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Text Pre-processor",
@@ -367,7 +487,11 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     },
     {
         "name": "Criação de Atributos Temporais",
@@ -379,7 +503,27 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": []
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
+    },
+    {
+        "name": "Fast AutoCV",
+        "description": "Classifica imagens utilizando as redes ResNet-18, ResNet-50 e VGG16",
+        "path": "/tasks/cv-fast-autocv",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "10G",
+        "memoryRequest": "10G"
     },
     {
         "name": "GloVe Embeddings Bag (Inglês)",
@@ -416,6 +560,10 @@
                 "url": "http://143.107.183.175:22980/download.php?file=embeddings/glove/glove_s1000.zip",
                 "name": "glove_s1000.zip"
             }
-        ]
+        ],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2G",
+        "memoryRequest": "2G"
     }
 ]

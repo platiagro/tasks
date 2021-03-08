@@ -39,16 +39,20 @@ def insert_task(**kwargs):
     str or None
         Inserted task_id or None when the task already exists.
     """
-    name = kwargs.get("name", None)
-    description = kwargs.get("description", None)
+    name = kwargs.get("name")
+    description = kwargs.get("description")
     tags = kwargs.get("tags", ["DEFAULT"])
-    image = kwargs.get("image", None)
-    commands = kwargs.get("commands", None)
-    arguments = kwargs.get("arguments", None)
-    is_default = kwargs.get("is_default", None)
+    image = kwargs.get("image")
+    commands = kwargs.get("commands")
+    arguments = kwargs.get("arguments")
+    is_default = kwargs.get("is_default")
     parameters = kwargs.get("parameters", [])
-    experiment_notebook_path = kwargs.get("experiment_notebook_path", None)
-    deployment_notebook_path = kwargs.get("deployment_notebook_path", None)
+    experiment_notebook_path = kwargs.get("experiment_notebook_path")
+    deployment_notebook_path = kwargs.get("deployment_notebook_path")
+    cpu_limit = kwargs.get("cpu_limit")
+    cpu_request = kwargs.get("cpu_request")
+    memory_limit = kwargs.get("memory_limit")
+    memory_request = kwargs.get("memory_request")
 
     conn = engine.connect()
     text = f'SELECT uuid FROM tasks WHERE name="{name}" LIMIT 1'
@@ -66,8 +70,10 @@ def insert_task(**kwargs):
     tags_json = json.dumps(tags)
 
     text = (
-        f"INSERT INTO tasks (uuid, name, description, image, commands, arguments, parameters, tags, experiment_notebook_path, deployment_notebook_path, is_default, created_at, updated_at) "
-        f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        f"INSERT INTO tasks (uuid, name, description, image, commands, arguments, parameters, tags, "
+        f"experiment_notebook_path, deployment_notebook_path, cpu_limit, cpu_request, memory_limit, memory_request, "
+        f"is_default, created_at, updated_at) "
+        f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     )
     conn.execute(
         text,
@@ -81,6 +87,10 @@ def insert_task(**kwargs):
         tags_json,
         experiment_notebook_path,
         deployment_notebook_path,
+        cpu_limit,
+        cpu_request,
+        memory_limit,
+        memory_request,
         is_default,
         created_at,
         created_at,
