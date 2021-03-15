@@ -7,19 +7,18 @@ import random
 from facenet_pytorch import MTCNN
 from PIL import Image
 from multiprocessing import cpu_count
-import zipfile
+
+
 
 class MTCNN_Model:
-    def __init__(self, general_parameters,model_parameters,inference_parameters):
+
+
+    def __init__(self, model_parameters, inference_parameters):
         
         #---------dataset_infos
         self.X = None
         self.input_images = None
         self.subfolders = None
-
-        #--------general_parameters
-        self.root_folder_name = general_parameters['root_folder_name']
-        
 
         #---------model_parameters
         self.image_size = model_parameters['image_size']
@@ -70,14 +69,12 @@ class MTCNN_Model:
         
         return (boxes, probs)
 
+
     def _construct_result_dataframe(self,step):
         
         self.df_result = pd.DataFrame(columns=["Input_image","Bboxes(x1,y1,x2,y2)","Probabilities"])
 
-        boxes_list = []
-        probs_list = []
-
-        for i in range(0,len(self.X),self.inference_batch_size):
+        for i in range(0, len(self.X), self.inference_batch_size):
           img_reference = []
           batch_images = self.X[i:i+self.inference_batch_size]
 
@@ -85,6 +82,7 @@ class MTCNN_Model:
           for row in batch_images:
             v_cap = cv2.VideoCapture(row[0])
             success, frame = v_cap.read()
+
             img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             img = cv2.resize(img, (self.input_square_transformation_size,self.input_square_transformation_size))
             img_reference.append(Image.fromarray(img))
@@ -136,6 +134,5 @@ class MTCNN_Model:
     def get_result_dataframe(self,X,step = 'Experiment'):
 
         self.X = X
-        self.image_paths = X[:,0]
         self._construct_result_dataframe(step)
         return self.df_result
