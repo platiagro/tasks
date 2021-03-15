@@ -19,7 +19,7 @@ class TestCVYOLO(unittest.TestCase):
         os.environ["OPERATOR_ID"] = OPERATOR_ID
         os.environ["RUN_ID"] = RUN_ID
 
-        datasets.ocr()
+        datasets.yolo()
 
         os.chdir("tasks/cv-yolo")
 
@@ -27,12 +27,12 @@ class TestCVYOLO(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_ocr_output_image(self):
+    def test_experiment_yolo_output_image(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/coco.zip",
+                dataset="/tmp/data/yolo.zip",
             ),
         )
 
