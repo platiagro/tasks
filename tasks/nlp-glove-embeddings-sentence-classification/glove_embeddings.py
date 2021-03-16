@@ -5,6 +5,9 @@ from platiagro.io import unzip_to_folder
 import torch
 
 class GloveEmbeddings(object):
+    """
+    Classes reponsável por criar a matriz de glove embeddings com os textos fornecidos
+    """
     def __init__(self,glove_dim:int,glove_weights_file_name:str,device:str):
         super(GloveEmbeddings , self).__init__()
         
@@ -17,6 +20,10 @@ class GloveEmbeddings(object):
         self._extract_glove_properties()
         
     def _set_glove_path(self):
+        """
+        Configura o caminho dos pesos para a PLATIA dependendo se é um arquivo .zip ou .txt
+        """
+        
         if ".zip" not in self.glove_weights_file_name and ".txt" not in self.glove_weights_file_name:
             raise TypeError("Os pesos Glove devem estar em um arquivo .txt ou comprimidos em um arquivo .zip")
         
@@ -31,6 +38,9 @@ class GloveEmbeddings(object):
             
 
     def _load_glove_vector(self):
+        """
+        Carrega os vetores glove no formato word2vec
+        """
         self._set_glove_path()
         try: 
             glove = KeyedVectors.load_word2vec_format(self.glove_path,no_header=False)
@@ -40,6 +50,9 @@ class GloveEmbeddings(object):
         return glove
     
     def _extract_glove_properties(self):
+        """
+        Extrai todas as propriedades dos vetores glove considerando o mapeamento ente palavras e vetores
+        """
         glove = self._load_glove_vector()
         glove_shape = glove.vectors.shape
         glove_dim = glove.vector_size
@@ -56,6 +69,9 @@ class GloveEmbeddings(object):
         self.glove_infos = glove_infos
     
     def _separate_punctuation_from_words(self,text):
+        """"
+        Pontuações são separadas das palavras porque caso estejam juntas esta palavra não estará no vetor de embeddings
+        """
         punctuation_list = '!(),.:;?'
         for punct in list(punctuation_list):
             text = text.replace(punct,f" {punct} ")
@@ -63,6 +79,9 @@ class GloveEmbeddings(object):
         return text
             
     def _tokenize_text(self,text_list: list = None):
+        """
+        Transforma o texto em lista de palavras
+        """
         tokenize_list = list()
         for text in text_list:
             text = text[0]
@@ -73,6 +92,9 @@ class GloveEmbeddings(object):
 
 
     def build_glove_matrix(self,X):
+        """
+        Cria as matriz de texto com palavras contida no espaço de palavras e a matrix com os ids de vetores gloves
+        """
         X = self._tokenize_text(X)
         glove_matrix = []
         word_filtered_matrix = []

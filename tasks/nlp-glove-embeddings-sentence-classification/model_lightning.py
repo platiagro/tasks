@@ -16,10 +16,10 @@ from torch.utils.data.sampler import WeightedRandomSampler
 
 
 class GloveFinetuner(pl.LightningModule):
-    def __init__(self, hyperparams, model_parameters, dataset_infos, extra_infos):
+    def __init__(self, hparams):
 
         super(GloveFinetuner, self).__init__()
-
+   
         # ---------- hyperparams
         self.learning_rate = hyperparams["learning_rate"]
         self.train_batch_size = hyperparams["train_batch_size"]
@@ -64,29 +64,6 @@ class GloveFinetuner(pl.LightningModule):
             columns=["valid_epoch_loss", "valid_epoch_acc"]
         )
 
-        # ---------- getting datasets
-        self.targets_sampler = self.all_data[2]
-        if self.overfit:
-            self.train_dataset = self.CustomDataset(
-                self.all_data[0], self.all_data[1], self.all_data[2]
-            )
-            self.valid_dataset = self.CustomDataset(
-                self.all_data[0], self.all_data[1], self.all_data[2]
-            )
-            self.test_dataset = self.CustomDataset(
-                self.all_data[0], self.all_data[1], self.all_data[2]
-            )
-        else:
-            self.train_dataset = self.CustomDataset(
-                self.all_data[0], self.all_data[1], self.all_data[2]
-            )
-            self.valid_dataset = self.CustomDataset(
-                self.all_data[3], self.all_data[4], self.all_data[5]
-            )
-            self.test_dataset = self.CustomDataset(
-                self.all_data[6], self.all_data[7], self.all_data[8]
-            )
-            
 
         # ---------- Creating comparision dataframe with expected and predicted results
         self.response_columns = [ "ORIGINAL_TARGET","ORIGINAL_CODE","PREDICTED_TARGET","PREDICTED_CODE" ] + [label.upper() + "_PROB" for label in self.label_encoder.classes_]
@@ -385,21 +362,11 @@ class GloveFinetuner(pl.LightningModule):
         torch.cuda.manual_seed_all(self.seed)
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
-        
-    def gpu_mem_restore(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            try:
-                return func(*args, **kwargs)
-            except:
-                type, val, tb = sys.exc_info()
-                traceback.clear_frames(tb)
-                raise type(val).with_traceback(tb) from None
 
-        return wrapper
-
-    @gpu_mem_restore
     def train_dataloader(self):
+        self.train_dataset = self.CustomDataset(
+                self.all_data[0], self.all_data[1], self.all_data[2]
+            )
         if self.sampler:
             targets = []
             for target in self.targets_sampler:
@@ -429,8 +396,15 @@ class GloveFinetuner(pl.LightningModule):
             collate_fn=self.my_collate,
         )
 
-    @gpu_mem_restore
     def val_dataloader(self):
+        if self.overfit:
+            self.valid_dataset = self.CustomDataset(
+                self.all_data[0], self.all_data[1], self.all_data[2]
+            )
+        else:
+            self.valid_dataset = self.CustomDataset(
+                self.all_data[3], self.all_data[4], self.all_data[5]
+            )
         return DataLoader(
             self.valid_dataset,
             batch_size=self.eval_batch_size,
@@ -439,8 +413,15 @@ class GloveFinetuner(pl.LightningModule):
             collate_fn=self.my_collate,
         )
 
-    @gpu_mem_restore
     def test_dataloader(self):
+        if self.overfit:
+            self.test_dataset = self.CustomDataset(
+                self.all_data[0], self.all_data[1], self.all_data[2]
+            )
+        else:
+            self.test_dataset = self.CustomDataset(
+                self.all_data[6], self.all_data[7], self.all_data[8]
+            )
         return DataLoader(
             self.test_dataset,
             batch_size=self.eval_batch_size,
