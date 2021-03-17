@@ -133,6 +133,13 @@ def imdb():
     metadata(name=name, df=pd.read_csv(path))
 
 
+def imdb_testdata():
+    data = {
+        "strData": "Un-bleeping-believable! Meg Ryan doesn't even look her usual pert lovable self in this, which normally makes me forgive her shallow ticky acting schtick. Hard to believe she was the producer on this dog. Plus Kevin Kline: what kind of suicide trip has his career been on? Whoosh... Banzai!!! Finally this was directed by the guy who did Big Chill? Must be a replay of Jonestown - hollywood style. Wooofff!",
+    }
+    return data
+
+
 def coco():
     name = "coco.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"

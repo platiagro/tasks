@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, deployments
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -47,3 +47,16 @@ class TestSVR(unittest.TestCase):
                 max_iter=-1,
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        proc = deployments.run()
+        data = datasets.boston_testdata()
+        response = deployments.test(data=data)
+        proc.kill()
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 14)  # 13 features + 1 prediction
+        self.assertEqual(len(names), 14)

@@ -60,10 +60,6 @@ def test(data):
         "http://localhost:5000/api/v1.0/predictions",
         json=data,
     )
-    print("response.status_code")
-    print(response.status_code)
-    print("response.content")
-    print(response.content)
     assert response.status_code == 200
 
     body = response.json()

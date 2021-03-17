@@ -82,3 +82,16 @@ class TestAutoMLClassifier(unittest.TestCase):
                 method="predict_proba",
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        proc = deployments.run()
+        data = datasets.titanic_testdata()
+        response = deployments.test(data=data)
+        proc.kill()
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 15)  # 12 features + 1 class + 2 probas
+        self.assertEqual(len(names), 15)
