@@ -115,9 +115,7 @@ class GloveFinetuner(pl.LightningModule):
             num_workers=cpu_count(),
             collate_fn=self.my_collate,
         )
-        print("len_dataloader:\n",len(dataloader))
         for batch in dataloader:
-            print("Batch content:\n",batch)
             batch = [elem.to(self.device_used) for elem in batch] 
             self.test_step(batch, None)
         return self.df_test.to_numpy()
