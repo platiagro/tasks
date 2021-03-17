@@ -16,7 +16,10 @@ from torch.utils.data.sampler import WeightedRandomSampler
 
 
 class GloveFinetuner(pl.LightningModule):
-    def __init__(self, hparams):
+    def __init__(self,hyperparams,
+                    model_parameters,
+                    dataset_infos,
+                    extra_infos,):
 
         super(GloveFinetuner, self).__init__()
    
@@ -41,7 +44,7 @@ class GloveFinetuner(pl.LightningModule):
         # ---------- extra_infos
         self.overfit = extra_infos["overfit"]
         self.sampler = extra_infos["sampler"]
-        self.device = extra_infos["device"]
+        self.device_used = extra_infos["device"]
 
         # ---------- other_infos
         self.predict_proba = torch.nn.Softmax(dim=1)
@@ -79,6 +82,7 @@ class GloveFinetuner(pl.LightningModule):
         )
         
         self.net = self._build_mlp()
+        self.net.to(self.device_used)
     
     def _build_mlp(self):
         """Build a feedforward neural network."""
@@ -111,8 +115,10 @@ class GloveFinetuner(pl.LightningModule):
             num_workers=cpu_count(),
             collate_fn=self.my_collate,
         )
+        print("len_dataloader:\n",len(dataloader))
         for batch in dataloader:
-            batch = [elem.to(self.device) for elem in batch] 
+            print("Batch content:\n",batch)
+            batch = [elem.to(self.device_used) for elem in batch] 
             self.test_step(batch, None)
         return self.df_test.to_numpy()
 
@@ -148,12 +154,12 @@ class GloveFinetuner(pl.LightningModule):
             "loss": loss,
             "train_acc_batch": acc,
             "train_loss_batch": loss,
-            "log": tensorboard_logs,
+        
         }
 
     def training_epoch_end(self, outputs):
-        if not outputs:
-            return {}
+#         if not outputs:
+#             return {}
 
         temp_avg_loss_batch = [x["train_loss_batch"] for x in outputs]
         temp_avg_acc_batch = [x["train_acc_batch"] for x in outputs]
@@ -173,8 +179,9 @@ class GloveFinetuner(pl.LightningModule):
             "avg_train_acc": avg_train_acc,
             "avg_train_loss": avg_train_loss,
         }
-
-        return {"avg_train_acc": avg_train_acc, "log": tensorboard_logs}
+        
+        self.log('avg_train_acc', avg_train_acc, on_epoch=True, prog_bar=True, logger=True)
+        self.log('avg_train_loss', avg_train_loss, on_epoch=True, prog_bar=True, logger=True)
 
     def validation_step(self, batch, batch_nb):
         # batch
@@ -247,7 +254,8 @@ class GloveFinetuner(pl.LightningModule):
             "avg_valid_loss": avg_valid_loss,
         }
 
-        return {"avg_valid_acc": avg_valid_acc, "log": tensorboard_logs}
+        self.log('avg_valid_acc', avg_valid_acc, on_epoch=True, prog_bar=True, logger=True)
+        self.log('avg_valid_loss', avg_valid_loss, on_epoch=True, prog_bar=True, logger=True)
 
     def test_step(self, batch, batch_nb):
         # batch
@@ -279,6 +287,7 @@ class GloveFinetuner(pl.LightningModule):
                 predicted_codes,
                 classes_probabilities,
             ):
+       
                 row_info = [original_target, int(target),predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
                 self.df_test = self.df_test.append(pd.Series(row_info,index=self.df_test.columns), ignore_index=True)
                
@@ -291,6 +300,7 @@ class GloveFinetuner(pl.LightningModule):
             y_hat = self.forward(inputs, offsets)
             # constructing dataframe
             _, predicted_codes = torch.max(y_hat, dim=1)
+            
             predicted_targets = self.label_encoder.inverse_transform(
                 predicted_codes.data.cpu().numpy()
             )
@@ -316,7 +326,9 @@ class GloveFinetuner(pl.LightningModule):
 
         tensorboard_logs = {"avg_test_acc": avg_test_acc}
 
-        return {"avg_test_acc": avg_test_acc, "log": tensorboard_logs}
+        #return {"avg_test_acc": avg_test_acc}
+        self.log('avg_test_acc', avg_valid_acc, on_epoch=True, prog_bar=True, logger=True)
+
 
     def configure_optimizers(self):
         return torch.optim.SGD(
