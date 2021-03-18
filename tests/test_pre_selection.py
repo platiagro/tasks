@@ -53,8 +53,8 @@ class TestPreSelection(unittest.TestCase):
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 12)  # 12 features
-        self.assertEqual(len(names), 12)
+        self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1 removed
+        self.assertEqual(len(names), 3)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -105,5 +105,5 @@ class TestPreSelection(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 13)  # 13 features
-        self.assertEqual(len(names), 13)
+        self.assertEqual(len(ndarray[0]), 12)  # 13 features - 1 removed
+        self.assertEqual(len(names), 12)

@@ -52,8 +52,8 @@ class TestNormalizer(unittest.TestCase):
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 12)  # 12 features
-        self.assertEqual(len(names), 12)
+        self.assertEqual(len(ndarray[0]), 4)  # 4 features
+        self.assertEqual(len(names), 4)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(

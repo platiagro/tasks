@@ -50,7 +50,7 @@ class TestFilterSelection(unittest.TestCase):
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1
+        self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1 removed
         self.assertEqual(len(names), 3)
 
     def test_experiment_titanic(self):
@@ -74,7 +74,7 @@ class TestFilterSelection(unittest.TestCase):
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 10)  # 11 features - 1
+        self.assertEqual(len(ndarray[0]), 10)  # 11 features - 1 removed
         self.assertEqual(len(names), 10)
 
     def test_experiment_hotel_bookings(self):
@@ -98,5 +98,5 @@ class TestFilterSelection(unittest.TestCase):
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 29)  # 31 features - 2
+        self.assertEqual(len(ndarray[0]), 29)  # 31 features - 2 removed
         self.assertEqual(len(names), 29)
