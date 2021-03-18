@@ -36,8 +36,12 @@ class Server:
         RuntimeError
             When the process that runs the server exits (because of an error).
         """
+        # exec cause cmd to inherit the shell process,
+        # instead of having the shell launch a child process.
+        # proc.kill() would not work without exec
         self.proc = subprocess.Popen(
-            ["seldon-core-microservice", self.interface_name, self.api_type, "--port", str(self.port), "--metrics-port", str(self.metrics_port)],
+            f"exec seldon-core-microservice {self.interface_name} {self.api_type} --port {self.port} --metrics-port {self.metrics_port}",
+            shell=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
