@@ -55,9 +55,12 @@ class Server:
                 raise RuntimeError(f"deployment exited with status: {self.proc.returncode}")
 
             # Checks whether the server is healthy and running
-            response = requests.get(f"http://localhost:{self.port}/health/ping")
-            if response.status_code == 200:
-                break
+            try:
+                response = requests.get(f"http://localhost:{self.port}/health/ping", timeout=5)
+                if response.status_code == 200:
+                    break
+            except requests.exceptions.RequestException:
+                pass
 
             if wait_time > 300:
                 # p.subprocess took too long to be healthy (> 5 minutes)
@@ -84,6 +87,7 @@ class Server:
         response = requests.post(
             f"http://localhost:{self.port}/api/v1.0/predictions",
             json=data,
+            timeout=5,
         )
 
         if response.status_code != 200:
