@@ -56,6 +56,8 @@ class TestAutoMLClassifier(unittest.TestCase):
         proc = deployments.run()
         data = datasets.iris_testdata()
         response = deployments.test(data=data)
+        if response is None:
+            print(proc.stderr.read().decode(), flush=True)
         os.kill(proc.pid, 9)
         names = response["names"]
         ndarray = response["ndarray"]
@@ -90,6 +92,8 @@ class TestAutoMLClassifier(unittest.TestCase):
         proc = deployments.run()
         data = datasets.titanic_testdata()
         response = deployments.test(data=data)
+        if response is None:
+            print(proc.stderr.read().decode(), flush=True)
         os.kill(proc.pid, 9)
         names = response["names"]
         ndarray = response["ndarray"]

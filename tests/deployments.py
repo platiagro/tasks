@@ -54,18 +54,15 @@ def test(data):
 
     Returns
     -------
-    dict or str or bytes
-
-    Raises
-    ------
-    AssertionError
-        When the returned response status code isn't 200 OK.
+    dict or str or bytes or None
     """
     response = requests.post(
         "http://localhost:5000/api/v1.0/predictions",
         json=data,
     )
-    assert response.status_code == 200
+
+    if response.status_code != 200:
+        return None
 
     body = response.json()
     if "data" in body:
