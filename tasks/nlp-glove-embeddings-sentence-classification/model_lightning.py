@@ -148,6 +148,9 @@ class GloveFinetuner(pl.LightningModule):
             ignore_index=True,
         )
 
+        self.log('train_loss_batch', loss, on_step=True, prog_bar=True, logger=True)
+        self.log('train_acc_batch', acc, on_step=True, prog_bar=True, logger=True)
+
         return {
             "loss": loss,
             "train_acc_batch": acc,
@@ -228,6 +231,9 @@ class GloveFinetuner(pl.LightningModule):
             ignore_index=True,
         )
 
+        self.log('valid_acc_batch', acc, on_step=True, prog_bar=True, logger=True)
+        self.log('valid_loss_batch', loss, on_step=True, prog_bar=True, logger=True)
+
         return {"valid_acc_batch": acc, "valid_loss_batch": loss}
 
     def validation_epoch_end(self, outputs):
@@ -252,8 +258,8 @@ class GloveFinetuner(pl.LightningModule):
             "avg_valid_loss": avg_valid_loss,
         }
 
-        self.log('avg_valid_acc', avg_valid_acc, on_epoch=True, prog_bar=True, logger=True)
-        self.log('avg_valid_loss', avg_valid_loss, on_epoch=True, prog_bar=True, logger=True)
+        self.log('avg_valid_acc', avg_valid_acc, on_step=True, prog_bar=True, logger=True)
+        self.log('avg_valid_loss', avg_valid_loss, on_step=True, prog_bar=True, logger=True)
 
     def test_step(self, batch, batch_nb):
         # batch
@@ -289,7 +295,8 @@ class GloveFinetuner(pl.LightningModule):
                 row_info = [original_target, int(target),predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
                 self.df_test = self.df_test.append(pd.Series(row_info,index=self.df_test.columns), ignore_index=True)
                
-            
+            self.log('test_acc_batch', acc, on_step=True, prog_bar=True, logger=True)
+
             final_return = {"test_acc_batch": acc}
 
         if self.step == "Deployment":
@@ -325,7 +332,7 @@ class GloveFinetuner(pl.LightningModule):
         tensorboard_logs = {"avg_test_acc": avg_test_acc}
 
         #return {"avg_test_acc": avg_test_acc}
-        self.log('avg_test_acc', avg_valid_acc, on_epoch=True, prog_bar=True, logger=True)
+        self.log('avg_test_acc', avg_test_acc, on_epoch=True, prog_bar=True, logger=True)
 
 
     def configure_optimizers(self):
