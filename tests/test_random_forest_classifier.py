@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets, deployments
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -56,7 +56,7 @@ class TestRandomForestClassifier(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.iris_testdata()
-        with deployments.Server() as s:
+        with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
@@ -91,7 +91,7 @@ class TestRandomForestClassifier(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.titanic_testdata()
-        with deployments.Server() as s:
+        with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]

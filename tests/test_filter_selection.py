@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -35,9 +35,23 @@ class TestFilterSelection(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-                features_to_filter=[]
+                features_to_filter=["SepalLengthCm"]
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.iris_testdata()
+
+        with server.Server() as s:
+            response = s.test(data=data)
+
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1
+        self.assertEqual(len(names), 3)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -49,6 +63,20 @@ class TestFilterSelection(unittest.TestCase):
             ),
         )
 
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.titanic_testdata()
+
+        with server.Server() as s:
+            response = s.test(data=data)
+
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 11)  # 12 features - 1
+        self.assertEqual(len(names), 11)
+
     def test_experiment_hotel_bookings(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
@@ -58,3 +86,17 @@ class TestFilterSelection(unittest.TestCase):
                 features_to_filter=["reservation_status_date", "arrival_date_year"]
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.hotel_bookings_testdata()
+
+        with server.Server() as s:
+            response = s.test(data=data)
+
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 29)  # 31 features - 2
+        self.assertEqual(len(names), 29)

@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets, deployments
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -55,7 +55,7 @@ class TestAutoMLClassifier(unittest.TestCase):
         )
         data = datasets.iris_testdata()
 
-        with deployments.Server() as s:
+        with server.Server() as s:
             response = s.test(data=data)
 
         names = response["names"]
@@ -90,7 +90,7 @@ class TestAutoMLClassifier(unittest.TestCase):
         )
         data = datasets.titanic_testdata()
 
-        with deployments.Server() as s:
+        with server.Server() as s:
             response = s.test(data=data)
 
         names = response["names"]

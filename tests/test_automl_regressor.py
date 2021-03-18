@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets, deployments
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -51,7 +51,7 @@ class TestAutoMLRegressor(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.boston_testdata()
-        with deployments.Server() as s:
+        with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]

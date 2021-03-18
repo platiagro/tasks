@@ -1,4 +1,3 @@
-import os
 import subprocess
 import random
 import time
@@ -37,8 +36,7 @@ class Server:
             When the process that runs the server exits (because of an error).
         """
         self.proc = subprocess.Popen(
-            f"seldon-core-microservice {self.interface_name} {self.api_type} --port {self.port}",
-            shell=True,
+            ["seldon-core-microservice", self.interface_name, self.api_type, "--port", str(self.port)],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
@@ -57,7 +55,7 @@ class Server:
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        os.kill(self.proc.pid, 9)
+        self.proc.kill()
 
     def test(self, data):
         """
