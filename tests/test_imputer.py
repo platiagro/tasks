@@ -90,7 +90,7 @@ class TestImputer(unittest.TestCase):
         self.assertEqual(len(ndarray[0]), 12)  # 12 features
         self.assertEqual(len(names), 12)
 
-    def test_boston(self):
+    def test_experiment_boston(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",

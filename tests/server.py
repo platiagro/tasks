@@ -20,6 +20,7 @@ class Server:
         self.interface_name = interface_name
         self.api_type = api_type
         self.port = random.randint(5000, 9000)
+        self.metrics_port = random.randint(5000, 9000)
 
     def __enter__(self):
         """
@@ -36,7 +37,7 @@ class Server:
             When the process that runs the server exits (because of an error).
         """
         self.proc = subprocess.Popen(
-            ["seldon-core-microservice", self.interface_name, self.api_type, "--port", str(self.port)],
+            ["seldon-core-microservice", self.interface_name, self.api_type, "--port", str(self.port), "--metrics-port", str(self.metrics_port)],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
@@ -57,7 +58,6 @@ class Server:
             if wait_time > 300:
                 # p.subprocess took too long to be healthy (> 5 minutes)
                 print(self.proc.stderr.read().decode(), flush=True)
-                self.proc.kill()
                 raise RuntimeError(f"deployment took too long to be ready")
 
         return self

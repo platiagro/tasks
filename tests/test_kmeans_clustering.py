@@ -57,7 +57,7 @@ class TestKmeansClustering(unittest.TestCase):
             ),
         )
 
-    def test_boston(self):
+    def test_experiment_boston(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",

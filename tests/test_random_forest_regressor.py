@@ -27,7 +27,7 @@ class TestRandomForestRegressor(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_boston(self):
+    def test_experiment_boston(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
