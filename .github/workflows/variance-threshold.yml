@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/variance-threshold/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_variance_threshold.py
 
 jobs:

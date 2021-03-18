@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/mlp-regressor/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_mlp_regressor.py
 
 jobs:

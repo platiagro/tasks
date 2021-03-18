@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/logistic-regression/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_logistic_regression.py
 
 jobs:

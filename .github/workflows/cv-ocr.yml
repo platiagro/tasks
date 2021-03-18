@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/cv-ocr/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_cv_ocr.py
 
 jobs:

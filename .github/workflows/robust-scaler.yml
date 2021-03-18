@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/robust-scaler/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_robust_scaler.py
 
 jobs:

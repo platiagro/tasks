@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/feature-tools/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_feature_tools.py
 
 jobs:

@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/normalizer/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_normalizer.py
 
 jobs:

@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/simulated-annealing/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_simulated_annealing.py
 
 jobs:

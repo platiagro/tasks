@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/automl-regressor/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_automl_regressor.py
 
 jobs:

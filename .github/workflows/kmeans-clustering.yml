@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/kmeans-clustering/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_kmeans_clustering.py
 
 jobs:

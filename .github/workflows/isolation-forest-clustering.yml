@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/isolation-forest-clustering/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_isolation_forest_clustering.py
 
 jobs:

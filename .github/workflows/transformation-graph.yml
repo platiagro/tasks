@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/transformation-graph/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_transformation_graph.py
 
 jobs:

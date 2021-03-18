@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/mlp-classifier/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_mlp_classifier.py
 
 jobs:

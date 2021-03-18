@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/grouping-categorical-features/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_grouping_categorical_features.py
 
 jobs:

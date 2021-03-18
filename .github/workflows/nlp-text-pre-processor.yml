@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/nlp-text-pre-processor/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_nlp_text_preprocessor.py
 
 jobs:

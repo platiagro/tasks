@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/rfe-selector/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_rfe_selector.py
 
 jobs:

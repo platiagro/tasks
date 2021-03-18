@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/time-related-features/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_time_related_features.py
 
 jobs:

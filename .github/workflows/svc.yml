@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/svc/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_svc.py
 
 jobs:

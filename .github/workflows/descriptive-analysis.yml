@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/descriptive-analysis/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_descriptive_analysis.py
 
 jobs:

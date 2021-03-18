@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/pre-selection/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_pre_selection.py
 
 jobs:

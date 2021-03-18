@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/imputer/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_imputer.py
 
 jobs:

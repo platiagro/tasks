@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/filter-selection/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_filter_selection.py
 
 jobs:

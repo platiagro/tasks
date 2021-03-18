@@ -40,8 +40,10 @@ class Server:
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
+        wait_time = 0
         while True:
             time.sleep(5)
+            wait_time += 5
             poll = self.proc.poll()
             if poll is not None:
                 # p.subprocess is not alive
@@ -51,6 +53,12 @@ class Server:
             response = requests.get(f"http://localhost:{self.port}/health/ping")
             if response.status_code == 200:
                 break
+
+            if wait_time > 300:
+                # p.subprocess took too long to be healthy (> 5 minutes)
+                print(self.proc.stderr.read().decode(), flush=True)
+                self.proc.kill()
+                raise RuntimeError(f"deployment took too long to be ready")
 
         return self
 

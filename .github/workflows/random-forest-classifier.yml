@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/random-forest-classifier/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_random_forest_classifier.py
 
 jobs:

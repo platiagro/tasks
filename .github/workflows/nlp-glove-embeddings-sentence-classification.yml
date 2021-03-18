@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/nlp-glove-embeddings-sentence-classification/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_glove_embeddings_sentence_classification.py
 
 jobs:
