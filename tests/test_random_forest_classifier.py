@@ -58,7 +58,7 @@ class TestRandomForestClassifier(unittest.TestCase):
         proc = deployments.run()
         data = datasets.iris_testdata()
         response = deployments.test(data=data)
-        proc.kill()
+        os.kill(proc.pid, 9)
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 class + 3 probas
@@ -94,7 +94,7 @@ class TestRandomForestClassifier(unittest.TestCase):
         proc = deployments.run()
         data = datasets.titanic_testdata()
         response = deployments.test(data=data)
-        proc.kill()
+        os.kill(proc.pid, 9)
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 15)  # 12 features + 1 class + 2 probas

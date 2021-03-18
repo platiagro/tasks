@@ -22,7 +22,12 @@ def run(interface_name="Model", api_type="REST"):
     RuntimeError
         When the process that runs the server exits (because of an error).
     """
-    proc = subprocess.Popen(["seldon-core-microservice", interface_name, api_type])
+    proc = subprocess.Popen(
+        f"seldon-core-microservice {interface_name} {api_type}",
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
 
     while True:
         time.sleep(5)

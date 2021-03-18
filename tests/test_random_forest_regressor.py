@@ -54,7 +54,7 @@ class TestRandomForestRegressor(unittest.TestCase):
         proc = deployments.run()
         data = datasets.boston_testdata()
         response = deployments.test(data=data)
-        proc.kill()
+        os.kill(proc.pid, 9)
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 13 features + 1 prediction
