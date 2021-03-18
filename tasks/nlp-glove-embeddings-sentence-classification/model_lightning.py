@@ -258,8 +258,8 @@ class GloveFinetuner(pl.LightningModule):
             "avg_valid_loss": avg_valid_loss,
         }
 
-        self.log('avg_valid_acc', avg_valid_acc, on_step=True, prog_bar=True, logger=True)
-        self.log('avg_valid_loss', avg_valid_loss, on_step=True, prog_bar=True, logger=True)
+        self.log('avg_valid_acc', avg_valid_acc, on_epoch=True, prog_bar=True, logger=True)
+        self.log('avg_valid_loss', avg_valid_loss, on_epoch=True, prog_bar=True, logger=True)
 
     def test_step(self, batch, batch_nb):
         # batch
