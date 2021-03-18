@@ -48,12 +48,9 @@ class TestLinearRegression(unittest.TestCase):
             "Deployment.ipynb",
             "/dev/null",
         )
-        proc = deployments.run()
         data = datasets.boston_testdata()
-        response = deployments.test(data=data)
-        if response is None:
-            print(proc.stderr.read().decode(), flush=True)
-        os.kill(proc.pid, 9)
+        with deployments.Server() as s:
+            response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 13 features + 1 prediction

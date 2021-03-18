@@ -1,75 +1,90 @@
+import os
 import subprocess
+import random
 import time
 
 import requests
 
 
-def run(interface_name="Model", api_type="REST"):
+class Server:
     """
     Starts seldon core deployment server.
 
-    Parameters
+    Attributes
     ----------
     interface_name : str
     api_type : str
-
-    Returns
-    -------
-    subprocess.Popen
-
-    Raises
-    ------
-    RuntimeError
-        When the process that runs the server exits (because of an error).
     """
-    proc = subprocess.Popen(
-        f"seldon-core-microservice {interface_name} {api_type}",
-        shell=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
 
-    while True:
-        time.sleep(5)
-        poll = proc.poll()
-        if poll is not None:
-            # p.subprocess is not alive
-            raise RuntimeError(f"deployment exited with status: {proc.returncode}")
+    def __init__(self, interface_name="Model", api_type="REST"):
+        self.proc = None
+        self.interface_name = interface_name
+        self.api_type = api_type
+        self.port = random.randint(5000, 9000)
 
-        # Checks whether the server is healthy and running
-        response = requests.get("http://localhost:5000/health/ping")
-        if response.status_code == 200:
-            break
+    def __enter__(self):
+        """
+        Starts seldon core deployment server.
 
-    return proc
+        Parameters
+        ----------
+        interface_name : str
+        api_type : str
 
+        Raises
+        ------
+        RuntimeError
+            When the process that runs the server exits (because of an error).
+        """
+        self.proc = subprocess.Popen(
+            f"seldon-core-microservice {self.interface_name} {self.api_type} --port {self.port}",
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        while True:
+            time.sleep(5)
+            poll = self.proc.poll()
+            if poll is not None:
+                # p.subprocess is not alive
+                raise RuntimeError(f"deployment exited with status: {self.proc.returncode}")
 
-def test(data):
-    """
-    Sends a test request to seldon core deployment server.
+            # Checks whether the server is healthy and running
+            response = requests.get(f"http://localhost:{self.port}/health/ping")
+            if response.status_code == 200:
+                break
 
-    Parameters
-    ----------
-    data : dict
+        return self
 
-    Returns
-    -------
-    dict or str or bytes or None
-    """
-    response = requests.post(
-        "http://localhost:5000/api/v1.0/predictions",
-        json=data,
-    )
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        os.kill(self.proc.pid, 9)
 
-    if response.status_code != 200:
-        return None
+    def test(self, data):
+        """
+        Sends a test request to seldon core deployment server.
 
-    body = response.json()
-    if "data" in body:
-        return body["data"]
-    elif "strData" in body:
-        return body["strData"]
-    elif "binData" in body:
-        return body["binData"]
+        Parameters
+        ----------
+        data : dict
 
-    return body
+        Returns
+        -------
+        dict or str or bytes or None
+        """
+        response = requests.post(
+            f"http://localhost:{self.port}/api/v1.0/predictions",
+            json=data,
+        )
+
+        if response.status_code != 200:
+            print(self.proc.stderr.read().decode(), flush=True)
+
+        body = response.json()
+        if "data" in body:
+            return body["data"]
+        elif "strData" in body:
+            return body["strData"]
+        elif "binData" in body:
+            return body["binData"]
+
+        return body
