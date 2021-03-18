@@ -78,8 +78,8 @@ class TestNormalizer(unittest.TestCase):
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 12)  # 12 features
-        self.assertEqual(len(names), 12)
+        self.assertEqual(len(ndarray[0]), 11)  # 11 features
+        self.assertEqual(len(names), 11)
 
     def test_experiment_boston(self):
         papermill.execute_notebook(

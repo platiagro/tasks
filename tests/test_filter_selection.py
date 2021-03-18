@@ -74,8 +74,8 @@ class TestFilterSelection(unittest.TestCase):
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 11)  # 12 features - 1
-        self.assertEqual(len(names), 11)
+        self.assertEqual(len(ndarray[0]), 10)  # 11 features - 1
+        self.assertEqual(len(names), 10)
 
     def test_experiment_hotel_bookings(self):
         papermill.execute_notebook(

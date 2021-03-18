@@ -97,5 +97,5 @@ class TestMLPClassifier(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 15)  # 12 features + 1 class + 2 probas
-        self.assertEqual(len(names), 15)
+        self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
+        self.assertEqual(len(names), 14)
