@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -32,16 +32,27 @@ class TestNLPMarianMT(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset= "/tmp/data/paracrawl_en_pt_test.xlsx",
+                dataset="/tmp/data/paracrawl_en_pt_test.xlsx",
                 target="target",
-                prefix = ">>pt_br<<",
-                filter_type = "incluir",
+                prefix=">>pt_br<<",
+                filter_type="incluir",
                 model_features="text",
-                model_name = "Helsinki-NLP/opus-mt-en-ROMANCE",
-                seed = 7,
-                input_max_length = 127,
-                output_max_length = 256,
-                inference_batch_size = 2
+                model_name="Helsinki-NLP/opus-mt-en-ROMANCE",
+                seed=7,
+                input_max_length=127,
+                output_max_length=256,
+                inference_batch_size=2
             ),
         )
 
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.imdb_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 1)  # 1 feature
+        self.assertEqual(len(names), 1)

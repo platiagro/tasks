@@ -44,10 +44,8 @@ class TestFilterSelection(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.iris_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1 removed
@@ -68,10 +66,8 @@ class TestFilterSelection(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.titanic_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 10)  # 11 features - 1 removed
@@ -92,10 +88,8 @@ class TestFilterSelection(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.hotel_bookings_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 29)  # 31 features - 2 removed

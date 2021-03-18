@@ -47,10 +47,8 @@ class TestPreSelection(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.iris_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1 removed
@@ -74,10 +72,8 @@ class TestPreSelection(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.titanic_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 11)  # 11 features

@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -40,3 +40,15 @@ class TestTimeRelatedFeatures(unittest.TestCase):
                 target_col="reservation_status",
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.hotel_bookings_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 31)  # 31 features
+        self.assertEqual(len(names), 31)

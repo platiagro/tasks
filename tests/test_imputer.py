@@ -51,10 +51,8 @@ class TestImputer(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.iris_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 4)  # 4 features
@@ -81,10 +79,8 @@ class TestImputer(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.titanic_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 11)  # 11 features
@@ -139,10 +135,8 @@ class TestImputer(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.hotel_bookings_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 31)  # 31 features

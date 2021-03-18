@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -43,6 +43,18 @@ class TestIsolationForestClustering(unittest.TestCase):
             ),
         )
 
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.iris_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 4)  # 4 features
+        self.assertEqual(len(names), 4)
+
     def test_experiment_titanic(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
@@ -55,6 +67,18 @@ class TestIsolationForestClustering(unittest.TestCase):
                 max_features=1.0,
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.titanic_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 11)  # 11 features
+        self.assertEqual(len(names), 11)
 
     def test_experiment_boston(self):
         papermill.execute_notebook(
@@ -69,6 +93,18 @@ class TestIsolationForestClustering(unittest.TestCase):
             ),
         )
 
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.boston_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 13)  # 13 features
+        self.assertEqual(len(names), 13)
+
     def test_hotel_bookings(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
@@ -81,3 +117,15 @@ class TestIsolationForestClustering(unittest.TestCase):
                 max_features=1.0,
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.hotel_bookings_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 31)  # 31 features
+        self.assertEqual(len(names), 31)

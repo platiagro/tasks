@@ -46,10 +46,8 @@ class TestVarianceThreshold(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.iris_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 4)  # 4 features
@@ -72,10 +70,8 @@ class TestVarianceThreshold(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.titanic_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 11)  # 11 features

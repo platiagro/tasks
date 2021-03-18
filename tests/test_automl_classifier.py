@@ -54,10 +54,8 @@ class TestAutoMLClassifier(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.iris_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 class + 3 probas
@@ -89,10 +87,8 @@ class TestAutoMLClassifier(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.titanic_testdata()
-
         with server.Server() as s:
             response = s.test(data=data)
-
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas

@@ -51,6 +51,7 @@ class Server:
             wait_time += 5
             poll = self.proc.poll()
             if poll is not None:
+                print(self.proc.stderr.read().decode(), flush=True)
                 # p.subprocess is not alive
                 raise RuntimeError(f"deployment exited with status: {self.proc.returncode}")
 
