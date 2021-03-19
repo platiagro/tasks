@@ -32,7 +32,7 @@ class TestFineTuningAutoAugment(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/hymenoptera_data.zip",
+                dataset="/tmp/data/hymenoptera.zip",
                 arch_list=["resnet18", "resnet50", "vgg16"],
                 aug_polices=["fa_reduced_cifar10",
                              "fa_resnet50_rimagenet", "fa_reduced_svhn"],
