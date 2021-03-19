@@ -56,7 +56,7 @@ class Server:
                 # p.subprocess is not alive
                 raise RuntimeError(f"deployment exited with status: {self.proc.returncode}")
 
-            # Checks whether the server is healthy and running
+            # Checks whether the server is running and healthy
             try:
                 response = requests.get(f"http://localhost:{self.port}/health/ping", timeout=5)
                 if response.status_code == 200:
@@ -67,12 +67,7 @@ class Server:
             if wait_time > 300:
                 # p.subprocess took too long to be healthy (> 5 minutes)
                 os.kill(self.proc.pid, 9)
-                try:
-                    outs, errs = self.proc.communicate(timeout=15)
-                    print(outs, flush=True)
-                    print(errs, flush=True)
-                except subprocess.TimeoutExpired:
-                    pass
+                self.print_server_logs()
                 raise RuntimeError(f"deployment took too long to be ready")
 
         return self
@@ -100,12 +95,7 @@ class Server:
 
         if response.status_code != 200:
             os.kill(self.proc.pid, 9)
-            try:
-                outs, errs = self.proc.communicate(timeout=15)
-                print(outs, flush=True)
-                print(errs, flush=True)
-            except subprocess.TimeoutExpired:
-                pass
+            self.print_server_logs()
 
         body = response.json()
         if "data" in body:
@@ -116,3 +106,16 @@ class Server:
             return body["binData"]
 
         return body
+
+    def print_server_logs(self):
+        """
+        Prints the deployment server logs.
+
+        Note: this method blocks until the process ends or a 15s timeout is reached.
+        """
+        try:
+            outs, errs = self.proc.communicate(timeout=15)
+            print(outs, flush=True)
+            print(errs, flush=True)
+        except subprocess.TimeoutExpired:
+            pass
