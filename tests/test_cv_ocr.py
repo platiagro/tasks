@@ -33,15 +33,15 @@ class TestCVOCR(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
-                target = "target_OCR" ,
-                filter_type = "incluir",
-                model_features = "input_image",
-                bbox_conf = 60,
-                segmentation_mode = "Considere um único bloco de texto uniforme",
-                ocr_engine = "Mecanismo de redes neurais com apenas LSTM",
-                language = "por",
-                bbox_return = "image",
-                image_return_format = ".jpg"
+                target="target_OCR",
+                filter_type="incluir",
+                model_features="input_image",
+                bbox_conf=60,
+                segmentation_mode="Considere um único bloco de texto uniforme",
+                ocr_engine="Mecanismo de redes neurais com apenas LSTM",
+                language="por",
+                bbox_return="image",
+                image_return_format=".jpg"
 
             ),
         )
@@ -52,15 +52,15 @@ class TestCVOCR(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
-                target = "target_OCR" ,
-                filter_type = "incluir",
-                model_features = "input_image",
-                bbox_conf = 60,
-                segmentation_mode = "Considere um único bloco de texto uniforme",
-                ocr_engine = "Mecanismo de redes neurais com apenas LSTM",
-                language = "por",
-                bbox_return = "np_array",
-                image_return_format = "N/A"
+                target="target_OCR",
+                filter_type="incluir",
+                model_features="input_image",
+                bbox_conf=60,
+                segmentation_mode="Considere um único bloco de texto uniforme",
+                ocr_engine="Mecanismo de redes neurais com apenas LSTM",
+                language="por",
+                bbox_return="np_array",
+                image_return_format="N/A"
 
             ),
         )

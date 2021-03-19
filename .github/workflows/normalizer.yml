@@ -5,6 +5,7 @@ on:
     paths:
       - tasks/normalizer/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_normalizer.py
 
 jobs:
@@ -23,6 +24,7 @@ jobs:
         run: |
           pip install pytest
           pytest -v tests/test_normalizer.py
+        timeout-minutes: 30
         env:
           MINIO_ENDPOINT: play.min.io
           MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F

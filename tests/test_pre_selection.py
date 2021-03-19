@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -42,6 +42,18 @@ class TestPreSelection(unittest.TestCase):
             ),
         )
 
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.iris_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1 removed
+        self.assertEqual(len(names), 3)
+
     def test_experiment_titanic(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
@@ -55,7 +67,19 @@ class TestPreSelection(unittest.TestCase):
             )
         )
 
-    def test_boston(self):
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.titanic_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 11)  # 11 features
+        self.assertEqual(len(names), 11)
+
+    def test_experiment_boston(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -67,3 +91,15 @@ class TestPreSelection(unittest.TestCase):
                 threshold=0.0,
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+        data = datasets.boston_testdata()
+        with server.Server() as s:
+            response = s.test(data=data)
+        names = response["names"]
+        ndarray = response["ndarray"]
+        self.assertEqual(len(ndarray[0]), 12)  # 13 features - 1 removed
+        self.assertEqual(len(names), 12)

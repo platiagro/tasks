@@ -35,5 +35,3 @@ class TestCVYOLO(unittest.TestCase):
                 dataset="/tmp/data/football_teams.zip",
             ),
         )
-
-
