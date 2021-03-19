@@ -1,10 +1,11 @@
-name: AutoKeras Image Classification AutoCV 
+name: AutoKeras Image Classification AutoCV
 
 on:
   push:
     paths:
       - tasks/tasks/cv-autokeras-autocv-image-classification/**
       - tests/datasets.py
+      - tests/server.py
       - tests/test_cv_autokeras_autocv_image_classification.py
 
 jobs:
@@ -23,6 +24,7 @@ jobs:
         run: |
           pip install pytest
           pytest -v tests/test_cv_autokeras_autocv_image_classification.py
+        timeout-minutes: 30
         env:
           MINIO_ENDPOINT: play.min.io
           MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F
