@@ -211,7 +211,7 @@ def paracrawl():
 
 
 def hymenoptera():
-    name = "hymenoptera_data.zip"
+    name = "hymenoptera.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
