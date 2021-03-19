@@ -6,7 +6,7 @@ on:
       - tasks/linear-regression/**
       - tests/datasets.py
       - tests/server.py
-      - tests/test_kmeans_clustering.py
+      - tests/test_linear_regression.py
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest
-          pytest -v tests/test_kmeans_clustering.py
+          pytest -v tests/test_linear_regression.py
         timeout-minutes: 30
         env:
           MINIO_ENDPOINT: play.min.io
