@@ -41,7 +41,7 @@ class Server:
         # instead of having the shell launch a child process.
         # proc.kill() would not work without exec
         self.proc = subprocess.Popen(
-            f"exec seldon-core-microservice {self.interface_name} {self.api_type} --port {self.port} --metrics-port {self.metrics_port}",
+            f"exec seldon-core-microservice {self.interface_name} {self.api_type} --port {self.port} --metrics-port {self.metrics_port} --single-threaded 1",
             shell=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
