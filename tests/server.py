@@ -1,3 +1,4 @@
+import os
 import subprocess
 import random
 import time
@@ -65,13 +66,19 @@ class Server:
 
             if wait_time > 300:
                 # p.subprocess took too long to be healthy (> 5 minutes)
-                print(self.proc.stderr.read().decode(), flush=True)
+                os.kill(self.proc.pid, 9)
+                try:
+                    outs, errs = self.proc.communicate(timeout=15)
+                    print(outs, flush=True)
+                    print(errs, flush=True)
+                except subprocess.TimeoutExpired:
+                    pass
                 raise RuntimeError(f"deployment took too long to be ready")
 
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        self.proc.kill()
+        os.kill(self.proc.pid, 9)
 
     def test(self, data):
         """
@@ -92,7 +99,13 @@ class Server:
         )
 
         if response.status_code != 200:
-            print(self.proc.stderr.read().decode(), flush=True)
+            os.kill(self.proc.pid, 9)
+            try:
+                outs, errs = self.proc.communicate(timeout=15)
+                print(outs, flush=True)
+                print(errs, flush=True)
+            except subprocess.TimeoutExpired:
+                pass
 
         body = response.json()
         if "data" in body:
