@@ -19,7 +19,7 @@ class TestCVYOLO(unittest.TestCase):
         os.environ["OPERATOR_ID"] = OPERATOR_ID
         os.environ["RUN_ID"] = RUN_ID
 
-        datasets.face_detection()
+        datasets.football_teams()
 
         os.chdir("tasks/cv-mtcnn-face-detection")
 

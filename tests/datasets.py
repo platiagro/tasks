@@ -182,7 +182,7 @@ def ocr():
     metadata(name=name)
 
 
-def face_detection():
+def football_teams():
     name = "football_teams.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
