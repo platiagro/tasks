@@ -3,7 +3,10 @@ import subprocess
 import random
 import time
 
+import psutil
 import requests
+
+PROCNAME = "seldon-core-mic"
 
 
 class Server:
@@ -66,14 +69,14 @@ class Server:
 
             if wait_time > 300:
                 # p.subprocess took too long to be healthy (> 5 minutes)
-                os.kill(self.proc.pid, 9)
+                self.kill()
                 self.print_server_logs()
                 raise RuntimeError(f"deployment took too long to be ready")
 
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        os.kill(self.proc.pid, 9)
+        self.kill()
 
     def test(self, data):
         """
@@ -94,7 +97,7 @@ class Server:
         )
 
         if response.status_code != 200:
-            os.kill(self.proc.pid, 9)
+            self.kill()
             self.print_server_logs()
 
         body = response.json()
@@ -107,6 +110,15 @@ class Server:
 
         return body
 
+    def kill(self):
+        """
+        Kills deployment server processes.
+        """
+        for proc in psutil.process_iter():
+            # check whether the process name matches
+            if proc.name() == PROCNAME:
+                proc.kill()
+
     def print_server_logs(self):
         """
         Prints the deployment server logs.
@@ -115,7 +127,7 @@ class Server:
         """
         try:
             outs, errs = self.proc.communicate(timeout=15)
-            print(outs, flush=True)
-            print(errs, flush=True)
+            print(outs.decode(), flush=True)
+            print(errs.decode(), flush=True)
         except subprocess.TimeoutExpired:
             pass
