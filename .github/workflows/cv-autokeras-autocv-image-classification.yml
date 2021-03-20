@@ -3,7 +3,7 @@ name: AutoKeras Image Classification AutoCV
 on:
   push:
     paths:
-      - tasks/tasks/cv-autokeras-autocv-image-classification/**
+      - tasks/cv-autokeras-autocv-image-classification/**
       - tests/datasets.py
       - tests/server.py
       - tests/test_cv_autokeras_autocv_image_classification.py
