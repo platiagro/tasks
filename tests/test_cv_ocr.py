@@ -33,7 +33,7 @@ class TestCVOCR(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
-                target="target_OCR",
+                target="target",
                 filter_type="incluir",
                 model_features="input_image",
                 bbox_conf=60,
@@ -52,7 +52,7 @@ class TestCVOCR(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/ocr_dataset.zip",
-                target="target_OCR",
+                target="target",
                 filter_type="incluir",
                 model_features="input_image",
                 bbox_conf=60,
