@@ -27,13 +27,13 @@ class TestFineTuningAutoAugment(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_hymenoptera(self):
+    def test_experiment_beans_disease(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset = "/tmp/data/beans_disease.zip",
-                num_epochs = 16,
+                num_epochs = 1,
                 trials = 5,
                 batch_size = 8,
                 target_size = (256, 256),

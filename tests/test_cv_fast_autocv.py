@@ -42,7 +42,7 @@ class TestFineTuningAutoAugment(unittest.TestCase):
                 top_predictions=1,
 
                 batch=12,
-                epochs=10,
+                epochs=1,
                 lr=0.001,
                 gamma=0.1,
                 step_size=7,
