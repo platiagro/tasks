@@ -1,4 +1,4 @@
-name: Fast AutoCV
+name: Fast AutoCV for Image Classification
 
 on:
   push:
