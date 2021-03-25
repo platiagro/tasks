@@ -35,7 +35,10 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-
+                
+                filter_type = "remover",
+                model_features = "Species",
+                
                 n_clusters=3,
                 n_init=10,
                 max_iter=300,
@@ -61,6 +64,9 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
+                
+                filter_type = "remover",
+                model_features = "Survived",
 
                 n_clusters=3,
                 n_init=10,
@@ -87,6 +93,9 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
+                
+                filter_type = "remover",
+                model_features = "medv",
 
                 n_clusters=3,
                 n_init=10,
