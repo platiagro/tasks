@@ -36,6 +36,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
+                
+                filter_type = "remover",
+                model_features = "Species",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -61,6 +64,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
+                
+                filter_type = "remover",
+                model_features = "Survived",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -86,6 +92,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
+                
+                filter_type = "remover",
+                model_features = "medv",
 
                 max_samples="auto",
                 contamination=0.1,
