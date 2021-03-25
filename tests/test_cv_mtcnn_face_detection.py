@@ -11,7 +11,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-class TestCVYOLO(unittest.TestCase):
+class TestMTCNNFaceDetection(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
