@@ -35,7 +35,7 @@ class TestAutoKerasAutoCV(unittest.TestCase):
                 dataset = "/tmp/data/beans_disease.zip",
                 num_epochs = 1,
                 trials = 5,
-                batch_size = 8,
+                batch_size = 4,
                 target_size = (256, 256),
                 validation = 0.2,
 
