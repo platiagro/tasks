@@ -35,7 +35,10 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-
+                
+                filter_type = "remover",
+                model_features = "Species",
+                
                 n_clusters=3,
                 n_init=10,
                 max_iter=300,
@@ -52,8 +55,8 @@ class TestKmeansClustering(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 4)  # 4 features
-        self.assertEqual(len(names), 4)
+        self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 cluster + 3 distance to clusters
+        self.assertEqual(len(names), 8)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -61,6 +64,9 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
+                
+                filter_type = "remover",
+                model_features = "Survived",
 
                 n_clusters=3,
                 n_init=10,
@@ -78,8 +84,8 @@ class TestKmeansClustering(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 11)  # 11 features
-        self.assertEqual(len(names), 11)
+        self.assertEqual(len(ndarray[0]), 15)  # 11 features+ 1 cluster + 3 distance to clusters
+        self.assertEqual(len(names), 15)
 
     def test_experiment_boston(self):
         papermill.execute_notebook(
@@ -87,6 +93,9 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
+                
+                filter_type = "remover",
+                model_features = "medv",
 
                 n_clusters=3,
                 n_init=10,
@@ -104,5 +113,5 @@ class TestKmeansClustering(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 13)  # 13 features
-        self.assertEqual(len(names), 13)
+        self.assertEqual(len(ndarray[0]), 17)  # 13 features+ 1 cluster + 3 distance to clusters
+        self.assertEqual(len(names), 17)
