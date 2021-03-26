@@ -55,8 +55,8 @@ class TestIsolationForestClustering(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 4)  # 4 features
-        self.assertEqual(len(names), 4)
+        self.assertEqual(len(ndarray[0]), 5)  # 4 features + 1 anomaly score
+        self.assertEqual(len(names), 5)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -83,8 +83,8 @@ class TestIsolationForestClustering(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 11)  # 11 features
-        self.assertEqual(len(names), 11)
+        self.assertEqual(len(ndarray[0]), 12)  # 11 features + 1 anomaly score
+        self.assertEqual(len(names), 12)
 
     def test_experiment_boston(self):
         papermill.execute_notebook(
@@ -111,8 +111,8 @@ class TestIsolationForestClustering(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 13)  # 13 features
-        self.assertEqual(len(names), 13)
+        self.assertEqual(len(ndarray[0]), 14)  # 13 features  + 1 anomaly score
+        self.assertEqual(len(names), 14)
 
     def test_hotel_bookings(self):
         papermill.execute_notebook(
@@ -120,6 +120,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",
+                
+                filter_type = "remover",
+                model_features = "is_canceled",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -136,5 +139,5 @@ class TestIsolationForestClustering(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 31)  # 31 features
-        self.assertEqual(len(names), 31)
+        self.assertEqual(len(ndarray[0]), 32)  # 31 features + 1 anomaly score
+        self.assertEqual(len(names), 32)
