@@ -39,6 +39,7 @@ class TestAutoKerasAutoCV(unittest.TestCase):
                 target_size = (256, 256),
                 validation = 0.2,
 
+
                 brightness_range = None,
                 channel_shift_range = 0.0,
                 cval = 0.0,
