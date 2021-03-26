@@ -33,7 +33,7 @@ class TestAutoKerasAutoCV(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset = "/tmp/data/beans_disease.zip",
-                num_epochs = 1,
+                num_epochs = 2,
                 trials = 5,
                 batch_size = 4,
                 target_size = (256, 256),
