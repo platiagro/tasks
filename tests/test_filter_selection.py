@@ -48,8 +48,8 @@ class TestFilterSelection(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 3)  # 4 features - 1 removed
-        self.assertEqual(len(names), 3)
+        self.assertEqual(len(ndarray[0]), 4)  # 5 features - 1 removed
+        self.assertEqual(len(names), 4)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -70,8 +70,8 @@ class TestFilterSelection(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 10)  # 11 features - 1 removed
-        self.assertEqual(len(names), 10)
+        self.assertEqual(len(ndarray[0]), 11)  # 12 features - 1 removed
+        self.assertEqual(len(names), 11)
 
     def test_experiment_hotel_bookings(self):
         papermill.execute_notebook(
@@ -92,5 +92,5 @@ class TestFilterSelection(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 29)  # 31 features - 2 removed
-        self.assertEqual(len(names), 29)
+        self.assertEqual(len(ndarray[0]), 30)  # 32 features - 2 removed
+        self.assertEqual(len(names), 30)
