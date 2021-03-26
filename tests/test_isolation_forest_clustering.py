@@ -54,6 +54,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
+        print(names)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 5)  # 4 features + 1 anomaly score
         self.assertEqual(len(names), 5)
@@ -82,6 +83,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
+        print(names)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 12)  # 11 features + 1 anomaly score
         self.assertEqual(len(names), 12)
@@ -110,6 +112,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
+        print(names)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 13 features  + 1 anomaly score
         self.assertEqual(len(names), 14)
@@ -138,6 +141,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
+        print(names)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 32)  # 31 features + 1 anomaly score
         self.assertEqual(len(names), 32)
