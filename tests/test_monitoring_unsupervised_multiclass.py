@@ -33,9 +33,5 @@ class TestMonitoringUnsupervisedMulticlass(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/moving_squares_monitoring.csv",
-
-                n_target=50,
-                n_ref=5 * n_target,
-                K=3,
             ),
         )
