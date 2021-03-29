@@ -224,6 +224,20 @@ def hymenoptera():
     metadata(name=name)
 
 
+def moving_squares_monitoring():
+    name = "moving_squares_monitoring.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
+
 def metadata(name, df=None):
     root_metadata = {
         "filename": name,
