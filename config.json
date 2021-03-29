@@ -11,8 +11,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Google Drive",
@@ -26,8 +26,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Classificador AutoML",
@@ -42,8 +42,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressor AutoML",
@@ -58,8 +58,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressão Logística",
@@ -74,8 +74,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressão Linear",
@@ -90,8 +90,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Classificador SVM",
@@ -106,8 +106,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressor SVM",
@@ -122,8 +122,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Classificador MLP",
@@ -138,8 +138,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressor MLP",
@@ -154,8 +154,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Classificador Random Forest",
@@ -170,8 +170,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressor Random Forest",
@@ -186,8 +186,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Análise Descritiva",
@@ -202,8 +202,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Feature Tools",
@@ -218,8 +218,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Seleção Manual de Atributos",
@@ -234,8 +234,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Agrupamento de Atributos Categóricos",
@@ -250,8 +250,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Imputação de Valores Faltantes",
@@ -266,8 +266,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Detecção de Anomalias por Isolation Forest",
@@ -282,8 +282,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Clusterização KMeans",
@@ -298,8 +298,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Normalizador de Amostras",
@@ -314,8 +314,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Seleção de Atributos por Correlação",
@@ -330,8 +330,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Seleção de Atributos por Método de Eliminação Recursiva",
@@ -346,8 +346,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Scaler Robusto",
@@ -362,8 +362,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Simulated Annealing",
@@ -378,8 +378,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Transformation Graph",
@@ -394,8 +394,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Seleção de Atributos por Limiar de Variância",
@@ -410,8 +410,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Criação de Atributos Temporais",
@@ -426,7 +426,7 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "2G",
-        "memoryRequest": "2G"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     }
 ]
