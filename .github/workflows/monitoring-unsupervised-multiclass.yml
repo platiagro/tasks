@@ -1,0 +1,31 @@
+name: Multiclass Unsupervised Monitoring
+
+on:
+  push:
+    paths:
+      - tasks/monitoring-unsupervised-multiclass/**
+      - tests/datasets.py
+      - tests/server.py
+      - tests/test_monitoring_unsupervised_multiclass.py
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # runs all of the steps inside the specified container rather than on the VM host.
+    # Because of this the network configuration changes from host based network to a container network.
+    container:
+      image: platiagro/platiagro-notebook-image:0.2.0
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Test with pytest
+        run: |
+          pip install pytest
+          pytest -v tests/test_monitoring_unsupervised_multiclass.py
+        timeout-minutes: 30
+        env:
+          MINIO_ENDPOINT: play.min.io
+          MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F
+          MINIO_SECRET_KEY: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
