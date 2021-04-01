@@ -24,7 +24,7 @@ jobs:
         run: |
           pip install pytest
           pytest -v tests/test_transformation_graph.py
-        timeout-minutes: 30
+        timeout-minutes: 90
         env:
           MINIO_ENDPOINT: play.min.io
           MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F
