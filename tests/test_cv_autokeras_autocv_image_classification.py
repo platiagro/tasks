@@ -34,16 +34,14 @@ class TestAutoKerasAutoCV(unittest.TestCase):
             parameters=dict(
                 dataset = "/tmp/data/beans_disease.zip",
                 num_epochs = 2,
-                trials = 5,
-                batch_size = 4,
+                trials = 3,
+                batch_size = 2,
                 target_size = (256, 256),
-                validation = 0.2,
-
 
                 brightness_range = None,
                 channel_shift_range = 0.0,
                 cval = 0.0,
-                data_format = None,
+                data_format = "channels_last",
                 dtype = 'float32',
                 featurewise_center = False,
                 featurewise_std_normalization = False,
