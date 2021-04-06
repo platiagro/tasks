@@ -49,8 +49,8 @@ class TestFeatureTools(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 4)  # 4 features
-        self.assertEqual(len(names), 4)
+        self.assertEqual(len(ndarray[0]), 5)  # 5 features
+        self.assertEqual(len(names), 5)
 
     def test_experiment_hotel_bookings(self):
         papermill.execute_notebook(
@@ -73,5 +73,5 @@ class TestFeatureTools(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 31)  # 31 features
-        self.assertEqual(len(names), 31)
+        self.assertEqual(len(ndarray[0]), 32)  # 32 features
+        self.assertEqual(len(names), 32)
