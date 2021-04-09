@@ -70,7 +70,7 @@ def create_tasks():
         })
 
         if "MONITORING" in tags:
-            file_content = open(f"{path}/Experiment.ipynb", "r").read()
+            file_content = open(f"{path}/{experiment_notebook_path}", "r").read()
             create_config_map(task_id=task_id, experiment_notebook_content=file_content)
 
     # Adds volume mount to the notebook server
