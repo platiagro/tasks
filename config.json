@@ -414,11 +414,11 @@
         "memoryRequest": "1Gi"
     },
     {
-        "name": "Criação de Atributos Temporais",
-        "description": "Criação de atributos temporais a partir da agregação por períodos (dia, semana, mês, trimestre ou ano). Para cada atributo categórico no dataset, são gerados novos atributos considerando-se janelas móveis de três, seis e noves períodos consecutivos.",
-        "path": "/tasks/time-related-features",
+        "name": "Monitoramento -  Multiclasses - Não Supervisionado",
+        "description": "Um conjunto de dados batch é analizado atraves de duas janelas deslizantes, refência e target, comparando as janelas com a estátitica Jensen-Shannon Divergence e a estaimação feita pelo algoritmo SPEAR.",
+        "path": "/tasks/monitoring-unsupervised-multiclass",
         "tags": [
-            "FEATURE_ENGINEERING"
+            "MONITORING"
         ],
         "commands": null,
         "arguments": null,
@@ -430,11 +430,11 @@
         "memoryRequest": "1Gi"
     },
     {
-        "name": "Monitoramento -  Multiclasses - Não Supervisionado",
-        "description": "Um conjunto de dados batch é analizado atraves de duas janelas deslizantes, refência e target, comparando as janelas com a estátitica Jensen-Shannon Divergence e a estaimação feita pelo algoritmo SPEAR.",
-        "path": "/tasks/monitoring-unsupervised-multiclass",
+        "name": "Criação de Atributos Temporais",
+        "description": "Criação de atributos temporais a partir da agregação por períodos (dia, semana, mês, trimestre ou ano). Para cada atributo categórico no dataset, são gerados novos atributos considerando-se janelas móveis de três, seis e noves períodos consecutivos.",
+        "path": "/tasks/time-related-features",
         "tags": [
-            "MONITORING"
+            "FEATURE_ENGINEERING"
         ],
         "commands": null,
         "arguments": null,
