@@ -3,7 +3,7 @@ import json
 import os
 
 from database import insert_task
-from notebook import create_persistent_volume_claim, copy_files_inside_pod, \
+from notebook import create_persistent_volume_claim, create_config_map, copy_files_inside_pod, \
     parse_parameters, patch_notebook_server, set_notebook_metadata, uuid_alpha
 
 CONFIG_PATH = "/tasks/config.json"
@@ -68,6 +68,10 @@ def create_tasks():
             "name": volume_name,
             "mount_path": mount_path,
         })
+
+        if "MONITORING" in tags:
+            file_content = open(f"{path}/Experiment.ipynb", "r").read()
+            create_config_map(task_id=task_id, experiment_notebook_content=file_content)
 
     # Adds volume mount to the notebook server
     patch_notebook_server(volume_mounts)

@@ -85,6 +85,37 @@ def create_persistent_volume_claim(name):
         raise Exception(f"Error while trying to patch notebook server: {message}")
 
 
+def create_config_map(task_id, experiment_notebook_content):
+    """
+    Create a ConfigMap with the notebook of the given task.
+
+    Parameters
+    ----------
+    task_id : str
+    experiment_notebook_content : str
+    """
+    config_map_name = f"configmap-{task_id}"
+
+    load_kube_config()
+    v1 = client.CoreV1Api()
+
+    body = {
+        "metadata": {
+            "name": config_map_name,
+        },
+        "data": {
+            "Experiment.ipynb": experiment_notebook_content
+        }
+    }
+
+    v1.create_namespaced_config_map(
+        namespace=KF_PIPELINES_NAMESPACE,
+        body=body,
+    )
+
+    warnings.warn(f"ConfigMap of task {task_id} created!")
+
+
 def patch_notebook_server(volume_mounts):
     """
     Adds a list of volume mounts to the notebook server.
