@@ -17,7 +17,7 @@ from kubernetes.stream import stream
 
 from kube_config import load_kube_config
 
-KF_PIPELINES_NAMESPACE = getenv("KF_PIPELINES_NAMESPACE", "anonymous")
+KF_PIPELINES_NAMESPACE = os.getenv("KF_PIPELINES_NAMESPACE", "anonymous")
 NOTEBOOK_NAME = "server"
 NOTEBOOK_NAMESPACE = "anonymous"
 NOTEBOOK_POD_NAME = "server-0"
