@@ -432,7 +432,7 @@
     {
         "name": "Hands-On AgTech - Visão Computacional",
         "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional.",
-        "path": "/tasks/hands-on-agtech-computer-vision"
+        "path": "/tasks/hands-on-agtech-computer-vision",
         "tags": [
             "DEFAULT"
         ],
