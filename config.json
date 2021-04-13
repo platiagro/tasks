@@ -42,8 +42,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryLimit": "4Gi",
+        "memoryRequest": "4Gi"
     },
     {
         "name": "Regressor AutoML",
@@ -58,8 +58,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryLimit": "4Gi",
+        "memoryRequest": "4Gi"
     },
     {
         "name": "Regressão Logística",
