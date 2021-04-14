@@ -443,7 +443,23 @@
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
         "memoryLimit": "16Gi",
-        "memoryRequest": "16Gi"
+        "memoryRequest": "10Gi"
+    },
+    {
+        "name": "(w/input) Hands-On AgTech - Visão Computacional",
+        "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional recebendo um conjunto reduzido de input do usuário.",
+        "path": "/tasks/hands-on-agtech-computer-vision-w-input",
+        "tags": [
+            "DEFAULT"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image-gpu:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
     },
     {
         "name": "Monitoramento -  Multiclasses - Não Supervisionado",
