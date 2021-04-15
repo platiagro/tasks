@@ -3,7 +3,7 @@ import json
 import os
 
 from database import insert_task
-from notebook import create_persistent_volume_claim, copy_files_inside_pod, \
+from notebook import create_persistent_volume_claim, create_config_map, copy_files_inside_pod, \
     parse_parameters, patch_notebook_server, set_notebook_metadata, uuid_alpha
 
 CONFIG_PATH = "/tasks/config.json"
@@ -40,6 +40,9 @@ def create_tasks():
             experiment_notebook_path = None
             deployment_notebook_path = None
 
+        task["experiment_notebook_path"] = experiment_notebook_path
+        task["deployment_notebook_path"] = deployment_notebook_path
+
         task_id = insert_task(
             name=name,
             description=description,
@@ -75,7 +78,11 @@ def create_tasks():
     # Copies task files and artifacts
     for task in tasks:
         name = task["name"]
+        task_id = task["task_id"]
+        experiment_notebook_path = task["experiment_notebook_path"]
+        deployment_notebook_path = task["deployment_notebook_path"]
         path = task.get("path")
+
         if path:
             copy_files_inside_pod(
                 local_path=path,
@@ -86,8 +93,8 @@ def create_tasks():
             experiment_id = uuid_alpha()
             operator_id = uuid_alpha()
 
-            if os.path.exists(f"{path}/Experiment.ipynb"):
-                notebook_path = f"{name}/Experiment.ipynb"
+            if os.path.exists(f"{path}/{experiment_notebook_path}"):
+                notebook_path = f"{name}/{experiment_notebook_path}"
                 set_notebook_metadata(
                     notebook_path=notebook_path,
                     task_id=task_id,
@@ -95,14 +102,24 @@ def create_tasks():
                     operator_id=operator_id,
                 )
 
-            if os.path.exists(f"{path}/Deployment.ipynb"):
-                notebook_path = f"{name}/Deployment.ipynb"
+            if os.path.exists(f"{path}/{deployment_notebook_path}"):
+                notebook_path = f"{name}/{deployment_notebook_path}"
                 set_notebook_metadata(
                     notebook_path=notebook_path,
                     task_id=task_id,
                     experiment_id=experiment_id,
                     operator_id=operator_id,
                 )
+
+    # Create ConfigMap for monitoring tasks
+    for task in tasks:
+        task_id = task["task_id"]
+        tags = task["tags"]
+        experiment_notebook_path = task["experiment_notebook_path"]
+
+        if "MONITORING" in tags:
+            file_content = open(f"{path}/{experiment_notebook_path}", "r").read()
+            create_config_map(task_id=task_id, experiment_notebook_content=file_content)
 
 
 def main():

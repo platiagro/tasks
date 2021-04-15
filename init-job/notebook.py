@@ -17,6 +17,7 @@ from kubernetes.stream import stream
 
 from kube_config import load_kube_config
 
+KF_PIPELINES_NAMESPACE = os.getenv("KF_PIPELINES_NAMESPACE", "anonymous")
 NOTEBOOK_NAME = "server"
 NOTEBOOK_NAMESPACE = "anonymous"
 NOTEBOOK_POD_NAME = "server-0"
@@ -83,6 +84,37 @@ def create_persistent_volume_claim(name):
         body = literal_eval(e.body)
         message = body["message"]
         raise Exception(f"Error while trying to patch notebook server: {message}")
+
+
+def create_config_map(task_id, experiment_notebook_content):
+    """
+    Create a ConfigMap with the notebook of the given task.
+
+    Parameters
+    ----------
+    task_id : str
+    experiment_notebook_content : str
+    """
+    config_map_name = f"configmap-{task_id}"
+
+    load_kube_config()
+    v1 = client.CoreV1Api()
+
+    body = {
+        "metadata": {
+            "name": config_map_name,
+        },
+        "data": {
+            "Experiment.ipynb": experiment_notebook_content
+        }
+    }
+
+    v1.create_namespaced_config_map(
+        namespace=KF_PIPELINES_NAMESPACE,
+        body=body,
+    )
+
+    warnings.warn(f"ConfigMap of task {task_id} created!")
 
 
 def patch_notebook_server(volume_mounts):

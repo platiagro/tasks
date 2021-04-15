@@ -430,6 +430,22 @@
         "memoryRequest": "1Gi"
     },
     {
+        "name": "Monitoramento -  Multiclasses - Não Supervisionado",
+        "description": "Um conjunto de dados batch é analizado atraves de duas janelas deslizantes, refência e target, comparando as janelas com a estátitica Jensen-Shannon Divergence e a estaimação feita pelo algoritmo SPEAR.",
+        "path": "/tasks/monitoring-unsupervised-multiclass",
+        "tags": [
+            "MONITORING"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
+    },
+    {
         "name": "Hands-On AgTech - Visão Computacional",
         "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional.",
         "path": "/tasks/hands-on-agtech-computer-vision",
@@ -460,21 +476,5 @@
         "cpuRequest": "1000m",
         "memoryLimit": "16Gi",
         "memoryRequest": "10Gi"
-    },
-    {
-        "name": "Monitoramento -  Multiclasses - Não Supervisionado",
-        "description": "Um conjunto de dados batch é analizado atraves de duas janelas deslizantes, refência e target, comparando as janelas com a estátitica Jensen-Shannon Divergence e a estaimação feita pelo algoritmo SPEAR.",
-        "path": "/tasks/monitoring-unsupervised-multiclass",
-        "tags": [
-            "MONITORING"
-        ],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
     }
 ]
