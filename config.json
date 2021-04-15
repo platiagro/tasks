@@ -42,8 +42,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryLimit": "4Gi",
+        "memoryRequest": "4Gi"
     },
     {
         "name": "Regressor AutoML",
@@ -58,8 +58,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryLimit": "4Gi",
+        "memoryRequest": "4Gi"
     },
     {
         "name": "Regressão Logística",
@@ -414,6 +414,22 @@
         "memoryRequest": "1Gi"
     },
     {
+        "name": "Criação de Atributos Temporais",
+        "description": "Criação de atributos temporais a partir da agregação por períodos (dia, semana, mês, trimestre ou ano). Para cada atributo categórico no dataset, são gerados novos atributos considerando-se janelas móveis de três, seis e noves períodos consecutivos.",
+        "path": "/tasks/time-related-features",
+        "tags": [
+            "FEATURE_ENGINEERING"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
+    },
+    {
         "name": "Monitoramento -  Multiclasses - Não Supervisionado",
         "description": "Um conjunto de dados batch é analizado atraves de duas janelas deslizantes, refência e target, comparando as janelas com a estátitica Jensen-Shannon Divergence e a estaimação feita pelo algoritmo SPEAR.",
         "path": "/tasks/monitoring-unsupervised-multiclass",
@@ -430,19 +446,35 @@
         "memoryRequest": "1Gi"
     },
     {
-        "name": "Criação de Atributos Temporais",
-        "description": "Criação de atributos temporais a partir da agregação por períodos (dia, semana, mês, trimestre ou ano). Para cada atributo categórico no dataset, são gerados novos atributos considerando-se janelas móveis de três, seis e noves períodos consecutivos.",
-        "path": "/tasks/time-related-features",
+        "name": "Hands-On AgTech - Visão Computacional",
+        "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional.",
+        "path": "/tasks/hands-on-agtech-computer-vision",
         "tags": [
-            "FEATURE_ENGINEERING"
+            "DEFAULT"
         ],
         "commands": null,
         "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "image": "platiagro/platiagro-experiment-image-gpu:0.2.0",
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
+    },
+    {
+        "name": "(w/input) Hands-On AgTech - Visão Computacional",
+        "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional recebendo um conjunto reduzido de input do usuário.",
+        "path": "/tasks/hands-on-agtech-computer-vision-w-input",
+        "tags": [
+            "DEFAULT"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image-gpu:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
     }
 ]
