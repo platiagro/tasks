@@ -168,6 +168,20 @@ def yolo():
     metadata(name=name)
 
 
+def beans_disease():
+    name = "beans_disease.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
+
 def ocr():
     name = "ocr_dataset.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
@@ -182,7 +196,7 @@ def ocr():
     metadata(name=name)
 
 
-def face_detection():
+def football_teams():
     name = "football_teams.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
@@ -211,7 +225,7 @@ def paracrawl():
 
 
 def hymenoptera():
-    name = "hymenoptera_data.zip"
+    name = "hymenoptera.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 

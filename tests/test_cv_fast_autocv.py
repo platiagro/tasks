@@ -11,7 +11,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-class TestFineTuningAutoAugment(unittest.TestCase):
+class TestFastAutoCV(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -32,7 +32,7 @@ class TestFineTuningAutoAugment(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/hymenoptera_data.zip",
+                dataset="/tmp/data/hymenoptera.zip",
                 arch_list=["resnet18", "resnet50", "vgg16"],
                 aug_polices=["fa_reduced_cifar10",
                              "fa_resnet50_rimagenet", "fa_reduced_svhn"],
@@ -42,7 +42,7 @@ class TestFineTuningAutoAugment(unittest.TestCase):
                 top_predictions=1,
 
                 batch=12,
-                epochs=10,
+                epochs=1,
                 lr=0.001,
                 gamma=0.1,
                 step_size=7,

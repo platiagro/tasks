@@ -11,7 +11,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-class TestCVYOLO(unittest.TestCase):
+class TestMTCNNFaceDetection(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -19,7 +19,7 @@ class TestCVYOLO(unittest.TestCase):
         os.environ["OPERATOR_ID"] = OPERATOR_ID
         os.environ["RUN_ID"] = RUN_ID
 
-        datasets.face_detection()
+        datasets.football_teams()
 
         os.chdir("tasks/cv-mtcnn-face-detection")
 

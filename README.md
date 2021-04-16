@@ -42,11 +42,11 @@ Download the docker image that has all requirements installed. In this example
 we use a public MinIO server, but you can replace it with any other MinIO server.
 
 ```bash
-docker run --it --rm \
+sudo docker run -it --rm \
     -e "MINIO_ENDPOINT=play.min.io" \
     -e "MINIO_ACCESS_KEY=Q3AM3UQ867SPQQA43P2F" \
     -e "MINIO_SECRET_KEY=zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG" \
-    -v $(pwd):/home/jovyan
+    -v $(pwd):/home/jovyan \
     platiagro/platiagro-notebook-image:0.2.0 bash
 ```
 
