@@ -36,7 +36,7 @@ class TestAutoKerasAutoCV(unittest.TestCase):
                 num_epochs = 2,
                 trials = 3,
                 batch_size = 2,
-                target_size = (256, 256),
+                target_size = 256,
 
                 brightness_range = None,
                 channel_shift_range = 0.0,
