@@ -52,8 +52,8 @@ class TestTransformationGraph(unittest.TestCase):
         names = response["names"]
         print(names)
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 5)  # 5 features
-        self.assertEqual(len(names), 5)
+        self.assertEqual(len(ndarray[0]), 12)  # 4 original features + 8 new features
+        self.assertEqual(len(names), 12)
 
     def test_experiment_hotel_bookings(self):
         papermill.execute_notebook(
@@ -79,5 +79,5 @@ class TestTransformationGraph(unittest.TestCase):
         names = response["names"]
         print(names)
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 32)  # 32 features
-        self.assertEqual(len(names), 32)
+        self.assertEqual(len(ndarray[0]), 110)  # 31 original features + 79 new features
+        self.assertEqual(len(names), 110)
