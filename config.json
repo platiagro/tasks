@@ -476,5 +476,85 @@
         "cpuRequest": "1000m",
         "memoryLimit": "16Gi",
         "memoryRequest": "10Gi"
+    },
+    {
+        "name": "Face Detection",
+        "description": "Utiliza a biblioteca facenet-pytorch, a qual disponibiliza o algorítimo MTCNN.",
+        "path": "/tasks/cv-mtcnn-face-detection",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2Gi",
+        "memoryRequest": "2Gi"
+    },
+    {
+        "name": "OCR (Optical Character Recognition)",
+        "description": "Utiliza a biblioteca Pytesseract para converter textos em imagem para string.",
+        "path": "/tasks/cv-ocr",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2Gi",
+        "memoryRequest": "2Gi"
+    },
+    {
+        "name": "YOLO (You Only Look Once)",
+        "description": "Utiliza uma biblioteca do Yolov4 para detecção e classificação de objetos em imagens.",
+        "path": "/tasks/cv-yolo",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2Gi",
+        "memoryRequest": "2Gi"
+    },
+    {
+        "name": "Fast AutoCV",
+        "description": "Classifica imagens utilizando as redes ResNet-18, ResNet-50 e VGG16",
+        "path": "/tasks/cv-fast-autocv",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
+    },
+    {
+        "name": "AutoKeras AutoCV para Classificação de Imagens",
+        "description": "Faz a busca por arquiteturas e hyperparâmetros que melhor configuram o modelo para a base de dados fornecida",
+        "path": "/tasks/cv-autokeras-autocv-image-classification",
+        "tags": [
+            "COMPUTER_VISION"
+        ],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
     }
 ]
