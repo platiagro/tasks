@@ -57,7 +57,7 @@ class GloveEmbeddings(object):
         glove_shape = glove.vectors.shape
         glove_dim = glove.vector_size
         glove_words = glove.index_to_key
-        glove_vectors = torch.from_numpy(glove.vectors).to(self.device)
+        glove_vectors = torch.from_numpy(glove.vectors).to('cpu')
         glove_vocab = {word:i for i, word in enumerate(glove_words)}
         
         glove_infos = {'glove_shape':glove_shape,
