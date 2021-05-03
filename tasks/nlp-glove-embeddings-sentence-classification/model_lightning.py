@@ -75,6 +75,7 @@ class GloveFinetuner(pl.LightningModule):
 
         # ---------- mlp
         weight = self.glove_infos["glove_vectors"]
+        weight = weight.to(self.device_used)
         self.embedding_dim = self.glove_infos["glove_dim"]
         self.output_classes_number = len(self.label_encoder.classes_)
         self.embedding_bag = torch.nn.EmbeddingBag.from_pretrained(
