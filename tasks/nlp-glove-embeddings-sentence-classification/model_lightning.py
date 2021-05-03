@@ -128,8 +128,8 @@ class GloveFinetuner(pl.LightningModule):
                 predicted_codes,
                 classes_probabilities,
             ):
-            row_info = [not_apply, not_apply,predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
-            df_result = df_result.append(pd.Series(row_info,index=df_result.columns), ignore_index=True)
+                row_info = [not_apply, not_apply,predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
+                df_result = df_result.append(pd.Series(row_info,index=df_result.columns), ignore_index=True)
             
         return df_result.to_numpy()
 
