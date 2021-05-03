@@ -103,7 +103,7 @@ class GloveFinetuner(pl.LightningModule):
         return net
 
 
-    def predict(self, X_inference_glove_ids, X_inference_glove_words):
+    def predict(self, X_test_glove_ids, X_test_glove_words):
         self.step = "Deployment"
         self.net.eval()
         self.all_data = {}
