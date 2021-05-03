@@ -412,14 +412,19 @@ class GloveFinetuner(pl.LightningModule):
         )
 
     def test_dataloader(self):
-        if self.overfit:
+        if self.step=="Experiment":
+            if self.overfit:
+                self.test_dataset = self.CustomDataset(
+                    self.all_data["X_train_glove_ids"], self.all_data["X_train_glove_words"], self.all_data["y_train"],step=self.step
+                )
+            else:
+                self.test_dataset = self.CustomDataset(
+                    self.all_data["X_test_glove_ids"], self.all_data["X_test_glove_words"], self.all_data["y_test"],step=self.step
+                )
+        elif self.step=="Deployment":
             self.test_dataset = self.CustomDataset(
-                self.all_data["X_train_glove_ids"], self.all_data["X_train_glove_words"], self.all_data["y_train"],step=self.step
-            )
-        else:
-            self.test_dataset = self.CustomDataset(
-                self.all_data["X_test_glove_ids"], self.all_data["X_test_glove_words"], self.all_data["y_test"],step=self.step
-            )
+                    self.all_data["X_test_glove_ids"][0], self.all_data["X_test_glove_words"][0], self.all_data["y_test"],step=self.step
+                )
         return DataLoader(
             self.test_dataset,
             batch_size=self.eval_batch_size,
