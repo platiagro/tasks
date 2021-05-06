@@ -35,7 +35,7 @@ class TestFilterSelection(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-                features_to_filter=["SepalLengthCm"]
+                features_to_filter=["SepalLengthCm", "Species"]
             ),
         )
 
@@ -47,10 +47,9 @@ class TestFilterSelection(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
-        print(names)
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 4)  # 5 features - 1 removed
-        self.assertEqual(len(names), 4)
+        self.assertEqual(len(ndarray[0]), 3)  # 5 features - 2 removed
+        self.assertEqual(len(names), 3)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -58,7 +57,7 @@ class TestFilterSelection(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
-                features_to_filter=["Name"]
+                features_to_filter=["Name", "Survived"]
             ),
         )
 
@@ -70,10 +69,9 @@ class TestFilterSelection(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
-        print(names)
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 11)  # 12 features - 1 removed
-        self.assertEqual(len(names), 11)
+        self.assertEqual(len(ndarray[0]), 10)  # 12 features - 2 removed
+        self.assertEqual(len(names), 10)
 
     def test_experiment_hotel_bookings(self):
         papermill.execute_notebook(
@@ -81,7 +79,7 @@ class TestFilterSelection(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",
-                features_to_filter=["reservation_status_date", "arrival_date_year"]
+                features_to_filter=["reservation_status_date", "arrival_date_year", "is_canceled"]
             ),
         )
 
@@ -93,7 +91,6 @@ class TestFilterSelection(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
-        print(names)
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 30)  # 32 features - 2 removed
-        self.assertEqual(len(names), 30)
+        self.assertEqual(len(ndarray[0]), 29)  # 32 features - 3 removed
+        self.assertEqual(len(names), 29)
