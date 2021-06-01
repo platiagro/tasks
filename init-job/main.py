@@ -30,6 +30,7 @@ def create_tasks():
         cpu_request = task.get("cpuRequest")
         memory_limit = task.get("memoryLimit")
         memory_request = task.get("memoryRequest")
+        readiness_probe_initial_delay_seconds = task.get("readinessProbeInitialDelaySeconds", 60)
         parameters = []
 
         if path:
@@ -58,6 +59,7 @@ def create_tasks():
             cpu_request=cpu_request,
             memory_limit=memory_limit,
             memory_request=memory_request,
+            readiness_probe_initial_delay_seconds=readiness_probe_initial_delay_seconds,
         )
         task["task_id"] = task_id
 
