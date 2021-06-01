@@ -118,8 +118,9 @@ def create_tasks():
         task_id = task["task_id"]
         tags = task["tags"]
         experiment_notebook_path = task["experiment_notebook_path"]
+        path = task.get("path")
 
-        if "MONITORING" in tags:
+        if path and "MONITORING" in tags:
             file_content = open(f"{path}/{experiment_notebook_path}", "r").read()
             create_config_map(task_id=task_id, experiment_notebook_content=file_content)
 
