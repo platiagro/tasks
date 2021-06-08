@@ -2,6 +2,8 @@
 import json
 import os
 
+import requests
+
 from database import insert_task
 from notebook import create_persistent_volume_claim, create_config_map, copy_files_inside_pod, \
     parse_parameters, patch_notebook_server, set_notebook_metadata, uuid_alpha
@@ -130,6 +132,8 @@ def main():
     Job that creates tasks in PlatIAgro from a config file.
     """
     create_tasks()
+    # Terminates istio sidecar so the job goes to state "Complete"
+    requests.post("http://localhost:15020/quitquitquit")
 
     print("done!", flush=True)
 
