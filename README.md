@@ -1,5 +1,7 @@
 # PlatIAgro Native Tasks
 
+[![Init Tasks - CI](https://github.com/platiagro/tasks/actions/workflows/ci.yml/badge.svg)](https://github.com/platiagro/tasks/actions/workflows/ci.yml)
+
 Task | Status | License
 --- | --- | ---
 [AutoML Classifier](tasks/automl-classifier/) | [![AutoML Classifier](https://github.com/platiagro/tasks/workflows/AutoML%20Classifier/badge.svg)](https://github.com/platiagro/tasks/actions/workflows/automl-classifier.yml) | [Custom License](https://github.com/automl/auto-sklearn/blob/master/LICENSE.txt)
