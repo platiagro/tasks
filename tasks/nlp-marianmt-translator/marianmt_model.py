@@ -18,7 +18,7 @@ class MarianMTTranslator:
         def verify_args():
             if type(self.output_language) != str:
                 raise ValueError(f"model_params['output_language'] must be a string")
-            possible_languages = ['pt_br','en']
+            possible_languages = ["de", "ca", "es", "fr", "en", "it", "la", "pt_br", "ro"]
             if self.output_language not in possible_languages: 
                 raise ValueError(f"{self.output_language} not in options {possible_languages}") 
             if type(self.max_length) != int:
