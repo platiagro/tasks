@@ -25,7 +25,8 @@ def create_tasks():
         commands = task["commands"]
         description = task["description"]
         name = task["name"]
-        tags = task["tags"]
+        category = task["category"]
+        tags = task.get("tags")
         image = task["image"]
         path = task.get("path")
         cpu_limit = task.get("cpuLimit")
@@ -49,6 +50,7 @@ def create_tasks():
         task_id = insert_task(
             name=name,
             description=description,
+            category=category,
             tags=tags,
             image=image,
             commands=commands,
