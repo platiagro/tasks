@@ -7,30 +7,44 @@ import pandas as pd
 from tqdm import tqdm
 import sacrebleu
 import random
+from typing import List
 
 
 class MarianMTTranslator:
 
     
     def __init__(self,hyperparams,model_params):
+        def verify_args():
+            if type(self.output_language) != str:
+                raise ValueError(f"model_params['output_language'] must be a string")
+            possible_languages = ["de", "ca", "es", "fr", "en", "it", "la", "pt_br", "ro"]
+            if self.output_language not in possible_languages: 
+                raise ValueError(f"{self.output_language} not in options {possible_languages}") 
+            if type(self.max_length) != int:
+                raise ValueError(f"hyperparams['max_length'] must be an integer")
+            if type(self.seed) != int:
+                raise ValueError(f"hyperparams['seed'] must be an integer")
+            if type(self.model_name) != str:
+                raise ValueError(f"model_params['model_name'] must be a string")
+                
+        #------ Getting Args
+        self.max_length = hyperparams['max_length']
+        self.inference_batch_size = hyperparams['inference_batch_size']
+        self.seed = hyperparams.get('seed',42)
+        self.model_name = model_params['model_name']
+        self.output_language = model_params['output_language']
+        verify_args()
+
+        #------- Creating Model and Tokenizer
+        self.model = MarianMTModel.from_pretrained(self.model_name)
+        self.tokenizer = MarianTokenizer.from_pretrained(self.model_name)
 
         #------- Data
-        
         self.X = None
         self.y_target = None
 
-        #------- Hyperparams
-        self.input_max_length = hyperparams['input_max_length']
-        self.output_max_length = hyperparams['output_max_length']
-        self.inference_batch_size = hyperparams['inference_batch_size']
-        self.seed = hyperparams['seed']
-
-        #------- Model Params
-        self.model = MarianMTModel.from_pretrained(model_params['model_name'])
-        self.tokenizer = MarianTokenizer.from_pretrained(model_params['model_name'])
-        self.prefix = model_params['prefix']
-
         #------- Others
+        self.template_func = lambda text: f"{text}" if self.output_language == "en" else f">>{self.output_language}<< {text}"
         self.nlp = English()
         self.nlp.add_pipe('sentencizer')
         dev = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -43,13 +57,15 @@ class MarianMTTranslator:
         self.df_result  = None
 
         # Configurando semente de randomização
+        self._seed_parameters()
+        
+    def _seed_parameters(self):
         random.seed(self.seed)
         np.random.seed(self.seed)
         torch.random.manual_seed(self.seed)
         torch.cuda.manual_seed(self.seed)
         torch.backends.cudnn.deterministic = True
-        
-        
+
     def _chunkstring_spacy(self,text):
         chunck_sentences = []
         doc = self.nlp(str(text))
@@ -58,78 +74,72 @@ class MarianMTTranslator:
         return chunck_sentences
 
 
-    def predict(self,text_array=None):
+    def predict(self, text_array:List[str]):
         
-        if text_array is not None and len(text_array) > 0:
-            self.X = text_array
         
         # Move o modelo para a GPU
         self.model.to(self.device)
         self.model.eval()
 
-        result = [''] * len(self.X)
-        for batch_number in tqdm(range(0, len(self.X), self.inference_batch_size)):
+        result = [''] * len(text_array)
+        
+        #0) Remover espaços em excesso
+        text_array_batch = [' '.join(sentence.split()).replace('"','').strip() for sentence in text_array]
 
-            #0) Controlando os intervalos
-            batch_number_final = batch_number+self.inference_batch_size-1
-            batch_number_final = batch_number_final if batch_number_final<len(self.X) else len(self.X)-1
-            #batch_number_start = batch_number_final-batch_size+1 if (batch_number_final+1)==self.inference_batch_size else len(self.X)-batch_number_final
-            batch_number_start  =batch_number
-            X_batch = self.X[batch_number_start:batch_number_final+1]
+        #1) Zerando os vetores 
+        batchs = []
+        id_identifier = []
+        tranlations = []   
 
-            #1) Zerando os vetores 
-            batchs = []
-            id_identifier = []
-            tranlations = []   
-
-            #2) Separando documento a cada fim de sentença de forma inteligentge
-            doctext_chuncks = {batch_number_start+i:self._chunkstring_spacy(elem) for i,elem in enumerate(X_batch)}
-
-            #3) Controladno tamanho dos chuncks
-            splited_max_sentences_dict = {}
-            for row_id, sentences in doctext_chuncks.items():
-                splited_max_sentences = []
-                for sentence in sentences:
-                    sentence_length = len(sentence.split(' '))
-                    #neste caso se a sentença do chunck é maior que o max permitido faz chuncks do chunck
-                    if  sentence_length > self.input_max_length:
-                        for i in range(int((sentence_length/self.input_max_length)+1)):
-                            splited_max_sentences.append(' '.join(sentence.split(' ')[i*self.input_max_length:(i+1)*self.input_max_length]))
-                    #caso não inclui o propio chunck
-                    else:
-                        splited_max_sentences.append(sentence)
-
-                    splited_max_sentences_dict[row_id] = splited_max_sentences
+        #2) Separando documento a cada fim de sentença de forma inteligentge
+        doctext_chuncks = {i:self._chunkstring_spacy(elem) for i, elem in enumerate(text_array_batch)}
+        
+        #3) Controladno tamanho dos chuncks
+        splited_max_sentences_dict = {}
+        for row_id, sentences in doctext_chuncks.items():
+            
+            splited_max_sentences = []
+            for sentence in sentences:
+                sentence_length = len(sentence.split(' '))
+                #neste caso se a sentença do chunck é maior que o max permitido faz chuncks do chunck
+                if  sentence_length > self.max_length:
+                    for i in range(int((sentence_length / self.max_length)+1)):
+                        splited_max_sentences.append(' '.join(sentence.split(' ')[i*self.max_length:(i+1)*self.max_length]))
+                #caso não inclui o propio chunck
+                else:
+                    splited_max_sentences.append(sentence)
+                
+                splited_max_sentences_dict[row_id] = splited_max_sentences
 
 
-            #4) Colocando o prefixo de tradução
-            for row_id,sentences in splited_max_sentences_dict.items():
-                for sentence in sentences:
-                    final_sent = self.prefix + ' ' + sentence
-                    batchs.append(final_sent)
-                    id_identifier.append(row_id)
+        #4) Colocando o prefixo de tradução
+        for row_id,sentences in splited_max_sentences_dict.items():
+            for sentence in sentences:
+                final_sent = self.template_func(sentence)
+                batchs.append(final_sent)
+                id_identifier.append(row_id)
+        
+        #5) Tradução utilizando o MarianMT
+        for i in range(0, len(batchs), self.inference_batch_size):
+            #tokenized_text = self.tokenizer.prepare_translation_batch(batchs[i:i+64], max_length=self.max_length)
+            batch_inputs = self.tokenizer(batchs[i:i + self.inference_batch_size],
+                                            max_length=self.max_length,
+                                            return_tensors='pt',
+                                            padding=True,
+                                            truncation=True
+                                            )
+            batch_inputs = batch_inputs.to(self.device)
+ 
+            translated = self.model.generate(**batch_inputs)
+            tranlations.extend(self.tokenizer.batch_decode(translated,skip_special_tokens=True))
 
-            #5) Tradução utilizando o MarianMT
-            for i in range(0, len(batchs), 64):
-                tokenized_text = self.tokenizer.prepare_seq2seq_batch(batchs[i:i+64], max_length=self.output_max_length, return_tensors="pt")
+        #6) Remontando o batch
+        dict_result  = {i:'' for i in np.unique(id_identifier)}
+        for tranlation,id in zip(tranlations,id_identifier):
+            dict_result[id] += tranlation
+        result = np.array(list(dict_result.values()))
 
-                translated = self.model.generate(input_ids=tokenized_text['input_ids'].to(self.device), 
-                                                  max_length=self.output_max_length, num_beams=1, 
-                                                  early_stopping=True, 
-                                                  do_sample=False)
-                tranlations.extend(self.tokenizer.batch_decode(translated, skip_special_tokens=True))
-
-
-            #6) Remontando o batch
-            dict_result = doctext_chuncks = {batch_number_start+i:'' for i in range(0,len(X_batch))}
-            for tranlation,id in zip(tranlations,id_identifier):
-                dict_result[id] += tranlation
-
-            #7) Salvando resultado
-            for row_id,document_text in dict_result.items():
-                result[row_id] = document_text
-
-        return np.array(result)
+        return result
 
 
     def _calc_bleu(self):
@@ -148,16 +158,16 @@ class MarianMTTranslator:
     def _construct_result_dataframe(self,step):
 
         if step == 'Experiment':
-            self.y_pred = self.predict()
+            self.y_pred = self.predict(self.X)
             self.bleu_array,self.avg_bleu = self._calc_bleu()
             self.df_result = pd.DataFrame({'source_text': self.X, 'target_text': self.y_target,'translated_text': self.y_pred,'bleu_score': self.bleu_array})
 
         if step == 'Deployment':
-            self.y_pred = self.predict() 
+            self.y_pred = self.predict(self.X) 
             self.df_result = pd.DataFrame({'source_text': self.X,'translated_text': self.y_pred}) 
 
 
-    def get_result_dataframe(self,X,y=None,step = 'Experiment'):
+    def get_result_dataframe(self,X:np.ndarray,y:np.ndarray=None,step = 'Experiment'):
 
         #squeezing X if necesary
         try:
