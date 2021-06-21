@@ -242,7 +242,7 @@ def football_teams():
 
 
 def paracrawl():
-    name = "paracrawl_en_pt_test.xlsx"
+    name = "paracrawl_en_pt_test.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
@@ -311,4 +311,3 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
-
