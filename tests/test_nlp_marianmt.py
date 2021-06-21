@@ -32,7 +32,7 @@ class TestNLPMarianMT(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/pt_en_testing_texts.csv",
+                dataset="/tmp/data/paracrawl_en_pt_test.csv",
                 text = "text_english",
                 target = "text_portuguese",
                 input_language =  "Inglês",
