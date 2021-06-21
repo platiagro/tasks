@@ -47,10 +47,8 @@ class TestNLPMarianMT(unittest.TestCase):
             "Deployment.ipynb",
             "/dev/null",
         )
-        data = datasets.paracrawl()
+        data = datasets.paracrawl_test_data()
         with server.Server() as s:
             response = s.test(data=data)
-        names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 1)  # 1 feature
-        self.assertEqual(len(names), 1)
