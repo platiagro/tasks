@@ -47,7 +47,7 @@ class TestNLPMarianMT(unittest.TestCase):
             "Deployment.ipynb",
             "/dev/null",
         )
-        data = datasets.imdb_testdata()
+        data = datasets.paracrawl()
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
