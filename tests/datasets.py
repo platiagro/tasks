@@ -255,6 +255,14 @@ def paracrawl():
     metadata(name=name)
 
 
+def paracrawl_test_data():
+    data = {
+        "data": {
+            "ndarray": [["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"]],
+        },
+    }
+    return data
+
 def hymenoptera():
     name = "hymenoptera.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
