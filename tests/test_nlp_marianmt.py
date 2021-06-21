@@ -32,16 +32,14 @@ class TestNLPMarianMT(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/paracrawl_en_pt_test.xlsx",
-                target="target",
-                prefix=">>pt_br<<",
-                filter_type="incluir",
-                model_features="text",
-                model_name="Helsinki-NLP/opus-mt-en-ROMANCE",
-                seed=7,
-                input_max_length=127,
-                output_max_length=256,
-                inference_batch_size=2
+                dataset="/tmp/data/pt_en_testing_texts.csv",
+                text = "text_english",
+                target = "text_portuguese",
+                input_language =  "Inglês",
+                target_language = "Português" ,
+                seed = 42,
+                max_length = 256,
+                inference_batch_size = 2
             ),
         )
 

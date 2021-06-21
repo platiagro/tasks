@@ -8,49 +8,56 @@ from tqdm import tqdm
 import sacrebleu
 import random
 from typing import List
-from vident.io_utils import IO_Utils
 
 
 class MarianMTTranslator:
-
     
-    def __init__(self,hyperparams,model_params):
+    
+    def __init__(self,hyperparams):
         def verify_args():
-            if type(self.output_language) != str:
-                raise ValueError(f"model_params['output_language'] must be a string")
-            possible_languages = ["de", "ca", "es", "fr", "en", "it", "la", "pt_br", "ro"]
-            if self.output_language not in possible_languages: 
-                raise ValueError(f"{self.output_language} not in options {possible_languages}") 
+            possible_models_list = ["Helsinki-NLP/opus-mt-ROMANCE-en","Helsinki-NLP/opus-mt-en-ROMANCE"]
+            if not all(isinstance(s, str) for s in self.models_list): 
+                raise ValueError(f"{self.models_list} must be a list of strings") 
+            if (len(self.models_list) not in [1,2]):
+                raise ValueError(f"{self.models_list} have length 1 or 2")
+            if self.models_list[0] not in possible_models_list:
+                raise ValueError(f"Position on 0 of models_list is {self.models_list[0]} and must be in the options {possible_models_list}") 
+            if (len(self.models_list)==2) and self.models_list[1] not in possible_models_list:
+                raise ValueError(f"Position on 1 of models_list is {self.models_list[1]} and must be in the options {possible_models_list}") 
             if type(self.max_length) != int:
                 raise ValueError(f"hyperparams['max_length'] must be an integer")
             if type(self.seed) != int:
                 raise ValueError(f"hyperparams['seed'] must be an integer")
-            if type(self.model_name) != str:
-                raise ValueError(f"model_params['model_name'] must be a string")
-                
+            
         #------ Getting Args
+        self.models_list = hyperparams['models_list']
         self.max_length = hyperparams['max_length']
         self.inference_batch_size = hyperparams['inference_batch_size']
+        self.target_language = hyperparams['target_language']
         self.seed = hyperparams.get('seed',42)
-        self.model_name = model_params['model_name']
-        self.output_language = model_params['output_language']
         verify_args()
 
-        #------- Creating Model and Tokenizer
-        self.model = MarianMTModel.from_pretrained(self.model_name)
-        self.tokenizer = MarianTokenizer.from_pretrained(self.model_name)
+        #------- Creating Model Tokenizer
+        self.model1,self.tokenizer1,self.model2,self.tokenizer2 = self._create_models_and_tokenizers()
 
         #------- Data
         self.X = None
         self.y_target = None
 
         #------- Others
-        self.template_func = lambda text: f"{text}" if self.output_language == "en" else f">>{self.output_language}<< {text}"
         self.nlp = English()
         self.nlp.add_pipe('sentencizer')
         dev = "cuda:0" if torch.cuda.is_available() else "cpu"
         self.device = torch.device(dev)
-
+        self.prefixes_dict = {"Alemão": "de",
+                                "Catalão": "ca",
+                                "Espanhol": "es",
+                                "Francês": "fr",
+                                "Inglês": "en",
+                                "Italiano": "it",
+                                "Latim": "la",
+                                "Português": "pt_br",
+                                "Romeno": "ro"}
         #------- Results
         self.y_pred = None
         self.avg_bleu = None
@@ -59,6 +66,21 @@ class MarianMTTranslator:
 
         # Configurando semente de randomização
         self._seed_parameters()
+    
+    def _create_models_and_tokenizers(self):
+        
+        model1 = MarianMTModel.from_pretrained(self.models_list[0])
+        tokenizer1 = MarianTokenizer.from_pretrained(self.models_list[0])
+        if len(self.models_list) == 1:
+            model2 = None
+            tokenizer2 = None
+        elif len(self.models_list) == 2:
+            model2 = MarianMTModel.from_pretrained(self.models_list[1])
+            tokenizer2 = MarianTokenizer.from_pretrained(self.models_list[1])
+        else:
+            raise ValueError("Is excpeted that the argiment models_list has the length 1 or 2")
+        
+        return model1,tokenizer1,model2,tokenizer2
         
     def _seed_parameters(self):
         random.seed(self.seed)
@@ -73,14 +95,35 @@ class MarianMTTranslator:
         for sent in doc.sents:
             chunck_sentences.append(sent.text)
         return chunck_sentences
-
-
-    def predict(self, text_array:List[str]):
+    
+    def predict(self,text_array:List[str]):
         
+        if (not self.model2) and (not self.tokenizer2):
+            translated_text = self._translate(text_array=text_array,
+                                              tokenizer=self.tokenizer1,
+                                              model=self.model1,
+                                              target_prefix = self.prefixes_dict[self.target_language])
+        else:
+            english_text = self._translate(text_array=text_array,
+                                              tokenizer=self.tokenizer1,
+                                              model=self.model1,
+                                              target_prefix = 'en')
+            translated_text = self._translate(text_array=english_text,
+                                              tokenizer=self.tokenizer2,
+                                              model=self.model2,
+                                              target_prefix = self.prefixes_dict[self.target_language])
+            
+            
+        
+        return translated_text
+
+    def _translate(self, text_array:List[str],tokenizer,model,target_prefix):
+        #Creating template func
+        template_func = lambda text: f"{text}" if target_prefix == "en" else f">>{target_prefix}<< {text}"
         
         # Move o modelo para a GPU
-        self.model.to(self.device)
-        self.model.eval()
+        model.to(self.device)
+        model.eval()
 
         result = [''] * len(text_array)
         
@@ -116,14 +159,14 @@ class MarianMTTranslator:
         #4) Colocando o prefixo de tradução
         for row_id,sentences in splited_max_sentences_dict.items():
             for sentence in sentences:
-                final_sent = self.template_func(sentence)
+                final_sent = template_func(sentence)
                 batchs.append(final_sent)
                 id_identifier.append(row_id)
         
         #5) Tradução utilizando o MarianMT
         for i in range(0, len(batchs), self.inference_batch_size):
             #tokenized_text = self.tokenizer.prepare_translation_batch(batchs[i:i+64], max_length=self.max_length)
-            batch_inputs = self.tokenizer(batchs[i:i + self.inference_batch_size],
+            batch_inputs = tokenizer(batchs[i:i + self.inference_batch_size],
                                             max_length=self.max_length,
                                             return_tensors='pt',
                                             padding=True,
@@ -131,9 +174,9 @@ class MarianMTTranslator:
                                             )
             batch_inputs = batch_inputs.to(self.device)
  
-            translated = self.model.generate(**batch_inputs)
-            tranlations.extend(self.tokenizer.batch_decode(translated,skip_special_tokens=True))
-
+            translated = model.generate(**batch_inputs)
+            tranlations.extend(tokenizer.batch_decode(translated,skip_special_tokens=True))
+        
         #6) Remontando o batch
         dict_result  = {i:'' for i in np.unique(id_identifier)}
         for tranlation,id in zip(tranlations,id_identifier):
@@ -186,4 +229,3 @@ class MarianMTTranslator:
             
         self._construct_result_dataframe(step)
         return self.df_result
-     
