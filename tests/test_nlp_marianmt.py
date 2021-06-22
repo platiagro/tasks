@@ -48,6 +48,7 @@ class TestNLPMarianMT(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.paracrawl_test_data()
+        print("########################\n",data)
         with server.Server() as s:
             response = s.test(data=data)
         ndarray = response["ndarray"]
