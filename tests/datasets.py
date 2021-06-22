@@ -253,6 +253,14 @@ def paracrawl():
         f.write(content)
 
     metadata(name=name)
+    
+def paracrawl_test_data():
+    data = {
+        "data": {
+            "ndarray": ["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"],
+        },
+    }
+    return data
 
 
 def paracrawl_test_data():
@@ -319,4 +327,3 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
-
