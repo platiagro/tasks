@@ -12,6 +12,7 @@ import torch
 from sklearn.metrics import accuracy_score
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import WeightedRandomSampler
+#from glove_embeddings import GloveEmbeddings
 
 
 
@@ -51,7 +52,7 @@ class GloveFinetuner(pl.LightningModule):
         self.step = "Experiment"
         
         # ---------- fixing seeds
-        self.seed_everything()
+        pl.utilities.seed.seed_everything(seed = self.seed)
 
         # ---------- Creating Dataframe for saving accuracy and loss
         self.df_performance_train_batch = pd.DataFrame(
@@ -75,6 +76,7 @@ class GloveFinetuner(pl.LightningModule):
 
         # ---------- mlp
         weight = self.glove_infos["glove_vectors"]
+        weight = weight.to(self.device_used)
         self.embedding_dim = self.glove_infos["glove_dim"]
         self.output_classes_number = len(self.label_encoder.classes_)
         self.embedding_bag = torch.nn.EmbeddingBag.from_pretrained(
@@ -102,23 +104,37 @@ class GloveFinetuner(pl.LightningModule):
         return net
 
 
-    def predict(self, X_inference_glove_ids, X_inference_glove_words):
+    def predict(self, X_test_glove_ids, X_test_glove_words):
         self.step = "Deployment"
-        self.df_test = pd.DataFrame(columns=self.response_columns)
-        inference_dataset = self.CustomDataset(
-            X_inference_glove_ids, X_inference_glove_words,step=self.step
-        )
-        dataloader = DataLoader(
-            inference_dataset,
-            batch_size=self.eval_batch_size,
-            shuffle=False,
-            num_workers=cpu_count(),
-            collate_fn=self.my_collate,
-        )
-        for batch in dataloader:
-            batch = [elem.to(self.device_used) for elem in batch] 
-            self.test_step(batch, None)
-        return self.df_test.to_numpy()
+        self.net.eval()
+        self.all_data = {}
+        self.all_data["X_test_glove_ids"]=X_test_glove_ids,
+        self.all_data["X_test_glove_words"]=X_test_glove_words, 
+        self.all_data["y_test"] = None
+        df_result = pd.DataFrame(columns=self.response_columns)
+               
+        for batch in self.test_dataloader():
+            inputs, offsets = batch
+            # fwd
+            y_hat = self.forward(inputs, offsets)
+            # constructing dataframe
+            _, predicted_codes = torch.max(y_hat, dim=1)
+
+            predicted_targets = self.label_encoder.inverse_transform(
+                predicted_codes.data.cpu().numpy()
+            )
+            classes_probabilities = self.predict_proba(y_hat).data.cpu().numpy()
+            not_apply_list = ["N/A"] * len(classes_probabilities)
+            for not_apply, predicted_target, predicted_code, classes_probability in zip(
+                not_apply_list,
+                predicted_targets,
+                predicted_codes,
+                classes_probabilities,
+            ):
+                row_info = [not_apply, not_apply,predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
+                df_result = df_result.append(pd.Series(row_info,index=df_result.columns), ignore_index=True)
+            
+        return df_result.to_numpy()
 
     def forward(self, word_ids, offsets):
         X_emb = self.embedding_bag(word_ids, offsets)
@@ -263,64 +279,40 @@ class GloveFinetuner(pl.LightningModule):
 
     def test_step(self, batch, batch_nb):
         # batch
-        if self.step == "Experiment":
-            inputs, offsets, targets = batch
-            # fwd
-            y_hat = self.forward(inputs, offsets)
-            # acc
-            acc = self.get_acc(y_hat, targets)
-            # constructing dataframe
-            _, predicted_codes = torch.max(y_hat, dim=1)
-            predicted_targets = self.label_encoder.inverse_transform(
-                predicted_codes.data.cpu().numpy()
-            )
-            original_targets = self.label_encoder.inverse_transform(
-                targets.data.cpu().numpy()
-            )
-            classes_probabilities = self.predict_proba(y_hat).data.cpu().numpy()
-            for (
-                original_target,
-                target,
-                predicted_target,
-                predicted_code,
-                classes_probability,
-            ) in zip(
-                original_targets,
-                targets,
-                predicted_targets,
-                predicted_codes,
-                classes_probabilities,
-            ):
-       
-                row_info = [original_target, int(target),predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
-                self.df_test = self.df_test.append(pd.Series(row_info,index=self.df_test.columns), ignore_index=True)
-               
-            self.log('test_acc_batch', acc, on_step=True, prog_bar=True, logger=True)
+        inputs, offsets, targets = batch
+        # fwd
+        y_hat = self.forward(inputs, offsets)
+        # acc
+        acc = self.get_acc(y_hat, targets)
+        # constructing dataframe
+        _, predicted_codes = torch.max(y_hat, dim=1)
+        predicted_targets = self.label_encoder.inverse_transform(
+            predicted_codes.data.cpu().numpy()
+        )
+        original_targets = self.label_encoder.inverse_transform(
+            targets.data.cpu().numpy()
+        )
+        classes_probabilities = self.predict_proba(y_hat).data.cpu().numpy()
+        for (
+            original_target,
+            target,
+            predicted_target,
+            predicted_code,
+            classes_probability,
+        ) in zip(
+            original_targets,
+            targets,
+            predicted_targets,
+            predicted_codes,
+            classes_probabilities,
+        ):
 
-            final_return = {"test_acc_batch": acc}
+            row_info = [original_target, int(target),predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
+            self.df_test = self.df_test.append(pd.Series(row_info,index=self.df_test.columns), ignore_index=True)
 
-        if self.step == "Deployment":
-            inputs, offsets = batch
-            # fwd
-            y_hat = self.forward(inputs, offsets)
-            # constructing dataframe
-            _, predicted_codes = torch.max(y_hat, dim=1)
-            
-            predicted_targets = self.label_encoder.inverse_transform(
-                predicted_codes.data.cpu().numpy()
-            )
-            classes_probabilities = self.predict_proba(y_hat).data.cpu().numpy()
-            not_apply_list = ["N/A"] * len(classes_probabilities)
-            for not_apply, predicted_target, predicted_code, classes_probability in zip(
-                not_apply_list,
-                predicted_targets,
-                predicted_codes,
-                classes_probabilities,
-            ):
-                row_info = [not_apply, not_apply,predicted_target,int(predicted_code)] + [prob for prob in classes_probability]
-                self.df_test = self.df_test.append(pd.Series(row_info,index=self.df_test.columns), ignore_index=True)
+        self.log('test_acc_batch', acc, on_step=True, prog_bar=True, logger=True)
 
-            final_return = None
+        final_return = {"test_acc_batch": acc}
 
         return final_return
 
@@ -369,20 +361,10 @@ class GloveFinetuner(pl.LightningModule):
             final_return = list_words_ids_vector, offsets
 
         return final_return
-        
-    def seed_everything(self):
-        random.seed(self.seed)
-        os.environ['PYTHONHASHSEED'] = str(self.seed)
-        np.random.seed(self.seed)
-        torch.manual_seed(self.seed)
-        torch.cuda.manual_seed(self.seed)
-        torch.cuda.manual_seed_all(self.seed)
-        torch.backends.cudnn.deterministic = True
-        torch.backends.cudnn.benchmark = False
-
+         
     def train_dataloader(self):
         self.train_dataset = self.CustomDataset(
-                self.all_data[0], self.all_data[1], self.all_data[2]
+                self.all_data["X_train_glove_ids"], self.all_data["X_train_glove_words"], self.all_data["y_train"],step=self.step
             )
         if self.sampler:
             targets = []
@@ -416,11 +398,11 @@ class GloveFinetuner(pl.LightningModule):
     def val_dataloader(self):
         if self.overfit:
             self.valid_dataset = self.CustomDataset(
-                self.all_data[0], self.all_data[1], self.all_data[2]
+                self.all_data["X_train_glove_ids"], self.all_data["X_train_glove_words"], self.all_data["y_train"],step=self.step
             )
         else:
             self.valid_dataset = self.CustomDataset(
-                self.all_data[3], self.all_data[4], self.all_data[5]
+                self.all_data["X_valid_glove_ids"], self.all_data["X_valid_glove_words"], self.all_data["y_valid"],step=self.step
             )
         return DataLoader(
             self.valid_dataset,
@@ -431,14 +413,19 @@ class GloveFinetuner(pl.LightningModule):
         )
 
     def test_dataloader(self):
-        if self.overfit:
+        if self.step=="Experiment":
+            if self.overfit:
+                self.test_dataset = self.CustomDataset(
+                    self.all_data["X_train_glove_ids"], self.all_data["X_train_glove_words"], self.all_data["y_train"],step=self.step
+                )
+            else:
+                self.test_dataset = self.CustomDataset(
+                    self.all_data["X_test_glove_ids"], self.all_data["X_test_glove_words"], self.all_data["y_test"],step=self.step
+                )
+        elif self.step=="Deployment":
             self.test_dataset = self.CustomDataset(
-                self.all_data[0], self.all_data[1], self.all_data[2]
-            )
-        else:
-            self.test_dataset = self.CustomDataset(
-                self.all_data[6], self.all_data[7], self.all_data[8]
-            )
+                    self.all_data["X_test_glove_ids"][0], self.all_data["X_test_glove_words"][0], self.all_data["y_test"],step=self.step
+                )
         return DataLoader(
             self.test_dataset,
             batch_size=self.eval_batch_size,

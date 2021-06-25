@@ -2,6 +2,8 @@
 import json
 import os
 
+import requests
+
 from database import insert_task
 from notebook import create_persistent_volume_claim, create_config_map, copy_files_inside_pod, \
     parse_parameters, patch_notebook_server, set_notebook_metadata, uuid_alpha
@@ -23,13 +25,15 @@ def create_tasks():
         commands = task["commands"]
         description = task["description"]
         name = task["name"]
-        tags = task["tags"]
+        category = task["category"]
+        tags = task.get("tags")
         image = task["image"]
         path = task.get("path")
         cpu_limit = task.get("cpuLimit")
         cpu_request = task.get("cpuRequest")
         memory_limit = task.get("memoryLimit")
         memory_request = task.get("memoryRequest")
+        readiness_probe_initial_delay_seconds = task.get("readinessProbeInitialDelaySeconds", 60)
         parameters = []
 
         if path:
@@ -46,6 +50,7 @@ def create_tasks():
         task_id = insert_task(
             name=name,
             description=description,
+            category=category,
             tags=tags,
             image=image,
             commands=commands,
@@ -58,6 +63,7 @@ def create_tasks():
             cpu_request=cpu_request,
             memory_limit=memory_limit,
             memory_request=memory_request,
+            readiness_probe_initial_delay_seconds=readiness_probe_initial_delay_seconds,
         )
         task["task_id"] = task_id
 
@@ -114,10 +120,11 @@ def create_tasks():
     # Create ConfigMap for monitoring tasks
     for task in tasks:
         task_id = task["task_id"]
-        tags = task["tags"]
+        category = task["category"]
         experiment_notebook_path = task["experiment_notebook_path"]
+        path = task.get("path")
 
-        if "MONITORING" in tags:
+        if path and category == "MONITORING":
             file_content = open(f"{path}/{experiment_notebook_path}", "r").read()
             create_config_map(task_id=task_id, experiment_notebook_content=file_content)
 
@@ -127,6 +134,8 @@ def main():
     Job that creates tasks in PlatIAgro from a config file.
     """
     create_tasks()
+    # Terminates istio sidecar so the job goes to state "Complete"
+    requests.post("http://localhost:15020/quitquitquit")
 
     print("done!", flush=True)
 

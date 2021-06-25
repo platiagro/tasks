@@ -41,7 +41,8 @@ def insert_task(**kwargs):
     """
     name = kwargs.get("name")
     description = kwargs.get("description")
-    tags = kwargs.get("tags", ["DEFAULT"])
+    category = kwargs.get("category", "DEFAULT")
+    tags = kwargs.get("tags", [])
     image = kwargs.get("image")
     commands = kwargs.get("commands")
     arguments = kwargs.get("arguments")
@@ -53,6 +54,7 @@ def insert_task(**kwargs):
     cpu_request = kwargs.get("cpu_request")
     memory_limit = kwargs.get("memory_limit")
     memory_request = kwargs.get("memory_request")
+    readiness_probe_initial_delay_seconds = kwargs.get("readiness_probe_initial_delay_seconds", 60)
 
     conn = engine.connect()
     text = f'SELECT uuid FROM tasks WHERE name="{name}" LIMIT 1'
@@ -70,16 +72,17 @@ def insert_task(**kwargs):
     tags_json = json.dumps(tags)
 
     text = (
-        f"INSERT INTO tasks (uuid, name, description, image, commands, arguments, parameters, tags, "
-        f"experiment_notebook_path, deployment_notebook_path, cpu_limit, cpu_request, memory_limit, memory_request, "
-        f"is_default, created_at, updated_at) "
-        f"VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        "INSERT INTO tasks (uuid, name, description, category, image, commands, arguments, parameters, tags, "
+        "experiment_notebook_path, deployment_notebook_path, cpu_limit, cpu_request, memory_limit, memory_request, "
+        "readiness_probe_initial_delay_seconds, is_default, created_at, updated_at) "
+        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     )
     conn.execute(
         text,
         task_id,
         name,
         description,
+        category,
         image,
         commands_json,
         arguments_json,
@@ -91,6 +94,7 @@ def insert_task(**kwargs):
         cpu_request,
         memory_limit,
         memory_request,
+        readiness_probe_initial_delay_seconds,
         is_default,
         created_at,
         created_at,

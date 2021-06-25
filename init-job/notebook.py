@@ -196,12 +196,12 @@ def patch_notebook_server(volume_mounts):
 
             if pod.status.phase == "Running" \
                and all([c.state.running for c in pod.status.container_statuses]):
-                print(f"Mounted volumes in notebook server!", flush=True)
+                print("Mounted volumes in notebook server!", flush=True)
                 break
         except ApiException:
             pass
         finally:
-            warnings.warn(f"Waiting for notebook server to be ready...")
+            warnings.warn("Waiting for notebook server to be ready...")
             time.sleep(5)
 
 
@@ -222,7 +222,7 @@ def copy_files_inside_pod(local_path, destination_path, task_name):
     api_instance = client.CoreV1Api()
 
     # The following command extracts the contents of STDIN to /home/jovyan/tasks
-    exec_command = ["tar", "xvf", "-", "-C", f"/home/jovyan/tasks"]
+    exec_command = ["tar", "xvf", "-", "-C", "/home/jovyan/tasks"]
 
     container_stream = stream(
         api_instance.connect_get_namespaced_pod_exec,

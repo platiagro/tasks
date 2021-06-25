@@ -43,11 +43,11 @@ class TestFilterSelection(unittest.TestCase):
             "Deployment.ipynb",
             "/dev/null",
         )
-        data = datasets.iris_testdata()
+        data = datasets.iris_testdata_full()
         with server.Server() as s:
             response = s.test(data=data)
+            
         names = response["names"]
-        print(names)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 4)  # 5 features - 1 removed
         self.assertEqual(len(names), 4)
@@ -66,11 +66,11 @@ class TestFilterSelection(unittest.TestCase):
             "Deployment.ipynb",
             "/dev/null",
         )
-        data = datasets.titanic_testdata()
+        data = datasets.titanic_testdata_full()
         with server.Server() as s:
             response = s.test(data=data)
+
         names = response["names"]
-        print(names)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 11)  # 12 features - 1 removed
         self.assertEqual(len(names), 11)
@@ -89,11 +89,11 @@ class TestFilterSelection(unittest.TestCase):
             "Deployment.ipynb",
             "/dev/null",
         )
-        data = datasets.hotel_bookings_testdata()
+        data = datasets.hotel_bookings_testdata_full()
         with server.Server() as s:
             response = s.test(data=data)
-        names = response["names"]
-        print(names)
+
+        names = response["names"]    
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 30)  # 32 features - 2 removed
         self.assertEqual(len(names), 30)

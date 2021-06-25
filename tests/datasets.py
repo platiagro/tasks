@@ -47,6 +47,16 @@ def iris_testdata():
     return data
 
 
+def iris_testdata_full():
+    data = {
+        "data": {
+            "ndarray": [[5.1, 3.5, 1.4, 0.2, "Iris-setosa"]],
+            "names": ["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm", "Species"],
+        },
+    }
+    return data
+
+
 def titanic():
     name = "titanic.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
@@ -69,6 +79,17 @@ def titanic_testdata():
         },
     }
     return data
+
+
+def titanic_testdata_full():
+    data = {
+        "data": {
+            "ndarray": [[1, 0, 3, "Braund, Mr. Owen Harris", "male", 22, 1, 0, "A/5 21171", 7.25, None, "S"]],
+            "names": ["PassengerId", "Survived", "Pclass", "Name", "Sex", "Age", "SibSp", "Parch", "Ticket", "Fare", "Cabin", "Embarked"],
+        },
+    }
+    return data
+
 
 
 def boston():
@@ -118,6 +139,16 @@ def hotel_bookings_testdata():
     }
     return data
 
+
+def hotel_bookings_testdata_full():
+    data = {
+        "data": {
+            "ndarray": [["Resort Hotel", 0, 342, 2015, "July", 27, 1, 0, 0, 2, 0, 0, "BB", "PRT", "Direct", "Direct", 0, 0, 0, "C", "C", 3, "No Deposit", None, None, 0, "Transient", 0, 0, 0, "Check-Out", "01-07-15"]],
+            "names": ["hotel", "is_canceled","lead_time", "arrival_date_year", "arrival_date_month", "arrival_date_week_number", "arrival_date_day_of_month", "stays_in_weekend_nights", "stays_in_week_nights", "adults", "children", "babies", "meal", "country", "market_segment", "distribution_channel", "is_repeated_guest", "previous_cancellations", "previous_bookings_not_canceled", "reserved_room_type", "assigned_room_type", "booking_changes", "deposit_type", "agent", "company", "days_in_waiting_list", "customer_type", "adr", "required_car_parking_spaces", "total_of_special_requests", "reservation_status", "reservation_status_date"],
+        },
+    }
+    return data
+    
 
 def imdb():
     name = "imdb.csv"
@@ -211,7 +242,7 @@ def football_teams():
 
 
 def paracrawl():
-    name = "paracrawl_en_pt_test.xlsx"
+    name = "paracrawl_en_pt_test.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
@@ -222,7 +253,23 @@ def paracrawl():
         f.write(content)
 
     metadata(name=name)
+    
+def paracrawl_test_data():
+    data = {
+        "data": {
+            "ndarray": ["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"],
+        },
+    }
+    return data
 
+
+def paracrawl_test_data():
+    data = {
+        "data": {
+            "ndarray": ["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"],
+        },
+    }
+    return data
 
 def hymenoptera():
     name = "hymenoptera.zip"

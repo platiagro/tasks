@@ -2,9 +2,8 @@
     {
         "name": "Upload de arquivo",
         "description": "Importa arquivos para utilização em experimentos.",
-        "tags": [
-            "DATASETS"
-        ],
+        "category": "DATASETS",
+        "tags": ["DATASETS"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -17,9 +16,8 @@
     {
         "name": "Google Drive",
         "description": "Importa arquivos do Google Drive para utilização em experimentos.",
-        "tags": [
-            "DATASETS"
-        ],
+        "category": "DATASETS",
+        "tags": ["DATASETS"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -33,9 +31,8 @@
         "name": "Classificador AutoML",
         "description": "Utiliza o auto-sklearn para obter um ou mais modelos classificadores já otimizados.",
         "path": "/tasks/automl-classifier",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -49,9 +46,8 @@
         "name": "Regressor AutoML",
         "description": "Utiliza o auto-sklearn para obter um ou mais modelos regressores já otimizados.",
         "path": "/tasks/automl-regressor",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -65,9 +61,8 @@
         "name": "Regressão Logística",
         "description": "Treina um modelo de Regressão Logística para classificação usando scikit-learn.",
         "path": "/tasks/logistic-regression",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -81,9 +76,8 @@
         "name": "Regressão Linear",
         "description": "Treina um modelo de Regressão Linear para regressão usando scikit-learn.",
         "path": "/tasks/linear-regression",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -97,9 +91,8 @@
         "name": "Classificador SVM",
         "description": "Treina um modelo Support Vector Classification usando scikit-learn.",
         "path": "/tasks/svc",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -113,9 +106,8 @@
         "name": "Regressor SVM",
         "description": "Treina um modelo Support Vector Regression usando scikit-learn.",
         "path": "/tasks/svr",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -129,9 +121,8 @@
         "name": "Classificador MLP",
         "description": "Treina um modelo classificador Multi-layer Perceptron (MLP) usando scikit-learn.",
         "path": "/tasks/mlp-classifier",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -145,9 +136,8 @@
         "name": "Regressor MLP",
         "description": "Treina um modelo regressor Multi-layer Perceptron (MLP) usando scikit-learn.",
         "path": "/tasks/mlp-regressor",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -161,9 +151,8 @@
         "name": "Classificador Random Forest",
         "description": "Treina um modelo classificador Random Forest usando scikit-learn.",
         "path": "/tasks/random-forest-classifier",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -177,9 +166,8 @@
         "name": "Regressor Random Forest",
         "description": "Treina um modelo regressor Random Forest usando scikit-learn.",
         "path": "/tasks/random-forest-regressor",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -193,9 +181,8 @@
         "name": "Análise Descritiva",
         "description": "Gera estatísticas descritivas para um determinado conjunto de dados.",
         "path": "/tasks/descriptive-analysis",
-        "tags": [
-            "DESCRIPTIVE_STATISTICS"
-        ],
+        "category": "DESCRIPTIVE_STATISTICS",
+        "tags": ["DESCRIPTIVE_STATISTICS"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -209,9 +196,8 @@
         "name": "Feature Tools",
         "description": "Usa a biblioteca Feature Tools para Feature Engineering.",
         "path": "/tasks/feature-tools",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -225,9 +211,8 @@
         "name": "Seleção Manual de Atributos",
         "description": "Remove as features específicas do conjunto de dados.",
         "path": "/tasks/filter-selection",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -241,9 +226,8 @@
         "name": "Agrupamento de Atributos Categóricos",
         "description": "Faz o agrupamento de features categóricas com elevado número de classes.",
         "path": "/tasks/grouping-categorical-features",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -257,9 +241,8 @@
         "name": "Imputação de Valores Faltantes",
         "description": "Imputa valores ausentes usando média, mediana ou mais frequente.",
         "path": "/tasks/imputer",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -273,9 +256,8 @@
         "name": "Detecção de Anomalias por Isolation Forest",
         "description": "Treina um modelo Isolation Forest para detecção de anomalias usando scikit-learn.",
         "path": "/tasks/isolation-forest-clustering",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -289,9 +271,8 @@
         "name": "Clusterização KMeans",
         "description": "Treina um modelo KMeans para clusterização usando scikit-learn.",
         "path": "/tasks/kmeans-clustering",
-        "tags": [
-            "PREDICTOR"
-        ],
+        "category": "PREDICTOR",
+        "tags": ["PREDICTOR"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -305,9 +286,8 @@
         "name": "Normalizador de Amostras",
         "description": "Normaliza amostras individualmente para o modelo de norma de unidade usando scikit-learn.",
         "path": "/tasks/normalizer",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -321,9 +301,8 @@
         "name": "Seleção de Atributos por Correlação",
         "description": "Remove todas as features de baixa variação e altamente correlacionadas.",
         "path": "/tasks/pre-selection",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -337,9 +316,8 @@
         "name": "Seleção de Atributos por Método de Eliminação Recursiva",
         "description": "Realiza a seleção de features baseado no método de eliminação recursiva usando um estimador Random Forest.",
         "path": "/tasks/rfe-selector",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -353,9 +331,8 @@
         "name": "Scaler Robusto",
         "description": "Dimensiona features usando estatísticas robustas para outliers.",
         "path": "/tasks/robust-scaler",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -369,9 +346,8 @@
         "name": "Simulated Annealing",
         "description": "Aplica a estratégia simulated annealing para Feature Engineering.",
         "path": "/tasks/simulated-annealing",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -385,9 +361,8 @@
         "name": "Transformation Graph",
         "description": "Usa uma estratégia de gráfico de transformação para o Feature Engineering.",
         "path": "/tasks/transformation-graph",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -401,9 +376,8 @@
         "name": "Seleção de Atributos por Limiar de Variância",
         "description": "Remove todos os atributos de baixa variância.",
         "path": "/tasks/variance-threshold",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -417,9 +391,8 @@
         "name": "Criação de Atributos Temporais",
         "description": "Criação de atributos temporais a partir da agregação por períodos (dia, semana, mês, trimestre ou ano). Para cada atributo categórico no dataset, são gerados novos atributos considerando-se janelas móveis de três, seis e noves períodos consecutivos.",
         "path": "/tasks/time-related-features",
-        "tags": [
-            "FEATURE_ENGINEERING"
-        ],
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -433,9 +406,8 @@
         "name": "Monitoramento -  Multiclasses - Não Supervisionado",
         "description": "Um conjunto de dados batch é analizado atraves de duas janelas deslizantes, refência e target, comparando as janelas com a estátitica Jensen-Shannon Divergence e a estaimação feita pelo algoritmo SPEAR.",
         "path": "/tasks/monitoring-unsupervised-multiclass",
-        "tags": [
-            "MONITORING"
-        ],
+        "category": "MONITORING",
+        "tags": ["MONITORING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
@@ -449,9 +421,8 @@
         "name": "Hands-On AgTech - Visão Computacional",
         "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional.",
         "path": "/tasks/hands-on-agtech-computer-vision",
-        "tags": [
-            "DEFAULT"
-        ],
+        "category": "DEFAULT",
+        "tags": ["DEFAULT"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image-gpu:0.2.0",
@@ -465,9 +436,8 @@
         "name": "(w/input) Hands-On AgTech - Visão Computacional",
         "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional recebendo um conjunto reduzido de input do usuário.",
         "path": "/tasks/hands-on-agtech-computer-vision-w-input",
-        "tags": [
-            "DEFAULT"
-        ],
+        "category": "DEFAULT",
+        "tags": ["DEFAULT"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image-gpu:0.2.0",
@@ -475,6 +445,96 @@
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
         "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
+    },
+    {
+        "name": "Face Detection",
+        "description": "Utiliza a biblioteca facenet-pytorch, a qual disponibiliza o algorítimo MTCNN.",
+        "path": "/tasks/cv-mtcnn-face-detection",
+        "category": "COMPUTER_VISION",
+        "tags": ["COMPUTER_VISION"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2Gi",
+        "memoryRequest": "2Gi"
+    },
+    {
+        "name": "OCR (Optical Character Recognition)",
+        "description": "Utiliza a biblioteca Pytesseract para converter textos em imagem para string.",
+        "path": "/tasks/cv-ocr",
+        "category": "COMPUTER_VISION",
+        "tags": ["COMPUTER_VISION"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2Gi",
+        "memoryRequest": "2Gi"
+    },
+    {
+        "name": "YOLO (You Only Look Once)",
+        "description": "Utiliza uma biblioteca do Yolov4 para detecção e classificação de objetos em imagens.",
+        "path": "/tasks/cv-yolo",
+        "category": "COMPUTER_VISION",
+        "tags": ["COMPUTER_VISION"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "2Gi",
+        "memoryRequest": "2Gi"
+    },
+    {
+        "name": "Fast AutoCV",
+        "description": "Classifica imagens utilizando as redes ResNet-18, ResNet-50 e VGG16",
+        "path": "/tasks/cv-fast-autocv",
+        "category": "COMPUTER_VISION",
+        "tags": ["COMPUTER_VISION"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
+    },
+    {
+        "name": "AutoKeras AutoCV para Classificação de Imagens",
+        "description": "Faz a busca por arquiteturas e hyperparâmetros que melhor configuram o modelo para a base de dados fornecida",
+        "path": "/tasks/cv-autokeras-autocv-image-classification",
+        "category": "COMPUTER_VISION",
+        "tags": ["COMPUTER_VISION"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "16Gi",
+        "memoryRequest": "10Gi"
+    },
+    {
+        "name": "GloVe Embeddings Bag",
+        "description": "Classifica sentenças com base nos pacotes de Embeddings GloVe disponiblizado pela Stanford",
+        "path": "/tasks/nlp-glove-embeddings-sentence-classification",
+        "category": "NLP",
+        "tags": ["NLP"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "10Gi",
         "memoryRequest": "10Gi"
     }
 ]
