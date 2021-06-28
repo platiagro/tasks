@@ -30,6 +30,16 @@ jobs:
     container:
       image: platiagro/platiagro-notebook-image:0.2.0
 
+    services:
+
+      minio:
+        image: bitnami/minio:latest
+        env:
+          MINIO_ACCESS_KEY: minio
+          MINIO_SECRET_KEY: minio123
+        ports:
+        - 9000:9000
+
     steps:
     - uses: actions/checkout@v2
 
@@ -39,6 +49,6 @@ jobs:
         pytest -v tests/test_cv_fast_autocv.py
       timeout-minutes: 30
       env:
-        MINIO_ENDPOINT: play.min.io
-        MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F
-        MINIO_SECRET_KEY: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
+        MINIO_ENDPOINT: minio:9000
+        MINIO_ACCESS_KEY: minio
+        MINIO_SECRET_KEY: minio123
