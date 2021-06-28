@@ -536,5 +536,20 @@
         "cpuRequest": "1000m",
         "memoryLimit": "10Gi",
         "memoryRequest": "10Gi"
+    },
+    {
+        "name": "Sparse Document Retriever",
+        "description": "Ranqueia textos de acordo com um outro texto de entrada através das estratégias TF-IDF, BM25 ou Glove Embeddings",
+        "path": "/tasks/nlp-sparse-document-retriever",
+        "category": "NLP",
+        "tags": ["NLP"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": ["https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt"],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "10Gi",
+        "memoryRequest": "10Gi"
     }
 ]

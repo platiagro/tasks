@@ -240,6 +240,27 @@ def football_teams():
 
     metadata(name=name)
 
+def report_contexts():
+    name = "reports_contexts.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
+
+def report_contexts_test_data():
+    data = {
+        "data": {
+            "ndarray": ["Quantas plantas da ninha existem ?", "Qual herbicida é melhor contra planta da ninha ?"],
+        },
+    }
+    return data
 
 def paracrawl():
     name = "paracrawl_en_pt_test.csv"
@@ -262,14 +283,6 @@ def paracrawl_test_data():
     }
     return data
 
-
-def paracrawl_test_data():
-    data = {
-        "data": {
-            "ndarray": ["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"],
-        },
-    }
-    return data
 
 def hymenoptera():
     name = "hymenoptera.zip"
