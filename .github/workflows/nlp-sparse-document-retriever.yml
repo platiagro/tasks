@@ -1,0 +1,44 @@
+name: Sparse Document Retriever
+
+on:
+  push:
+    branches:
+    - main
+    - v*-branch
+    paths:
+    - tasks/nlp-sparse-document-retriever/**
+    - tests/datasets.py
+    - tests/server.py
+    - tests/test_nlp_sparse_document_retriever.py
+
+  pull_request:
+    branches:
+    - main
+    - v*-branch
+    paths:
+    - tasks/nlp-sparse-document-retriever/**
+    - tests/datasets.py
+    - tests/server.py
+    - tests/test_nlp_sparse_document_retriever.py
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # runs all of the steps inside the specified container rather than on the VM host.
+    # Because of this the network configuration changes from host based network to a container network.
+    container:
+      image: platiagro/platiagro-notebook-image:0.2.0
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Test with pytest
+      run: |
+        pip install pytest
+        pytest -v tests/test_nlp_sparse_document_retriever.py
+      timeout-minutes: 30
+      env:
+        MINIO_ENDPOINT: play.min.io
+        MINIO_ACCESS_KEY: Q3AM3UQ867SPQQA43P2F
+        MINIO_SECRET_KEY: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
