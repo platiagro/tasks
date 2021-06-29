@@ -28,6 +28,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_report_contexts(self):
+
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -50,4 +51,4 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
         ndarray = response["ndarray"]
-        #self.assertEqual(len(ndarray[0]), 1)  # 1 feature
+        self.assertEqual(len(ndarray[0]), 4)  # 1 feature

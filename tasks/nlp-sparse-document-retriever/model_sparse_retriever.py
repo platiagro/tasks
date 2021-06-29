@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
-from rank_bm25 import BM25Okapi
+#from rank_bm25 import BM25Okapi
 
 
 class TfidfRetriever:
@@ -61,15 +61,15 @@ class W2VRetriever:
     def _phrase2vec(self, phrase):
         ''' s is a string
         '''
-        dim = self.w2v.wv['pedra'].shape[0]
+        dim = self.w2v.vector_size
         vecs = []
         for w in phrase:
-            if w not in self.w2v.wv:
+            if w not in self.w2v:
                 vecs.append(np.zeros(dim))
             else:
-                vecs.append(self.w2v.wv[w])
+                vecs.append(self.w2v[w])
                 
-        vec = np.max(vecs, axis=0)
+        vec = np.mean(vecs, axis=0)
         return vec
     
     def _transform(self, corpus):
@@ -97,16 +97,18 @@ class W2VRetriever:
         
         if self.preproc:
             questions = self.preproc.transform(questions)
-
+        
         question_vec = self._transform(questions)
         pair_sim = np.dot(question_vec, self.context_vec.T)
         
         sim_contexts = []
         scores = []
+        
         for i in range(len(questions)):
             similar_ids = np.argsort(pair_sim[i])[::-1][:top]
             sim_contexts.append(similar_ids)
             scores.append(pair_sim[i][similar_ids])
+
         
         return sim_contexts, scores
 

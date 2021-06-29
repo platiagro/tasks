@@ -2,6 +2,7 @@ import io
 import json
 import os
 import shutil
+from typing import Mapping
 
 import minio
 import minio.error
@@ -340,3 +341,7 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
+
+
+if __name__ == '__main__':
+    report_contexts()
