@@ -251,7 +251,7 @@ def report_contexts():
     with open(path, "wb") as f:
         f.write(content)
 
-    metadata(name=name)
+    metadata(name=name, df=pd.read_csv(path))
 
 
 def report_contexts_test_data():
