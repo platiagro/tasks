@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
-#from rank_bm25 import BM25Okapi
+from rank_bm25 import BM25Okapi
 
 
 class TfidfRetriever:
