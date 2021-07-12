@@ -79,7 +79,7 @@ class Reader(pl.LightningModule):
 
     def validation_epoch_end(self, outputs):
         epoch_dict = self.get_epoch_results(outputs,'valid')
-        return epoch_dict #must do to save checkpoints
+        #return epoch_dict #must do to save checkpoints
 
     def test_epoch_end(self, outputs):
         epoch_dict = self.get_epoch_results(outputs,'test')

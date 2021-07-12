@@ -263,6 +263,28 @@ def report_contexts_test_data():
     }
     return data
 
+def squad_bert_chuncked():
+    name = "df_squad_test_bert_chuncked.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
+
+def squad_bert_chuncked_test():
+    data = {
+        "data": {
+            "ndarray": ["Quantas plantas da ninha existem ?", "Qual herbicida é melhor contra planta da ninha ?"],
+        },
+    }
+    return data
+
+
 def paracrawl():
     name = "paracrawl_en_pt_test.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
