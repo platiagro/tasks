@@ -128,3 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 *.DS_Store
+
+# Kers e Bash History
+.keras/
+.bash_history
