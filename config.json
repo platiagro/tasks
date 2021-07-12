@@ -554,5 +554,5 @@
         "cpuRequest": "1000m",
         "memoryLimit": "10Gi",
         "memoryRequest": "10Gi"
-    },
+    }
 ]
