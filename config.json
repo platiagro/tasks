@@ -591,7 +591,10 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": ["https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt"],
+        "artifacts": [{
+            "url": "https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt",
+            "name": "glove_s300_portugues.txt"
+        }],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
         "memoryLimit": "10Gi",
@@ -606,10 +609,16 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": [],
+        "artifacts": [{
+            "url": "https://storage.googleapis.com/platiagro/Vident/squad-train-v1.1.json",
+            "name": "squad-train-v1.1.json"
+        },{
+            "url": "https://storage.googleapis.com/platiagro/Vident/squad-dev-v1.1.json",
+            "name": "squad-dev-v1.1.json"
+        }],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "10Gi",
-        "memoryRequest": "10Gi"
+        "memoryLimit": "20Gi",
+        "memoryRequest": "20Gi"
     }
 ]

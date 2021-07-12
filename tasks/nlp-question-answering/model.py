@@ -69,7 +69,7 @@ class Reader(pl.LightningModule):
         output = self.forward(token_ids,attention_mask,token_type_ids)
         pred_start_logits = output['start_logits']
         pred_end_logits = output['end_logits']
-
+        batch_metrics_dict = {}
         return batch_metrics_dict
     
     def training_epoch_end(self, outputs):
