@@ -224,7 +224,7 @@
     },
     {
         "name": "Altera Valor de Linhas",
-        "description": "A partir de uma condição, altera as linhas que satisfazem uma condição fornecida, somando 800 aos valores.",
+        "description": "A partir de uma condição, altera as linhas que satisfazem uma condição fornecida, subtraindo 800 aos valores.",
         "path": "/tasks/remove-rows/",
         "category": "FEATURE_ENGINEERING",
         "tags": ["FEATURE_ENGINEERING"],
