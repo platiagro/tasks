@@ -591,7 +591,10 @@
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.2.0",
-        "artifacts": ["https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt"],
+        "artifacts": [{
+            "url": "https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt",
+            "name": "glove_s300_portugues.txt"
+        }],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
         "memoryLimit": "10Gi",
