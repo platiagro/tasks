@@ -89,40 +89,6 @@ class Reader_Caller():
         self.softmax = torch.nn.Softmax(dim=1)
         self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
-        # Trainer
-        if self.fast_dev_run:
-            self.TRAINER = pl.Trainer(
-                gpus=self.num_gpus,
-                checkpoint_callback=False,
-                fast_dev_run=True  # Disable checkpoint saving.
-            )
-        else:
-            checkpoint_callback = ModelCheckpoint(
-            dirpath=self.data_dirpath, save_top_k=-1
-            )
-
-            early_stop_callback = EarlyStopping(
-                monitor=self.early_stop_callback_params['monitor'],
-                min_delta=self.early_stop_callback_params['min_delta'],
-                patience=self.early_stop_callback_params['patience'],
-                verbose=self.early_stop_callback_params['verbose'],
-                mode=self.early_stop_callback_params['mode']
-                )
-
-            tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}")
-
-            self.TRAINER = pl.Trainer(
-            gpus= self.lightning_params['num_gpus'],
-            profiler=self.lightning_params['profiler'],
-            max_epochs=self.lightning_params['max_epochs'],
-            accumulate_grad_batches = self.lightning_params['accumulate_grad_batches'],
-            check_val_every_n_epoch=self.lightning_params['check_val_every_n_epoch'],
-            progress_bar_refresh_rate=self.lightning_params['progress_bar_refresh_rate'],
-            callbacks = [early_stop_callback,checkpoint_callback],
-            resume_from_checkpoint=None,
-            logger = tb_logger
-            )
-
     def forward(self,**kwargs):
 
         def verify_args(question,topn_contexts):
@@ -284,6 +250,39 @@ class Reader_Caller():
             datasets=datasets,
             )
 
+        # Trainer
+        if self.fast_dev_run:
+            self.TRAINER = pl.Trainer(
+                gpus=self.num_gpus,
+                checkpoint_callback=False,
+                fast_dev_run=True  # Disable checkpoint saving.
+            )
+        else:
+            checkpoint_callback = ModelCheckpoint(
+            dirpath=self.data_dirpath, save_top_k=-1
+            )
+
+            early_stop_callback = EarlyStopping(
+                monitor=self.early_stop_callback_params['monitor'],
+                min_delta=self.early_stop_callback_params['min_delta'],
+                patience=self.early_stop_callback_params['patience'],
+                verbose=self.early_stop_callback_params['verbose'],
+                mode=self.early_stop_callback_params['mode']
+                )
+
+            tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}")
+
+            self.TRAINER = pl.Trainer(
+            gpus= self.lightning_params['num_gpus'],
+            profiler=self.lightning_params['profiler'],
+            max_epochs=self.lightning_params['max_epochs'],
+            accumulate_grad_batches = self.lightning_params['accumulate_grad_batches'],
+            check_val_every_n_epoch=self.lightning_params['check_val_every_n_epoch'],
+            progress_bar_refresh_rate=self.lightning_params['progress_bar_refresh_rate'],
+            callbacks = [early_stop_callback,checkpoint_callback],
+            resume_from_checkpoint=None,
+            logger = tb_logger
+            )
         # Treinando Algorítimos
         self.TRAINER.fit(self.MODEL)
 
