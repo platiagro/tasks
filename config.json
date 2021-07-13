@@ -615,6 +615,9 @@
         },{
             "url": "https://storage.googleapis.com/platiagro/Vident/squad-dev-v1.1.json",
             "name": "squad-dev-v1.1.json"
+        },{
+            "url": "https://storage.googleapis.com/platiagro/Vident/default_document_reader_squad_pt.ckpt",
+            "name": "default_document_reader_squad_pt.ckpt"
         }],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
