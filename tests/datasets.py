@@ -7,7 +7,7 @@ from typing import Mapping
 import minio
 import minio.error
 import pandas as pd
-import platiagro.featuretypes
+#import platiagro.featuretypes
 import requests
 
 BUCKET_NAME = "anonymous"
@@ -263,8 +263,20 @@ def report_contexts_test_data():
     }
     return data
 
+
+def document_reader_test_data():
+    data = {
+        "data": {
+            "ndarray": [["Qual o resultado da utilização do fertilizante foliar Ômega, quando utilizado cerrado?","Na região do cerrado, o fertilizante foliar Ômega utilizado na dessecação pré-colheita do feijão, var. Imperador Vermelho, realizado com 84,2 porcento de vagens maduras, resultou em dessecação eficaz (97%) quando utilizado na dose de 4.000 mL.ha-1 , com desempenho similar a Trunfo (1.500 mL.ha-1 ) e Reglone (2.000 mL.ha-1 ). O aumento da dose de Ômega para 5.000 ou 10.000 mL.ha-1 não resultou em diferença significativa na dessecação das plantas (Figura 6);"]],
+            "names":["question","context"]
+        },
+    }
+    return data
+
+
+
 def squad_bert_chuncked():
-    name = "df_squad_test_bert_chuncked.csv"
+    name = "squad_bert_chuncked_pt.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
@@ -363,7 +375,3 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
-
-
-if __name__ == '__main__':
-    report_contexts()
