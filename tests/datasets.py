@@ -7,7 +7,7 @@ from typing import Mapping
 import minio
 import minio.error
 import pandas as pd
-#import platiagro.featuretypes
+import platiagro.featuretypes
 import requests
 
 BUCKET_NAME = "anonymous"
