@@ -21,7 +21,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
 
         datasets.report_contexts()
 
-        os.chdir("tasks/nlp-sparse-document-retriever")
+        os.chdir("tasks/nlp-document-retriever")
 
     def tearDown(self):
         datasets.clean()
@@ -73,7 +73,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "Deployment.ipynb",
             "/dev/null",
         )
-        
+
         data = datasets.document_reader_test_data()
         with server.Server() as s:
             response = s.test(data=data)
