@@ -21,7 +21,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
 
         datasets.report_contexts()
 
-        os.chdir("tasks/nlp-document-retriever")
+        os.chdir("tasks/nlp-document-reader")
 
     def tearDown(self):
         datasets.clean()
