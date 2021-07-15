@@ -47,7 +47,7 @@ jobs:
       run: |
         pip install pytest
         pytest -v tests/test_nlp_document_reader.py
-      timeout-minutes: 60
+      timeout-minutes: 90
       env:
         MINIO_ENDPOINT: minio:9000
         MINIO_ACCESS_KEY: minio
