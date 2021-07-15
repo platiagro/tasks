@@ -252,8 +252,21 @@ def report_contexts():
     with open(path, "wb") as f:
         f.write(content)
 
-    df = pd.read_csv(path)
-    metadata(name=name, df=df[:10])
+    metadata(name=name, df=pd.read_csv(path))
+
+
+def reports_contexts_small():
+    name = "reports_contexts_small.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
 
 
 def report_contexts_test_data():

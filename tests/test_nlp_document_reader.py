@@ -18,7 +18,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         os.environ["OPERATOR_ID"] = OPERATOR_ID
         os.environ["RUN_ID"] = RUN_ID
 
-        datasets.report_contexts()
+        datasets.reports_contexts_small()
 
         os.chdir("tasks/nlp-document-reader")
 
@@ -32,7 +32,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/reports_contexts.csv",
+                dataset="/tmp/data/reports_contexts_small.csv",
                 question = "Qual é o melhor herbicida para erva da ninha ?",
                 top = 10,
                 column_context = "context",
@@ -80,5 +80,5 @@ class TestSparseDocumentRetriever(unittest.TestCase):
 
         names = response["names"]    
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 5)  # 1 feature
-        self.assertEqual(len(names), 2)
+        self.assertEqual(len(ndarray[0]), 5)
+        self.assertEqual(len(names), 5)
