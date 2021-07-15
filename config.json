@@ -599,5 +599,29 @@
         "cpuRequest": "1000m",
         "memoryLimit": "10Gi",
         "memoryRequest": "10Gi"
+    },
+    {
+        "name": "Document Reader",
+        "description": "Procura a resposta para uma determinada pergunta dentro de um conjunto de contextos e retorna a porcentagem de certeza da reposta",
+        "path": "/tasks/nlp-sparse-document-retriever",
+        "category": "NLP",
+        "tags": ["NLP"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.2.0",
+        "artifacts": [{
+            "url": "https://storage.googleapis.com/platiagro/Vident/squad-train-v1.1.json",
+            "name": "squad-train-v1.1.json"
+        },{
+            "url": "https://storage.googleapis.com/platiagro/Vident/squad-dev-v1.1.json",
+            "name": "squad-dev-v1.1.json"
+        },{
+            "url": "https://storage.googleapis.com/platiagro/Vident/default_document_reader_squad_pt.ckpt",
+            "name": "default_document_reader_squad_pt.ckpt"
+        }],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "20Gi",
+        "memoryRequest": "20Gi"
     }
 ]

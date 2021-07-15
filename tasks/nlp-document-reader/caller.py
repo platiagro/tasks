@@ -7,7 +7,7 @@ import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 
 from sklearn.model_selection import train_test_split
-from pytorch_lightning.callbacks import ModelCheckpoint,EarlyStopping,GPUStatsMonitor
+from pytorch_lightning.callbacks import ModelCheckpoint,EarlyStopping
 from transformers import AutoModelForQuestionAnswering,AutoTokenizer
 from typing import List
 from multiprocessing import cpu_count
@@ -88,41 +88,6 @@ class Reader_Caller():
         self.tokenizer = AutoTokenizer.from_pretrained(self.config['params']['hparams']['model_name'])
         self.softmax = torch.nn.Softmax(dim=1)
         self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-
-        # Trainer
-        if self.fast_dev_run:
-            self.TRAINER = pl.Trainer(
-                gpus=self.num_gpus,
-                checkpoint_callback=False,
-                fast_dev_run=True  # Disable checkpoint saving.
-            )
-        else:
-            checkpoint_callback = ModelCheckpoint(
-            dirpath=self.data_dirpath, save_top_k=-1
-            )
-
-            early_stop_callback = EarlyStopping(
-                monitor=self.early_stop_callback_params['monitor'],
-                min_delta=self.early_stop_callback_params['min_delta'],
-                patience=self.early_stop_callback_params['patience'],
-                verbose=self.early_stop_callback_params['verbose'],
-                mode=self.early_stop_callback_params['mode']
-                )
-
-            gpu_stats = GPUStatsMonitor() 
-            tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}")
-
-            self.TRAINER = pl.Trainer(
-            gpus= self.lightning_params['num_gpus'],
-            profiler=self.lightning_params['profiler'],
-            max_epochs=self.lightning_params['max_epochs'],
-            accumulate_grad_batches = self.lightning_params['accumulate_grad_batches'],
-            check_val_every_n_epoch=self.lightning_params['check_val_every_n_epoch'],
-            progress_bar_refresh_rate=self.lightning_params['progress_bar_refresh_rate'],
-            callbacks = [early_stop_callback,gpu_stats,checkpoint_callback],
-            resume_from_checkpoint=None,
-            logger = tb_logger
-            )
 
     def forward(self,**kwargs):
 
@@ -241,6 +206,7 @@ class Reader_Caller():
         df_result_train= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,train_path))
         df_result_valid= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,valid_path))
         df_result_test= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,test_path))
+        
         train_dataset = CustomDataset(
                             df = df_result_train,
                             tokenizer = self.tokenizer,
@@ -284,6 +250,39 @@ class Reader_Caller():
             datasets=datasets,
             )
 
+        # Trainer
+        if self.fast_dev_run:
+            self.TRAINER = pl.Trainer(
+                gpus=self.num_gpus,
+                checkpoint_callback=False,
+                fast_dev_run=True  # Disable checkpoint saving.
+            )
+        else:
+            checkpoint_callback = ModelCheckpoint(
+            dirpath=self.data_dirpath, save_top_k=-1
+            )
+
+            early_stop_callback = EarlyStopping(
+                monitor=self.early_stop_callback_params['monitor'],
+                min_delta=self.early_stop_callback_params['min_delta'],
+                patience=self.early_stop_callback_params['patience'],
+                verbose=self.early_stop_callback_params['verbose'],
+                mode=self.early_stop_callback_params['mode']
+                )
+
+            tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}")
+
+            self.TRAINER = pl.Trainer(
+            gpus= self.lightning_params['num_gpus'],
+            profiler=self.lightning_params['profiler'],
+            max_epochs=self.lightning_params['max_epochs'],
+            accumulate_grad_batches = self.lightning_params['accumulate_grad_batches'],
+            check_val_every_n_epoch=self.lightning_params['check_val_every_n_epoch'],
+            progress_bar_refresh_rate=self.lightning_params['progress_bar_refresh_rate'],
+            callbacks = [early_stop_callback,checkpoint_callback],
+            resume_from_checkpoint=None,
+            logger = tb_logger
+            )
         # Treinando Algorítimos
         self.TRAINER.fit(self.MODEL)
 
@@ -328,11 +327,6 @@ class Reader_Caller():
         df_result_train = self._convert_tokenized_examples_to_dataset(df=df_train)
         df_result_valid = self._convert_tokenized_examples_to_dataset(df=df_valid)
         df_result_test = self._convert_tokenized_examples_to_dataset(df=df_test)
-        
-        # Chunck dataset
-        df_result_train = df_result_train[:10]
-        df_result_valid = df_result_valid[:10]
-        df_result_test = df_result_test[:10]
 
         # Salvando dados
         train_output = os.path.join(self.data_dirpath,'df_squad_train_bert_chuncked.csv')
@@ -512,91 +506,3 @@ class Reader_Caller():
         df = pd.DataFrame({'context': context, 'question': question, 'answer': answer, 'answer_start': answer_start})
 
         return df
- 
-    
-# if __name__ == '__main__':
-
-#     import os
-#     data_dir  =  root_dir = os.getcwd()
-#     logs_dir = os.path.join(root_dir,"lightning_logs")
-
-#     # Colocando parâmetros de entrada no fromato esperado
-#     hparams = {
-#         "model_name":model_name,
-#         "train_batch_size":train_batch_size,
-#         "eval_batch_size":eval_batch_size,
-#         "max_length":max_length,
-#         "doc_stride":doc_stride,
-#         "learning_rate":learning_rate,
-#         "eps":eps,
-#         "seed":seed,
-
-#     }
-
-#     lightning_params = {
-#         "num_gpus":num_gpus,
-#         "profiler":profiler,
-#         "max_epochs":max_epochs,
-#         "accumulate_grad_batches":accumulate_grad_batches,
-#         "check_val_every_n_epoch":check_val_every_n_epoch,
-#         "progress_bar_refresh_rate":progress_bar_refresh_rate,
-#         "gradient_clip_val":gradient_clip_val,
-#         "fast_dev_run":fast_dev_run,
-#     }
-
-
-#     early_stop_callback_params = {
-#          "monitor":monitor,
-#         "min_delta":min_delta,
-#         "patience":patience,
-#         "verbose":verbose,
-#         "mode":mode,    
-#     }
-
-#     prepare_data_params = {
-#          "batch_dataset_preparation":batch_dataset_preparation,
-#          "test_size_from_dev":test_size_from_dev,
-#     }
-
-#     # Configurações
-#     config = {'params':{'hparams':hparams,
-#                         'lightning_params':lightning_params,
-#                         'early_stop_callback_params':early_stop_callback_params,
-#                         'prepare_data_params':prepare_data_params },
-
-#             'dirpaths':{'data_dirpath':data_dir,
-#                     'log_dirpath':logs_dir,
-#                     'cwd_dirpath':root_dir},
-#     }
-
-#     # Criando Caller
-#     reader_caller = Reader_Caller(config)
-#     reader_caller.build()
-
-#     #Preparando dados
-#     squad_train_path = os.path.join(data_dir,'squad-train-v1.1.json')
-#     squad_dev_path= os.path.join(data_dir,'squad-dev-v1.1.json')
-#     #prepared_datapaths = reader_caller.prepare_data(squad_train_path=squad_train_path,
-#     #                                                squad_dev_path=squad_dev_path)
-#     prepared_datapaths = {
-#     "prepared_data_train_path":os.path.join(data_dir,'df_squad_train_bert_chuncked.csv'),
-#     "prepared_data_valid_path":os.path.join(data_dir,'df_squad_valid_bert_chuncked.csv'),
-#     "prepared_data_test_path":os.path.join(data_dir,'df_squad_test_bert_chuncked.csv'),
-#                             }
-#     # Treinamento
-#     _ = reader_caller.train(train_path=prepared_datapaths['prepared_data_train_path'],
-#                                 valid_path=prepared_datapaths['prepared_data_valid_path'],
-#                                 test_path=prepared_datapaths['prepared_data_test_path'])
-#     # Avaliação
-#     reader_caller.evaluate()
-
-#     # reader_caller.load_model(checkpoint_path=os.path.join(data_dir,'epoch=0-step=0.ckpt'))
-
-#     # Testando Exemplo
-#     io_utils = IO_Utils()
-#     report_contenst_txt_path = os.path.join(data_dir,'..','pdf_info_extractor','reports_contexts_texts.txt')
-#     contexts_texts = io_utils.read_line_spaced_txt_file(filepath=report_contenst_txt_path)
-#     topn_contexts = contexts_texts[:10]
-#     df_result = reader_caller.forward(question="Qual o melhor herbicida contra erva da ninha ?",topn_contexts=topn_contexts)
-    
-#     import pdb;pdb.set_trace()

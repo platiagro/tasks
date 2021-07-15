@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 *.DS_Store
 
-#Keras e Bash History
+# Keras e Bash History
 .keras/
 .bash_history

@@ -255,6 +255,20 @@ def report_contexts():
     metadata(name=name, df=pd.read_csv(path))
 
 
+def reports_contexts_small():
+    name = "reports_contexts_small.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
+
+
 def report_contexts_test_data():
     data = {
         "data": {
@@ -262,6 +276,41 @@ def report_contexts_test_data():
         },
     }
     return data
+
+
+def document_reader_test_data():
+    data = {
+        "data": {
+            "ndarray": [["Na região da Amazônia, o fertilizante foliar Ômega utilizado na dessecação pré-colheita do feijão, var. Imperador Vermelho, realizado com 84,2 porcento de vagens maduras, resultou em dessecação eficaz (97%) quando utilizado na dose de 4.000 mL.ha-1 , com desempenho similar a Trunfo (1.500 mL.ha-1 ) e Reglone (2.000 mL.ha-1 ). O aumento da dose de Ômega para 5.000 ou 10.000 mL.ha-1 não resultou em diferença significativa na dessecação das plantas (Figura 6);","Qual o resultado da utilização do fertilizante foliar Ômega, quando utilizado cerrado?"],
+                        ["Na região do cerrado, o fertilizante foliar Ômega utilizado na dessecação pré-colheita do feijão, var. Imperador Vermelho, realizado com 84,2 porcento de vagens maduras, resultou em dessecação eficaz (97%) quando utilizado na dose de 4.000 mL.ha-1 , com desempenho similar a Trunfo (1.500 mL.ha-1 ) e Reglone (2.000 mL.ha-1 ). O aumento da dose de Ômega para 5.000 ou 10.000 mL.ha-1 não resultou em diferença significativa na dessecação das plantas (Figura 6);","Qual o resultado da utilização do fertilizante foliar Ômega, quando utilizado cerrado?"]
+                        ],
+            "names":["context","question"]
+        },
+    }
+    return data
+
+
+def squad_bert_chuncked():
+    name = "squad_bert_chuncked_pt.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name, df=pd.read_csv(path))
+
+def squad_bert_chuncked_test():
+    data = {
+        "data": {
+            "ndarray": ["Quantas plantas da ninha existem ?", "Qual herbicida é melhor contra planta da ninha ?"],
+        },
+    }
+    return data
+
 
 def paracrawl():
     name = "paracrawl_en_pt_test.csv"
@@ -341,7 +390,3 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
-
-
-if __name__ == '__main__':
-    report_contexts()
