@@ -78,9 +78,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
 
-        print("############################################################")
-        print("response: \n",response)
         names = response["names"]    
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 2)  # 1 feature
+        self.assertEqual(len(ndarray[0]), 5)  # 1 feature
         self.assertEqual(len(names), 2)
