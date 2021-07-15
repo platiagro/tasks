@@ -267,9 +267,7 @@ def report_contexts_test_data():
 def document_reader_test_data():
     data = {
         "data": {
-            "ndarray": [["Na região da Amazônia, o fertilizante foliar Ômega utilizado na dessecação pré-colheita do feijão, var. Imperador Vermelho, realizado com 84,2 porcento de vagens maduras, resultou em dessecação eficaz (97%) quando utilizado na dose de 4.000 mL.ha-1 , com desempenho similar a Trunfo (1.500 mL.ha-1 ) e Reglone (2.000 mL.ha-1 ). O aumento da dose de Ômega para 5.000 ou 10.000 mL.ha-1 não resultou em diferença significativa na dessecação das plantas (Figura 6);","Qual o resultado da utilização do fertilizante foliar Ômega, quando utilizado cerrado?"],
-                        ["Na região do cerrado, o fertilizante foliar Ômega utilizado na dessecação pré-colheita do feijão, var. Imperador Vermelho, realizado com 84,2 porcento de vagens maduras, resultou em dessecação eficaz (97%) quando utilizado na dose de 4.000 mL.ha-1 , com desempenho similar a Trunfo (1.500 mL.ha-1 ) e Reglone (2.000 mL.ha-1 ). O aumento da dose de Ômega para 5.000 ou 10.000 mL.ha-1 não resultou em diferença significativa na dessecação das plantas (Figura 6);","Qual o resultado da utilização do fertilizante foliar Ômega, quando utilizado cerrado?"]
-                        ],
+            "ndarray": [["Na região da Amazônia, o fertilizante foliar Ômega utilizado na dessecação pré-colheita do feijão, var. Imperador Vermelho, realizado com 84,2 porcento de vagens maduras, resultou em dessecação eficaz (97%) quando utilizado na dose de 4.000 mL.ha-1 , com desempenho similar a Trunfo (1.500 mL.ha-1 ) e Reglone (2.000 mL.ha-1 ). O aumento da dose de Ômega para 5.000 ou 10.000 mL.ha-1 não resultou em diferença significativa na dessecação das plantas (Figura 6);","Qual o resultado da utilização do fertilizante foliar Ômega, quando utilizado cerrado?"]],
             "names":["context","question"]
         },
     }
