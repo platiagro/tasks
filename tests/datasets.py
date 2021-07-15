@@ -276,7 +276,6 @@ def document_reader_test_data():
     return data
 
 
-
 def squad_bert_chuncked():
     name = "squad_bert_chuncked_pt.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
