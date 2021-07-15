@@ -10,7 +10,6 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-
 class TestSparseDocumentRetriever(unittest.TestCase):
 
     def setUp(self):
@@ -75,8 +74,12 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         )
 
         data = datasets.document_reader_test_data()
+
         with server.Server() as s:
             response = s.test(data=data)
+
+        print("############################################################")
+        print("response: \n",response)
         names = response["names"]    
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 2)  # 1 feature
