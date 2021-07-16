@@ -36,8 +36,8 @@ class TestDenseDocumentRetriever(unittest.TestCase):
                 dataset="/tmp/data/reports_contexts_small.csv",
                 column = "context",
                 question = "What is the best weed herbicide?",
-                top = 10,
-                inner_batch_size = 10,
+                top = 5,
+                inner_batch_size = 5,
                 tokenizer_fn = "facebook/dpr-reader-single-nq-base",
                 tokenizer_max_len = 512,
                 dpr_fn = "facebook/dpr-reader-single-nq-base",
@@ -50,7 +50,11 @@ class TestDenseDocumentRetriever(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.report_contexts_test_data()
+        print("######################################################")
+        print(data)
         with server.Server() as s:
-            response = s.test(data=data)
+            print("######################################################")
+            print("s")
+            response = s.test(data=data,timeout=10)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 4)  # 1 feature
