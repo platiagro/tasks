@@ -11,7 +11,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-class TestSparseDocumentRetriever(unittest.TestCase):
+class TestDenseDocumentRetriever(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -33,7 +33,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/reports_contexts.csv",
+                dataset="/tmp/data/reports_contexts_small.csv",
                 column = "context",
                 question = "What is the best weed herbicide?",
                 top = 10,
