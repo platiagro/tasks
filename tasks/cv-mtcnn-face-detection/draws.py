@@ -46,7 +46,7 @@ def draw_bboxes(
         
         # find name id, prob and set color
         name_id = np.where(np.array(name_ids) == names[bbox_id])[0][0]
-        prob = probs[bbox_id]
+        prob = float(probs[bbox_id])
         color = _BBOX_COLORS[name_id%_MAX_CLASSES]
 
         # Get text size
