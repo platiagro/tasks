@@ -114,7 +114,7 @@ class MTCNN_Model:
             for each image, with image_path, bbox and probability
         '''
         
-        df = pd.DataFrame(columns=["Input_image","Bboxes(x1,y1,x2,y2)","Probabilities"])
+        df = pd.DataFrame(columns=["image","coords(x_min,y_min,x_max,y_max)","probability"])
         
         # Resulting arrays from batches results
         paths, bboxes, probs = [], [], []
@@ -143,12 +143,12 @@ class MTCNN_Model:
                 probs.append(probs_data[bbox_id])
             
         df = pd.DataFrame()
-        df["Input_image"]         = paths
-        df["Bboxes(x1,y1,x2,y2)"] = bboxes
-        df["Probabilities"]       = probs
+        df["image"]         = paths
+        df["coords(x_min,y_min,x_max,y_max)"] = bboxes
+        df["probability"]       = probs
         
         # Ordering column names
-        df = df[["Input_image","Bboxes(x1,y1,x2,y2)","Probabilities"]]
+        df = df[["image","coords(x_min,y_min,x_max,y_max)","probability"]]
         
         return df
     
@@ -184,7 +184,7 @@ class MTCNN_Model:
         '''
         
         # Define the df_result format
-        self.df_result = pd.DataFrame(columns=["Input_image","Bboxes(x1,y1,x2,y2)","Probabilities"])
+        self.df_result = pd.DataFrame(columns=["image","coords(x_min,y_min,x_max,y_max)","probability"])
         
         # Perform batch prediction
         max_size = len(self.X)
@@ -231,8 +231,8 @@ class MTCNN_Model:
         -------
         pd.DataFrame
             Returns a pd.DataFrame containing all the results of
-            the inferences. The dataframe has the columns "Input_image", 
-            "Bboxes(x1,y1,x2,y2)" and "Probabilities".
+            the inferences. The dataframe has the columns "image", 
+            "coords(x_min,y_min,x_max,y_max)" and "probability".
         '''
         
         self.X = X
