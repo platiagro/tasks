@@ -23,9 +23,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        python-version: ["3.7"]
+
     steps:
     - name: Checkout 🛎️
       uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
     - name: Set output variables
       id: vars
@@ -40,6 +48,13 @@ jobs:
         fi
         echo ::set-output name=BRANCH::${{ github.ref }}
         echo ::set-output name=COMMIT::${{ github.sha }}
+
+    - name: Test with pytest
+      run: |
+        pip install pytest pytest-cov
+        coverage erase
+        coverage run --branch --source=init-job -m pytest
+        coverage xml -i
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
