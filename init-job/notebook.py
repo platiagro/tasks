@@ -414,7 +414,7 @@ def read_parameters_from_source(source):
                 # For these comparisons below we need to make sure there are no white spaces.
                 default_str_no_whitespace = default.strip()
 
-                if default_str_no_whitespace and default_str_no_whitespace != None:
+                if default_str_no_whitespace and default_str_no_whitespace != "None":
                     if default_str_no_whitespace in ["True", "False"]:
                         default = default_str_no_whitespace.lower()
                     parameter["default"] = json.loads(default)
