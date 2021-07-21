@@ -35,6 +35,7 @@ class TestDescriptiveAnalysis(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
+                group_col="Species",
             ),
         )
 
@@ -44,6 +45,7 @@ class TestDescriptiveAnalysis(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
+                group_col="Embarked",
             ),
         )
 
@@ -53,5 +55,6 @@ class TestDescriptiveAnalysis(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
+                group_col="rad",
             ),
         )
