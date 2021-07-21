@@ -53,7 +53,7 @@ jobs:
       run: |
         pip install pytest pytest-cov
         coverage erase
-        coverage run --branch --source=init-job -m pytest
+        coverage run --branch --source=init-job -m pytest tests/test_parameters.py
         coverage xml -i
 
     - name: Set up QEMU
