@@ -412,7 +412,7 @@ def read_parameters_from_source(source):
                 parameter = {"name": name}
 
                 # For these comparisons below we need to make sure there are no whitespaces.
-                default_str_no_whitespace = default.strip()
+                default_str_no_whitespace = default.strip() if default else None
 
                 if default_str_no_whitespace and default_str_no_whitespace != "None":
                     if default_str_no_whitespace in ["True", "False"]:
