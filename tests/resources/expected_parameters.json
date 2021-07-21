@@ -4,56 +4,56 @@
         "name": "no_default_value",
         "type": "feature",
         "label": "Atributo alvo",
-        "description": "Esse valor será utilizado para garantir que o alvo não seja removido.",
+        "description": "Esse valor será utilizado para garantir que o alvo não seja removido."
     },
     {
         "name": "default_value_True",
-        "default": True,
+        "default": true,
         "type": "boolean",
         "label": "Centralização",
-        "description": "Centralizar os dados antes de dimensionar. Ocorre exceção quando usado com matrizes esparsas",
+        "description": "Centralizar os dados antes de dimensionar. Ocorre exceção quando usado com matrizes esparsas"
     },
     {
         "name": "default_value_False",
-        "default": False,
+        "default": false,
         "type": "boolean",
         "label": "Dimensionamento",
-        "description": "Dimensionar os dados para um intervalo interquartil",
+        "description": "Dimensionar os dados para um intervalo interquartil"
     },
     {
         "name": "default_value_int",
         "default": 1,
         "type": "boolean",
         "label": "Dimensionamento",
-        "description": "Dimensionar os dados para um intervalo interquartil",
+        "description": "Dimensionar os dados para um intervalo interquartil"
     },
     {
         "name": "default_value_float",
         "default": 0.5,
         "type": "boolean",
         "label": "Dimensionamento",
-        "description": "Dimensionar os dados para um intervalo interquartil",
+        "description": "Dimensionar os dados para um intervalo interquartil"
     },
     {
         "name": "default_value_string",
         "default": "My string",
         "type": "boolean",
         "label": "Dimensionamento",
-        "description": "Dimensionar os dados para um intervalo interquartil",
+        "description": "Dimensionar os dados para um intervalo interquartil"
     },
     {
         "name": "default_value_list",
         "default": [9, 3, 3, 2],
         "type": "boolean",
         "label": "Dimensionamento",
-        "description": "Dimensionar os dados para um intervalo interquartil",
+        "description": "Dimensionar os dados para um intervalo interquartil"
     },
     {
         "name": "default_value_dict",
         "default": {"a": 1, "b": 1, "c": 3},
         "type": "boolean",
         "label": "Dimensionamento",
-        "description": "Dimensionar os dados para um intervalo interquartil",
-    },
+        "description": "Dimensionar os dados para um intervalo interquartil"
+    }
 ]
 
