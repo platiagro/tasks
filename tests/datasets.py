@@ -9,6 +9,7 @@ import minio.error
 import pandas as pd
 import platiagro.featuretypes
 import requests
+from base64 import b64encode
 
 BUCKET_NAME = "anonymous"
 PREFIX = "datasets"
@@ -399,11 +400,10 @@ def image_testdata(kind: str = 'objects', ext: str = 'jpg'):
     name = f"{kind}.{ext}"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/tests/resources/{name}"
 
-    content = requests.get(url).content
+    imbytes = requests.get(url).content
 
     data = {
-        "data": {
-            "ndarray": [content],
-        },
+        "binData": b64encode(imbytes).decode(),
     }
+
     return data
