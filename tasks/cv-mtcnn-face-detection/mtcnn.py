@@ -1,3 +1,4 @@
+import logging
 import cv2 
 import numpy as np
 import pandas as pd
@@ -57,15 +58,14 @@ class MTCNN_Model:
         #------- Results
         self.df_result  = None
         
-    def predict(self, 
-                img_arr: np.ndarray):
+    def predict(self, img_arr: np.ndarray):
         '''
         Parameters
         ----------
         img_arr : np.ndarray, list
             A array containing the data of a 3D image or a list of
             3D image arrays (as a batch)
-
+        
         Returns
         -------
         Tuple
@@ -79,34 +79,47 @@ class MTCNN_Model:
             If no bbox was found, first element is represented by None, and the second
             [None]
         '''
-        
+
         # Convert to nd.array
         if isinstance(img_arr, list):
             img_arr = np.array(img_arr)
-        
+
         # Adding batch dimension
         if len(img_arr.shape) == 3:
             img_arr = np.expand_dims(img_arr, 0)
+
+        # Resize image to network input size
+        original_image_shapes = []
+        reshaped_images = []
+        for img in img_arr:
+            original_image_shapes.append(img.shape)
+            reshaped_images.append(cv2.resize(img, (self.input_square_transformation_size, self.input_square_transformation_size)))
+        
+        # Convert to np.ndarray
+        reshaped_images = np.array(reshaped_images)
         
         # Migth popup a warning when not fiding any bbox
-        boxes, probs = self.mtcnn.detect(img_arr, landmarks=False)
-        
-        return (boxes, probs)
+        batch_bboxes, batch_probs = self.mtcnn.detect(reshaped_images, landmarks=False)
+
+        for i, bboxes in enumerate(batch_bboxes):
+            if bboxes is None: continue
+            
+            # Reshape bbox to match original image shape
+            original_shape = original_image_shapes[i]
+            batch_bboxes[i] = [self._bbox_to_original_shape(bbox, original_shape) for bbox in bboxes]
+
+        return (batch_bboxes, batch_probs)
     
-    def _post_process_batch(self, batch_results, batch_img_paths, batch_original_img_shapes):
+    def _post_process_results(self, batch_results, index_range):
         '''
         Parameters
         ----------
         batch_results : np.ndarray, list
             A array containing the data of each batch prediction
             
-        batch_img_paths : np.ndarray, list
-            Containing each image path for each instance of the
-            batch_result
+        index_range : np.ndarray, list
+            Containing each image index in the batch
             
-        batch_original_img_shapes : np.ndarray, list
-            Containing each image original tuple shape (e.g. [(256, 256, *),...])
-
         Returns
         -------
         pd.DataFrame
@@ -114,14 +127,16 @@ class MTCNN_Model:
             for each image, with image_path, bbox and probability
         '''
         
-        df = pd.DataFrame(columns=["image","coords(x_min,y_min,x_max,y_max)","probability"])
-        
         # Resulting arrays from batches results
         paths, bboxes, probs = [], [], []
+
+        # Get batch image paths
+        batch_img_paths = self.X[index_range]
         
-        zipped_loop = zip(batch_results[0], batch_results[1], batch_img_paths, batch_original_img_shapes)
+        # Zip data for loop
+        zipped_loop = zip(batch_results[0], batch_results[1], batch_img_paths)
         
-        for bboxes_data, probs_data, image_path, original_img_shape in zipped_loop:
+        for bboxes_data, probs_data, image_path in zipped_loop:
             
             # Not found bbox
             if bboxes_data is None:
@@ -132,20 +147,13 @@ class MTCNN_Model:
             
             for bbox_id in range(bboxes_data.shape[0]):
                 paths.append(image_path)
-                
-                # Restore the bbox to match original image shape
-                restored_bbox = self._bbox_to_original_shape(
-                    bboxes_data[bbox_id],
-                    original_img_shape
-                    )
-                
-                bboxes.append(restored_bbox)
+                bboxes.append(bboxes_data[bbox_id])
                 probs.append(probs_data[bbox_id])
             
         df = pd.DataFrame()
-        df["image"]         = paths
+        df["image"] = paths
         df["coords(x_min,y_min,x_max,y_max)"] = bboxes
-        df["probability"]       = probs
+        df["probability"] = probs
         
         # Ordering column names
         df = df[["image","coords(x_min,y_min,x_max,y_max)","probability"]]
@@ -174,7 +182,27 @@ class MTCNN_Model:
         y2 = bbox[3] * original_shape[0]/self.input_square_transformation_size
 
         return np.array([x1, y1, x2, y2])
-        
+
+    def _build_batch(self, index_range):
+        '''
+        Build a batch of images to be used in prediction
+        '''
+
+        # Create a batch of images
+        batch = []
+        image_paths = self.X[index_range]
+        for image_path in image_paths:
+            # Read image
+            v_cap = cv2.VideoCapture(image_path)
+            success, frame = v_cap.read()
+
+            # If image is not read correctly, skip it
+            if not success: continue
+            
+            img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            batch.append(img)
+
+        return np.array(batch)
     
     def _construct_result_dataframe(self):
         '''
@@ -190,29 +218,18 @@ class MTCNN_Model:
         max_size = len(self.X)
         step     = min(max_size, self.inference_batch_size)
         for i in range(0, max_size, step):
-            
-            batch_imgs = []
-            batch_original_img_shapes = []
-            batch_img_paths = self.X[i:i+step]
 
-            # Process each batch image
-            for img_path in batch_img_paths:
-                
-                # Read image
-                v_cap = cv2.VideoCapture(img_path)
-                success, frame = v_cap.read()
-                
-                # Preprocess image
-                img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                batch_original_img_shapes.append(img.shape) # Save original shape for refactor bbox
-                img = cv2.resize(img, (self.input_square_transformation_size,self.input_square_transformation_size))
-                batch_imgs.append(img)
+            # Batch index range
+            index_range = range(i, min(i+step, max_size))
+            
+            # Build a batch of images
+            batch = self._build_batch(index_range)
 
             # Infer the batch
-            batch_results = self.predict(np.array(batch_imgs))
+            batch_results = self.predict(batch)
             
             # Post process results from batch inference
-            batch_df = self._post_process_batch(batch_results, batch_img_paths, batch_original_img_shapes)
+            batch_df = self._post_process_results(batch_results, index_range)
             
             # Add results to final df
             self.df_result = pd.concat((self.df_result, batch_df))
