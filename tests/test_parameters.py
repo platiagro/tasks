@@ -1,7 +1,7 @@
 import unittest
 import sys
 import json
-# we need import this way just because python can handle well '-' character in import
+# we need import this way just because python can't handle well '-' character in import
 sys.path.append("./init-job")
 
 import notebook
