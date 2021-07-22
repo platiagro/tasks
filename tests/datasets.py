@@ -390,3 +390,20 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
+
+def image_testdata(kind: str = 'objects', ext: str = 'jpg'):
+
+    assert kind in ['objects', 'text', 'people']
+    assert ext in ['jpg', 'png']
+
+    name = f"{kind}.{ext}"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/tests/resources/{name}"
+
+    content = requests.get(url).content
+
+    data = {
+        "data": {
+            "ndarray": [content],
+        },
+    }
+    return data
