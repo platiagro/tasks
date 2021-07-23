@@ -242,6 +242,19 @@ def football_teams():
 
     metadata(name=name)
 
+def face_detection():
+    name = "face_detection.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
 def report_contexts():
     name = "reports_contexts.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
