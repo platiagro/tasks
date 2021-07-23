@@ -53,7 +53,7 @@ sudo docker run -it --rm \
     -e "MINIO_ACCESS_KEY=Q3AM3UQ867SPQQA43P2F" \
     -e "MINIO_SECRET_KEY=zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG" \
     -v $(pwd):/home/jovyan \
-    platiagro/platiagro-notebook-image:0.2.0 bash
+    platiagro/platiagro-notebook-image:0.3.0 bash
 ```
 
 Install the testing requirements:
