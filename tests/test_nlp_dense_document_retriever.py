@@ -50,11 +50,7 @@ class TestDenseDocumentRetriever(unittest.TestCase):
             "/dev/null",
         )
         data = datasets.report_contexts_test_data()
-        print("######################################################")
-        print(data)
         with server.Server() as s:
-            print("######################################################")
-            print("s")
             response = s.test(data=data,timeout=10)
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 4)  # 1 feature
