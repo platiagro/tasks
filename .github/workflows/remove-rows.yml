@@ -1,0 +1,54 @@
+name: Remove Rows
+
+on:
+  push:
+    branches:
+    - main
+    - v*-branch
+    paths:
+    - tasks/remove-rows/**
+    - tests/datasets.py
+    - tests/server.py
+    - tests/test_remove_rows.py
+
+  pull_request:
+    branches:
+    - main
+    - v*-branch
+    paths:
+    - tasks/remove-rows/**
+    - tests/datasets.py
+    - tests/server.py
+    - tests/test_remove_rows.py
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # runs all of the steps inside the specified container rather than on the VM host.
+    # Because of this the network configuration changes from host based network to a container network.
+    container:
+      image: platiagro/platiagro-notebook-image:0.3.0
+
+    services:
+
+      minio:
+        image: bitnami/minio:latest
+        env:
+          MINIO_ACCESS_KEY: minio
+          MINIO_SECRET_KEY: minio123
+        ports:
+        - 9000:9000
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Test with pytest
+      run: |
+        pip install pytest
+        pytest -v tests/test_remove_rows.py
+      timeout-minutes: 5
+      env:
+        MINIO_ENDPOINT: minio:9000
+        MINIO_ACCESS_KEY: minio
+        MINIO_SECRET_KEY: minio123
