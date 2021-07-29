@@ -56,7 +56,6 @@ class Qgenerator_caller():
         self.test_size_from_dev = self.prepare_data_params['test_size_from_dev']
         #-
         self.model_name = self.hparams['model_name']
-        self.save_every = self.hparams['save_every']
         self.num_gen_sentences = self.hparams['num_gen_sentences']
         self.no_repeat_ngram_size = self.hparams['no_repeat_ngram_size']
         self.train_batch_size = self.hparams['train_batch_size']
@@ -172,16 +171,13 @@ class Qgenerator_caller():
         verify_args(train_path,valid_path,test_path,glove_weights_path)
 
         # Criando datasets
-        # df_result_train= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,train_path))
-        # df_result_valid= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,valid_path))
-        # df_result_test= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,test_path))        
-        df_train = pd.read_excel(train_path)
-        df_valid = pd.read_excel(valid_path)
-        df_test = pd.read_excel(test_path)
-
-        X_train,y_train = np.array(df_train['Context']),np.array(df_train['Question'])
-        X_valid,y_valid = np.array(df_valid['Context']),np.array(df_valid['Question'])
-        X_test ,y_test  = np.array(df_test ['Context']),np.array(df_test ['Question'])
+        df_result_train= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,train_path))
+        df_result_valid= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,valid_path))
+        df_result_test= self.io_utils.read_csv_to_df(filepath=os.path.join(self.data_dirpath,test_path))
+    
+        X_train,y_train = np.array(df_result_train['context']),np.array(df_result_train['question'])
+        X_valid,y_valid = np.array(df_result_valid['context']),np.array(df_result_valid['question'])
+        X_test ,y_test  = np.array(df_result_test['context']),np.array(df_result_test['question'])
             
         train_dataset = CustomDataset(PREFIX=self.hparams['PREFIX'],
             tokenizer=self.tokenizer,
@@ -239,6 +235,13 @@ class Qgenerator_caller():
 
         return self.MODEL        
 
+    def save_checkpoint(self,checkpoint_path):
+        # Checagem das Chamadas
+        if not (self.train_called):
+            raise AssertionError("Para chamar o método save_checkpoint é nececssário chamar o método train")
+            
+        self.TRAINER.save_checkpoint(checkpoint_path)
+        
     def evaluate(self,**kwargs):
         # Checagem das Chamadas
         if not (self.build_called and (self.train_called or self.load_called)):
@@ -252,8 +255,8 @@ class Qgenerator_caller():
         test_results_output_path =  os.path.join(self.log_dirpath,'test_results.json')
         valid_results = self.MODEL.valid_metrics_calculator.list_dict_track
         test_results = self.MODEL.test_metrics_calculator.list_dict_track
-        self.io_utils.dumps_json(filepath=valid_results_output_path,d=valid_results)
-        self.io_utils.dumps_json(filepath=test_results_output_path,d=test_results)
+        self.io_utils.dump_json(filepath=valid_results_output_path,d=valid_results)
+        self.io_utils.dump_json(filepath=test_results_output_path,d=test_results)
 
         return {'valid_results':valid_results,
                 'test_results':test_results
@@ -262,9 +265,7 @@ class Qgenerator_caller():
     def forward(self,**kwargs):
 
         def verify_args(contexts,num_gen_sentences):
-       
-            if not contexts:
-                raise ValueError("contexts é um argumento obrigatório")
+      
             if not all(isinstance(elem, str) for elem in contexts):
                 raise ValueError(f"contexts deve ser uma lista de strings mas é {contexts}")
             if not num_gen_sentences:
@@ -331,24 +332,33 @@ class Qgenerator_caller():
         df_valid, df_test = train_test_split(df_dev, test_size=self.test_size_from_dev)
 
         # Chunck dataset
-        df_result_train = self._convert_tokenized_examples_to_dataset(df=df_train)
-        df_result_valid = self._convert_tokenized_examples_to_dataset(df=df_valid)
-        df_result_test = self._convert_tokenized_examples_to_dataset(df=df_test)
+        df_result_train = df_train #self._convert_tokenized_examples_to_dataset(df=df_train)
+        df_result_valid = df_valid #self._convert_tokenized_examples_to_dataset(df=df_valid)
+        df_result_test = df_test #self._convert_tokenized_examples_to_dataset(df=df_test)
+        #df_result = pd.concat([df_result_train, df_result_valid, df_result_test],ignore_index=True)
+        
 
         # Salvando dados
-        train_output = os.path.join(self.data_dirpath,'qgenerator','squad-train-v1.1.xlsx')
-        valid_output = os.path.join(self.data_dirpath,'qgenerator','squad-valid-v1.1.xlsx')
-        test_output = os.path.join(self.data_dirpath,'qgenerator','squad-test-v1.1.xlsx')
+        train_output = os.path.join(self.data_dirpath,'squad-train-v1.1.csv')
+        valid_output = os.path.join(self.data_dirpath,'squad-valid-v1.1.csv')
+        test_output = os.path.join(self.data_dirpath,'squad-test-v1.1.csv')
+        #complete_output = os.path.join(self.data_dirpath,'squad-v1.1.csv')
+            
         df_result_train.to_csv(os.path.join(train_output),index=False)
         df_result_valid.to_csv(os.path.join(valid_output),index=False)
         df_result_test.to_csv(os.path.join(test_output),index=False)
+        #df_result.to_csv(os.path.join(complete_output),index=False)
         
         return {
                 'prepared_data_train_path':train_output,
                 'prepared_data_valid_path':valid_output,
                 'prepared_data_test_path':test_output,
                 }
-
+    
+    def _apply_preprocessing(self,text):
+        text = " ".join(text.split()).strip()
+        return text
+    
     def _read_squad_json_as_dataframe(self,json_file):
 
         context, question, answer, answer_start = [], [], [], []
@@ -361,9 +371,9 @@ class Qgenerator_caller():
                     
                     for a in q['answers']:
                         
-                        context.append(c['context'])
-                        question.append(q['question'])
-                        answer.append(a['text'])
+                        context.append(self._apply_preprocessing(c['context']))
+                        question.append(self._apply_preprocessing(q['question']))
+                        answer.append(self._apply_preprocessing(a['text']))
                         answer_start.append(a['answer_start'])
 
         df = pd.DataFrame({'context': context, 'question': question, 'answer': answer, 'answer_start': answer_start})
@@ -381,85 +391,3 @@ class Qgenerator_caller():
             gen_questions_dict_copy[k]['section_name'] = section_name
         
         return gen_questions_dict_copy
-
-if __name__ == '__main__':
-
-
-    # Mapeando dirpaths
-    file_dir = os.path.dirname(os.path.abspath(__file__))
-    root_dir = os.path.join(file_dir,'..','..')
-    data_dir = os.path.join(root_dir,"data","qgenerator")
-    logs_dir = os.path.join(root_dir,"logs","qgenerator","lightning_logs")
-
-    # Recuperando parâmetros
-    hparams = yaml.safe_load(open(os.path.join(file_dir,"params.yaml")))['hparams']
-    lightning_params =yaml.safe_load(open(os.path.join(file_dir,"params.yaml")))['lightning_params']
-    early_stop_callback_params = yaml.safe_load(open(os.path.join(file_dir,"params.yaml")))['early_stop_callback']
-    prepare_data_params = yaml.safe_load(open(os.path.join(file_dir,"params.yaml")))['prepare_data']
-
-    io_utils = IO_Utils()
-
-    #setting dirpaths
-    data_dir = os.path.join(root_dir,"data")
-    logs_dir = os.path.join(root_dir,"logs")
-    raw_data_dir = os.path.join(data_dir,"raw_data")
-    qgenerator_data_dir = os.path.join(data_dir,"qgenerator")
-    tb_logdir = os.path.join(logs_dir,"qgenerator")
-
-    #setting filepaths  
-    MODEL_PATH = ''  
-
-    #Getting data and setting output paths
-    train_input_path = os.path.join(qgenerator_data_dir,'squad-train-v1.1.xlsx')
-    valid_input_path = os.path.join(qgenerator_data_dir,'squad-valid-v1.1.xlsx')
-    test_input_path = os.path.join(qgenerator_data_dir,'squad-test-v1.1.xlsx')
-    glove_weights_path = os.path.join(raw_data_dir,'glove_s300_portugues.txt')
-
-
-    config = {'params':{'hparams':hparams,
-                        'lightning_params':lightning_params,
-                        'early_stop_callback_params':early_stop_callback_params,
-                        'prepare_data_params':prepare_data_params },
-
-            'dirpaths':{'data_dirpath':data_dir,
-                    'log_dirpath':logs_dir,
-                    'cwd_dirpath':root_dir},
-            }
-
-    qgenerator_caller = Qgenerator_caller(config)
-    qgenerator_caller.build()
-
-    #Preparando dados
-    #squad_train_path = os.path.join(data_dir,'..','raw_data','squad-train-v1.1.json')
-    #squad_dev_path= os.path.join(data_dir,'..','raw_data','squad-dev-v1.1.json')
-    # prepared_datapaths = qgenerator_caller.prepare_data(squad_train_path=squad_train_path,
-    #                                                squad_dev_path=squad_dev_path)
-    # prepared_datapaths = {
-    # "prepared_data_train_path":os.path.join(data_dir,'qgenerator','squad-train-v1.1.xlsx'),
-    # "prepared_data_valid_path":os.path.join(data_dir,'qgenerator','squad-valid-v1.1.xlsx'),
-    # "prepared_data_test_path":os.path.join(data_dir,'qgenerator','squad-test-v1.1.xlsx'),
-    #                         }
-    # # Treinamento
-    # _ = qgenerator_caller.train(train_path=prepared_datapaths['prepared_data_train_path'],
-    #                             valid_path=prepared_datapaths['prepared_data_valid_path'],
-    #                             test_path=prepared_datapaths['prepared_data_test_path'],
-    #                             glove_weights_path = glove_weights_path,
-    #                            )
-    # #Avaliação
-    # qgenerator_caller.evaluate()
-
-
-    qgenerator_caller.load_model(checkpoint_path=os.path.join(data_dir,'qgenerator','epoch=0-step=1367.ckpt'))
-
-    # Testando Exemplo
-    reports_contents = io_utils.read_json(filepath=os.path.join(data_dir,'pdf_info_extractor','reports_contents.json'))
-    contexts = [reports_contents[i]['text'] for i in reports_contents]
-    
-    gen_questions_dict = qgenerator_caller.forward(contexts=contexts, num_gen_sentences=10)
-
-    gen_questions_dict = qgenerator_caller.build_complete_json(gen_questions_dict=gen_questions_dict,reports_contents=reports_contents)                    
-    
-    io_utils.dump_json(filepath=os.path.join(data_dir,'qgenerator','context_questions_map.json'),d=gen_questions_dict)
-    #import pdb;pdb.set_trace()
-
-    print("Question Generation Finishied!")

@@ -1,5 +1,5 @@
 import numpy as np
-from nlgeval import NLGEval
+#from nlgeval import NLGEval
 from gensim.models import KeyedVectors
 import torch
 import numpy as np
@@ -12,7 +12,7 @@ class Metrics_Calculator(object):
 
       
         super(Metrics_Calculator, self).__init__()
-        self.nlg_eval = NLGEval(metrics_to_omit=['EmbeddingAverageCosineSimilairty', 'EmbeddingAverageCosineSimilarity','GreedyMatchingScore','SkipThoughtCS','VectorExtremaCosineSimilarity'])
+        #self.nlg_eval = NLGEval(metrics_to_omit=['EmbeddingAverageCosineSimilairty', 'EmbeddingAverageCosineSimilarity','GreedyMatchingScore','SkipThoughtCS','VectorExtremaCosineSimilarity'])
         self.list_dict_track  = {"data":[]}
         self.hparams = hparams
         self.glove_comparer = glove_comparer
@@ -40,34 +40,36 @@ class Metrics_Calculator(object):
         """ 
         Calcula as métricas para cada par question-context
         """
-        bleu_1_list = []
-        bleu_2_list = []
-        bleu_3_list = []
-        bleu_4_list = []
-        CIDEr_list = []
-        ROUGE_L_list = []
+        # bleu_1_list = []
+        # bleu_2_list = []
+        # bleu_3_list = []
+        # bleu_4_list = []
+        # CIDEr_list = []
+        # ROUGE_L_list = []
         cossine_similarity_list = []
 
         for gen_target_option in gen_target_options_list:
           
-          metrics_dict = self.nlg_eval.compute_individual_metrics(ref=[original_target],hyp=gen_target_option)#ref:List[str] , hyp:str
-          bleu_1_list.append(metrics_dict['Bleu_1'])
-          bleu_2_list.append(metrics_dict['Bleu_2'])
-          bleu_3_list.append(metrics_dict['Bleu_3'])
-          bleu_4_list.append(metrics_dict['Bleu_4'])
-          CIDEr_list.append(metrics_dict['CIDEr'])
-          ROUGE_L_list.append(metrics_dict['ROUGE_L'])
-          cs = self.glove_comparer.compare_sentences_with_cossine_similarity(original_target,gen_target_option)
-          cossine_similarity_list.append(cs)
+        #   metrics_dict = self.nlg_eval.compute_individual_metrics(ref=[original_target],hyp=gen_target_option)#ref:List[str] , hyp:str
+        #   bleu_1_list.append(metrics_dict['Bleu_1'])
+        #   bleu_2_list.append(metrics_dict['Bleu_2'])
+        #   bleu_3_list.append(metrics_dict['Bleu_3'])
+        #   bleu_4_list.append(metrics_dict['Bleu_4'])
+        #   CIDEr_list.append(metrics_dict['CIDEr'])
+        #   ROUGE_L_list.append(metrics_dict['ROUGE_L'])
+
+            cs = self.glove_comparer.compare_sentences_with_cossine_similarity(original_target,gen_target_option)
+            cossine_similarity_list.append(cs)
           
           
 
-        row_metrics_dict = {"Bleu_1":np.mean(bleu_1_list),
-                             "Bleu_2":np.mean(bleu_2_list),
-                             "Bleu_3":np.mean(bleu_3_list),
-                             "Bleu_4":np.mean(bleu_4_list),
-                             "CIDEr":np.mean(CIDEr_list),
-                             "ROUGE_L":np.mean(ROUGE_L_list),
+        # row_metrics_dict = {"Bleu_1":np.mean(bleu_1_list),
+        #                      "Bleu_2":np.mean(bleu_2_list),
+        #                      "Bleu_3":np.mean(bleu_3_list),
+        #                      "Bleu_4":np.mean(bleu_4_list),
+        #                      "CIDEr":np.mean(CIDEr_list),
+        #                      "ROUGE_L":np.mean(ROUGE_L_list),
+        row_metrics_dict = {
                              "Glove_Cossine_Similarity":np.mean(cossine_similarity_list)}
 
         return row_metrics_dict
@@ -78,43 +80,44 @@ class Metrics_Calculator(object):
         """
         Calcula métricas para todo o batch
         """
-        batch_bleu_1_list = []
-        batch_bleu_2_list = []
-        batch_bleu_3_list = []
-        batch_bleu_4_list = []
-        batch_CIDEr_list = []
-        batch_ROUGE_L_list = []
+        # batch_bleu_1_list = []
+        # batch_bleu_2_list = []
+        # batch_bleu_3_list = []
+        # batch_bleu_4_list = []
+        # batch_CIDEr_list = []
+        # batch_ROUGE_L_list = []
         batch_Glove_Cossine_Similarity_list = []
 
 
         #batch
         for i,(original_target,original_source) in enumerate(zip(original_targets_batch,original_sources_batch)):
           #linha
-          relevant_logits = logits[i*self.hparams.num_gen_sentences:self.hparams.num_gen_sentences+i*self.hparams.num_gen_sentences]
-          gen_target_options_list = [self.hparams.tokenizer.decode(l, skip_special_tokens=True) for l in relevant_logits]
-          row_metrics_dict = self.track_metrics_row(original_target=original_target,gen_target_options_list=gen_target_options_list)
+            relevant_logits = logits[i*self.hparams.num_gen_sentences:self.hparams.num_gen_sentences+i*self.hparams.num_gen_sentences]
+            gen_target_options_list = [self.hparams.tokenizer.decode(l, skip_special_tokens=True) for l in relevant_logits]
+            row_metrics_dict = self.track_metrics_row(original_target=original_target,gen_target_options_list=gen_target_options_list)
 
-          if save_track_dict:
-            self.list_dict_track["data"].append(self.build_json_results(context=original_source,
+            if save_track_dict:
+                self.list_dict_track["data"].append(self.build_json_results(context=original_source,
                                   generated_question_list=gen_target_options_list,
                                   target_question_list=original_target,
                                   row_mean_metrics = row_metrics_dict))
           
-          batch_bleu_1_list.append(row_metrics_dict['Bleu_1'])
-          batch_bleu_2_list.append(row_metrics_dict['Bleu_2'])
-          batch_bleu_3_list.append(row_metrics_dict['Bleu_3'])
-          batch_bleu_4_list.append(row_metrics_dict['Bleu_4'])
-          batch_CIDEr_list.append(row_metrics_dict['CIDEr'])
-          batch_ROUGE_L_list.append(row_metrics_dict['ROUGE_L'])
-          batch_Glove_Cossine_Similarity_list.append(row_metrics_dict['Glove_Cossine_Similarity'])
+        #   batch_bleu_1_list.append(row_metrics_dict['Bleu_1'])
+        #   batch_bleu_2_list.append(row_metrics_dict['Bleu_2'])
+        #   batch_bleu_3_list.append(row_metrics_dict['Bleu_3'])
+        #   batch_bleu_4_list.append(row_metrics_dict['Bleu_4'])
+        #   batch_CIDEr_list.append(row_metrics_dict['CIDEr'])
+        #   batch_ROUGE_L_list.append(row_metrics_dict['ROUGE_L'])
+            batch_Glove_Cossine_Similarity_list.append(row_metrics_dict['Glove_Cossine_Similarity'])
 
 
-        batch_metrics_dict = {"Batch_Bleu_1":np.mean(batch_bleu_1_list),
-                              "Batch_Bleu_2":np.mean(batch_bleu_2_list),
-                              "Batch_Bleu_3":np.mean(batch_bleu_3_list),
-                              "Batch_Bleu_4":np.mean(batch_bleu_4_list),
-                              "Batch_CIDEr":np.mean(batch_CIDEr_list),
-                              "Batch_ROUGE_L":np.mean(batch_ROUGE_L_list),
+        # batch_metrics_dict = {"Batch_Bleu_1":np.mean(batch_bleu_1_list),
+        #                       "Batch_Bleu_2":np.mean(batch_bleu_2_list),
+        #                       "Batch_Bleu_3":np.mean(batch_bleu_3_list),
+        #                       "Batch_Bleu_4":np.mean(batch_bleu_4_list),
+        #                       "Batch_CIDEr":np.mean(batch_CIDEr_list),
+        #                       "Batch_ROUGE_L":np.mean(batch_ROUGE_L_list),
+        batch_metrics_dict = {
                               "Batch_Glove_Cossine_Similarity":np.mean(batch_Glove_Cossine_Similarity_list)
                              }
 

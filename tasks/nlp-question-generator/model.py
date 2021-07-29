@@ -7,7 +7,7 @@ import pandas as pd
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 from transformers import T5ForConditionalGeneration
-from vident.qgenerator.metrics_calculator import Glove_Embeddings_Comparer, Metrics_Calculator
+from metrics_calculator import Glove_Embeddings_Comparer, Metrics_Calculator
 
 class T5Finetuner(pl.LightningModule):
 
@@ -29,10 +29,10 @@ class T5Finetuner(pl.LightningModule):
         self.model.to(self.hparams.device)
 
         # #----------Metrics Trackers
-        # if self.hparams.track_metrics == True:
-        #     glove_comparer = Glove_Embeddings_Comparer(glove_weights_path=self.hparams.glove_weights_path,device=self.hparams.device)
-        #     self.valid_metrics_calculator = Metrics_Calculator(self.hparams,glove_comparer)
-        #     self.test_metrics_calculator = Metrics_Calculator(self.hparams,glove_comparer)
+        if self.hparams.track_metrics == True:
+            glove_comparer = Glove_Embeddings_Comparer(glove_weights_path=self.hparams.glove_weights_path,device=self.hparams.device)
+            self.valid_metrics_calculator = Metrics_Calculator(self.hparams,glove_comparer)
+            self.test_metrics_calculator = Metrics_Calculator(self.hparams,glove_comparer)
     
 
     def forward(self, source_token_ids, source_mask, target_token_ids=None,
@@ -86,9 +86,12 @@ class T5Finetuner(pl.LightningModule):
          
         # fwd
         loss = self.forward(source_token_ids, source_masks, target_token_ids,info_requested='loss')
-        #logits = self.forward(source_token_ids, source_masks, target_token_ids,info_requested='logits')
+        logits = self.forward(source_token_ids, source_masks, target_token_ids,info_requested='logits')
 
-        batch_metrics_dict = {}
+        #Calc Metrics and Saving Results
+        batch_metrics_dict = self.valid_metrics_calculator.generate_sentences_and_track_metrics_batch(logits,original_targets,original_sources,save_track_dict=True)
+
+        batch_metrics_dict = {'valid_'+key: value for (key, value) in batch_metrics_dict.items()}
         batch_metrics_dict['valid_loss'] = loss.item() 
 
         #include special values to batch metrics dict
@@ -105,10 +108,12 @@ class T5Finetuner(pl.LightningModule):
         source_token_ids, source_masks, target_token_ids, target_masks, original_sources, original_targets = batch
 
         # fwd
-        #logits = self.forward(source_token_ids, source_masks, target_token_ids,info_requested='logits')
+        logits = self.forward(source_token_ids, source_masks, target_token_ids,info_requested='logits')
 
         #Calc Metrics and Saving Results
-        batch_metrics_dict = {}
+        batch_metrics_dict = self.test_metrics_calculator.generate_sentences_and_track_metrics_batch(logits,original_targets,original_sources,save_track_dict=True)
+
+        batch_metrics_dict = {'test_'+key: value for (key, value) in batch_metrics_dict.items()}
 
 
         #include special values to batch metrics dict
@@ -124,6 +129,33 @@ class T5Finetuner(pl.LightningModule):
         if step != "test":
             temp_avg_loss_batch = [x["loss"] for x in outputs]
             avg_loss = torch.stack(temp_avg_loss_batch).mean()
+
+        if step != "train":
+            # temp_avg_bleu1_batch = [x[f"{step}_Batch_Bleu_1"] for x in outputs]
+            # temp_avg_bleu2_batch = [x[f"{step}_Batch_Bleu_2"] for x in outputs]
+            # temp_avg_bleu3_batch = [x[f"{step}_Batch_Bleu_3"] for x in outputs]
+            # temp_avg_bleu4_batch = [x[f"{step}_Batch_Bleu_4"] for x in outputs]
+            # temp_avg_cider_batch = [x[f"{step}_Batch_CIDEr"] for x in outputs]
+            # temp_avg_rougeL_batch = [x[f"{step}_Batch_ROUGE_L"] for x in outputs] 
+            temp_avg_glove_cossine_similarity = [x[f"{step}_Batch_Glove_Cossine_Similarity"] for x in outputs] 
+
+            # avg_bleu1 = np.stack(temp_avg_bleu1_batch).mean()
+            # avg_bleu2 = np.stack(temp_avg_bleu2_batch).mean()
+            # avg_bleu3 = np.stack(temp_avg_bleu3_batch).mean()
+            # avg_bleu4 = np.stack(temp_avg_bleu4_batch).mean()
+            # avg_cider = np.stack(temp_avg_cider_batch).mean()
+            # avg_rougeL = np.stack(temp_avg_rougeL_batch).mean()
+            avg_glove_cossine_similarity = np.stack(temp_avg_glove_cossine_similarity).mean()
+
+            # tensorboard_logs[f"avg_{step}_bleu1"] = avg_bleu1
+            # tensorboard_logs[f"avg_{step}_bleu2"] = avg_bleu2
+            # tensorboard_logs[f"avg_{step}_bleu3"] = avg_bleu3
+            # tensorboard_logs[f"avg_{step}_bleu4"] = avg_bleu4
+            # tensorboard_logs[f"avg_{step}_cider"] = avg_cider
+            # tensorboard_logs[f"avg_{step}_rougeL"] = avg_rougeL
+            tensorboard_logs[f"avg_{step}_glove_cossine_similarity"] = avg_glove_cossine_similarity
+
+        if step != "test":
             tensorboard_logs[f"avg_{step}_loss"] =  avg_loss.item()
 
         epoch_dict = tensorboard_logs.copy()
