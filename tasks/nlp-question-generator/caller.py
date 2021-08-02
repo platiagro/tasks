@@ -1,4 +1,5 @@
 import os
+import gc
 import sys
 import yaml
 import torch
@@ -86,6 +87,7 @@ class Qgenerator_caller():
         # Criando parâmetros adicionais
         self.tokenizer = T5Tokenizer.from_pretrained(self.config['params']['hparams']['model_name'])
         self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+        self.MODEL = None
 
         # Trainer
         if self.fast_dev_run:
@@ -123,6 +125,16 @@ class Qgenerator_caller():
             logger = tb_logger
             )
     
+    def free_memory(self):
+        del self.MODEL
+        del self.TRAINER
+        del self.tokenizer
+        del self.device
+        del self.hparams
+        del self.config
+        gc.collect()
+        torch.cuda.empty_cache()
+
     def load_model(self,**kwargs):
         def verify_args(checkpoint_path):
             if not checkpoint_path:
@@ -232,9 +244,7 @@ class Qgenerator_caller():
 
         # Treinando Algorítimos
         self.TRAINER.fit(self.MODEL)
-
-        return self.MODEL        
-
+  
     def save_checkpoint(self,checkpoint_path):
         # Checagem das Chamadas
         if not (self.train_called):
@@ -291,23 +301,27 @@ class Qgenerator_caller():
                 step='Deployment',
             )
         
-        self.MODEL.eval()
-        self.MODEL.to(self.device)
-        inference_dataloader = DataLoader(inference_dataset, batch_size=self.hparams['eval_batch_size'], shuffle=False,num_workers=cpu_count())
         
-        result = {}
-        j = 0
-        for i,batch in enumerate(tqdm(inference_dataloader)):
-            source_token_ids, source_masks, original_source = batch
-            batch_size = len(original_source)
-            source_token_ids = source_token_ids.to(self.device)
-            source_masks = source_masks.to(self.device)
-            logits = self.MODEL.forward(source_token_ids, source_masks,info_requested='logits',num_gen_sentences=num_gen_sentences)
-            gen_quesitons = [self.tokenizer.decode(l, skip_special_tokens=True) for l in logits]
-            questions_per_context = [gen_quesitons[s:s+num_gen_sentences] for s in list(range(0,len(gen_quesitons),num_gen_sentences))]
-            result_batch = {f'{j+k}':{'context':original_source[k],'questions':questions_per_context[k]} for k in range(batch_size)}
-            result.update(result_batch)
-            j += batch_size
+        with torch.no_grad():
+            
+            self.MODEL.eval()
+            self.MODEL.to(self.device)
+            inference_dataloader = DataLoader(inference_dataset, batch_size=self.hparams['eval_batch_size'], shuffle=False,num_workers=cpu_count())
+
+            result = {}
+            j = 0
+            for i,batch in enumerate(tqdm(inference_dataloader)):
+                source_token_ids, source_masks, original_source = batch
+                batch_size = len(original_source)
+                source_token_ids = source_token_ids.to(self.device)
+                source_masks = source_masks.to(self.device)
+                logits = self.MODEL.forward(source_token_ids, source_masks,info_requested='logits',num_gen_sentences=num_gen_sentences)
+                gen_quesitons = [self.tokenizer.decode(l, skip_special_tokens=True) for l in logits]
+                questions_per_context = [gen_quesitons[s:s+num_gen_sentences] for s in list(range(0,len(gen_quesitons),num_gen_sentences))]
+                result_batch = {f'{j+k}':{'context':original_source[k],'questions':questions_per_context[k]} for k in range(batch_size)}
+                result.update(result_batch)
+                j += batch_size
+                
 
         return result        
 
