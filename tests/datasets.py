@@ -150,7 +150,7 @@ def hotel_bookings_testdata_full():
         },
     }
     return data
-    
+
 
 def imdb():
     name = "imdb.csv"
@@ -338,7 +338,7 @@ def paracrawl():
         f.write(content)
 
     metadata(name=name)
-    
+
 def paracrawl_test_data():
     data = {
         "data": {
@@ -389,7 +389,7 @@ def metadata(name, df=None):
 
     try:
         MINIO_CLIENT.make_bucket(BUCKET_NAME)
-    except minio.error.BucketAlreadyOwnedByYou:
+    except minio.error.S3Error:
         pass
 
     object_name = f"{PREFIX}/{name}/{name}.metadata"
