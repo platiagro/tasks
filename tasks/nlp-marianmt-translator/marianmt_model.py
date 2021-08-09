@@ -198,34 +198,20 @@ class MarianMTTranslator:
 
         return results, np.mean(results) 
 
-
-    def _construct_result_dataframe(self,step):
-
-        if step == 'Experiment':
-            self.y_pred = self.predict(self.X)
+    
+    def get_result_dataframe(self,df_input:pd.DataFrame,input_column_name:str,output_column_name:str,reference_column_name:None):
+        
+        #if (not reference_column_name) or (reference_column_name not in df_input.columns):
+        #    raise ValueError(f"A coluna {reference_column_name} não existe em {df_input.columns}")
+        
+        self.X = df_input[input_column_name].to_numpy()
+        self.y_target = df_input[reference_column_name].to_numpy() if reference_column_name else None
+        self.y_pred = self.predict(self.X)
+        self.df_result = df_input.copy()
+        self.df_result.insert(df_input.shape[1], output_column_name, self.y_pred)
+        
+        if self.y_target:
             self.bleu_array,self.avg_bleu = self._calc_bleu()
-            self.df_result = pd.DataFrame({'source_text': self.X, 'target_text': self.y_target,'translated_text': self.y_pred,'bleu_score': self.bleu_array})
+            self.df_result.insert(df_input.shape[1], bleu_score, self.bleu_array)
 
-        if step == 'Deployment':
-            self.y_pred = self.predict(self.X) 
-            self.df_result = pd.DataFrame({'source_text': self.X,'translated_text': self.y_pred}) 
-
-
-    def get_result_dataframe(self,X:np.ndarray,y:np.ndarray=None,step = 'Experiment'):
-
-        #squeezing X if necesary
-        try:
-            test = X.shape[1]
-            self.X = np.squeeze(X)
-        except Exception as e:
-            self.X = X
-
-        #squeezing y if necesary
-        try:
-            test = y.shape[1] if y else 0
-            self.y_target = np.squeeze(y) if y else y
-        except Exception as e:
-            self.y_target = y
-            
-        self._construct_result_dataframe(step)
         return self.df_result

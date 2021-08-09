@@ -7,7 +7,7 @@ import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 
 from sklearn.model_selection import train_test_split
-from pytorch_lightning.callbacks import ModelCheckpoint,EarlyStopping
+from pytorch_lightning.callbacks import ModelCheckpoint,EarlyStopping,GPUStatsMonitor
 from transformers import AutoModelForQuestionAnswering,AutoTokenizer
 from typing import List
 from multiprocessing import cpu_count
@@ -88,6 +88,7 @@ class Reader_Caller():
         self.tokenizer = AutoTokenizer.from_pretrained(self.config['params']['hparams']['model_name'])
         self.softmax = torch.nn.Softmax(dim=1)
         self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    
 
     def forward(self,**kwargs):
 
@@ -100,6 +101,19 @@ class Reader_Caller():
                 raise ValueError(f"topn_contexts deve ser uma lista de strings mas é {topn_contexts}")
             if type(question) != str:
                 raise ValueError(f"question deve ser uma string")
+        
+        def filter_questions_in_encode_samples(chunckfied_encoded_samples):
+            for i, token_type_ids in enumerate(chunckfied_encoded_samples['token_type_ids']):
+                input_ids = chunckfied_encoded_samples['input_ids'][i]
+                attention_mask = chunckfied_encoded_samples['attention_mask'][i]
+                input_ids =  [101] + [k for k,t in zip(input_ids,token_type_ids) if t==1]
+                attention_mask = [1] + [k for k,t in zip(attention_mask,token_type_ids) if t==1]
+                token_type_ids = [1] + [t for t in token_type_ids if t==1]
+                chunckfied_encoded_samples['input_ids'][i] = input_ids
+                chunckfied_encoded_samples['attention_mask'][i] = attention_mask
+                chunckfied_encoded_samples['token_type_ids'][i] = token_type_ids
+            
+            return chunckfied_encoded_samples
         # Checagem das Chamadas
         if not (self.build_called and (self.train_called or self.load_called)):
             raise AssertionError("Para chamar o método forward é nececssário chamar o método build e em seguida o método train ou o método load")
@@ -107,21 +121,21 @@ class Reader_Caller():
         # Recuperando variáveis kwargs
         question = kwargs.get('question',None)
         topn_contexts = kwargs.get('topn_contexts',None)
+        top_ids = kwargs.get('top_ids',None)
         verify_args(question,topn_contexts)
 
         list_questions = [question]*len(topn_contexts)
         chunckfied_encoded_samples = self._chunckfy_with_stride(list_questions,topn_contexts)
-        #(['input_ids', 'token_type_ids', 'attention_mask','overflow_to_sample_mapping'])
-
+        #chunckfied_encoded_samples = filter_questions_in_encode_samples(chunckfied_encoded_samples)
+        
         # Initialize Vectors to create dataframe
-        question_list = []
-        context_list = []
-        answer_list = []
-        answer_prob_list = []
+        question_dict = {}
+        context_dict = {}
+        answer_dict = {}
+        answer_prob_dict = {}
 
         #Context control vector
         context_ids_list = []
-
         for chunck_id, context_id in enumerate(chunckfied_encoded_samples['overflow_to_sample_mapping']):
             context = topn_contexts[context_id]
             input_id_chunck = np.array([chunckfied_encoded_samples['input_ids'][chunck_id]])
@@ -129,30 +143,27 @@ class Reader_Caller():
             token_type_chunck = np.array([chunckfied_encoded_samples['token_type_ids'][chunck_id]])
             answer, answer_prob = self._get_answer(input_id_chunck,attention_mask_chunck,token_type_chunck)
             #searching the answer with best prob on chuncks
-            if context_id not in context_ids_list:
-                question_list.append(question)
-                context_list.append(context)
-                answer_list.append(answer)
-                answer_prob_list.append(answer_prob)
+
+            if context_id in list(answer_prob_dict.keys()):
+                if (answer_prob>answer_prob_dict[context_id]):
+                    answer_dict[context_id] = answer if (answer not in ['[CLS]','[SEP]','']) else '[Not Found]'
+                    answer_prob_dict[context_id] = answer_prob if (answer not in ['[CLS]','[SEP]','']) else 0
             else:
-                if (answer not in ['[CLS]','[SEP]']) and (answer_prob>answer_prob_list[context_id]):
-                    answer_list[context_id] = answer
-                    answer_prob_list[context_id] = answer_prob
-                    
-
-            context_ids_list.append(context_id)
-
+                question_dict[context_id] = question
+                context_dict[context_id] = context
+                answer_dict[context_id] = answer if (answer not in ['[CLS]','[SEP]','']) else '[Not Found]'
+                answer_prob_dict[context_id] = answer_prob if (answer not in ['[CLS]','[SEP]','']) else 0
+    
         df_result = pd.DataFrame({
-                                'question': question_list,
-                                'context': context_list,
-                                'answer': answer_list,
-                                'answer_prob': answer_prob_list})
-        
-        
-        df_result['index'] = df_result.index        
-        
-        df_result = df_result.sort_values(by='answer_prob', ascending=False).reset_index(drop=True)
-                                    
+                                'question': list(question_dict.values()),
+                                'context': list(context_dict.values()),
+                                'answer': list(answer_dict.values()),
+                                'answer_prob': list(answer_prob_dict.values())
+                                })
+
+        df_result['doc_id'] = top_ids if all(top_ids)!=None else df_result.index
+        df_result = df_result if all(top_ids)!=None else df_result.sort_values(by='answer_prob', ascending=False).reset_index(drop=True)
+
         return df_result
       
 
@@ -249,7 +260,7 @@ class Reader_Caller():
             hparams=hparams,
             datasets=datasets,
             )
-
+            
         # Trainer
         if self.fast_dev_run:
             self.TRAINER = pl.Trainer(
@@ -270,6 +281,7 @@ class Reader_Caller():
                 mode=self.early_stop_callback_params['mode']
                 )
 
+            gpu_stats = GPUStatsMonitor() 
             tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}")
 
             self.TRAINER = pl.Trainer(
@@ -279,10 +291,11 @@ class Reader_Caller():
             accumulate_grad_batches = self.lightning_params['accumulate_grad_batches'],
             check_val_every_n_epoch=self.lightning_params['check_val_every_n_epoch'],
             progress_bar_refresh_rate=self.lightning_params['progress_bar_refresh_rate'],
-            callbacks = [early_stop_callback,checkpoint_callback],
+            callbacks = [early_stop_callback,gpu_stats,checkpoint_callback],
             resume_from_checkpoint=None,
             logger = tb_logger
             )
+
         # Treinando Algorítimos
         self.TRAINER.fit(self.MODEL)
 
@@ -506,3 +519,91 @@ class Reader_Caller():
         df = pd.DataFrame({'context': context, 'question': question, 'answer': answer, 'answer_start': answer_start})
 
         return df
+ 
+    
+# if __name__ == '__main__':
+
+#     import os
+#     data_dir  =  root_dir = os.getcwd()
+#     logs_dir = os.path.join(root_dir,"lightning_logs")
+
+#     # Colocando parâmetros de entrada no fromato esperado
+#     hparams = {
+#         "model_name":model_name,
+#         "train_batch_size":train_batch_size,
+#         "eval_batch_size":eval_batch_size,
+#         "max_length":max_length,
+#         "doc_stride":doc_stride,
+#         "learning_rate":learning_rate,
+#         "eps":eps,
+#         "seed":seed,
+
+#     }
+
+#     lightning_params = {
+#         "num_gpus":num_gpus,
+#         "profiler":profiler,
+#         "max_epochs":max_epochs,
+#         "accumulate_grad_batches":accumulate_grad_batches,
+#         "check_val_every_n_epoch":check_val_every_n_epoch,
+#         "progress_bar_refresh_rate":progress_bar_refresh_rate,
+#         "gradient_clip_val":gradient_clip_val,
+#         "fast_dev_run":fast_dev_run,
+#     }
+
+
+#     early_stop_callback_params = {
+#          "monitor":monitor,
+#         "min_delta":min_delta,
+#         "patience":patience,
+#         "verbose":verbose,
+#         "mode":mode,    
+#     }
+
+#     prepare_data_params = {
+#          "batch_dataset_preparation":batch_dataset_preparation,
+#          "test_size_from_dev":test_size_from_dev,
+#     }
+
+#     # Configurações
+#     config = {'params':{'hparams':hparams,
+#                         'lightning_params':lightning_params,
+#                         'early_stop_callback_params':early_stop_callback_params,
+#                         'prepare_data_params':prepare_data_params },
+
+#             'dirpaths':{'data_dirpath':data_dir,
+#                     'log_dirpath':logs_dir,
+#                     'cwd_dirpath':root_dir},
+#     }
+
+#     # Criando Caller
+#     reader_caller = Reader_Caller(config)
+#     reader_caller.build()
+
+#     #Preparando dados
+#     squad_train_path = os.path.join(data_dir,'squad-train-v1.1.json')
+#     squad_dev_path= os.path.join(data_dir,'squad-dev-v1.1.json')
+#     #prepared_datapaths = reader_caller.prepare_data(squad_train_path=squad_train_path,
+#     #                                                squad_dev_path=squad_dev_path)
+#     prepared_datapaths = {
+#     "prepared_data_train_path":os.path.join(data_dir,'df_squad_train_bert_chuncked.csv'),
+#     "prepared_data_valid_path":os.path.join(data_dir,'df_squad_valid_bert_chuncked.csv'),
+#     "prepared_data_test_path":os.path.join(data_dir,'df_squad_test_bert_chuncked.csv'),
+#                             }
+#     # Treinamento
+#     _ = reader_caller.train(train_path=prepared_datapaths['prepared_data_train_path'],
+#                                 valid_path=prepared_datapaths['prepared_data_valid_path'],
+#                                 test_path=prepared_datapaths['prepared_data_test_path'])
+#     # Avaliação
+#     reader_caller.evaluate()
+
+#     # reader_caller.load_model(checkpoint_path=os.path.join(data_dir,'epoch=0-step=0.ckpt'))
+
+#     # Testando Exemplo
+#     io_utils = IO_Utils()
+#     report_contenst_txt_path = os.path.join(data_dir,'..','pdf_info_extractor','reports_contexts_texts.txt')
+#     contexts_texts = io_utils.read_line_spaced_txt_file(filepath=report_contenst_txt_path)
+#     topn_contexts = contexts_texts[:10]
+#     df_result = reader_caller.forward(question="Qual o melhor herbicida contra erva da ninha ?",topn_contexts=topn_contexts)
+    
+#     import pdb;pdb.set_trace()
