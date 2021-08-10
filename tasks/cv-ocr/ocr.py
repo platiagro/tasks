@@ -107,8 +107,10 @@ class Class_Pytesseract_OCR:
         n_boxes = len(d['text'])
         for i in range(n_boxes):
             if int(d['conf'][i]) > self.bbox_conf:
-                (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
-                bboxes_list.append((x, y, w, h))
+                (x_min, y_min, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
+                x_max = x_min + w
+                y_max = y_min + h
+                bboxes_list.append((x_min, y_min, x_max, y_max))
         return bboxes_list
             
 
@@ -175,10 +177,10 @@ class Class_Pytesseract_OCR:
 
         if step == 'Experiment':
             mer_list,wer_list,wil_list,wip_list,self.avg_mer,self.avg_wer,self.avg_wil,self.avg_wip = self._get_metrics()
-            self.df_result = pd.DataFrame({'source_text': self.X, 'target_ocr_text': self.y_target,'predicted_ocr_text': self.y_pred,'BBOXES_COORDS(X, Y, W, H)':all_bboxes_list,'Match Error Rate (MER)':mer_list,' Word Error Rate (WER)':wer_list,'Word Information Lost (WIL)':wil_list,'Word Information Preserved (WIP)':wip_list})
+            self.df_result = pd.DataFrame({'image': self.X, 'target_ocr_text': self.y_target,'predicted_ocr_text': self.y_pred,'coords(x_min,y_min,x_max,y_max)':all_bboxes_list,'match_error_rate(MER)':mer_list,'word_error_rate(WER)':wer_list,'word_information/WIL_lost(WIL)':wil_list,'word_information_preserved(WIP)':wip_list})
         
         if step == 'Deployment':
-            self.df_result = pd.DataFrame({'source_text': self.X,'predicted_ocr_text': self.y_pred,'BBOXES_COORDS(X, Y, W, H)':all_bboxes_list}) 
+            self.df_result = pd.DataFrame({'image': self.X,'predicted_ocr_text': self.y_pred,'coords(x_min,y_min,x_max,y_max)':all_bboxes_list}) 
 
 
     def get_result_dataframe(self,X,y=None,step = 'Experiment'):

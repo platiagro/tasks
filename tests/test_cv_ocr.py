@@ -4,7 +4,7 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -27,7 +27,7 @@ class TestCVOCR(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_ocr_output_image(self):
+    def test_experiment_ocr_output_data(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -40,12 +40,31 @@ class TestCVOCR(unittest.TestCase):
                 segmentation_mode="Considere um único bloco de texto uniforme",
                 ocr_engine="Mecanismo de redes neurais com apenas LSTM",
                 language="por",
-                bbox_return="image",
-                image_return_format=".jpg"
+                bbox_return="np_array",
+                image_return_format="N/A"
 
             ),
         )
 
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+
+        for ext in ['png', 'jpg']:
+            data = datasets.image_testdata(kind='text',  ext=ext)
+            
+            with server.Server() as s:
+                response = s.test(data=data, timeout=10)
+
+            print(response)
+            for bbox in response['ndarray']:
+                xmin, ymin, xmax, ymax, text = bbox
+                self.assertGreater(xmax, xmin, "BoundingBox incorreta.")
+                self.assertGreater(ymax, ymin, "BoundingBox incorreta.")
+
+
+    """
     def test_experiment_ocr_output_nparray(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
@@ -64,3 +83,4 @@ class TestCVOCR(unittest.TestCase):
 
             ),
         )
+    """
