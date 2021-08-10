@@ -13,7 +13,7 @@ def build_result_dataframe(df_input:pd.DataFrame,
     
     df_result_copy = df_result.copy()
     del df_result_copy['context']
-    df_result_copy = pd.merge(df,df_result_copy,on = [column_doc_id],how='inner')
+    df_result_copy = pd.merge(df_input,df_result_copy,on = [column_doc_id],how='inner')
     df_result_copy = df_result_copy.rename(columns={"answer_prob": column_reader_score})
     
     if remove_no_answer_found:

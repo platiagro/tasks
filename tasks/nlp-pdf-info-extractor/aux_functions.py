@@ -23,3 +23,19 @@ def get_reports_as_dataframe(reports_dir,columns_dict):
     df = pd.DataFrame(data)
     
     return df
+
+
+def filter_post_content(df: pd.DataFrame,
+                            keep_only_conclusions: bool=True,#Capítulo 6, Capitulo 6
+                            min_context_length_in_tokens: int=10):
+    
+        df_copy = df.copy()
+        
+        if keep_only_conclusions:
+            df_copy = df_copy.loc[df_copy['section_name'].isin(["Capítulo 6", "Capitulo 6"])]
+        
+        df_copy['context_split'] = df_copy['context'].apply(lambda x: x.split())
+        df_copy = df_copy[df_copy['context_split'].str.len() >= min_context_length_in_tokens]
+        del df_copy['context_split']
+
+        return df_copy
