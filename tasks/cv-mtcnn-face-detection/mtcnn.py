@@ -137,13 +137,16 @@ class MTCNN_Model:
         zipped_loop = zip(batch_results[0], batch_results[1], batch_img_paths)
         
         for bboxes_data, probs_data, image_path in zipped_loop:
-            
+
             # Not found bbox
             if bboxes_data is None:
                 paths.append(image_path)
                 bboxes.append(None)
                 probs.append(None)
                 continue
+
+            # Assure to be a numpy array
+            bboxes_data = np.array(bboxes_data)
             
             for bbox_id in range(bboxes_data.shape[0]):
                 paths.append(image_path)
