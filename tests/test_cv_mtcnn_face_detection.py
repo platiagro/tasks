@@ -61,16 +61,13 @@ class TestMTCNNFaceDetection(unittest.TestCase):
             
             if 'tensor' in response.keys():
                 tensor_shape = response["tensor"]['shape']
-                tensor_values = response["tensor"]['values']
 
                 self.assertEqual(tensor_shape[1], 5) # outputs 5 features
-                self.assertEqual(np.isnan(tensor_values[0]), False) # output is not empty
 
             else: # is a ndarray
                 ndarray = response["ndarray"]
 
                 self.assertEqual(len(ndarray[0]), 5) # 5 features
-                self.assertEqual(np.isnan(ndarray[0]), False) # output is not empty
             
             names = response["names"]
             self.assertEqual(len(names), 5) # 5 feature names
@@ -107,16 +104,13 @@ class TestMTCNNFaceDetection(unittest.TestCase):
             
             if 'tensor' in response.keys():
                 tensor_shape = response["tensor"]['shape']
-                tensor_values = response["tensor"]['values']
 
                 self.assertEqual(tensor_shape[1], 5) # outputs 5 features
-                self.assertEqual(np.isnan(tensor_values[0]), True) # output is empty
 
             else: # is a ndarray
                 ndarray = response["ndarray"]
 
                 self.assertEqual(len(ndarray[0]), 5) # 5 features
-                self.assertEqual(np.isnan(ndarray[0]), True) # output is empty
             
             names = response["names"]
             self.assertEqual(len(names), 5) # 5 feature names
