@@ -184,7 +184,7 @@ class MTCNN_Model:
         y1 = bbox[1] * original_shape[0]/self.input_square_transformation_size
         y2 = bbox[3] * original_shape[0]/self.input_square_transformation_size
 
-        return np.array([x1, y1, x2, y2])
+        return np.array([x1, y1, x2, y2]).astype(int)
 
     def _build_batch(self, index_range):
         '''
