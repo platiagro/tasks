@@ -33,13 +33,15 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/reports_contexts.csv",
+                dataset="/tmp/data/reports_contexts_small.csv",
                 column = "context",
                 question = "Qual é o melhor herbicida para erva da ninha ?",
                 retriever_type = "tfidf",
                 bm25_k1 = 2,
                 bm25_b = 0.75 ,
                 top = 10,
+                column_doc_id = "doc_id",
+                column_score = "retriever_score",
             ),
         )
 
@@ -50,8 +52,11 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         data = datasets.report_contexts_test_data()
         with server.Server() as s:
             response = s.test(data=data)
+
+        names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 4)  # 1 feature
+        self.assertEqual(len(ndarray[0]), 3)
+        self.assertEqual(len(names), 3)
 
     def test_experiment_report_contexts_bm25(self):
 
@@ -59,7 +64,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 "Experiment.ipynb",
                 "/dev/null",
                 parameters=dict(
-                    dataset="/tmp/data/reports_contexts.csv",
+                    dataset="/tmp/data/reports_contexts_small.csv",
                     column = "context",
                     question = "Qual é o melhor herbicida para erva da ninha ?",
                     retriever_type = "bm25",
@@ -76,8 +81,11 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             data = datasets.report_contexts_test_data()
             with server.Server() as s:
                 response = s.test(data=data)
+
+            names = response["names"]
             ndarray = response["ndarray"]
-            self.assertEqual(len(ndarray[0]), 4)  # 1 feature
+            self.assertEqual(len(ndarray[0]), 3)
+            self.assertEqual(len(names), 3)
 
     def test_experiment_report_contexts_word2vec(self):
 
@@ -85,7 +93,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 "Experiment.ipynb",
                 "/dev/null",
                 parameters=dict(
-                    dataset="/tmp/data/reports_contexts.csv",
+                    dataset="/tmp/data/reports_contexts_small.csv",
                     column = "context",
                     question = "Qual é o melhor herbicida para erva da ninha ?",
                     retriever_type = "word2vec",
@@ -102,5 +110,8 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             data = datasets.report_contexts_test_data()
             with server.Server() as s:
                 response = s.test(data=data)
+
+            names = response["names"]
             ndarray = response["ndarray"]
-            self.assertEqual(len(ndarray[0]), 4)  # 1 feature
+            self.assertEqual(len(ndarray[0]), 3)
+            self.assertEqual(len(names), 3)

@@ -10,7 +10,7 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-class TestSparseDocumentRetriever(unittest.TestCase):
+class TestQuestionGenerator(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -20,7 +20,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
 
         datasets.reports_contexts_small()
 
-        os.chdir("tasks/nlp-document-reader")
+        os.chdir("tasks/nlp-question-generator")
 
     def tearDown(self):
         datasets.clean()
@@ -33,28 +33,33 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/reports_contexts_small.csv",
-                question = "Qual é o melhor herbicida para erva da ninha ?",
-                top = 10,
                 column_context = "context",
                 column_question = "question",
-                column_answer_start = "answer_start",
-                column_answer_end= "answer_end",
+                column_doc_id = "doc_id",
                 train_from_zero = False,
                 train_from_squad = False,
+                expand_context = True,
+                expanded_text_column_name = "expanded_context",
                 dev_size_from_data= 0.2,
                 test_size_from_dev= 0.5,
-                batch_dataset_preparation = 30 ,
-                model_name= "neuralmind/bert-large-portuguese-cased",
+                model_name= "unicamp-dl/ptt5-base-portuguese-vocab",
+                PREFIX = "gerador_perguntas:",
+                num_gen_sentences = 2,
+                infer_num_gen_sentences = 10,
                 train_batch_size= 2,
-                eval_batch_size= 2,
-                max_length= 384,
-                doc_stride= 128,
+                eval_batch_size= 8,
+                infer_batch_size = 8,
+                no_repeat_ngram_size= 2,
+                temperature= 0.7,
+                top_p= 0.92,
+                source_max_length= 512,
+                target_max_length= 100,
                 learning_rate= 3.0e-5,
                 eps= 1.0e-08,
                 seed = 13,
-                num_gpus= 1,
+                num_gpus= 0,
                 profiler= True,
-                max_epochs= 2,
+                max_epochs= 1,
                 accumulate_grad_batches= 16,
                 check_val_every_n_epoch= 1,
                 progress_bar_refresh_rate= 1,
@@ -67,18 +72,17 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 mode= 'min'
             ),
         )
-
         papermill.execute_notebook(
             "Deployment.ipynb",
             "/dev/null",
         )
-
-        data = datasets.document_reader_test_data()
+        
+        data = datasets.report_contexts_test_data()
 
         with server.Server() as s:
             response = s.test(data=data)
 
         names = response["names"]    
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 6)
-        self.assertEqual(len(names), 6)
+        self.assertEqual(len(ndarray[0]), 4)
+        self.assertEqual(len(names), 4)
