@@ -78,7 +78,7 @@ class Server:
     def __exit__(self, exc_type, exc_value, exc_traceback):
         self.kill()
 
-    def test(self, data):
+    def test(self, data,timeout=5):
         """
         Sends a test request to seldon core deployment server.
 
@@ -93,7 +93,7 @@ class Server:
         response = requests.post(
             f"http://localhost:{self.port}/api/v1.0/predictions",
             json=data,
-            timeout=5,
+            timeout=timeout,
         )
 
         if response.status_code != 200:

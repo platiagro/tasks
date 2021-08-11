@@ -28,10 +28,10 @@ jobs:
     # runs all of the steps inside the specified container rather than on the VM host.
     # Because of this the network configuration changes from host based network to a container network.
     container:
-      image: platiagro/platiagro-notebook-image:0.2.0
+      image: platiagro/platiagro-notebook-image:0.3.0
 
     services:
-    
+
       minio:
         image: bitnami/minio:latest
         env:

@@ -4,12 +4,15 @@ import uuid
 
 import papermill
 
-from tests import datasets
+from tests import datasets, server
+import numpy as np
+import logging
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
+EXPERIMENT_DATASET = "/tmp/data/yolo.zip"
 
 class TestCVYOLO(unittest.TestCase):
 
@@ -26,12 +29,109 @@ class TestCVYOLO(unittest.TestCase):
     def tearDown(self):
         datasets.clean()
         os.chdir("../../")
-
-    def test_experiment_yolo_output_image(self):
+    
+    def test_yolo_default_params(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/yolo.zip",
+                dataset=EXPERIMENT_DATASET,
             ),
         )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+
+        for ext in ['png', 'jpg']:
+
+            data = datasets.image_testdata(kind='objects', ext=ext)
+
+            with server.Server() as s:
+                response = s.test(data=data, timeout=10)
+            
+            if 'tensor' in response.keys():
+                tensor_shape = response["tensor"]['shape']
+
+                self.assertEqual(tensor_shape[1], 6) # outputs 6 features
+
+            else: # is a ndarray
+                ndarray = response["ndarray"]
+
+                self.assertEqual(len(ndarray[0]), 6) # 6 features
+            
+            names = response["names"]
+            self.assertEqual(len(names), 6) # 6 feature names
+    
+    def test_yolo_tiny_portuguese(self):
+        papermill.execute_notebook(
+            "Experiment.ipynb",
+            "/dev/null",
+            parameters=dict(
+                dataset=EXPERIMENT_DATASET,
+                language="português",
+                yolo_weight_type="tiny",
+            ),
+        )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+
+        for ext in ['png', 'jpg']:
+
+            data = datasets.image_testdata(kind='objects', ext=ext)
+
+            with server.Server() as s:
+                response = s.test(data=data, timeout=10)
+            
+            if 'tensor' in response.keys():
+                tensor_shape = response["tensor"]['shape']
+
+                self.assertEqual(tensor_shape[1], 6) # outputs 6 features
+
+            else: # is a ndarray
+                ndarray = response["ndarray"]
+
+                self.assertEqual(len(ndarray[0]), 6) # 6 features
+            
+            names = response["names"]
+            self.assertEqual(len(names), 6) # 6 feature names
+
+    def test_yolo_empty_output(self):
+        papermill.execute_notebook(
+            "Experiment.ipynb",
+            "/dev/null",
+            parameters=dict(
+                dataset=EXPERIMENT_DATASET,
+                score_threshold=0.9999,
+                iou_threshold=0.9999,
+                yolo_weight_type="tiny",
+            ),
+        )
+
+        papermill.execute_notebook(
+            "Deployment.ipynb",
+            "/dev/null",
+        )
+
+
+        data = datasets.image_testdata(kind='text', ext='png')
+
+        with server.Server() as s:
+            response = s.test(data=data, timeout=10)
+        
+        if 'tensor' in response.keys():
+            tensor_shape = response["tensor"]['shape']
+
+            self.assertEqual(tensor_shape[1], 6) # outputs 6 features
+
+        else: # is a ndarray
+            ndarray = response["ndarray"]
+
+            self.assertEqual(len(ndarray[0]), 6) # 6 features
+        
+        names = response["names"]
+        self.assertEqual(len(names), 6) # 6 feature names

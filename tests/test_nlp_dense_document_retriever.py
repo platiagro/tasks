@@ -1,4 +1,3 @@
-
 import os
 import unittest
 import uuid
@@ -60,4 +59,3 @@ class TestDenseDocumentRetriever(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 3)
         self.assertEqual(len(names), 3)
-         

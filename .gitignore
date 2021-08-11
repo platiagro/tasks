@@ -132,3 +132,6 @@ dmypy.json
 # Keras e Bash History
 .keras/
 .bash_history
+
+# every file/folder starting with  __no__repo
+__no__repo*
