@@ -504,8 +504,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "4Gi",
-        "memoryRequest": "4Gi"
+        "memoryLimit": "5Gi",
+        "memoryRequest": "5Gi"
     },
     {
         "name": "OCR (Optical Character Recognition)",
