@@ -125,16 +125,13 @@ class TestCVYOLO(unittest.TestCase):
         
         if 'tensor' in response.keys():
             tensor_shape = response["tensor"]['shape']
-            tensor_values = response["tensor"]['values']
 
             self.assertEqual(tensor_shape[1], 6) # outputs 6 features
-            self.assertEqual(np.isnan(tensor_values[0]), True) # output is empty
 
         else: # is a ndarray
             ndarray = response["ndarray"]
 
             self.assertEqual(len(ndarray[0]), 6) # 6 features
-            self.assertEqual(np.isnan(ndarray[0][0]), True) # output is empty
         
         names = response["names"]
         self.assertEqual(len(names), 6) # 6 feature names
