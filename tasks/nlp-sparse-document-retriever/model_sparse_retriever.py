@@ -43,6 +43,9 @@ class TfidfRetriever:
             sim_contexts.append(similar_ids)
             scores.append(pair_sim[i][similar_ids])
         
+        sim_contexts = np.array(sim_contexts)
+        scores = np.array(scores)
+        
         return sim_contexts, scores
 
     
@@ -110,6 +113,9 @@ class W2VRetriever:
             scores.append(pair_sim[i][similar_ids])
 
         
+        sim_contexts = np.array(sim_contexts)
+        scores = np.array(scores)
+        
         return sim_contexts, scores
 
 class BM25Retriever:
@@ -158,5 +164,8 @@ class BM25Retriever:
             ids = np.argsort(_score)[::-1][:top]
             sim_contexts.append(ids)
             sim_scores.append([_score[i] for i in ids])
+        
+        sim_contexts = np.array(sim_contexts)
+        sim_scores = np.array(sim_scores)
         
         return sim_contexts, sim_scores

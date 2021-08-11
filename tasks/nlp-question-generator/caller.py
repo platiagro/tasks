@@ -288,9 +288,12 @@ class Qgenerator_caller():
         # Recuperando variáveis kwargs
         num_gen_sentences = kwargs.get('num_gen_sentences',None)
         contexts = kwargs.get('contexts',None)
+        doc_ids = kwargs.get('doc_ids',None)
+        
         verify_args(contexts,num_gen_sentences)
 
         X_test = np.array(contexts)
+        doc_ids = np.array(doc_ids)
 
         inference_dataset = CustomDataset(PREFIX=self.hparams['PREFIX'],
                 tokenizer=self.tokenizer,
@@ -318,7 +321,7 @@ class Qgenerator_caller():
                 logits = self.MODEL.forward(source_token_ids, source_masks,info_requested='logits',num_gen_sentences=num_gen_sentences)
                 gen_quesitons = [self.tokenizer.decode(l, skip_special_tokens=True) for l in logits]
                 questions_per_context = [gen_quesitons[s:s+num_gen_sentences] for s in list(range(0,len(gen_quesitons),num_gen_sentences))]
-                result_batch = {f'{j+k}':{'context':original_source[k],'questions':questions_per_context[k]} for k in range(batch_size)}
+                result_batch = {f'{doc_ids[j+k]}':{'context':original_source[k],'questions':questions_per_context[k]} for k in range(batch_size)}
                 result.update(result_batch)
                 j += batch_size
                 

@@ -26,6 +26,7 @@ class EnglishDPRRetriever(object):
     def __call__(self,
                 questions: str,
                 passages: List[str],
+                doc_ids: List[str],
                 inner_batch_size: int=1,
                 top: int=None):
         ''' Both "questions" and "passages" must be in English
@@ -69,7 +70,9 @@ class EnglishDPRRetriever(object):
                 relevances = [r.item() for r in relevances]
                 ids = np.argsort(relevances)[::-1]
                 relevances = [relevances[index] for index in ids]
-                retrieved_ids.append(ids[:top])
+                top_ids = ids[:top]
+                top_doc_ids = np.array([doc_ids[k] for k in top_ids])
+                retrieved_ids.append(top_doc_ids)
                 retrieved_relevances.append(relevances[:top])
         assert len(retrieved_ids) == len(retrieved_relevances)
         retrieved_relevances = np.array(retrieved_relevances)
