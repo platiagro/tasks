@@ -193,7 +193,7 @@ class MarianMTTranslator:
             aux,pred = iter
             row_number = aux[0]
             target = aux[1]
-            bleu_score = sentence_bleu(pred, [target])
+            bleu_score = sentence_bleu([target],pred)
             results[row_number] = bleu_score
 
         return results, np.mean(results) 
