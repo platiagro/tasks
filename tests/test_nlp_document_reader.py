@@ -52,7 +52,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 learning_rate= 3.0e-5,
                 eps= 1.0e-08,
                 seed = 13,
-                num_gpus= 1,
+                num_gpus= 0,
                 profiler= True,
                 max_epochs= 2,
                 accumulate_grad_batches= 16,

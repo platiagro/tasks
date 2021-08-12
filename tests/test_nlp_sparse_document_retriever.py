@@ -19,7 +19,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         os.environ["OPERATOR_ID"] = OPERATOR_ID
         os.environ["RUN_ID"] = RUN_ID
 
-        datasets.report_contexts()
+        datasets.reports_contexts_small()
 
         os.chdir("tasks/nlp-sparse-document-retriever")
 
