@@ -5,7 +5,7 @@ import torch
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-import sacrebleu
+from nltk.translate.bleu_score import sentence_bleu
 import random
 from typing import List
 
@@ -193,7 +193,7 @@ class MarianMTTranslator:
             aux,pred = iter
             row_number = aux[0]
             target = aux[1]
-            bleu_score = sacrebleu.corpus_bleu([pred], [[target]]).score
+            bleu_score = sentence_bleu(pred, [target])
             results[row_number] = bleu_score
 
         return results, np.mean(results) 
@@ -210,7 +210,7 @@ class MarianMTTranslator:
         self.df_result = df_input.copy()
         self.df_result.insert(df_input.shape[1], output_column_name, self.y_pred)
         
-        if self.y_target:
+        if type(self.y_target) == np.ndarray:
             self.bleu_array,self.avg_bleu = self._calc_bleu()
             self.df_result.insert(df_input.shape[1], 'bleu_score', self.bleu_array)
 

@@ -601,6 +601,48 @@
         "memoryRequest": "10Gi"
     },
     {
+        "name": "Dense Document Retriever",
+        "description": "Ranqueia textos de acordo com um outro texto de entrada atravésde vetores densos a partir do algorítimo DPR",
+        "path": "/tasks/nlp-dense-document-retriever",
+        "category": "NLP",
+        "tags": ["NLP"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.3.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "20Gi",
+        "memoryRequest": "20Gi"
+    },
+    {
+        "name": "Question Generator",
+        "description": "Gerguntas referentes a passagens de texto passadas pelo usuário",
+        "path": "/tasks/nlp-question-generator",
+        "category": "NLP",
+        "tags": ["NLP"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.3.0",
+        "artifacts": [{
+            "url": "https://storage.googleapis.com/platiagro/Vident/squad-train-v1.1.json",
+            "name": "squad-train-v1.1.json"
+        },{
+            "url": "https://storage.googleapis.com/platiagro/Vident/squad-dev-v1.1.json",
+            "name": "squad-dev-v1.1.json"
+        },{
+            "url": "!wget -nc https://storage.googleapis.com/platiagro/Vident/default_qgenerator_squad_pt.ckpt",
+            "name": "default_qgenerator_squad_pt.ckpt"
+        },{
+            "url": "https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt",
+            "name": "glove_s300_portugues.txt"
+        }],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "20Gi",
+        "memoryRequest": "20Gi"
+    },
+    {
         "name": "Document Reader",
         "description": "Procura a resposta para uma determinada pergunta dentro de um conjunto de contextos e retorna a porcentagem de certeza da reposta",
         "path": "/tasks/nlp-sparse-document-retriever",
