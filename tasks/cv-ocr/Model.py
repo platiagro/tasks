@@ -35,12 +35,13 @@ class Model:
         return ['x_min', 'y_min', 'x_max', 'y_max', 'text']
     
     def format_result(self, boxes, text):
+        words = text.split(' ')
+        words.remove('')
         res = []
         for i, box in enumerate(boxes):
             box = list(map(float, box))
-            print(box)
             res.append(
-                np.array(box + [text[i]])
+                np.array(box + [words[i]])
             )
         """
         for i in range(len(boxes)):
@@ -92,7 +93,7 @@ class Model:
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
             frame_with_text = np.array(img).astype(np.uint8)
-            result = [np.array(frame_with_text), text]
+            result = frame_with_text
         
         ### DEBUG ###
         logging.error('--- DBG ---')
