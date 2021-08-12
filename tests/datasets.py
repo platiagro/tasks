@@ -9,6 +9,7 @@ import minio.error
 import pandas as pd
 import platiagro.featuretypes
 import requests
+from base64 import b64encode
 
 BUCKET_NAME = "anonymous"
 PREFIX = "datasets"
@@ -149,7 +150,7 @@ def hotel_bookings_testdata_full():
         },
     }
     return data
-    
+
 
 def imdb():
     name = "imdb.csv"
@@ -230,6 +231,19 @@ def ocr():
 
 def football_teams():
     name = "football_teams.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
+def face_detection():
+    name = "face_detection.zip"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
@@ -326,7 +340,7 @@ def paracrawl():
         f.write(content)
 
     metadata(name=name)
-    
+
 def paracrawl_test_data():
     data = {
         "data": {
@@ -377,7 +391,7 @@ def metadata(name, df=None):
 
     try:
         MINIO_CLIENT.make_bucket(BUCKET_NAME)
-    except minio.error.BucketAlreadyOwnedByYou:
+    except minio.error.S3Error:
         pass
 
     object_name = f"{PREFIX}/{name}/{name}.metadata"
@@ -392,3 +406,19 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
+
+def image_testdata(kind: str = 'objects', ext: str = 'jpg'):
+
+    assert kind in ['objects', 'text', 'people']
+    assert ext in ['jpg', 'png']
+
+    name = f"{kind}.{ext}"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/tests/resources/{name}"
+
+    imbytes = requests.get(url).content
+
+    data = {
+        "binData": b64encode(imbytes).decode(),
+    }
+
+    return data

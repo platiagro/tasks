@@ -1,4 +1,4 @@
-name: Filter Selection
+name: Remove Rows
 
 on:
   push:
@@ -6,20 +6,20 @@ on:
     - main
     - v*-branch
     paths:
-    - tasks/filter-selection/**
+    - tasks/remove-rows/**
     - tests/datasets.py
     - tests/server.py
-    - tests/test_filter_selection.py
+    - tests/test_remove_rows.py
 
   pull_request:
     branches:
     - main
     - v*-branch
     paths:
-    - tasks/filter-selection/**
+    - tasks/remove-rows/**
     - tests/datasets.py
     - tests/server.py
-    - tests/test_filter_selection.py
+    - tests/test_remove_rows.py
 
 jobs:
   build:
@@ -46,8 +46,8 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest -v tests/test_filter_selection.py
-      timeout-minutes: 30
+        pytest -v tests/test_remove_rows.py
+      timeout-minutes: 5
       env:
         MINIO_ENDPOINT: minio:9000
         MINIO_ACCESS_KEY: minio

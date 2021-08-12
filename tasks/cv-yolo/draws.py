@@ -27,7 +27,7 @@ def draw_bboxes(
         Dim(-1,)
     @return drawn_image
     Usage:
-        image = yolo.draw_bboxes(image, bboxes, probs, names)
+        image = draw_bboxes(image, bboxes, probs, names)
     """
     height, width, _ = image.shape
     image = np.copy(image)
@@ -46,7 +46,7 @@ def draw_bboxes(
         
         # find name id, prob and set color
         name_id = np.where(np.array(name_ids) == names[bbox_id])[0][0]
-        prob = float(probs[bbox_id])
+        prob = probs[bbox_id]
         color = _BBOX_COLORS[name_id%_MAX_CLASSES]
 
         # Get text size
