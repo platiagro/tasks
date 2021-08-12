@@ -110,8 +110,13 @@ class Reader_Caller():
                 mode=self.early_stop_callback_params['mode']
                 )
 
-            gpu_stats = GPUStatsMonitor() if self.num_gpus>0 else None
-            tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}") if self.num_gpus>0 else None
+            callbacks = [early_stop_callback,checkpoint_callback]
+            if self.num_gpus>0:
+                gpu_stats = GPUStatsMonitor()
+                callbacks.append(gpu_stats)
+                tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}")
+            else:
+                tb_logger = None
 
             self.TRAINER = pl.Trainer(
             gpus= self.lightning_params['num_gpus'],
@@ -120,7 +125,7 @@ class Reader_Caller():
             accumulate_grad_batches = self.lightning_params['accumulate_grad_batches'],
             check_val_every_n_epoch=self.lightning_params['check_val_every_n_epoch'],
             progress_bar_refresh_rate=self.lightning_params['progress_bar_refresh_rate'],
-            callbacks = [early_stop_callback,gpu_stats,checkpoint_callback],
+            callbacks = callbacks,
             resume_from_checkpoint=None,
             logger = tb_logger
             )
