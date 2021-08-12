@@ -212,6 +212,6 @@ class MarianMTTranslator:
         
         if self.y_target:
             self.bleu_array,self.avg_bleu = self._calc_bleu()
-            self.df_result.insert(df_input.shape[1], bleu_score, self.bleu_array)
+            self.df_result.insert(df_input.shape[1], 'bleu_score', self.bleu_array)
 
         return self.df_result

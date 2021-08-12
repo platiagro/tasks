@@ -80,5 +80,6 @@ class TestSparseDocumentRetriever(unittest.TestCase):
 
         names = response["names"]    
         ndarray = response["ndarray"]
+        print(ndarray[0])
         self.assertEqual(len(ndarray[0]), 6)
         self.assertEqual(len(names), 6)
