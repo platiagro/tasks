@@ -33,13 +33,15 @@ class TestNLPMarianMT(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/paracrawl_en_pt_test.csv",
-                text = "text_english",
-                target = "text_portuguese",
+                input_column_name = "text_english",
+                reference_column_name = "text_portuguese",
+                output_column_name = "text_portuguese",
                 input_language =  "Inglês",
                 target_language = "Português" ,
                 seed = 42,
                 max_length = 256,
-                inference_batch_size = 2
+                inference_batch_size = 2,
+                calculate_metrics = False
             ),
         )
 

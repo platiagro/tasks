@@ -35,7 +35,7 @@ class TestDenseDocumentRetriever(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/reports_contexts_small.csv",
-                column = "context",
+                column_context = "context",
                 question = "Qual é o melhor herbicida para erva da ninha ?",
                 top = 5,
                 inner_batch_size = 5,

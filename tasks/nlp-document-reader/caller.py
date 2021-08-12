@@ -110,8 +110,8 @@ class Reader_Caller():
                 mode=self.early_stop_callback_params['mode']
                 )
 
-            gpu_stats = GPUStatsMonitor() 
-            tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}")
+            gpu_stats = GPUStatsMonitor() if self.num_gpus>0 else None
+            tb_logger = pl.loggers.TensorBoardLogger(f"{self.log_dirpath}") if self.num_gpus>0 else None
 
             self.TRAINER = pl.Trainer(
             gpus= self.lightning_params['num_gpus'],

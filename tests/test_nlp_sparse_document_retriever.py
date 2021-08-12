@@ -34,7 +34,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/reports_contexts_small.csv",
-                column = "context",
+                column_context = "context",
                 question = "Qual é o melhor herbicida para erva da ninha ?",
                 retriever_type = "tfidf",
                 bm25_k1 = 2,
@@ -65,7 +65,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 "/dev/null",
                 parameters=dict(
                     dataset="/tmp/data/reports_contexts_small.csv",
-                    column = "context",
+                    column_context = "context",
                     question = "Qual é o melhor herbicida para erva da ninha ?",
                     retriever_type = "bm25",
                     bm25_k1 = 2,
@@ -94,7 +94,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 "/dev/null",
                 parameters=dict(
                     dataset="/tmp/data/reports_contexts_small.csv",
-                    column = "context",
+                    column_context = "context",
                     question = "Qual é o melhor herbicida para erva da ninha ?",
                     retriever_type = "word2vec",
                     bm25_k1 = 2,
