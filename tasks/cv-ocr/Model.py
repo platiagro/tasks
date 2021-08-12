@@ -36,7 +36,9 @@ class Model:
     
     def format_result(self, boxes, text):
         words = text.split(' ')
-        words.remove('')
+        try:
+            words.remove('')
+        except: None
         res = []
         for i, box in enumerate(boxes):
             box = list(map(float, box))
