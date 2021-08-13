@@ -344,7 +344,7 @@ def paracrawl():
 def paracrawl_test_data():
     data = {
         "data": {
-            "ndarray": [["What is the main objective of the PLATIA project?","The CPDQ is the largest research center in Brazil"]
+            "ndarray": [["What is the main objective of the PLATIA project?","The CPDQ is the largest research center in Brazil"],
                         ["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"],
                     ],
             #"names":["input_column_name","reference_column_name"]
