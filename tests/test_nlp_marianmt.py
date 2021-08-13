@@ -34,7 +34,7 @@ class TestNLPMarianMT(unittest.TestCase):
             parameters=dict(
                 dataset="/tmp/data/paracrawl_en_pt_test.csv",
                 input_column_name = "text_english",
-                reference_column_name = "reference_text_portuguese",
+                reference_column_name = "text_portuguese",
                 output_column_name = "translated_text_portuguese",
                 input_language =  "Inglês",
                 target_language = "Português" ,
