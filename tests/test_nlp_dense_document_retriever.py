@@ -57,6 +57,5 @@ class TestDenseDocumentRetriever(unittest.TestCase):
         
         names = response["names"]
         ndarray = response["ndarray"]
-        print(ndarray[0])
         self.assertEqual(len(ndarray[0]), 3)
         self.assertEqual(len(names), 3)
