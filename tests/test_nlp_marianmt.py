@@ -53,9 +53,9 @@ class TestNLPMarianMT(unittest.TestCase):
         with server.Server() as s:
             response = s.test(data=data)
 
-        
+        print("!!!!!!!!!!! response !!!!!!!!!!!")
+        print(response)
         names = response["names"]
         ndarray = response["ndarray"]
-        print(ndarray[0])
         self.assertEqual(len(ndarray[0]), 3)  # 1 feature
         self.assertEqual(len(names), 3)
