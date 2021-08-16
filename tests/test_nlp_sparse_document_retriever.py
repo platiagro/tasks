@@ -39,80 +39,85 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 retriever_type = "tfidf",
                 bm25_k1 = 2,
                 bm25_b = 0.75 ,
-                top = 10,
+                top = 2,
                 column_doc_id = "doc_id",
                 column_score = "retriever_score",
             ),
         )
-
         papermill.execute_notebook(
             "Deployment.ipynb",
             "/dev/null",
         )
+        
         data = datasets.report_contexts_test_data()
         with server.Server() as s:
             response = s.test(data=data)
 
+        import pdb;pdb.set_trace()
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 3)
         self.assertEqual(len(names), 3)
 
-    def test_experiment_report_contexts_bm25(self):
+    # def test_experiment_report_contexts_bm25(self):
 
-            papermill.execute_notebook(
-                "Experiment.ipynb",
-                "/dev/null",
-                parameters=dict(
-                    dataset="/tmp/data/reports_contexts_small.csv",
-                    column_context = "context",
-                    question = "Qual é o melhor herbicida para erva da ninha ?",
-                    retriever_type = "bm25",
-                    bm25_k1 = 2,
-                    bm25_b = 0.75 ,
-                    top = 10,
-                ),
-            )
+    #         papermill.execute_notebook(
+    #             "Experiment.ipynb",
+    #             "/dev/null",
+    #             parameters=dict(
+    #                 dataset="/tmp/data/reports_contexts_small.csv",
+    #                 column_context = "context",
+    #                 question = "Qual é o melhor herbicida para erva da ninha ?",
+    #                 retriever_type = "bm25",
+    #                 bm25_k1 = 2,
+    #                 bm25_b = 0.75 ,
+    #                 top = 10,
+    #             ),
+    #         )
 
-            papermill.execute_notebook(
-                "Deployment.ipynb",
-                "/dev/null",
-            )
-            data = datasets.report_contexts_test_data()
-            with server.Server() as s:
-                response = s.test(data=data)
+    #         papermill.execute_notebook(
+    #             "Deployment.ipynb",
+    #             "/dev/null",
+    #         )
+    #         data = datasets.report_contexts_test_data()
+    #         with server.Server() as s:
+    #             response = s.test(data=data)
 
-            names = response["names"]
-            ndarray = response["ndarray"]
-            self.assertEqual(len(ndarray[0]), 3)
-            self.assertEqual(len(names), 3)
+    #         names = response["names"]
+    #         ndarray = response["ndarray"]
+    #         self.assertEqual(len(ndarray[0]), 3)
+    #         self.assertEqual(len(names), 3)
 
-    def test_experiment_report_contexts_word2vec(self):
+    # def test_experiment_report_contexts_word2vec(self):
 
-            papermill.execute_notebook(
-                "Experiment.ipynb",
-                "/dev/null",
-                parameters=dict(
-                    dataset="/tmp/data/reports_contexts_small.csv",
-                    column_context = "context",
-                    question = "Qual é o melhor herbicida para erva da ninha ?",
-                    retriever_type = "word2vec",
-                    bm25_k1 = 2,
-                    bm25_b = 0.75 ,
-                    top = 10,
-                ),
-            )
+    #         papermill.execute_notebook(
+    #             "Experiment.ipynb",
+    #             "/dev/null",
+    #             parameters=dict(
+    #                 dataset="/tmp/data/reports_contexts_small.csv",
+    #                 column_context = "context",
+    #                 question = "Qual é o melhor herbicida para erva da ninha ?",
+    #                 retriever_type = "word2vec",
+    #                 bm25_k1 = 2,
+    #                 bm25_b = 0.75 ,
+    #                 top = 10,
+    #             ),
+    #         )
 
-            papermill.execute_notebook(
-                "Deployment.ipynb",
-                "/dev/null",
-            )
-            data = datasets.report_contexts_test_data()
-            with server.Server() as s:
-                response = s.test(data=data)
+    #         papermill.execute_notebook(
+    #             "Deployment.ipynb",
+    #             "/dev/null",
+    #         )
+    #         data = datasets.report_contexts_test_data()
+    #         with server.Server() as s:
+    #             response = s.test(data=data)
 
-            names = response["names"]
-            ndarray = response["ndarray"]
-            print(ndarray[0])
-            self.assertEqual(len(ndarray[0]), 3)
-            self.assertEqual(len(names), 3)
+    #         names = response["names"]
+    #         ndarray = response["ndarray"]
+    #         print(ndarray[0])
+    #         self.assertEqual(len(ndarray[0]), 3)
+    #         self.assertEqual(len(names), 3)
+
+# if __name__ == '__main__':
+#     t = TestSparseDocumentRetriever()
+#     t.test_experiment_report_contexts_tfidf()    
