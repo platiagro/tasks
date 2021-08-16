@@ -1,12 +1,13 @@
+import os
+import torch
+import random
+import sacrebleu
+import numpy as np
+import pandas as pd
 from transformers import MarianMTModel, MarianTokenizer
 import spacy
 from spacy.lang.en import English
-import torch
-import numpy as np
-import pandas as pd
 from tqdm import tqdm
-from nltk.translate.bleu_score import sentence_bleu
-import random
 from typing import List
 
 
@@ -193,7 +194,7 @@ class MarianMTTranslator:
             aux,pred = iter
             row_number = aux[0]
             target = aux[1]
-            bleu_score = sentence_bleu([target],pred)
+            bleu_score = sacrebleu.corpus_bleu([pred], [[target]]).score
             results[row_number] = bleu_score
 
         return results, np.mean(results) 
@@ -210,8 +211,61 @@ class MarianMTTranslator:
         self.df_result = df_input.copy()
         self.df_result.insert(df_input.shape[1], output_column_name, self.y_pred)
         
-        if type(self.y_target) == np.ndarray:
+        if self.y_target:
             self.bleu_array,self.avg_bleu = self._calc_bleu()
-            self.df_result.insert(df_input.shape[1], 'bleu_score', self.bleu_array)
+            self.df_result.insert(df_input.shape[1], bleu_score, self.bleu_array)
 
         return self.df_result
+
+
+class Translate:
+
+    def __init__(self,  
+                input_language:str="Português",
+                target_language:str="Inglês",
+                max_length:int=512,
+                inference_batch_size:int=10,
+                seed:int=42):
+
+        def verify_language():
+            possible_languages = ['Alemão', 'Catalão', 'Espanhol', 'Francês', 'Inglês', 'Italiano', 'Latim', 'Português', 'Romeno']
+            if self.input_language not in possible_languages:
+                raise ValueError(f"input_language tem valor {self.input_language} e deveria estar entre {possible_languages}")
+            if self.target_language not in possible_languages:
+                raise ValueError(f"target_language tem valor {self.target_language} e deveria estar entre {possible_languages}")
+            if self.input_language == self.target_language:
+                raise ValueError('Idioma de entrada e de saída não podem ser iguais')
+
+        #Input Parameters 
+        self.seed = seed
+        self.max_length = max_length
+        self.inference_batch_size = inference_batch_size
+        self.target_language = target_language
+        self.input_language = input_language
+
+        verify_language()
+
+        if input_language=='Inglês' and target_language!='Inglês':
+            models_list = ["Helsinki-NLP/opus-mt-en-ROMANCE"]
+        elif input_language!='Inglês' and target_language=='Inglês':
+            models_list = ["Helsinki-NLP/opus-mt-ROMANCE-en"]
+        else:
+            models_list = ["Helsinki-NLP/opus-mt-ROMANCE-en","Helsinki-NLP/opus-mt-en-ROMANCE"] 
+
+        self.hyperparams = {'max_length': max_length, 
+               'inference_batch_size': inference_batch_size,
+               'target_language':target_language,
+               'models_list':models_list,
+                'seed':seed
+              }
+
+        self.marian_model = MarianMTTranslator(self.hyperparams)
+
+    
+    def translate(self, data):
+        text_translated = self.marian_model.predict(data)
+        return text_translated
+
+    def translate_and_track_metrics(self, X:np.ndarray,y:np.ndarray):
+        text_translated = self.marian_model.get_result_dataframe(X,y)
+        return text_translated

@@ -14,7 +14,7 @@ class TfidfRetriever:
         self.preproc = preproc
         self.vectorizer = TfidfVectorizer(binary=binary)
     
-    def fit(self, contexts):
+    def fit(self, contexts,doc_ids):
         ''' contexts is an iterable of strings
         '''
         if self.preproc:
@@ -22,7 +22,7 @@ class TfidfRetriever:
         self.contexts = contexts
         self.vectorizer.fit(contexts)
         self.context_vec = self.vectorizer.transform(contexts)
-        #self.contexts = contexts
+        self.doc_ids = doc_ids
 
     def __call__(self, questions, top=100):
         ''' questions is a string or iterable of strings
@@ -40,8 +40,12 @@ class TfidfRetriever:
         scores = []
         for i in range(len(questions)):
             similar_ids = np.argsort(pair_sim[i])[::-1][:top]
-            sim_contexts.append(similar_ids)
+            top_doc_ids = np.array([self.doc_ids[k] for k in similar_ids])
+            sim_contexts.append(top_doc_ids)
             scores.append(pair_sim[i][similar_ids])
+        
+        sim_contexts = np.array(sim_contexts)
+        scores = np.array(scores)
         
         return sim_contexts, scores
 
@@ -81,13 +85,14 @@ class W2VRetriever:
             vecs.append(vec)
         return np.array(vecs)
 
-    def fit(self, contexts):
+    def fit(self, contexts,doc_ids):
         ''' contexts is an iterable of strings
         '''
         if self.preproc:
             contexts = self.preproc.transform(contexts)
         self.contexts = contexts
         self.context_vec = self._transform(contexts)
+        self.doc_ids = doc_ids
 
     def __call__(self, questions, top=100):
         ''' questions is a string or iterable of strings
@@ -106,9 +111,13 @@ class W2VRetriever:
         
         for i in range(len(questions)):
             similar_ids = np.argsort(pair_sim[i])[::-1][:top]
-            sim_contexts.append(similar_ids)
+            top_doc_ids = np.array([self.doc_ids[k] for k in similar_ids])
+            sim_contexts.append(top_doc_ids)
             scores.append(pair_sim[i][similar_ids])
 
+        
+        sim_contexts = np.array(sim_contexts)
+        scores = np.array(scores)
         
         return sim_contexts, scores
 
@@ -124,7 +133,7 @@ class BM25Retriever:
         self.k1 = kwargs['k1']
         self.b = kwargs['b']
     
-    def fit(self, contexts):
+    def fit(self, contexts,doc_ids):
         ''' contexts is an iterable of strings
         '''
         if self.preproc:
@@ -133,6 +142,7 @@ class BM25Retriever:
         self.bm25 = BM25Okapi(self._tokenize(contexts),
                               k1=self.k1,
                               b=self.b)
+        self.doc_ids = doc_ids
     
     def _tokenize(self, corpus):
         return [doc.split(' ') for doc in corpus]
@@ -155,8 +165,12 @@ class BM25Retriever:
         sim_contexts = []
         sim_scores = []
         for _score in scores:
-            ids = np.argsort(_score)[::-1][:top]
-            sim_contexts.append(ids)
-            sim_scores.append([_score[i] for i in ids])
+            similar_ids = np.argsort(_score)[::-1][:top]
+            top_doc_ids = np.array([self.doc_ids[k] for k in similar_ids])
+            sim_contexts.append(top_doc_ids)
+            sim_scores.append([_score[i] for i in similar_ids])
+            
+        sim_contexts = np.array(sim_contexts)
+        sim_scores = np.array(sim_scores)
         
         return sim_contexts, sim_scores

@@ -286,11 +286,14 @@ def reports_contexts_small():
 def report_contexts_test_data():
     data = {
         "data": {
-            "ndarray": ["Quantas plantas da ninha existem ?", "Qual herbicida é melhor contra planta da ninha ?"],
+            "ndarray": [["4","1.3 Palavras-Chave: fitotoxicidade, rendimento relativo, inibidores da ALS, textura do solo"],
+                        ["7","3. OBJETIVOS Avaliar a seletividade dos herbicidas residuais Vezir (imazethapyr), Spider (diclosulam), Boral (sulfentrazone), Heat (saflufenacil) e Coronel BR (metribuzin), bem como das misturas formuladas Prompt (imazethapyr+sulfentrazone), Zethamaxx (imazethapyr+ flumioxazin), Optill (imazethapyr+saflufenacil) e BF 486 (diuron+sulfentrazone), aplicados em pré-emergência, nos cultivares de soja convencional K 5616, K 6221 e BRS 511 em condição de solo de textura média."],
+                        ["9","4.1 Localização: o projeto de pesquisa foi instalado na safra de verão 2017/2018, na gleba 1 EArapoti, PR. As coordenadas da área experimental são de latitude sul e de longitude oeste, com 870 metros de altitude. O solo da área experimental é classificado como LATOSSOLO VERMELHO Distrófico típico, álico. A análise física e química do solo onde foi instalado o projeto pode ser observada na Tabela 1."],
+                        ],
+            "names":["doc_id","context"]
         },
     }
     return data
-
 
 def document_reader_test_data():
     data = {
@@ -342,7 +345,10 @@ def paracrawl():
 def paracrawl_test_data():
     data = {
         "data": {
-            "ndarray": ["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"],
+            "ndarray": [["What is the main objective of the PLATIA project?","The CPDQ is the largest research center in Brazil"],
+                        ["Qual o principal objetivo do projeto PLATIA?", "O CPDQ é o maior centro de pesquisa do Brasil"],
+                    ],
+            "names":["text_english","text_portuguese"]
         },
     }
     return data
