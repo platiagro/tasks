@@ -32,13 +32,14 @@ class Model:
             
         
         df = pd.DataFrame(X,columns = feature_names)
+        report_contexts = df[self.column_context].to_numpy()
+        doc_ids = df[self.column_doc_id].to_numpy()
+        self.model.fit(contexts=report_contexts, doc_ids=doc_ids)
         sim_contexts_ids, scores = self.model(questions=self.question, top=self.top)
-        column_doc_ids = df[self.column_doc_id].to_numpy()
-        sim_contexts_ids = np.array([column_doc_ids[k] for k in sim_contexts_ids[0]])
 
             
         df_result = build_result_dataframe(df_input=df,
-                            sim_contexts_ids=sim_contexts_ids,
+                            sim_contexts_ids=sim_contexts_ids[0],
                             scores=scores[0],
                             column_doc_id = self.column_doc_id,
                             column_score = self.column_score)
