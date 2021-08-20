@@ -135,3 +135,7 @@ dmypy.json
 
 # every file/folder starting with  __no__repo
 __no__repo*
+
+# Files locally generated
+.bashrc
+.conda/
