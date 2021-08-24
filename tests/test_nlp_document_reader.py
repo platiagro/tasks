@@ -35,8 +35,14 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 dataset="/tmp/data/reports_contexts_small.csv",
                 question = "Qual é o melhor herbicida para erva da ninha ?",
                 top = 10,
+                column_retriever_score = "retriever_score",
+                column_reader_score = "reader_score",
+                retriever_reader_pipeline = False,
+                reader_score_weight = 0.8,
+                remove_no_answer_found = True,
+                ntops_overall = 5,
                 column_context = "context",
-                column_question = "question",
+                column_doc_id = "doc_id",
                 column_answer_start = "answer_start",
                 column_answer_end= "answer_end",
                 train_from_zero = False,
@@ -73,7 +79,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "/dev/null",
         )
 
-        data = datasets.document_reader_test_data()
+        data = datasets.report_contexts_test_data()
 
         with server.Server() as s:
             response = s.test(data=data)
@@ -81,5 +87,5 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         names = response["names"]    
         ndarray = response["ndarray"]
         print(ndarray[0])
-        self.assertEqual(len(ndarray[0]), 6)
-        self.assertEqual(len(names), 6)
+        self.assertEqual(len(ndarray[0]), 5)
+        self.assertEqual(len(names), 5)
