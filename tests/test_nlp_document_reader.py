@@ -42,7 +42,6 @@ class TestSparseDocumentRetriever(unittest.TestCase):
                 remove_no_answer_found = True,
                 ntops_overall = 5,
                 column_context = "context",
-                column_question = "question",
                 column_doc_id = "doc_id",
                 column_answer_start = "answer_start",
                 column_answer_end= "answer_end",
@@ -80,7 +79,7 @@ class TestSparseDocumentRetriever(unittest.TestCase):
             "/dev/null",
         )
 
-        data = datasets.document_reader_test_data()
+        data = datasets.report_contexts_test_data()
 
         with server.Server() as s:
             response = s.test(data=data)
@@ -88,5 +87,5 @@ class TestSparseDocumentRetriever(unittest.TestCase):
         names = response["names"]    
         ndarray = response["ndarray"]
         print(ndarray[0])
-        self.assertEqual(len(ndarray[0]), 6)
-        self.assertEqual(len(names), 6)
+        self.assertEqual(len(ndarray[0]), 5)
+        self.assertEqual(len(names), 5)
