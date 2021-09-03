@@ -65,6 +65,13 @@ jobs:
         coverage run --branch --source=init-job -m pytest tests/test_parameters.py
         coverage xml -i
 
+    - name: SonarCloud Scan
+      if: ${{ always() }}
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
