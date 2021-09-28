@@ -1,6 +1,12 @@
 name: Dense Document Retriever
 
 on:
+  schedule:
+    # Since tasks rely on the docker image "docker.io/platiagro/platiagro-notebook-image",
+    # we schedule a run to check if any changes (eg. on requirements.txt) broke any tests
+    # Runs once a week (on Tuedays 2:30pm)
+    - cron:  '30 14 * * 2'
+
   push:
     branches:
     - main

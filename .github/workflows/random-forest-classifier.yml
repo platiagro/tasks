@@ -1,6 +1,12 @@
 name: Random Forest Classifier
 
 on:
+  schedule:
+    # Since tasks rely on the docker image "docker.io/platiagro/platiagro-notebook-image",
+    # we schedule a run to check if any changes (eg. on requirements.txt) broke any tests
+    # Runs once a week (on Sundays 4:30am)
+    - cron:  '30 4 * * 0'
+
   push:
     branches:
     - main
