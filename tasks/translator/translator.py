@@ -192,7 +192,8 @@ class Translator(nn.Module):
 
             # Transform in language pairs (bi grams)
             language_pairs_path = list(nltk.bigrams(language_path))
-        except:
+        except (nx.NodeNotFound, nx.NetworkXNoPath) as e:
+            print(e)
             language_pairs_path = []
         
         return language_pairs_path
