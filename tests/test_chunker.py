@@ -10,7 +10,8 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-LOCAL_TEST_DATA_PATH = "/tmp/data/paracrawl_en_pt_test.csv"
+TEMPORARY_DIR = "tmp"
+LOCAL_TEST_DATA_PATH = f"/{TEMPORARY_DIR}/data/paracrawl_en_pt_test.csv"
 EXPERIMENT_NOTEBOOK = "Experiment.ipynb"
 DEPLOYMENT_NOTEBOOK = "Deployment.ipynb"
 DEV_DIR = "/dev/null"

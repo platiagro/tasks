@@ -10,7 +10,8 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-LOCAL_TEST_DATA_PATH = "/tmp/data/paracrawl_en_pt_test.csv"
+TEMPORARY_DIR = "tmp"
+LOCAL_TEST_DATA_PATH = f"/{TEMPORARY_DIR}/data/paracrawl_en_pt_test.csv"
 EXPERIMENT_NOTEBOOK = "Experiment.ipynb"
 DEPLOYMENT_NOTEBOOK = "Deployment.ipynb"
 DEV_DIR = "/dev/null"
@@ -35,7 +36,7 @@ class TestTranslator(unittest.TestCase):
     def test_experiment_paracrawl_gpu(self):
         papermill.execute_notebook(
             EXPERIMENT_NOTEBOOK,
-            "/dev/null",
+            DEV_DIR,
             parameters=dict(
                 dataset=LOCAL_TEST_DATA_PATH,
                 text_column_name = "text_portuguese",
