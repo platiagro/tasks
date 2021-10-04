@@ -53,7 +53,7 @@ jobs:
       run: |
         pip install pytest pytest-cov
         coverage erase
-        coverage run --branch --source=. -m pytest tests/test_translator.py -v
+        coverage run --branch -m pytest tests/test_translator.py -v
         coverage xml -i
       timeout-minutes: 30
       env:
