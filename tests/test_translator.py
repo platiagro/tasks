@@ -10,6 +10,11 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
+LOCAL_TEST_DATA_PATH = "/tmp/data/paracrawl_en_pt_test.csv"
+EXPERIMENT_NOTEBOOK = "Experiment.ipynb"
+DEPLOYMENT_NOTEBOOK = "Deployment.ipynb"
+DEV_DIR = "/dev/null"
+
 
 class TestTranslator(unittest.TestCase):
 
@@ -29,10 +34,10 @@ class TestTranslator(unittest.TestCase):
 
     def test_experiment_paracrawl_gpu(self):
         papermill.execute_notebook(
-            "Experiment.ipynb",
+            EXPERIMENT_NOTEBOOK,
             "/dev/null",
             parameters=dict(
-                dataset="/tmp/data/paracrawl_en_pt_test.csv",
+                dataset=LOCAL_TEST_DATA_PATH,
                 text_column_name = "text_portuguese",
                 output_column_name = "text_translated",
                 expected_column_name = "",
@@ -44,8 +49,8 @@ class TestTranslator(unittest.TestCase):
         )
 
         papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
+            DEPLOYMENT_NOTEBOOK,
+            DEV_DIR,
         )
         data = datasets.paracrawl_test_data()
         with server.Server() as s:
@@ -58,10 +63,10 @@ class TestTranslator(unittest.TestCase):
     
     def test_experiment_paracrawl_eval(self):
         papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
+            EXPERIMENT_NOTEBOOK,
+            DEV_DIR,
             parameters=dict(
-                dataset="/tmp/data/paracrawl_en_pt_test.csv",
+                dataset=LOCAL_TEST_DATA_PATH,
                 text_column_name = "text_portuguese",
                 output_column_name = "text_translated",
                 expected_column_name = "text_english",
@@ -73,8 +78,8 @@ class TestTranslator(unittest.TestCase):
         )
 
         papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
+            DEPLOYMENT_NOTEBOOK,
+            DEV_DIR,
         )
         data = datasets.paracrawl_test_data()
         with server.Server() as s:
@@ -87,10 +92,10 @@ class TestTranslator(unittest.TestCase):
 
     def test_experiment_paracrawl_multiple_translation_step(self):
         papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
+            EXPERIMENT_NOTEBOOK,
+            DEV_DIR,
             parameters=dict(
-                dataset="/tmp/data/paracrawl_en_pt_test.csv",
+                dataset=LOCAL_TEST_DATA_PATH,
                 text_column_name = "text_portuguese",
                 output_column_name = "text_translated",
                 expected_column_name = "",
@@ -102,8 +107,8 @@ class TestTranslator(unittest.TestCase):
         )
 
         papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
+            DEPLOYMENT_NOTEBOOK,
+            DEV_DIR,
         )
         data = datasets.paracrawl_test_data()
         with server.Server() as s:
@@ -116,10 +121,10 @@ class TestTranslator(unittest.TestCase):
 
     def test_experiment_paracrawl_cpu(self):
         papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
+            EXPERIMENT_NOTEBOOK,
+            DEV_DIR,
             parameters=dict(
-                dataset="/tmp/data/paracrawl_en_pt_test.csv",
+                dataset=LOCAL_TEST_DATA_PATH,
                 text_column_name = "text_portuguese",
                 output_column_name = "text_translated",
                 expected_column_name = "",
@@ -131,8 +136,8 @@ class TestTranslator(unittest.TestCase):
         )
 
         papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
+            DEPLOYMENT_NOTEBOOK,
+            DEV_DIR,
         )
         data = datasets.paracrawl_test_data()
         with server.Server() as s:
