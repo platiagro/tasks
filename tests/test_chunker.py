@@ -3,6 +3,7 @@ import unittest
 import uuid
 
 import papermill
+import pandas as pd
 
 from tests import datasets, server
 
@@ -48,6 +49,13 @@ class TestChunker(unittest.TestCase):
             ),
         )
 
+        # Verify output data
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['text_english', 'text_portuguese', 'text_chunk'])
+        self.assertEqual(out_data.loc[0, 'text_chunk'], "Deste modo, a vida civil")
+        self.assertEqual(out_data.loc[1, 'text_chunk'], "vida civil de uma nação")
+
+        # Deployment pipeline
         papermill.execute_notebook(
             DEPLOYMENT_NOTEBOOK,
             DEV_DIR,
@@ -76,6 +84,12 @@ class TestChunker(unittest.TestCase):
             ),
         )
 
+        # Verify output data
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['text_english', 'text_portuguese', 'text_chunk'])
+        self.assertEqual(out_data.loc[0, 'text_chunk'].strip(), "Deste modo, a vida civil de uma nação amadurece, fazendo com que todos os cidadãos gozem dos frutos da tolerância genuína e do respeito mútuo.")
+
+        # Deployment pipeline
         papermill.execute_notebook(
             DEPLOYMENT_NOTEBOOK,
             DEV_DIR,
@@ -98,12 +112,19 @@ class TestChunker(unittest.TestCase):
                 text_column_name = "text_portuguese",
                 output_column_name = "text_chunk",
                 chunkenizer =  "word",
-                chunk_size = 5,
+                chunk_size = 12,
                 chunk_overlap = 2,
                 replicate_data = "não",
             ),
         )
 
+
+        # Verify output data
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['text_english', 'text_portuguese', 'text_chunk'])
+        self.assertEqual(out_data.loc[0, 'text_chunk'], "['Deste modo, a vida civil de uma nação amadurece, fazendo com que', 'com que todos os cidadãos gozem dos frutos da tolerância genuína e', 'genuína e do respeito mútuo.']")
+
+        # Deployment pipeline
         papermill.execute_notebook(
             DEPLOYMENT_NOTEBOOK,
             DEV_DIR,

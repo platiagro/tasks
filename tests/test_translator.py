@@ -5,6 +5,7 @@ import uuid
 import papermill
 
 from tests import datasets, server
+import pandas as pd
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
@@ -33,7 +34,7 @@ class TestTranslator(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_paracrawl_gpu(self):
+    def test_experiment_gpu(self):
         papermill.execute_notebook(
             EXPERIMENT_NOTEBOOK,
             DEV_DIR,
@@ -49,10 +50,17 @@ class TestTranslator(unittest.TestCase):
             ),
         )
 
+        # Verify output data
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['text_english', 'text_portuguese', 'text_translated'])
+        self.assertEqual(type(out_data.loc[0, 'text_translated']), type("string"))
+
+        # Deployment pipeline
         papermill.execute_notebook(
             DEPLOYMENT_NOTEBOOK,
             DEV_DIR,
         )
+
         data = datasets.paracrawl_test_data()
         with server.Server() as s:
             response = s.test(data=data)
@@ -62,7 +70,7 @@ class TestTranslator(unittest.TestCase):
         self.assertEqual(len(ndarray), 2)  # 2 translated texts
         self.assertEqual(len(names), 3) # 1 extra feature (total of 3)
     
-    def test_experiment_paracrawl_eval(self):
+    def test_experiment_eval(self):
         papermill.execute_notebook(
             EXPERIMENT_NOTEBOOK,
             DEV_DIR,
@@ -78,6 +86,12 @@ class TestTranslator(unittest.TestCase):
             ),
         )
 
+        # Verify output data
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['text_english', 'text_portuguese', 'text_translated'])
+        self.assertEqual(type(out_data.loc[0, 'text_translated']), type("string"))
+
+        # Deployment pipeline
         papermill.execute_notebook(
             DEPLOYMENT_NOTEBOOK,
             DEV_DIR,
@@ -91,7 +105,7 @@ class TestTranslator(unittest.TestCase):
         self.assertEqual(len(ndarray), 2)  # 2 translated texts
         self.assertEqual(len(names), 3) # 1 extra feature (total of 3)
 
-    def test_experiment_paracrawl_multiple_translation_step(self):
+    def test_experiment_multiple_translation_step(self):
         papermill.execute_notebook(
             EXPERIMENT_NOTEBOOK,
             DEV_DIR,
@@ -107,6 +121,12 @@ class TestTranslator(unittest.TestCase):
             ),
         )
 
+        # Verify output data
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['text_english', 'text_portuguese', 'text_translated'])
+        self.assertEqual(type(out_data.loc[0, 'text_translated']), type("string"))
+
+        # Deployment pipeline
         papermill.execute_notebook(
             DEPLOYMENT_NOTEBOOK,
             DEV_DIR,
@@ -120,7 +140,7 @@ class TestTranslator(unittest.TestCase):
         self.assertEqual(len(ndarray), 2)  # 2 translated texts
         self.assertEqual(len(names), 3) # 1 extra feature (total of 3)
 
-    def test_experiment_paracrawl_cpu(self):
+    def test_experiment_cpu(self):
         papermill.execute_notebook(
             EXPERIMENT_NOTEBOOK,
             DEV_DIR,
@@ -136,6 +156,12 @@ class TestTranslator(unittest.TestCase):
             ),
         )
 
+        # Verify output data
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['text_english', 'text_portuguese', 'text_translated'])
+        self.assertEqual(type(out_data.loc[0, 'text_translated']), type("string"))
+
+        # Deployment pipeline
         papermill.execute_notebook(
             DEPLOYMENT_NOTEBOOK,
             DEV_DIR,
