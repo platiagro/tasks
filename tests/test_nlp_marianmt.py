@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -11,6 +12,9 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
+@mock.patch(
+    "mlflow.log_metric",
+)
 class TestNLPMarianMT(unittest.TestCase):
 
     def setUp(self):
@@ -33,15 +37,15 @@ class TestNLPMarianMT(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/paracrawl_en_pt_test.csv",
-                input_column_name = "text_english",
-                reference_column_name = "text_portuguese",
-                output_column_name = "translated_text_portuguese",
-                input_language =  "Inglês",
-                target_language = "Português" ,
-                seed = 42,
-                max_length = 256,
-                inference_batch_size = 2,
-                calculate_metrics = False
+                input_column_name="text_english",
+                reference_column_name="text_portuguese",
+                output_column_name="translated_text_portuguese",
+                input_language="Inglês",
+                target_language="Português",
+                seed=42,
+                max_length=256,
+                inference_batch_size=2,
+                calculate_metrics=False
             ),
         )
 

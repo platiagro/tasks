@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -11,6 +12,9 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
+@mock.patch(
+    "mlflow.log_metric",
+)
 class TestMLPRegressor(unittest.TestCase):
 
     def setUp(self):

@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -11,6 +12,9 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
+@mock.patch(
+    "mlflow.log_metric",
+)
 class TestIsolationForestClustering(unittest.TestCase):
 
     def setUp(self):
@@ -36,9 +40,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-                
-                filter_type = "remover",
-                model_features = "Species",
+
+                filter_type="remover",
+                model_features="Species",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -64,9 +68,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
-                
-                filter_type = "remover",
-                model_features = "Survived",
+
+                filter_type="remover",
+                model_features="Survived",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -92,9 +96,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
-                
-                filter_type = "remover",
-                model_features = "medv",
+
+                filter_type="remover",
+                model_features="medv",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -120,9 +124,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/hotel_bookings.csv",
-                
-                filter_type = "remover",
-                model_features = "is_canceled",
+
+                filter_type="remover",
+                model_features="is_canceled",
 
                 max_samples="auto",
                 contamination=0.1,

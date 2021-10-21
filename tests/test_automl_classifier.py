@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -10,7 +11,9 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-
+@mock.patch(
+    "mlflow.log_metric",
+)
 class TestAutoMLClassifier(unittest.TestCase):
 
     def setUp(self):
