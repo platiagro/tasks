@@ -54,7 +54,6 @@ class TestRetriever(unittest.TestCase):
         # Verify output data
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['index','text','question','expected_answer','expected_retriever_answer','retriever_score'])
-        self.assertEqual(type(out_data.loc[0, 'answer']), str)
         self.assertEqual(out_data.loc[0, 'retriever_score'] > 0, True)
 
         # Deployment pipeline
@@ -65,12 +64,12 @@ class TestRetriever(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray), 4)  # 2 questions and top 2 retrieved, total: 4
-        self.assertEqual(len(names), 6) # 1 extra feature (total of 7)
+        self.assertEqual(len(names), 6) # 1 extra feature (total of 6)
     
     def test_experiment_cpu(self):
         papermill.execute_notebook(
@@ -92,7 +91,6 @@ class TestRetriever(unittest.TestCase):
         # Verify output data
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['index','text','question','expected_answer','expected_retriever_answer','retriever_score'])
-        self.assertEqual(type(out_data.loc[0, 'answer']), str)
         self.assertEqual(out_data.loc[0, 'retriever_score'] > 0, True)
 
         # Deployment pipeline
@@ -103,12 +101,12 @@ class TestRetriever(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray), 4)  # 2 questions and top 2 retrieved, total: 4
-        self.assertEqual(len(names), 6) # 1 extra feature (total of 7)
+        self.assertEqual(len(names), 6) # 1 extra feature (total of 6)
     
     def test_experiment_top1(self):
         papermill.execute_notebook(
@@ -130,7 +128,6 @@ class TestRetriever(unittest.TestCase):
         # Verify output data
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['index','text','question','expected_answer','expected_retriever_answer','retriever_score'])
-        self.assertEqual(type(out_data.loc[0, 'answer']), str)
         self.assertEqual(out_data.loc[0, 'retriever_score'] > 0, True)
 
         # Deployment pipeline
@@ -141,12 +138,12 @@ class TestRetriever(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray), 2)  # 2 questions and top 2 retrieved, total: 4
-        self.assertEqual(len(names), 6) # 1 extra feature (total of 7)
+        self.assertEqual(len(ndarray), 2)  # 2 questions and top 1 retrieved, total: 2
+        self.assertEqual(len(names), 6) # 1 extra feature (total of 6)
 
     def test_experiment_tfidf(self):
         papermill.execute_notebook(
@@ -168,7 +165,6 @@ class TestRetriever(unittest.TestCase):
         # Verify output data
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['index','text','question','expected_answer','expected_retriever_answer','retriever_score'])
-        self.assertEqual(type(out_data.loc[0, 'answer']), str)
         self.assertEqual(out_data.loc[0, 'retriever_score'] > 0, True)
 
         # Deployment pipeline
@@ -179,12 +175,12 @@ class TestRetriever(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray), 4)  # 2 questions and top 2 retrieved, total: 4
-        self.assertEqual(len(names), 6) # 1 extra feature (total of 7)
+        self.assertEqual(len(names), 6) # 1 extra feature (total of 6)
 
     def test_experiment_bm25(self):
         papermill.execute_notebook(
@@ -206,7 +202,6 @@ class TestRetriever(unittest.TestCase):
         # Verify output data
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['index','text','question','expected_answer','expected_retriever_answer','retriever_score'])
-        self.assertEqual(type(out_data.loc[0, 'answer']), str)
         self.assertEqual(out_data.loc[0, 'retriever_score'] > 0, True)
 
         # Deployment pipeline
@@ -217,12 +212,12 @@ class TestRetriever(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray), 4)  # 2 questions and top 2 retrieved, total: 4
-        self.assertEqual(len(names), 6) # 1 extra feature (total of 7)
+        self.assertEqual(len(names), 6) # 1 extra feature (total of 6)
 
     def test_experiment_word2vec(self):
         papermill.execute_notebook(
@@ -244,7 +239,6 @@ class TestRetriever(unittest.TestCase):
         # Verify output data
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['index','text','question','expected_answer','expected_retriever_answer','retriever_score'])
-        self.assertEqual(type(out_data.loc[0, 'answer']), str)
         self.assertEqual(out_data.loc[0, 'retriever_score'] > 0, True)
 
         # Deployment pipeline
@@ -255,12 +249,12 @@ class TestRetriever(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray), 4)  # 2 questions and top 2 retrieved, total: 4
-        self.assertEqual(len(names), 6) # 1 extra feature (total of 7)
+        self.assertEqual(len(names), 6) # 1 extra feature (total of 6)
 
     def test_experiment_eval(self):
         papermill.execute_notebook(
@@ -282,7 +276,6 @@ class TestRetriever(unittest.TestCase):
         # Verify output data
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['index','text','question','expected_answer','expected_retriever_answer','retriever_score'])
-        self.assertEqual(type(out_data.loc[0, 'answer']), str)
         self.assertEqual(out_data.loc[0, 'retriever_score'] > 0, True)
 
         # Deployment pipeline
@@ -293,9 +286,9 @@ class TestRetriever(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray), 4)  # 2 questions and top 2 retrieved, total: 4
-        self.assertEqual(len(names), 6) # 1 extra feature (total of 7)
+        self.assertEqual(len(names), 6) # 1 extra feature (total of 6)
