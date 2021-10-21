@@ -27,11 +27,11 @@ MODEL_MAPPING = {
 
 class Retriever(object):
     '''Retriever Caller'''
-    def __init__(self, **kwargs):
+    def __init__(self, similarity_model, **kwargs):
 
         # Retrieve kwargs
         self.device = kwargs.get('device', torch.device('cpu'))
-        self.similarity_model = kwargs.get('similarity_model', ParaphraseMultilingual(device=self.device))
+        self.similarity_model = similarity_model
 
     def _batchify_contexts(self, contexts: List[str], batch_size: int):
         '''
