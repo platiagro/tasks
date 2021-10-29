@@ -12,9 +12,8 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch(
-    "mlflow.log_metric",
-)
+@mock.patch("mlflow.log_metric")
+
 class TestNLPMarianMT(unittest.TestCase):
 
     def setUp(self):
