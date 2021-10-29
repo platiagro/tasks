@@ -8,6 +8,19 @@ import re
 from PIL import Image
 from typing import List, Optional
 
+
+def init_cut(string:str, delimiter: str):
+    splitted = re.split(delimiter, string, maxsplit=1, flags=re.I)
+    if len(splitted) > 1:
+        return delimiter + splitted[-1]
+    else: return "Delimiter not found."
+
+def final_cut(string:str ,delimiter: str):
+    splitted = re.split(delimiter, string, maxsplit=1, flags=re.I)
+    if len(splitted) > 1:
+        return splitted[0] + delimiter
+    else: return "Delimiter not found."
+
 class PDFExtractor():
     def __init__(self, filepath=None):
         if filepath:
@@ -53,27 +66,13 @@ class PDFExtractor():
                 content = "\n".join([ page.get_text() for page in self.pdf_file ])
             else:
                 content = input_text
-            
-            def init_cut(string:str, delimiter: str):
-                splitted = re.split(delimiter, string, maxsplit=1, flags=re.I)
-                if len(splitted) > 1:
-                    return delimiter + splitted[-1]
-                else: return "Delimiter not found."
-
-            def final_cut(string:str ,delimiter: str):
-                splitted = re.split(delimiter, string, maxsplit=1, flags=re.I)
-                if len(splitted) > 1:
-                    return splitted[0] + delimiter
-                else: return "Delimiter not found."
 
             if init_sep != "":
                 content = init_cut(content, init_sep)
             if final_sep != "":
                 content = final_cut(content, final_sep)
 
-            #print(content)
             return content
-        
 
         else:
             return None
