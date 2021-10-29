@@ -33,15 +33,21 @@ class PDFExtractor():
             self.open = False
             return None
 
-    # read a pdf_file and return all text content a List of strings. each string is a page
     def extract_all_text(self) -> List[str]:
+        '''
+        Read a pdf_file and return all text content a List of strings. each string is a page
+        '''
+
         if self.open:
             return [ page.get_text() for page in self.pdf_file ]
         else:
             return None
 
-    # read a pdf_file and return a selected text between init_sep and final_sep over all pdf text
     def extract_related_text(self, init_sep: str="", final_sep: str="", input_text: str="") -> str:
+        '''
+        Read a pdf_file and return a selected text between init_sep and final_sep over all pdf text
+        '''
+
         if self.open:
             if input_text == "":
                 content = "\n".join([ page.get_text() for page in self.pdf_file ])
@@ -72,8 +78,11 @@ class PDFExtractor():
         else:
             return None
 
-    # read a pdf_file and return the text content from a specific page
     def extract_page_text(self, page_id: int) -> str:
+        '''
+        read a pdf_file and return the text content from a specific page
+        '''
+
         if self.open:
             try:
                 page_text = self.pdf_file[page_id].get_text()
@@ -82,8 +91,11 @@ class PDFExtractor():
                 pass;
         else: return None;
 
-    # read a pdf_file and return all figures inside the pdf_file as a List of figures
     def extract_all_figures(self):
+        '''
+        read a pdf_file and return all figures inside the pdf_file as a List of figures
+        '''
+
         if self.open:
             figures = []
             for idx, page in enumerate(self.pdf_file):
@@ -97,8 +109,11 @@ class PDFExtractor():
             return figures                  
         else: return None;
 
-    # read a pdf_file and return all figures inside a specific page from the pdf_file
     def extract_page_figures(self, page_id: int):
+        '''
+        read a pdf_file and return all figures inside a specific page from the pdf_file
+        '''
+
         if self.open:
             figures = []
             try:
@@ -114,8 +129,11 @@ class PDFExtractor():
             return figures
         else: return None;
 
-    # read a pdf_file and return all rendered pages of the pdf_file as images
     def extract_all_as_image(self):
+        '''
+        read a pdf_file and return all rendered pages of the pdf_file as images
+        '''
+
         if self.open:
             images = []
             for page in self.pdf_file:
@@ -133,8 +151,11 @@ class PDFExtractor():
             return images
         else: return None;
 
-    # read a pdf_file and return the rendered image from a specific page
     def extract_page_as_image(self, page_id: int):
+        '''
+        read a pdf_file and return the rendered image from a specific page
+        '''
+
         if self.open:
             try:
                 page = self.pdf_file[page_id]
