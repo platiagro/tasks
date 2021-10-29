@@ -54,7 +54,7 @@ class PDFExtractor():
         if self.open:
             return [ page.get_text() for page in self.pdf_file ]
         else:
-            return None
+            return [ "" ]
 
     def extract_related_text(self, init_sep: str="", final_sep: str="", input_text: str="") -> str:
         '''
@@ -75,7 +75,7 @@ class PDFExtractor():
             return content
 
         else:
-            return None
+            return ""
 
     def extract_page_text(self, page_id: int) -> str:
         '''
@@ -88,7 +88,7 @@ class PDFExtractor():
                 return page_text
             except IndexError:
                 pass;
-        else: return None;
+        else: return "";
 
     def extract_all_figures(self):
         '''
@@ -100,7 +100,6 @@ class PDFExtractor():
             for idx, page in enumerate(self.pdf_file):
                 for img_ref in page.get_images():
                     img_obj = self.pdf_file.extract_image(img_ref[0])
-                    ext = img_obj["ext"]
                     img_bytes = img_obj["image"]
                     img_stream = io.BytesIO(img_bytes)
                     img = Image.open(img_stream)
@@ -118,7 +117,6 @@ class PDFExtractor():
             try:
                 for img_ref in self.pdf_file[page_id].get_images():
                     img_obj = self.pdf_file.extract_image(img_ref[0])
-                    ext = img_obj["ext"]
                     img_bytes = img_obj["image"]
                     img_stream = io.BytesIO(img_bytes)
                     img = Image.open(img_stream)
@@ -137,9 +135,6 @@ class PDFExtractor():
             images = []
             for page in self.pdf_file:
                 image_matrix = fitz.Matrix(fitz.Identity)
-
-                # pdf image scale. 2 means 2x bigger (width, height) 
-                #   than original pdf size
                 image_matrix.preScale(2, 2)
                 pix = page.getPixmap(alpha = False, matrix = image_matrix)
 
@@ -159,8 +154,6 @@ class PDFExtractor():
             try:
                 page = self.pdf_file[page_id]
                 image_matrix = fitz.Matrix(fitz.Identity)
-                # pdf image scale. 2 means 2x bigger (width, height) 
-                #   than original pdf size
                 image_matrix.preScale(2, 2)
                 pix = page.getPixmap(alpha = False, matrix = image_matrix)
 
@@ -294,10 +287,3 @@ def read_dir(datapath: str,
 
     elif extract == "figures" or extract == "prints":
         return contents
-
-
-
-if __name__ == "__main__":
-    pass;
-    
-
