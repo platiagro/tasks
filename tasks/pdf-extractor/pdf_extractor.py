@@ -86,7 +86,7 @@ class PDFExtractor():
             try:
                 page_text = self.pdf_file[page_id].get_text()
                 return page_text
-            except IndexError:
+            except TypeError:
                 pass;
         else: return "";
 
@@ -121,7 +121,7 @@ class PDFExtractor():
                     img_stream = io.BytesIO(img_bytes)
                     img = Image.open(img_stream)
                     figures.append(img)
-            except IndexError:
+            except TypeError:
                 pass
             return figures
         else: return None;
@@ -161,7 +161,7 @@ class PDFExtractor():
                         pix.samples)
                 return img
 
-            except IndexError:
+            except TypeError:
                 pass
         else: return None;
 
@@ -183,7 +183,7 @@ def read_file(datapath: str,
         raw_text = pdf_extractor.extract_all_text()
         try:
             text = "\n".join(raw_text[initial_page:final_page] + [raw_text[final_page]])
-        except IndexError:
+        except TypeError:
             text = "\n".join(raw_text)
 
         if text_filter_begin != "" or text_filter_end != "":
@@ -195,7 +195,7 @@ def read_file(datapath: str,
         figures = pdf_extractor.extract_all_figures()
         try:
             figures = figures[initial_page:final_page] + [figures[final_page]]
-        except IndexError:
+        except TypeError:
             pass
         return figures
 
@@ -203,7 +203,7 @@ def read_file(datapath: str,
         images = pdf_extractor.extract_all_as_image()
         try:
             images = images[initial_page:final_page] + [images[final_page]]
-        except IndexError:
+        except TypeError:
             pass
         return images
 
@@ -228,7 +228,7 @@ def read_memory(stream,
         raw_text = pdf_extractor.extract_all_text()
         try:
             text = "\n".join(raw_text[initial_page:final_page] + [raw_text[final_page]])
-        except IndexError:
+        except TypeError:
             text = "\n".join(raw_text)
 
         if text_filter_begin != "" or text_filter_end != "":
@@ -240,7 +240,7 @@ def read_memory(stream,
         figures = pdf_extractor.extract_all_figures()
         try:
             figures = figures[initial_page:final_page] + [figures[final_page]]
-        except IndexError:
+        except TypeError:
             pass
         return figures
 
@@ -248,7 +248,7 @@ def read_memory(stream,
         images = pdf_extractor.extract_all_as_image()
         try:
             images = images[initial_page:final_page] + [images[final_page]]
-        except IndexError:
+        except TypeError:
             pass
         return images
 

@@ -172,6 +172,14 @@ def imdb_testdata():
     }
     return data
 
+def landspaces_test_data():
+    data = {
+        "data": {
+            "ndarray": [["landspaces","The CPDQ is the largest research center in Brazil"]],
+            "names":["filename","text"]
+        },
+    }
+    return dat
 
 def coco():
     name = "coco.zip"
@@ -340,10 +348,23 @@ def paracrawl_test_data():
             "names":["text_english","text_portuguese"]
         },
     }
-    return data
+    return dat
 
 def papers():
     name = "papers.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
+def landspaces():
+    name = "landspaces.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
     content = requests.get(url).content
 
