@@ -179,7 +179,7 @@ def landspaces_test_data():
             "names":["filename","text"]
         },
     }
-    return dat
+    return data
 
 def coco():
     name = "coco.zip"
