@@ -38,7 +38,7 @@ class TfIDF(nn.Module):
         # Fit model
         self.model.fit(sentences)
 
-    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> np.array:
+    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> float:
         """Calculate similarities between hypothesis and reference sentence"""
 
         # Fit the model in hypothesis sentences
@@ -49,7 +49,7 @@ class TfIDF(nn.Module):
         reference_vector = self.model.transform([reference_sentece])
 
         # Similarities
-        similarities = np.dot(reference_vector, hypothesis_vectors.T).toarray()
+        similarities = np.dot(reference_vector, hypothesis_vectors.T).toarray()[0]
 
         return similarities
 
