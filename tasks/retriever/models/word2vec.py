@@ -53,7 +53,7 @@ class Word2Vec(nn.Module):
 
         return docs
 
-    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> float:
+    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> np.array:
         """Calculate similarities between hypothesis and reference sentence"""
 
         # Verify if all hypothesis sentences are already precomputed
@@ -110,11 +110,3 @@ class Word2Vec(nn.Module):
             batch_similarities.append(similarities)
 
         return batch_similarities
-
-
-# # Sentences we want sentence embeddings for
-# batch_hypothesis_sentences = [['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas'], ['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas'], ['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas']]
-# batch_reference_sentece = ['Esta sentença é um exemplo', 'Esta é a referencia do exemplo 2', 'Esta é a referencia do exemplo 3']
-
-# sent_sim = Word2Vec(model_size="md")
-# print(sent_sim(batch_hypothesis_sentences, batch_reference_sentece))

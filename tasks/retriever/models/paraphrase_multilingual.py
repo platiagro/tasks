@@ -143,19 +143,3 @@ class ParaphraseMultilingual(nn.Module):
             batch_similarities.append(similarities)
 
         return batch_similarities
-
-# from time import time
-
-# # Sentences we want sentence embeddings for
-# batch_hypothesis_sentences = [['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas'], ['Esta é uma sentença de exemplo 2']]
-# batch_reference_sentece = ['Esta sentença é um exemplo', 'Esta é a referencia do exemplo 2']
-
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# sent_sim = ParaphraseMultilingual(device=device)
-
-# st = time()
-# print(sent_sim(batch_hypothesis_sentences, batch_reference_sentece), time()-st)
-# st = time()
-# print(sent_sim(batch_hypothesis_sentences, batch_reference_sentece), time()-st)
-# st = time()
-# print(sent_sim(batch_hypothesis_sentences, batch_reference_sentece), time()-st)

@@ -38,7 +38,7 @@ class TfIDF(nn.Module):
         # Fit model
         self.model.fit(sentences)
 
-    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> float:
+    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> np.array:
         """Calculate similarities between hypothesis and reference sentence"""
 
         # Fit the model in hypothesis sentences
@@ -49,11 +49,11 @@ class TfIDF(nn.Module):
         reference_vector = self.model.transform([reference_sentece])
 
         # Similarities
-        similarities = np.dot(reference_vector, hypothesis_vectors.T).toarray()[0]
+        similarities = np.dot(reference_vector, hypothesis_vectors.T).toarray()
 
         return similarities
 
-    def forward(self, batch_hypothesis_sentences: List[List[str]], batch_reference_sentece: List[str]) -> float:
+    def forward(self, batch_hypothesis_sentences: List[List[str]], batch_reference_sentece: List[str]) -> list:
         """Calculate similarity between batch of sentences
             
             >>> batch_hypothesis_sentences = [['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas'], ['Esta é uma sentença de exemplo 2']]
@@ -84,11 +84,3 @@ class TfIDF(nn.Module):
             batch_similarities.append(similarities)
 
         return batch_similarities
-
-
-# Sentences we want sentence embeddings for
-# batch_hypothesis_sentences = [['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas'], ['Esta é uma sentença de exemplo 2']]
-# batch_reference_sentece = ['Esta sentença é um exemplo', 'Esta é a referencia do exemplo 2']
-
-# sent_sim = TfIDF(binary=True)
-# print(sent_sim(batch_hypothesis_sentences, batch_reference_sentece))

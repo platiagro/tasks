@@ -33,7 +33,7 @@ class Retriever(object):
         self.device = kwargs.get('device', torch.device('cpu'))
         self.similarity_model = similarity_model
 
-    def _batchify_contexts(self, contexts: List[str], batch_size: int):
+    def _batchify_contexts(self, contexts: List[str], batch_size: int) -> List:
         '''
         Produces batches of contexts with size batch_size
 
@@ -121,7 +121,7 @@ class Retriever(object):
 
         return topn_contexts_ids, topn_contexts_scores
 
-    def evaluate(self, batch_hypothesis_ids: List[List[int]], batch_reference_id: List[int], mrr_ranks: List[int] = [10]):
+    def evaluate(self, batch_hypothesis_ids: List[List[int]], batch_reference_id: List[int], mrr_ranks: List[int] = [10]) -> dict:
         """
         Calculate the mrr@rank for a batch of batch_hypothesis_ids and contexts.
 

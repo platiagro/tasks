@@ -37,7 +37,7 @@ class BM25(nn.Module):
                                k1=self.hparams['k1'],
                                b=self.hparams['b'])
 
-    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> float:
+    def _calculate_similarities(self, hypothesis_sentences: List[str], reference_sentece: str) -> np.array:
         """Calculate similarities between hypothesis and reference sentence"""
 
         # Fit model
@@ -51,7 +51,7 @@ class BM25(nn.Module):
 
         return similarities
 
-    def forward(self, batch_hypothesis_sentences: List[List[str]], batch_reference_sentece: List[str]) -> float:
+    def forward(self, batch_hypothesis_sentences: List[List[str]], batch_reference_sentece: List[str]) -> List:
         """Calculate similarity between batch of sentences
             
             >>> batch_hypothesis_sentences = [['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas'], ['Esta é uma sentença de exemplo 2']]
@@ -82,11 +82,3 @@ class BM25(nn.Module):
             batch_similarities.append(similarities)
 
         return batch_similarities
-
-
-# Sentences we want sentence embeddings for
-# batch_hypothesis_sentences = [['Esta é uma sentença de exemplo', 'Todas as sentenças são cobertas'], ['Esta é uma sentença de exemplo 2']]
-# batch_reference_sentece = ['Esta sentença é um exemplo', 'Esta é a referencia do exemplo 2']
-
-# sent_sim = BM25()
-# print(sent_sim(batch_hypothesis_sentences, batch_reference_sentece))
