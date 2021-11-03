@@ -64,7 +64,7 @@ class TestReader(unittest.TestCase):
 
         data = datasets.simple_qa_test_data()
         with server.Server() as s:
-            response = s.test(data=data)
+            response = s.test(data=data, timeout=20)
 
         names = response["names"]
         ndarray = response["ndarray"]
