@@ -667,33 +667,18 @@
         "memoryRequest": "20Gi"
     },
     {
-        "name": "Tradutor",
-        "description": "Componente de tradução multilingual, traduz textos entre diferentes idiomas",
-        "path": "/tasks/translator",
-        "category": "NLP",
-        "tags": ["NLP"],
+        "name": "Data Split",
+        "description": "Separa conjunto de dados em treinamento, validação e teste.",
+        "path": "/tasks/data-split/",
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
         "commands": null,
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "8Gi",
-        "memoryRequest": "8Gi"
-    },
-    {
-        "name": "Chunker",
-        "description": "Componente de janelamento de textos, aplica janelamento em textos mantendo uma porção de sobreposição em partes consecutivas",
-        "path": "/tasks/chunker",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "2Gi",
-        "memoryRequest": "2Gi"
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     }
 ]
