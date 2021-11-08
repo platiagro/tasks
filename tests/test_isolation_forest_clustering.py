@@ -58,8 +58,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 5)  # 4 features + 1 anomaly score
-        mock_log_metrics.assert_any_call()
         self.assertEqual(len(names), 5)
+        mock_log_metrics.assert_any_call()
 
     def test_experiment_titanic(self, mock_log_metrics):
         papermill.execute_notebook(

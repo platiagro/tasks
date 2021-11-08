@@ -29,7 +29,7 @@ class TestCVOCR(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_ocr_output_data(self):
+    def test_experiment_ocr_output_data(self, mock_log_metrics):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -64,6 +64,7 @@ class TestCVOCR(unittest.TestCase):
                 xmin, ymin, xmax, ymax, text = bbox
                 self.assertGreater(xmax, xmin, "BoundingBox incorreta.")
                 self.assertGreater(ymax, ymin, "BoundingBox incorreta.")
+        mock_log_metrics.assert_any_call()
 
     """
     def test_experiment_ocr_output_nparray(self):
