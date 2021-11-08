@@ -13,7 +13,6 @@ RUN_ID = str(uuid.uuid4())
 
 
 @mock.patch("mlflow.log_metric")
-
 class TestCVOCR(unittest.TestCase):
 
     def setUp(self):

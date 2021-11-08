@@ -13,7 +13,6 @@ RUN_ID = str(uuid.uuid4())
 
 
 @mock.patch("mlflow.log_metric")
-
 class TestIsolationForestClustering(unittest.TestCase):
 
     def setUp(self):
@@ -33,7 +32,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_iris(self):
+    def test_experiment_iris(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -61,7 +61,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         self.assertEqual(len(ndarray[0]), 5)  # 4 features + 1 anomaly score
         self.assertEqual(len(names), 5)
 
-    def test_experiment_titanic(self):
+    def test_experiment_titanic(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -89,7 +90,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         self.assertEqual(len(ndarray[0]), 12)  # 11 features + 1 anomaly score
         self.assertEqual(len(names), 12)
 
-    def test_experiment_boston(self):
+    def test_experiment_boston(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -117,7 +119,8 @@ class TestIsolationForestClustering(unittest.TestCase):
         self.assertEqual(len(ndarray[0]), 14)  # 13 features  + 1 anomaly score
         self.assertEqual(len(names), 14)
 
-    def test_hotel_bookings(self):
+    def test_hotel_bookings(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",

@@ -10,7 +10,7 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-
+@mock.patch("mlflow.log_metric")
 class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
 
     def setUp(self):
@@ -25,7 +25,8 @@ class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_imdb(self):
+    def test_experiment_imdb(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         os.chdir("tasks/nlp-glove-embeddings-sentence-classification")
 
         papermill.execute_notebook(

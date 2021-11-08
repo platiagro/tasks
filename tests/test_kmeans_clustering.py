@@ -13,7 +13,6 @@ RUN_ID = str(uuid.uuid4())
 
 
 @mock.patch("mlflow.log_metric")
-
 class TestKmeansClustering(unittest.TestCase):
 
     def setUp(self):
@@ -32,7 +31,8 @@ class TestKmeansClustering(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_iris(self):
+    def test_experiment_iris(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -61,7 +61,8 @@ class TestKmeansClustering(unittest.TestCase):
         self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 cluster + 3 distance to clusters
         self.assertEqual(len(names), 8)
 
-    def test_experiment_titanic(self):
+    def test_experiment_titanic(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -90,7 +91,8 @@ class TestKmeansClustering(unittest.TestCase):
         self.assertEqual(len(ndarray[0]), 15)  # 11 features+ 1 cluster + 3 distance to clusters
         self.assertEqual(len(names), 15)
 
-    def test_experiment_boston(self):
+    def test_experiment_boston(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",

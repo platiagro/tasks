@@ -13,7 +13,6 @@ RUN_ID = str(uuid.uuid4())
 
 
 @mock.patch("mlflow.log_metric")
-
 class TestMLPRegressor(unittest.TestCase):
 
     def setUp(self):
@@ -30,7 +29,8 @@ class TestMLPRegressor(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_boston(self):
+    def test_experiment_boston(self, mock_log_metrics):
+        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
