@@ -13,7 +13,6 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric", side_effect=mock_log_metric)
 class TestAutoMLClassifier(unittest.TestCase):
 
     def setUp(self):
@@ -31,6 +30,7 @@ class TestAutoMLClassifier(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
+    @mock.patch("mlflow.log_metric", side_effect=mock_log_metric)
     def test_experiment_iris(self, mock_log_metrics):
         papermill.execute_notebook(
             "Experiment.ipynb",
@@ -65,6 +65,8 @@ class TestAutoMLClassifier(unittest.TestCase):
         self.assertEqual(len(names), 8)
         mock_log_metrics.assert_any_call()
 
+    
+    @mock.patch("mlflow.log_metric", side_effect=mock_log_metric)
     def test_experiment_titanic(self, mock_log_metrics):
         papermill.execute_notebook(
             "Experiment.ipynb",
