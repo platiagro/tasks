@@ -6,13 +6,14 @@ from unittest import mock
 import papermill
 
 from tests import datasets, server
+from tests.utils import mock_log_metric
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric")
+@mock.patch("mlflow.log_metric", side_effect=mock_log_metric)
 class TestAutoMLClassifier(unittest.TestCase):
 
     def setUp(self):
