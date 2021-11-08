@@ -65,7 +65,6 @@ class TestAutoMLClassifier(unittest.TestCase):
         mock_log_metrics.assert_any_call()
 
     def test_experiment_titanic(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
