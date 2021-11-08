@@ -30,7 +30,7 @@ class TestAutoMLRegressor(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_boston(self, mock_log_metrics):
-        
+
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",

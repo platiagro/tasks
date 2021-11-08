@@ -11,6 +11,7 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
+
 @mock.patch("mlflow.log_metric")
 class TestAutoMLClassifier(unittest.TestCase):
 
@@ -30,7 +31,6 @@ class TestAutoMLClassifier(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_iris(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -62,6 +62,7 @@ class TestAutoMLClassifier(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 class + 3 probas
         self.assertEqual(len(names), 8)
+        mock_log_metrics.assert_any_call()
 
     def test_experiment_titanic(self, mock_log_metrics):
         mock_log_metrics.assert_any_call()
@@ -96,3 +97,4 @@ class TestAutoMLClassifier(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
         self.assertEqual(len(names), 14)
+        mock_log_metrics.assert_any_call()

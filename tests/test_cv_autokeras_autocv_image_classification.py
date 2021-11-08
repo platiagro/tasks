@@ -30,7 +30,6 @@ class TestAutoKerasAutoCV(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_beans_disease(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -64,3 +63,4 @@ class TestAutoKerasAutoCV(unittest.TestCase):
                 width_shift_range=0.0
             ),
         )
+        mock_log_metrics.assert_any_call()

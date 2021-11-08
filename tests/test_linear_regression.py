@@ -30,7 +30,6 @@ class TestLinearRegression(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_boston(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -58,3 +57,4 @@ class TestLinearRegression(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 13 features + 1 prediction
         self.assertEqual(len(names), 14)
+        mock_log_metrics.assert_any_call()

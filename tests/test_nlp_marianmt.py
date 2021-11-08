@@ -30,7 +30,6 @@ class TestNLPMarianMT(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_paracrawl(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -62,3 +61,4 @@ class TestNLPMarianMT(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 3)  # 1 feature
         self.assertEqual(len(names), 3)
+        mock_log_metrics.assert_any_call()

@@ -33,7 +33,6 @@ class TestIsolationForestClustering(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_iris(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -59,10 +58,10 @@ class TestIsolationForestClustering(unittest.TestCase):
         names = response["names"]
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 5)  # 4 features + 1 anomaly score
+        mock_log_metrics.assert_any_call()
         self.assertEqual(len(names), 5)
 
     def test_experiment_titanic(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -89,9 +88,9 @@ class TestIsolationForestClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 12)  # 11 features + 1 anomaly score
         self.assertEqual(len(names), 12)
+        mock_log_metrics.assert_any_call()
 
     def test_experiment_boston(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -118,9 +117,9 @@ class TestIsolationForestClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 13 features  + 1 anomaly score
         self.assertEqual(len(names), 14)
+        mock_log_metrics.assert_any_call()
 
     def test_hotel_bookings(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -147,3 +146,4 @@ class TestIsolationForestClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 32)  # 31 features + 1 anomaly score
         self.assertEqual(len(names), 32)
+        mock_log_metrics.assert_any_call()

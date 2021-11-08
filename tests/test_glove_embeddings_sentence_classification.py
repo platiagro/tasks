@@ -10,6 +10,7 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
+
 @mock.patch("mlflow.log_metric")
 class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
 
@@ -26,7 +27,7 @@ class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_imdb(self, mock_log_metrics):
-        mock_log_metrics.assert_any_call()
+
         os.chdir("tasks/nlp-glove-embeddings-sentence-classification")
 
         papermill.execute_notebook(
@@ -61,3 +62,4 @@ class TestGloveEmbeddingsSentenceClassification(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 1)  # 1 features
         self.assertEqual(len(names), 1)
+        mock_log_metrics.assert_any_call()
