@@ -12,7 +12,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric")
+
 class TestAutoKerasAutoCV(unittest.TestCase):
 
     def setUp(self):
@@ -29,7 +29,7 @@ class TestAutoKerasAutoCV(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_beans_disease(self, mock_log_metrics):
+    def test_experiment_beans_disease(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -63,4 +63,4 @@ class TestAutoKerasAutoCV(unittest.TestCase):
                 width_shift_range=0.0
             ),
         )
-        mock_log_metrics.assert_any_call()
+        

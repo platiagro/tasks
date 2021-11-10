@@ -12,7 +12,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric")
+
 class TestFastAutoCV(unittest.TestCase):
 
     def setUp(self):
@@ -29,7 +29,7 @@ class TestFastAutoCV(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_hymenoptera(self, mock_log_metrics):
+    def test_experiment_hymenoptera(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -51,4 +51,4 @@ class TestFastAutoCV(unittest.TestCase):
                 momentum=0.1,
             ),
         )
-        mock_log_metrics.assert_any_call()
+        

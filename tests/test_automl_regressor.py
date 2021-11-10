@@ -12,7 +12,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric")
+
 class TestAutoMLRegressor(unittest.TestCase):
 
     def setUp(self):
@@ -29,7 +29,7 @@ class TestAutoMLRegressor(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_boston(self, mock_log_metrics):
+    def test_experiment_boston(self):
 
         papermill.execute_notebook(
             "Experiment.ipynb",
@@ -58,6 +58,6 @@ class TestAutoMLRegressor(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        mock_log_metrics.assert_any_call()
+        
         self.assertEqual(len(ndarray[0]), 14)  # 13 features + 1 prediction
         self.assertEqual(len(names), 14)

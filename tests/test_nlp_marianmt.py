@@ -12,7 +12,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric")
+
 class TestNLPMarianMT(unittest.TestCase):
 
     def setUp(self):
@@ -29,7 +29,7 @@ class TestNLPMarianMT(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_paracrawl(self, mock_log_metrics):
+    def test_experiment_paracrawl(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -61,4 +61,4 @@ class TestNLPMarianMT(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 3)  # 1 feature
         self.assertEqual(len(names), 3)
-        mock_log_metrics.assert_any_call()
+        

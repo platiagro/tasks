@@ -12,7 +12,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric")
+
 class TestRandomForestClassifier(unittest.TestCase):
 
     def setUp(self):
@@ -30,7 +30,7 @@ class TestRandomForestClassifier(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_iris(self, mock_log_metrics):
+    def test_experiment_iris(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -64,9 +64,9 @@ class TestRandomForestClassifier(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 class + 3 probas
         self.assertEqual(len(names), 8)
-        mock_log_metrics.assert_any_call()
+        
 
-    def test_experiment_titanic(self, mock_log_metrics):
+    def test_experiment_titanic(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -100,4 +100,4 @@ class TestRandomForestClassifier(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
         self.assertEqual(len(names), 14)
-        mock_log_metrics.assert_any_call()
+        

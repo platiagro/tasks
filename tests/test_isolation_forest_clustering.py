@@ -12,7 +12,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-@mock.patch("mlflow.log_metric")
+
 class TestIsolationForestClustering(unittest.TestCase):
 
     def setUp(self):
@@ -32,7 +32,7 @@ class TestIsolationForestClustering(unittest.TestCase):
         datasets.clean()
         os.chdir("../../")
 
-    def test_experiment_iris(self, mock_log_metrics):
+    def test_experiment_iris(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -59,9 +59,9 @@ class TestIsolationForestClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 5)  # 4 features + 1 anomaly score
         self.assertEqual(len(names), 5)
-        mock_log_metrics.assert_any_call()
+        
 
-    def test_experiment_titanic(self, mock_log_metrics):
+    def test_experiment_titanic(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -88,9 +88,9 @@ class TestIsolationForestClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 12)  # 11 features + 1 anomaly score
         self.assertEqual(len(names), 12)
-        mock_log_metrics.assert_any_call()
+        
 
-    def test_experiment_boston(self, mock_log_metrics):
+    def test_experiment_boston(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -117,9 +117,9 @@ class TestIsolationForestClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 14)  # 13 features  + 1 anomaly score
         self.assertEqual(len(names), 14)
-        mock_log_metrics.assert_any_call()
+        
 
-    def test_hotel_bookings(self, mock_log_metrics):
+    def test_hotel_bookings(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -146,4 +146,4 @@ class TestIsolationForestClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 32)  # 31 features + 1 anomaly score
         self.assertEqual(len(names), 32)
-        mock_log_metrics.assert_any_call()
+        
