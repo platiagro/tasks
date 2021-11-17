@@ -3,6 +3,7 @@ import unittest
 import uuid
 from unittest import mock
 
+import pytest
 import papermill
 
 from tests import datasets, server
@@ -68,38 +69,39 @@ class TestMLPClassifier(unittest.TestCase):
         
 
     def test_experiment_titanic(self):
-        papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
-            parameters=dict(
-                dataset="/tmp/data/titanic.csv",
-                target="Survived",
+        with pytest.raises(papermill.PapermillExecutionError):
+            papermill.execute_notebook(
+                "Experiment.ipynb",
+                "/dev/null",
+                parameters=dict(
+                    dataset="/tmp/data/titanic.csv",
+                    target="Survived",
 
-                filter_type="remover",
-                model_features="",
+                    filter_type="remover",
+                    model_features="",
 
-                one_hot_features="",
+                    one_hot_features="",
 
-                hidden_layer_sizes=100,
-                activation="relu",
-                solver="adam",
-                learning_rate="constant",
-                max_iter=200,
-                shuffle=True,
+                    hidden_layer_sizes=100,
+                    activation="lulu",
+                    solver="adam",
+                    learning_rate="constant",
+                    max_iter=200,
+                    shuffle=True,
 
-                method="predict_proba",
-            ),
-        )
+                    method="predict_proba",
+                ),
+            )
 
-        papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
-        )
-        data = datasets.titanic_testdata()
-        with server.Server() as s:
-            response = s.test(data=data)
-        names = response["names"]
-        ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
-        self.assertEqual(len(names), 14)
-        
+            papermill.execute_notebook(
+                "Deployment.ipynb",
+                "/dev/null",
+            )
+            data = datasets.titanic_testdata()
+            with server.Server() as s:
+                response = s.test(data=data)
+            names = response["names"]
+            ndarray = response["ndarray"]
+            self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
+            self.assertEqual(len(names), 14)
+            
