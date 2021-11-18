@@ -76,6 +76,7 @@ class TestRandomForestClassifier(unittest.TestCase):
 
                 one_hot_features="",
 
+                random_search = "Não",
                 n_estimators=10,
                 criterion="gini",
                 max_depth=None,
