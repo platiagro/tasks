@@ -415,3 +415,55 @@ def image_testdata(kind: str = 'objects', ext: str = 'jpg'):
     }
 
     return data
+
+def simple_qa():
+    name = "simple_q&a.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/simple_q%26a.csv"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
+def simple_qa_test_data():
+    data = {
+        "data": {
+            "ndarray": [
+                [
+                    1,
+                    'A bola é um objeto utilizado para lazer de uma pessoa e em diversos desportos. A bola é geralmente esférica, mas pode ter outras formas, como a oblonga (apenas em poucos casos em especial, como a bola de rúgbi)[1] ou a quadrada (que é usada no dominó). A bola pode ser oca e repleta de ar, como a bola de futebol e basquetebol, ou sólida, como a bola de bilhar ou de golfe. Na maioria dos jogos, as jogadas acontecem em função do estado da bola sendo acertada, chutada, ou arremessada pelos jogadores.',
+                    'Qual o formato da bola?', 'esférica', 1
+                ],
+                [
+                    2,
+                    'Golfe é um esporte no qual os jogadores usam diversos tipos de tacos para arremessar uma bola para uma série de buracos numa vasta extensão de terreno, usando o menor número possível de tacadas.[1] É um dos poucos desportos com bola que não exige uma área de jogo normalizada. Em vez disso, o desporto é praticado num campo de golfe, o qual geralmente consiste numa progressão de nove ou dezoito buracos. Cada buraco inclui uma área de terreno inicial (tee) e uma área final (green), na qual se encontra o buraco propriamente dito. Entre as duas áreas existem diversos tipos padronizados de terreno e obstáculos, e cada buraco possui uma configuração única.',
+                    'Qual o formato da bola?', 'esférica', 1],
+                [
+                    3,
+                    'Jogo por tacadas[1] (stroke play[2]), também conhecido como medal play,[2] é um sistema de pontuação dentro do golfe, que leva em conta o número total de tacadas em cada buraco durante uma determinada rodada ou rodadas. O vencedor é aquele que completar os dezoito buracos com o menor número de tacadas.',
+                    'Qual o formato da bola?', 'esférica', 1
+                ],
+                [
+                    1,
+                    'A bola é um objeto utilizado para lazer de uma pessoa e em diversos desportos. A bola é geralmente esférica, mas pode ter outras formas, como a oblonga (apenas em poucos casos em especial, como a bola de rúgbi)[1] ou a quadrada (que é usada no dominó). A bola pode ser oca e repleta de ar, como a bola de futebol e basquetebol, ou sólida, como a bola de bilhar ou de golfe. Na maioria dos jogos, as jogadas acontecem em função do estado da bola sendo acertada, chutada, ou arremessada pelos jogadores.',
+                    'Aonde se pratica golfe?', 'campo de golfe', 2
+                ],
+                [
+                    2,
+                    'Golfe é um esporte no qual os jogadores usam diversos tipos de tacos para arremessar uma bola para uma série de buracos numa vasta extensão de terreno, usando o menor número possível de tacadas.[1] É um dos poucos desportos com bola que não exige uma área de jogo normalizada. Em vez disso, o desporto é praticado num campo de golfe, o qual geralmente consiste numa progressão de nove ou dezoito buracos. Cada buraco inclui uma área de terreno inicial (tee) e uma área final (green), na qual se encontra o buraco propriamente dito. Entre as duas áreas existem diversos tipos padronizados de terreno e obstáculos, e cada buraco possui uma configuração única.',
+                    'Aonde se pratica golfe?', 'campo de golfe', 2
+                ],
+                [
+                    3,
+                    'Jogo por tacadas[1] (stroke play[2]), também conhecido como medal play,[2] é um sistema de pontuação dentro do golfe, que leva em conta o número total de tacadas em cada buraco durante uma determinada rodada ou rodadas. O vencedor é aquele que completar os dezoito buracos com o menor número de tacadas.',
+                    'Aonde se pratica golfe?', 'campo de golfe', 2
+                ]
+            ],
+            "names":['index', 'text', 'question', 'expected_answer', 'expected_retriever_answer']
+        },
+    }
+    return data
