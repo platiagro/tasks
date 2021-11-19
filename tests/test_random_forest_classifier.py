@@ -83,7 +83,6 @@ class TestRandomForestClassifier(unittest.TestCase):
 
                 one_hot_features="",
 
-                random_search = "Não",
                 n_estimators=10,
                 criterion="gini",
                 max_depth=None,
@@ -96,7 +95,9 @@ class TestRandomForestClassifier(unittest.TestCase):
 
 
         out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
-        self.assertEqual(out_data.columns.tolist(), ['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'])
+        self.assertEqual(out_data.columns.tolist(), ['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
+            'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked','RFClassifier_predict_proba_0', 'RFClassifier_predict_proba_1',
+            'RFClassifier_predict_class'])
         self.assertEqual(out_data.loc[0, 'Sex'], "male")
 
 
