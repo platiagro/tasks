@@ -3,12 +3,15 @@ import unittest
 import uuid
 
 import papermill
+import pandas as pd
 
 from tests import datasets, server
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
+
+TITANIC_PATH = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/titanic.csv"
 
 
 class TestRandomForestClassifier(unittest.TestCase):
@@ -86,6 +89,12 @@ class TestRandomForestClassifier(unittest.TestCase):
                 method="predict_proba",
             ),
         )
+
+
+        out_data = pd.read_csv(TITANIC_PATH)
+        self.assertEqual(out_data.columns.tolist(), ['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'])
+        self.assertEqual(out_data.loc[0, 'Sex'], "male")
+
 
         papermill.execute_notebook(
             "Deployment.ipynb",
