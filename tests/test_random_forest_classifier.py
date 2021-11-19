@@ -11,7 +11,11 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-TITANIC_PATH = "https://raw.githubusercontent.com/platiagro/datasets/master/samples/titanic.csv"
+TEMPORARY_DIR = "tmp"
+LOCAL_TEST_DATA_PATH = f"/{TEMPORARY_DIR}/data/titanic.csv"
+EXPERIMENT_NOTEBOOK = "Experiment.ipynb"
+DEPLOYMENT_NOTEBOOK = "Deployment.ipynb"
+DEV_DIR = "/dev/null"
 
 
 class TestRandomForestClassifier(unittest.TestCase):
@@ -33,8 +37,8 @@ class TestRandomForestClassifier(unittest.TestCase):
 
     def test_experiment_iris(self):
         papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
+            EXPERIMENT_NOTEBOOK,
+            DEV_DIR,
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
                 target="Species",
@@ -55,8 +59,8 @@ class TestRandomForestClassifier(unittest.TestCase):
         )
 
         papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
+            DEPLOYMENT_NOTEBOOK,
+            DEV_DIR,
         )
         data = datasets.iris_testdata()
         with server.Server() as s:
@@ -68,8 +72,8 @@ class TestRandomForestClassifier(unittest.TestCase):
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
+            EXPERIMENT_NOTEBOOK,
+            DEV_DIR,
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
                 target="Survived",
@@ -91,14 +95,14 @@ class TestRandomForestClassifier(unittest.TestCase):
         )
 
 
-        out_data = pd.read_csv(TITANIC_PATH)
+        out_data = pd.read_csv(LOCAL_TEST_DATA_PATH)
         self.assertEqual(out_data.columns.tolist(), ['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'])
         self.assertEqual(out_data.loc[0, 'Sex'], "male")
 
 
         papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
+            DEPLOYMENT_NOTEBOOK,
+            DEV_DIR,
         )
         data = datasets.titanic_testdata()
         with server.Server() as s:
