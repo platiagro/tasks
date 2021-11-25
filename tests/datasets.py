@@ -348,7 +348,7 @@ def paracrawl_test_data():
             "names":["text_english","text_portuguese"]
         },
     }
-    return dat
+    return data
 
 def papers():
     name = "papers.zip"

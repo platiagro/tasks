@@ -10,12 +10,18 @@ from typing import List, Optional
 
 
 def init_cut(string:str, delimiter: str):
+    '''
+    Recebe uma string base, e uma string delimitadora. Retorna a string começando da parte definida pelo delimitador
+    '''
     splitted = re.split(delimiter, string, maxsplit=1, flags=re.I)
     if len(splitted) > 1:
         return delimiter + splitted[-1]
     else: return "Delimiter not found."
 
 def final_cut(string:str ,delimiter: str):
+    '''
+    Recebe uma string base, e uma string delimitadora. Retorna a string encerrando na parte definida pelo delimitador
+    '''
     splitted = re.split(delimiter, string, maxsplit=1, flags=re.I)
     if len(splitted) > 1:
         return splitted[0] + delimiter
@@ -217,6 +223,19 @@ def read_memory(stream,
     initial_page: Optional[int]=0,
     final_page: Optional[int]=-1
     ):
+    """
+    Lê e pré processa os dados de um stream de arquivo
+
+    Parameters:
+    =========
+
+        stream (stream de Bytes): stream de bytes para receber um arquivo .pdf
+        text_filter_begin (str): string delimitadora para o inicio da filtragem do arquivo
+        text_filter_end (str): string delimitadora para o fim da filtragem do arquivo
+        initial_page (int): indice da pagina inicial
+        final_page (int): indice da pagina final
+    """
+
 
     pdf_extractor = PDFExtractor()
 
