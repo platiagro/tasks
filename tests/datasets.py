@@ -460,6 +460,7 @@ def image_testdata(kind: str = 'objects', ext: str = 'jpg'):
     }
 
     return data
+
 def simple_qa():
     name = "simple_q&a.csv"
     url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/simple_q%26a.csv"
