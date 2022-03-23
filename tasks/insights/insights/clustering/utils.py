@@ -3,6 +3,7 @@ import pandas as pd
 
 
 def confusion_matrix(y_true, y_pred):
+    y_true = [str(y) for y in y_true]
     
     # Organizing labels and predictions      
     labels = [str(y) for y in list(set(y_true))]

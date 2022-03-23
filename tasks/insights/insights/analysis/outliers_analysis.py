@@ -6,6 +6,7 @@ assim podemos linkar as análises igual uma rede neural sequencial, e os plots/t
 """ 
 
 import numpy as np
+import pandas as pd
 
 from insights.outliers.remove import DetOutliers
 from insights.outliers.plot import plot
@@ -43,9 +44,15 @@ def outlier_analysis(df):
         _, cat_cols = column_filter(outliers_df, target_data='categorical')
         _, num_cols = column_filter(outliers_df, target_data='numerical')
         
-        numerical_describer = outliers_df[num_cols].describe()
-        categorical_describer = outliers_df[cat_cols].describe()
-        
+        if len(num_cols) > 0:
+            numerical_describer = outliers_df[num_cols].describe()
+        else:
+            numerical_describer = pd.DataFrame([0])
+        if len(cat_cols) > 0:
+            categorical_describer = outliers_df[cat_cols].describe()
+        else:
+            categorical_describer = pd.DataFrame([0])
+            
         figure = plot(df, y_pred, dimensions=2, title=None)
         
         

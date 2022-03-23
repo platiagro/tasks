@@ -54,7 +54,7 @@ def cluster_analysis(df, target_variable=None, dimensions=2, categorical=False, 
         figure += cf_figure
         
         group_statistics = []
-        n_grupos = len(cluster_df['cluster_group'].unique())
+        n_grupos = cluster_df['cluster_group'].nunique()
         text = ''
         
         scores_dict[function_name] = {" - ".join(score['labels']): score['score'] for score in scores}    

@@ -25,7 +25,8 @@ class Report():
         self.html = ''
         self.add_line(f'#{title}\n\n')
         # Clear figures folder
-        self.path = pathlib.Path('./insights/markdown_generator/'+title.replace(' ', '')+'/figures')
+        self.title = title.replace(' ', '')
+        self.path = pathlib.Path('./insights/markdown_generator/'+self.title+'/figures')
         self.path.mkdir(parents=True, exist_ok=True)
         shutil.rmtree(str(self.path))
         
@@ -38,7 +39,7 @@ class Report():
         
     def create_table(self, information):
         df = information['table']
-        markdown_table = df.to_markdown()
+        markdown_table = df.to_markdown(floatfmt='.2f')
         self.html += markdown.markdown(markdown_table, extensions=['tables'])
         self.add_line(f'*{information["caption"]}*')
     
@@ -76,7 +77,6 @@ class Report():
         path = self.path / name
         path.parents[0].mkdir(parents=True, exist_ok=True)
         path = str(path)
-        print(path)
         
         return path
     
@@ -96,7 +96,7 @@ class Report():
     
     def process(self):
         html = self.html
-        with open('test.md', 'w') as f:
+        with open(self.title+'.md', 'w') as f:
             f.write(html)
 
     
