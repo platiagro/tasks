@@ -1,0 +1,295 @@
+\documentclass{article}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage{lmodern}%
+\usepackage{textcomp}%
+\usepackage{lastpage}%
+\usepackage{geometry}%
+\geometry{right=2cm,left=2cm}%
+\usepackage[portuguese]{babel}%
+\usepackage{placeins}%
+\usepackage{booktabs}%
+\usepackage{graphicx}%
+%
+\title{CPQD AutoML Algorithm}%
+\date{\today}%
+%
+\begin{document}%
+\normalsize%
+\maketitle%
+\clearpage%
+\tableofcontents%
+\listoffigures%
+\listoftables%
+\clearpage%
+\section{Análise de Outliers}%
+\label{sec:AnlisedeOutliers}%
+Os outliers são dados que se diferenciam drasticamente de todos os outros. Em outras palavras, um outlier é um valor que foge da normalidade e que pode (e provavelmente irá) causar anomalias nos resultados obtidos por meio de algoritmos e sistemas de análise. Entender os outliers é fundamental em uma análise de dados por pelo menos dois aspectos: os outliers podem viesar negativamente todo o resultado de uma análise; o comportamento dos outliers pode ser justamente o que está sendo procurado.%
+\newline%
+\subsection{DBscan}%
+\label{subsec:DBscan}%
+Isolation Forests é um modelo de detecção de anomalias que faz uso de um conjunto de dados onde o alvo, neste caso a anomalia da fraude, do modelo contém poucas amostras entre tantos dados normais. A ideia do modelo é construir Árvores para isolar essas anomalias. Em outras palavras, a floresta de Isolamento é um conjunto de Árvores de Isolamento. Método parecido com a da nossa querida Random Forest.%
+\newline
+
+%
+\subsection{Isolation Forest}%
+\label{subsec:IsolationForest}%
+Isolation Forests é um modelo de detecção de anomalias que faz uso de um conjunto de dados onde o alvo, neste caso a anomalia da fraude, do modelo contém poucas amostras entre tantos dados normais. A ideia do modelo é construir Árvores para isolar essas anomalias. Em outras palavras, a floresta de Isolamento é um conjunto de Árvores de Isolamento. Método parecido com a da nossa querida Random Forest.%
+\newline%
+Utilizando o método Isolation Forest foram detectados 8 outliers neste dataset, correspondendo a uma proporção de 5.33\% do conjunto de amostras.%
+\newline%
+A orbservação do outliers pode ser feita nas tabelas \ref{tab:numerical1}-\ref{tab:categorical1}, onde serão mostradas as tabelas de descrição dos outliers, tando de todas as features categóricas quanto de todas as features numéricas. Também é mostrado, na figura \ref{fig:outliers1}, a distribuição dos outliers em relação ao restante da população do dataset.%
+\newline%
+
+
+\begin{table}[htbp]%
+\caption{Descrição Features Numéricas dos Outliers: Isolation Forest}%
+\centering%
+\begin{tabular}{ccccc}
+\toprule
+{} &  sepal.length &  sepal.width &  petal.length &  petal.width \\
+\midrule
+count &          8.00 &         8.00 &          8.00 &         8.00 \\
+mean  &          6.35 &         3.44 &          3.90 &         1.25 \\
+std   &          1.47 &         0.73 &          2.82 &         1.08 \\
+min   &          4.30 &         2.30 &          1.10 &         0.10 \\
+25\%   &          5.40 &         2.90 &          1.27 &         0.28 \\
+50\%   &          6.50 &         3.70 &          3.80 &         1.20 \\
+75\%   &          7.70 &         3.85 &          6.48 &         2.23 \\
+max   &          7.90 &         4.40 &          6.90 &         2.50 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:numerical1}%
+\end{table}
+
+%
+
+
+\begin{table}[htbp]%
+\caption{Descrição Features Categóricas dos Outliers: Isolation Forest}%
+\centering%
+\begin{tabular}{cc}
+\toprule
+{} & variety \\
+\midrule
+count  &       8 \\
+unique &       2 \\
+top    &  Setosa \\
+freq   &       4 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:categorical1}%
+\end{table}
+
+%
+
+
+\begin{figure}%
+\centering%
+\includegraphics[width=0.5\textwidth]{insights/report_generator/latex_figures/d1a256ce-d5b2-4575-aa66-b8479fc5aaeb.png}%
+\caption{Visualização dos outliers: Isolation Forest}%
+\label{fig:outliers1}%
+\end{figure}
+
+%
+\FloatBarrier%
+\clearpage%
+\section{Análise de Cluster}%
+\label{sec:AnlisedeCluster}%
+O clustering ou análise de agrupamento de dados é o conjunto de técnicas de prospecção de dados (data mining) que visa fazer agrupamentos automáticos de dados segundo o seu grau de semelhança. O critério de semelhança faz parte da definição do problema e, dependendo, do algoritmo. A cada conjunto de dados resultante do processo dá{-}se o nome de grupo, aglomerado ou agrupamento (cluster). O procedimento de agrupamento (clustering) também pode ser aplicado a bases de texto utilizando algoritmos de prospeção de texto (text mining), onde o algoritmo procura agrupar textos que falem sobre o mesmo assunto e separar textos de conteúdo diferentes. %
+\newline%
+\subsection{Feature Permutation 2 dim.}%
+\label{subsec:FeaturePermutation2dim.}%
+A melhor separação de grupos ocorreu nas features: {[}'petal.length', 'petal.width'{]} com uma quantidade de 3 grupos. A análise multidimensional em 2 dimensões fornece insights de quais features são mais importantes e que distinguem grupos entre si. Esta análise é realizada realizando a permutação das features do dataset, procurando os agrupamentos que melhor distinguem as amostras. Este tipo de operação traz diversos insights sobre quais features são mais importantes num ponto de vista de agrupamento de amostras.%
+\newline%
+A matriz de separação Tab. \ref{tab:matsep} mostra a distribuição populacional normalizada dentro de cada grupo de cluster. Note que valores maiores significam que há maior presença daquela população dentro daquele grupo. Este tipo de tabela também pode ser chamado de matriz de confusão, do inglês Confusion Matrix.%
+\newline%
+
+
+\begin{table}[htbp]%
+\caption{Matriz de separação do melhor agrupamento}%
+\centering%
+\begin{tabular}{cccc}
+\toprule
+{} &    0 &    1 &    2 \\
+\midrule
+Versicolor & 0.94 & 0.00 & 0.06 \\
+Virginica  & 0.02 & 0.00 & 0.98 \\
+Setosa     & 0.00 & 1.00 & 0.00 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:matsep}%
+\end{table}
+
+%
+\subsection{Multidimensional}%
+\label{subsec:Multidimensional}%
+A melhor separação de grupos ocorreu nas features: {[}'sepal.length', 'sepal.width', 'petal.length', 'petal.width'{]} com uma quantidade de 3 grupos. A análise multidimensional de clusters é semelhante a análise anterior, mas utilizando todas as features disponíveis no dataset. Esta análise tem o potencial da melhor separação entre grupos, se esta existir. Existem casos em que o score de separação é menor em relação às análises bi{-}dimensionais ou tri{-}dimensionais, significando que provavelmente aquela combinação é a mais determinante para a separaçao de grupos.%
+\newline%
+A matriz de separação Tab. \ref{tab:matsep} mostra a distribuição populacional normalizada dentro de cada grupo de cluster. Note que valores maiores significam que há maior presença daquela população dentro daquele grupo. Este tipo de tabela também pode ser chamado de matriz de confusão, do inglês Confusion Matrix.%
+\newline%
+
+
+\begin{table}[htbp]%
+\caption{Matriz de separação do melhor agrupamento}%
+\centering%
+\begin{tabular}{cccc}
+\toprule
+{} &    0 &    1 &    2 \\
+\midrule
+Versicolor & 0.10 & 0.00 & 0.90 \\
+Virginica  & 0.80 & 0.00 & 0.20 \\
+Setosa     & 0.00 & 1.00 & 0.00 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:matsep}%
+\end{table}
+
+%
+\subsection{Comparação dos Métodos}%
+\label{subsec:ComparaodosMtodos}%
+Na tabela \ref{tab:clustertypes} abaixo podemos observar a comparação de todos os métodos de clustering testados. O método com o maior score será considerado o melhor método, sendo este utilizado nas próximas análises.%
+\newline%
+
+
+\begin{table}[htbp]%
+\caption{Análise de score do agrupamento.}%
+\centering%
+\begin{tabular}{ccc}
+\toprule
+{} &  Feature Permutation 2 dim. &  Multidimensional \\
+\midrule
+petal.length - petal.width                         &                        0.66 &               NaN \\
+sepal.width - petal.length                         &                        0.59 &               NaN \\
+sepal.length - petal.length                        &                        0.58 &               NaN \\
+sepal.length - sepal.width - petal.length - pet... &                         NaN &              0.53 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:clustertypes}%
+\end{table}
+
+%
+\subsection{Insights {-} Variáveis Numéricas}%
+\label{subsec:Insights{-}VariveisNumricas}%
+Insights obtidos das variáveis numéricas estão disponíveis nas tabelas \ref{tab:media}-\ref{tab:var}, onde são apresentadas as diferenças das médias e variâncias entre a população geral e cada um dos grupos. A idéia é facilitar a observação de tendências distintas em cada um dos grupos, em relação a população geral. A tabela de variância é importante de um ponto de vista de análise da variação das features dentro de cada um dos grupos. A ideia é que a variância dentro de um grupo específico seja menor em relação a população em geral.%
+\newline%
+Figuras também são aliadas importantes na visualização de dados. Nas figuras \ref{fig:media}-\ref{fig:var} estão presentes duas figuras que representam a variação de média e variância de cada grupo em relação a população geral. Dados variando para a cor azul significam que a variação é negativa, enquanto dados variando para cores vermelhas significam que a variação é positiva.%
+\newline%
+
+
+\begin{table}[htbp]%
+\caption{Diferença de Média entre População {-} Grupos}%
+\centering%
+\begin{tabular}{cccc}
+\toprule
+cluster\_group &     0 &     1 &     2 \\
+\midrule
+sepal.length &  0.87 & -0.81 &  0.01 \\
+sepal.width  & -0.04 &  0.39 & -0.30 \\
+petal.length &  1.76 & -2.27 &  0.56 \\
+petal.width  &  0.79 & -0.95 &  0.20 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:media}%
+\end{table}
+
+%
+
+
+\begin{table}[htbp]%
+\caption{Diferença de Variância entre População {-} Grupos}%
+\centering%
+\begin{tabular}{cccc}
+\toprule
+cluster\_group &     0 &     1 &     2 \\
+\midrule
+sepal.length & -0.33 & -0.47 & -0.34 \\
+sepal.width  & -0.18 & -0.10 & -0.10 \\
+petal.length & -1.22 & -1.53 & -1.20 \\
+petal.width  & -0.42 & -0.64 & -0.47 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:var}%
+\end{table}
+
+%
+
+
+\begin{figure}%
+\centering%
+\includegraphics[width=0.5\textwidth]{insights/report_generator/latex_figures/cb34b1d0-39ac-4ada-9551-feeea9cd8482.png}%
+\caption{Diferença de Média entre População {-} Grupos}%
+\label{fig:media}%
+\end{figure}
+
+%
+
+
+\begin{figure}%
+\centering%
+\includegraphics[width=0.5\textwidth]{insights/report_generator/latex_figures/de8c1b32-7048-4df9-b39e-0ee88c17cea5.png}%
+\caption{Diferença de Variância entre População {-} Grupos}%
+\label{fig:var}%
+\end{figure}
+
+%
+A maior diferença populacional positiva foi detectada na feature petal.length e no grupo 0, com valor de 1.76. A maior variação negativa foi na feature petal.length e no grupo 1, com o valor registrado de {-}2.27\newline%
+%
+\newline
+
+%
+\subsection{Insights {-} Variáveis Categóricas}%
+\label{subsec:Insights{-}VariveisCategricas}%
+É possível observar nas tabelas \ref{tab:notavelmax}-\ref{tab:notavelmin} alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha \textit{Contagem} mostra a contagem daquela classe dentro do grupo, A linha \textit{Proporção} mostra a proporção da classe em relação a população do grupo, A linha \textit{Diferença da População} mostra a diferença de proporção daquela população no grupo em relação a população geral. %
+\newline%
+
+
+\begin{table}[htbp]%
+\caption{Diferença Máxima de População entre Grupos e Dataset}%
+\centering%
+\begin{tabular}{cc}
+\toprule
+{} &   variety \\
+\midrule
+maior ocorrencia       &    Setosa \\
+contagem               &        46 \\
+proporção              &       1.0 \\
+diferença da população &  0.676056 \\
+grupo                  &         1 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:notavelmax}%
+\end{table}
+
+%
+
+
+\begin{table}[htbp]%
+\caption{Diferença Mínima de População entre Grupos e Dataset}%
+\centering%
+\begin{tabular}{cc}
+\toprule
+{} &     variety \\
+\midrule
+maior ocorrencia       &  Versicolor \\
+contagem               &          45 \\
+proporção              &    0.833333 \\
+diferença da população &    0.481221 \\
+grupo                  &           2 \\
+\bottomrule
+\end{tabular}
+%
+\label{tab:notavelmin}%
+\end{table}
+
+%
+\FloatBarrier%
+\end{document}
