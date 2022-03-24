@@ -1,5 +1,6 @@
 import itertools
 import random 
+import copy 
 
 import pandas as pd
 
@@ -24,15 +25,16 @@ class ClusterPermutator():
         _, categorical_columns = column_filter(df, target_data='categorical')
         _, self.num_cols = column_filter(df, target_data='numerical')
         self.df_ohe = pd.get_dummies(df, columns=categorical_columns)
-
+        
         self.clusterer = OptimalCluster()
         self.categorical = categorical
         
         self.categorical_columns = list(set(self.df_ohe) - set(self.num_cols)) if \
             self.categorical else ['']
-            
+        
         self.targets_columns = list(itertools.combinations(self.num_cols, dimensions-1)) if \
             self.categorical else list(itertools.combinations(self.num_cols, dimensions))
+        
         
         self.total_targets = []
         for categorical in self.categorical_columns:
@@ -41,7 +43,6 @@ class ClusterPermutator():
                 if self.categorical:
                     combined.append(categorical)
                 self.total_targets.append(combined)
-        
         self.total_targets = random.sample(self.total_targets, min(len(self.total_targets), 10))
         
     def permutate(self):
@@ -55,9 +56,8 @@ class ClusterPermutator():
             labelled_df = self.df
             labelled_df['cluster_group'] = [str(x) for x in y_pred]
             score_list.append(
-                {'score': score, 'X': X, 'y_pred': y_pred, 'labels': target_column, 'n': n, 'labelled_df': labelled_df}
+                {'score': score, 'X': X, 'y_pred': y_pred, 'labels': target_column, 'n': n, 'labelled_df': copy.deepcopy(labelled_df)}
                 )
-
         # Ordena a lista: 
         score_list = sorted(score_list, key=lambda x: -x['score'])
         return score_list[0:3], self.df_ohe

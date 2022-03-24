@@ -4,6 +4,7 @@ A análise será alto nível, mas com opção de plotar gráficos.
 Padronizando as análises podemos ter uma lista de análises a se fazer, onde a entrada é o dataframe e a saída é a análise em texto e os plots, 
 assim podemos linkar as análises igual uma rede neural sequencial, e os plots/textos ficam fáceis de serem encaminhados para a tela do usuário. 
 """ 
+import copy 
 
 import numpy as np
 import pandas as pd
@@ -46,15 +47,14 @@ def cluster_analysis(df, target_variable=None, dimensions=2, categorical=False, 
         scores, df_ohe = clusterer.functions[function_name]()
         
         cluster_df = scores[0]['labelled_df']
+        n_grupos = copy.deepcopy(cluster_df['cluster_group'].nunique())
         if outliers is not None:
             cluster_df = cluster_df.append(outliers)
         
         figure = plotter.plot(df_ohe, scores, title=title)
-        cf_figure, cfs = plotter.plot_conf(df, scores, title)
-        figure += cf_figure
+        figure, cf = plotter.plot_conf(df, scores, title)
         
         group_statistics = []
-        n_grupos = cluster_df['cluster_group'].nunique()
         text = ''
         
         scores_dict[function_name] = {" - ".join(score['labels']): score['score'] for score in scores}    
@@ -78,7 +78,7 @@ def cluster_analysis(df, target_variable=None, dimensions=2, categorical=False, 
                 'type': 'table', 
                 'caption': 'Matriz de separação do melhor agrupamento',
                 'label': r'tab:matsep',
-                'table': cfs[0],
+                'table': copy.deepcopy(cf),
                 'float_fmt': "%.2f"
             }
         )
@@ -92,9 +92,7 @@ def cluster_analysis(df, target_variable=None, dimensions=2, categorical=False, 
             
         cluster_score = scores[0]['score']
         
-        if cluster_score > high_score:
-            score_dict = {'score': cluster_score, 'cluster_df': cluster_df}
-            high_score = cluster_score
+        score_dict = {'score': cluster_score, 'cluster_df': cluster_df}
     
 
     

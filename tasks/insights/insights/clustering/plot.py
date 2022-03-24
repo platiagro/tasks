@@ -1,6 +1,8 @@
 import plotly.express as px
 
 from insights.clustering.utils import confusion_matrix
+from insights.utils.filtering import column_filter
+from insights.preprocessing.preprocess import num_2_cat
 
 
 class Plotter():
@@ -55,19 +57,22 @@ class Plotter():
         if self.target_variable is None:
             raise ValueError('Target Variable is not set.')
         
-        figures = []
-        confusion_matrixes = []
-        for sample in samples:
-            y_true = df[self.target_variable]
-            cf = confusion_matrix(y_true, sample['y_pred'])
-            fig = px.imshow(cf, title=title + ": [" + " x ".join(sample['labels']) + "]")
-            fig.update_layout(
-                coloraxis_colorbar=dict(yanchor="top", y=1, x=0,
-                                                ticks="outside"),
-                title_text=title,
-                title_x=0.5,
-            )
-            figures.append(fig)
-            confusion_matrixes.append(cf)
         
-        return figures, confusion_matrixes
+        sample = samples[0]
+        
+        _, numerical_columns = column_filter(df, target_data='numerical')
+        if self.target_variable in numerical_columns:
+            y_true = num_2_cat(df, self.target_variable)
+        else:
+            y_true = df[self.target_variable]
+            
+        cf = confusion_matrix(y_true, sample['y_pred'])
+        fig = px.imshow(cf, title=title + ": [" + " x ".join(sample['labels']) + "]")
+        fig.update_layout(
+            coloraxis_colorbar=dict(yanchor="top", y=1, x=0,
+                                            ticks="outside"),
+            title_text=title,
+            title_x=0.5,
+        )
+        
+        return fig, cf

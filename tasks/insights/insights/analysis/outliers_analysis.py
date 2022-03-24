@@ -44,6 +44,7 @@ def outlier_analysis(df):
         _, cat_cols = column_filter(outliers_df, target_data='categorical')
         _, num_cols = column_filter(outliers_df, target_data='numerical')
         
+        
         if len(num_cols) > 0:
             numerical_describer = outliers_df[num_cols].describe()
         else:
