@@ -379,6 +379,6 @@ def group_analysis(numerical_grouping, categorical_grouping):
         {'type': 'text',
         'info': 'Os seguintes insights resumidos foram obtidos a partir dos métodos de agrupamento apresentados:'
         },
-        *[{'type': 'text', 'info': 'Grupo '+str(key)+': '+', '.join(group_info[key])} for key in group_info]
+        *[{'type': 'text', 'info': 'Grupo '+str(key)+': <br>&emsp;'+'<br>&emsp;'.join(group_info[key])} for key in group_info]
     ]
     return schema

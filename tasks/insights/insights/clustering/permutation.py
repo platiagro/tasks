@@ -43,7 +43,7 @@ class ClusterPermutator():
                 if self.categorical:
                     combined.append(categorical)
                 self.total_targets.append(combined)
-        self.total_targets = random.sample(self.total_targets, min(len(self.total_targets), 10))
+        self.total_targets = random.sample(self.total_targets, min(len(self.total_targets), 4))
         
     def permutate(self):
         score_list = []
