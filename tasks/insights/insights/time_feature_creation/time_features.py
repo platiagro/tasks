@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 import datetime
+import plotly.express as px
 import re
-
 
 class time_feature_eng():
   def __init__(self, file_path, resample=None):
@@ -13,7 +13,6 @@ class time_feature_eng():
 
     # Reading file
     self.dataset = self.read_file(file_path)
-    self.cringe = self.dataset.groupby(by=['Dia da Semana']).count()
 
     # Drop null cols
     self.dataset.dropna(axis=1, inplace=True)
@@ -24,22 +23,25 @@ class time_feature_eng():
     # Chaging , to .
     self.dataset.replace(',', '.', regex=True, inplace=True)
 
-    # drop columns that just has one uniqe value
+    # drop columns that just has one unique value
     for column in self.dataset.columns:
       if self.dataset[column].nunique() <= 1:
         self.dataset.drop(column, axis=1, inplace=True)
 
     # Columns
     self.columns = self.dataset.columns
-    #print("Colunas: ", self.columns)
 
     # DateTime cols
     # Check if there is datatime columns, if not, dont execute anything
     self.datatime_cols = self.get_datatime_column()
+    # If None, exit object
+    if self.datatime_cols == None:
+      print("No Datatime column found.")
+      return None # Exit
     print("Datatime cols: ", self.datatime_cols)
 
     # Features in the dataset excluding datatime
-    # in the future: separete features by categorical and numeric
+    # Use set to subtract (not implemented)
     self.features = [feature for feature in self.columns if feature not in self.datatime_cols]
     print("Features: ", self.features)
 
@@ -51,24 +53,19 @@ class time_feature_eng():
     # Create a list of datasets
     self.list_dataset = self.create_datetime_col()
 
-    # Set datatime column as the index for each dataset
-    #self.set_datetime_index() # dar uma olhada
-
     # Will change the period of the datetime features
-    # And also will groupby datetime and other feature
-    if resample == 'week':
-      self.grouped_dataset, self.grouped_tmp = self.resample_each_dataset(resample='W')
-    elif resample == 'month':
-      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='M')
-    elif resample == 'year':
-      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='Y')
-    elif resample == 'trimestre':
-      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='Q')
-    else:
-      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='D')
+    # And also will groupby datetime and another feature
+    self.resample_choose(resample=resample)
 
     # New features
     self.new_features = self.new_features_func()
+
+    # Dict
+    tmp_dict = {}
+    for i, date_col in enumerate(self.datatime_cols):
+      tmp_dict[date_col] = self.grouped_tmp[i]
+    
+    self.grouped_tmp = tmp_dict
 
   def read_file(self, file_path):
 
@@ -114,17 +111,20 @@ class time_feature_eng():
       # Ignore numeric type
       if isinstance(text, (str)):
         x = re.match(r'\d{2}/\d{2}/\d{4}', text)
-        #y = re.match(r'\d{4}-\d{2}-\d{2}', text)
-        #x = re.match(r'(?=\d{2}(?:\d{2})?-\d{1,2}-\d{1,2}\b)', text)
+        y = re.match(r'\d{4}-\d{2}-\d{2}', text)
 
         if x:
+          datatime_col.append(column)
+
+        if y:
           datatime_col.append(column)
 
 
     # Raise error in case of empty list
     # May change this line
     if not datatime_col:
-      raise NameError('This dataset has no datatime column.')
+      #raise NameError('This dataset has no datatime column.')
+      return None
 
     return datatime_col
 
@@ -141,7 +141,7 @@ class time_feature_eng():
 
       dif = (self.dataset[feature].shape[0] - self.dataset[feature].nunique())/self.dataset[feature].shape[0]
 
-      if dif >= 0.9:
+      if dif >= 0.95:
         categorical_.append(feature)
       else:
         numerical_.append(feature)
@@ -163,17 +163,6 @@ class time_feature_eng():
 
       dataset_copy = self.dataset.copy()
       dataset_copy['time_'+str(i)] = pd.to_datetime(dataset_copy[date_col]) # string to datetime
-      """print(1)
-      dataset_copy.set_index("time_"+str(i), inplace=True)
-      dataset_copy["time_"+str(i)] = pd.to_datetime(dataset_copy[self.datatime_cols[i]]) # string to datetime
-      dataset_copy.drop(self.datatime_cols[i], axis = 1, inplace=True)
-      print(1)
-
-      # Fill missing datetime
-      period = pd.period_range(min(dataset_copy['time_'+str(i)]), max(dataset_copy['time_'+str(i)]))
-      dataset_copy.reindex(period, fill_value=0)
-      print(1)"""
-      #print(period)
 
       dataset_copy.drop([col for col in self.datatime_cols if col not in date_col], axis = 1, inplace=True)
 
@@ -182,19 +171,18 @@ class time_feature_eng():
 
     return list_dataset
 
-  def set_datetime_index(self, ):
+  def resample_choose(self, resample):
 
-    """
-      Set each dataset's index as the datetime.
-    """
-
-    for i, dataset in enumerate(self.list_dataset):
-      self.list_dataset[i].set_index("time_"+str(i), inplace=True, drop=True)
-      #dataset.index = pd.DatetimeIndex(dataset['time_'+str(i)]).to_period('D')
-      #dataset['time_'+str(i)] = pd.to_datetime(dataset[self.datatime_cols[i]]) # string to datetime
-      #dataset.drop(self.datatime_cols[i], axis = 1, inplace=True)
-
-    return None
+    if resample == 'week':
+      self.grouped_dataset, self.grouped_tmp = self.resample_each_dataset(resample='W')
+    elif resample == 'month':
+      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='M')
+    elif resample == 'year':
+      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='Y')
+    elif resample == 'trimestre':
+      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='Q')
+    else:
+      self.grouped_dataset, self.grouped_tmp  = self.resample_each_dataset(resample='D')
 
   def resample_each_dataset(self, resample):
 
@@ -327,6 +315,56 @@ class time_feature_eng():
         #reset index and sort values
         self.grouped_tmp[i][j].set_index(pd.RangeIndex(start=0, stop=self.grouped_tmp[i][j].shape[0], step=1), inplace=True)
 
-        new_features = pd.concat([new_features, df],axis=1)
+        #new_features = pd.concat([new_features, df],axis=1)
 
-    return new_features
+    #return new_features
+
+  def mean_plot(self, date_col):
+
+    lis_ = [col + '_x' for col in self.numerical] + [col + '_y' for col in self.numerical] + [col for col in self.datatime_cols] + ['time_'+str(idx) for idx,_ in enumerate(self.datatime_cols)]
+    columns = set(self.grouped_tmp[date_col][0]) - set(self.features) - set(lis_)
+
+    for col in columns:
+      fig = px.line(self.grouped_tmp[date_col][0], x='time_0', y=col,
+                    markers=True,
+                    title = f'{col} x {date_col}')
+      fig.show()
+
+  def std_plot(self, date_col):
+
+    for col_num in self.numerical:
+      for col_cat in self.categorical:
+        for num in [3, 6, 9]:
+          y = f'STD_{col_cat}_{col_num}_' + str(num)
+
+          fig = px.line(self.grouped_tmp[date_col][0], x='time_0', y=y,
+                    markers=True,
+                    title = f'{y} x {date_col}')
+          fig.show()
+
+  def cat_plot(self, date_col):
+
+    for col_cat in self.categorical:
+
+      count = self.grouped_tmp[date_col][0][col_cat].value_counts(normalize=True) * 100
+
+      fig = px.bar(count, title = f'Contagem da variavel {col_cat}')
+      fig.show()
+
+  def date_plot(self, ):
+
+    for idx, col in enumerate(self.datatime_cols):
+
+      day_week = [date.day_name() for date in self.grouped_tmp[col][0]['time_'+str(idx)]]
+      day_week = pd.Series(day_week, name='Dia da semana')
+      count = day_week.value_counts(normalize=True) * 100
+
+      fig = px.bar(count, title = f'Contagem da variavel')
+      fig.show()
+
+      month = [date.month_name() for date in self.grouped_tmp[col][0]['time_'+str(idx)]]
+      month = pd.Series(month, name='Mês')
+      count = month.value_counts(normalize=True) * 100
+
+      fig = px.bar(count, title = f'Contagem da variavel')
+      fig.show()
