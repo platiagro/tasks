@@ -12,19 +12,19 @@ from insights.utils.filtering import column_filter
 from insights.markdown_generator.report import Report
 
 datasets = [
-    # 'data/avocado.csv',
-    # 'data/IBM-HR.csv',
-    # 'data/insurance.csv',
-    # 'data/creditcard.csv',
-    # 'data/HousingData.csv',
-    # 'data/winequality-red.csv',
-    # 'data/winequality-white.csv',
-    # 'data/titanic.csv',
-    # 'data/Mall_Customers.csv',
-    # 'data/Iris.csv',
-    # 'data/HousePrices.csv',
-    # 'data/StudentsPerformance.csv',
-    # 'data/mobile_price.csv',
+    'data/avocado.csv',
+    'data/IBM-HR.csv',
+    'data/insurance.csv',
+    'data/creditcard.csv',
+    'data/HousingData.csv',
+    'data/winequality-red.csv',
+    'data/winequality-white.csv',
+    'data/titanic.csv',
+    'data/Mall_Customers.csv',
+    'data/Iris.csv',
+    'data/HousePrices.csv',
+    'data/StudentsPerformance.csv',
+    'data/mobile_price.csv',
     'data/Churn_Modelling.csv',
     'data/bestsellers with categories.csv'
     ]
