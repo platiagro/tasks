@@ -91,7 +91,7 @@
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: DBscan</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/97fe3be3-07fb-4b29-b165-a4509469d88f.png" alt="Visualização dos outliers: DBscan" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/8f57791a-e3f5-44b0-94a3-17819d8f54fe.png" alt="Visualização dos outliers: DBscan" /></p>
 
 <p><em>Visualização dos outliers: DBscan</em></p>
 <h3>Isolation Forest</h3>
@@ -116,45 +116,45 @@
 </tr>
 <tr>
 <td align="left">mean</td>
-<td align="right">33.70</td>
-<td align="right">60.10</td>
-<td align="right">38.20</td>
+<td align="right">36.30</td>
+<td align="right">70.00</td>
+<td align="right">35.60</td>
 </tr>
 <tr>
 <td align="left">std</td>
-<td align="right">18.71</td>
-<td align="right">54.23</td>
-<td align="right">37.26</td>
+<td align="right">17.50</td>
+<td align="right">53.93</td>
+<td align="right">39.33</td>
 </tr>
 <tr>
 <td align="left">min</td>
 <td align="right">18.00</td>
-<td align="right">15.00</td>
+<td align="right">16.00</td>
 <td align="right">3.00</td>
 </tr>
 <tr>
 <td align="left">25%</td>
-<td align="right">19.25</td>
-<td align="right">18.25</td>
-<td align="right">8.00</td>
+<td align="right">22.50</td>
+<td align="right">19.00</td>
+<td align="right">6.50</td>
 </tr>
 <tr>
 <td align="left">50%</td>
-<td align="right">26.50</td>
-<td align="right">26.00</td>
-<td align="right">23.00</td>
+<td align="right">32.50</td>
+<td align="right">57.00</td>
+<td align="right">16.00</td>
 </tr>
 <tr>
 <td align="left">75%</td>
-<td align="right">41.75</td>
-<td align="right">114.75</td>
-<td align="right">72.00</td>
+<td align="right">42.50</td>
+<td align="right">122.75</td>
+<td align="right">69.25</td>
 </tr>
 <tr>
 <td align="left">max</td>
 <td align="right">67.00</td>
 <td align="right">137.00</td>
-<td align="right">94.00</td>
+<td align="right">99.00</td>
 </tr>
 </tbody>
 </table><p><em>Descrição Features Numéricas dos Outliers: Isolation Forest</em></p>
@@ -184,7 +184,7 @@
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: Isolation Forest</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/eb657f66-9745-49f6-879b-98fc2cfae19b.png" alt="Visualização dos outliers: Isolation Forest" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/96b94b29-e383-47b6-a0c6-6f542421f25e.png" alt="Visualização dos outliers: Isolation Forest" /></p>
 
 <p><em>Visualização dos outliers: Isolation Forest</em></p>
 <h2>Análise de Cluster</h2>
@@ -202,29 +202,29 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">(79.4, 99.0]</td>
-<td align="right">1.00</td>
-<td align="right">0.00</td>
-</tr>
-<tr>
-<td align="left">(20.6, 40.2]</td>
+<td align="left">(78.6, 98.0]</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
 </tr>
 <tr>
-<td align="left">(0.902, 20.6]</td>
-<td align="right">0.00</td>
-<td align="right">1.00</td>
-</tr>
-<tr>
-<td align="left">(59.8, 79.4]</td>
-<td align="right">0.97</td>
+<td align="left">(59.2, 78.6]</td>
 <td align="right">0.03</td>
+<td align="right">0.97</td>
 </tr>
 <tr>
-<td align="left">(40.2, 59.8]</td>
-<td align="right">0.29</td>
-<td align="right">0.71</td>
+<td align="left">(20.4, 39.8]</td>
+<td align="right">1.00</td>
+<td align="right">0.00</td>
+</tr>
+<tr>
+<td align="left">(0.903, 20.4]</td>
+<td align="right">1.00</td>
+<td align="right">0.00</td>
+</tr>
+<tr>
+<td align="left">(39.8, 59.2]</td>
+<td align="right">0.72</td>
+<td align="right">0.28</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
@@ -241,29 +241,29 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">(79.4, 99.0]</td>
-<td align="right">0.00</td>
-<td align="right">1.00</td>
-</tr>
-<tr>
-<td align="left">(20.6, 40.2]</td>
+<td align="left">(78.6, 98.0]</td>
 <td align="right">1.00</td>
 <td align="right">0.00</td>
 </tr>
 <tr>
-<td align="left">(0.902, 20.6]</td>
-<td align="right">1.00</td>
-<td align="right">0.00</td>
-</tr>
-<tr>
-<td align="left">(59.8, 79.4]</td>
-<td align="right">0.03</td>
+<td align="left">(59.2, 78.6]</td>
 <td align="right">0.97</td>
+<td align="right">0.03</td>
 </tr>
 <tr>
-<td align="left">(40.2, 59.8]</td>
-<td align="right">0.71</td>
-<td align="right">0.29</td>
+<td align="left">(20.4, 39.8]</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+</tr>
+<tr>
+<td align="left">(0.903, 20.4]</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+</tr>
+<tr>
+<td align="left">(39.8, 59.2]</td>
+<td align="right">0.28</td>
+<td align="right">0.72</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
@@ -300,21 +300,21 @@
 <tbody>
 <tr>
 <td align="left">Age</td>
-<td align="right">7.57</td>
-<td align="right">-9.97</td>
-<td align="right">-5.42</td>
+<td align="right">-9.98</td>
+<td align="right">7.58</td>
+<td align="right">-2.68</td>
 </tr>
 <tr>
 <td align="left">Annual Income (k$)</td>
-<td align="right">-1.20</td>
-<td align="right">1.57</td>
-<td align="right">-0.48</td>
+<td align="right">2.08</td>
+<td align="right">-1.58</td>
+<td align="right">9.94</td>
 </tr>
 <tr>
 <td align="left">Spending Score (1-100)</td>
-<td align="right">-16.86</td>
-<td align="right">22.21</td>
-<td align="right">-12.63</td>
+<td align="right">22.01</td>
+<td align="right">-16.71</td>
+<td align="right">-15.37</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Média entre População - Grupos</em></p>
@@ -330,31 +330,31 @@
 <tbody>
 <tr>
 <td align="left">Age</td>
-<td align="right">0.55</td>
 <td align="right">-0.73</td>
-<td align="right">-0.40</td>
+<td align="right">0.55</td>
+<td align="right">-0.19</td>
 </tr>
 <tr>
 <td align="left">Annual Income (k$)</td>
-<td align="right">-0.05</td>
-<td align="right">0.07</td>
-<td align="right">-0.02</td>
+<td align="right">0.09</td>
+<td align="right">-0.07</td>
+<td align="right">0.41</td>
 </tr>
 <tr>
 <td align="left">Spending Score (1-100)</td>
-<td align="right">-0.67</td>
 <td align="right">0.89</td>
-<td align="right">-0.51</td>
+<td align="right">-0.67</td>
+<td align="right">-0.62</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Variância entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/19a1dc69-24a5-4f0c-ae55-f3ca9604fef2.png" alt="Diferença de Média entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/29e0ac7d-5a77-4db6-8c40-8ee389f1d1e4.png" alt="Diferença de Média entre População - Grupos" /></p>
 
 <p><em>Diferença de Média entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/7cf67ce2-93ad-418d-8b21-fda3e6088032.png" alt="Diferença de Variância entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-Mall_Customers/figures/b0961643-b3e3-48b7-a50b-d47bda6c7a28.png" alt="Diferença de Variância entre População - Grupos" /></p>
 
 <p><em>Diferença de Variância entre População - Grupos</em></p>
-<p>A maior diferença populacional positiva foi detectada na feature Spending Score (1-100) e no grupo 1, com valor de 22.21. A maior variação negativa foi na feature Spending Score (1-100) e no grupo 0, com o valor registrado de -16.86</p>
+<p>A maior diferença populacional positiva foi detectada na feature Spending Score (1-100) e no grupo 0, com valor de 22.01. A maior variação negativa foi na feature Spending Score (1-100) e no grupo 1, com o valor registrado de -16.71</p>
 <h3>Insights - Variáveis Categóricas</h3>
 <p>É possível observar nas tabelas em ambas tabelas abaixo alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha Contagem mostra a contagem daquela classe dentro do grupo, A linha Proporção mostra a proporção da classe em relação a população do grupo, A linha Diferença da População mostra a diferença de proporção daquela população no grupo em relação a população geral. </p>
 <table>
@@ -375,15 +375,15 @@
 </tr>
 <tr>
 <td align="left">proporção</td>
-<td align="left">0.5833333333333334</td>
+<td align="left">0.583</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">0.009649122807017574</td>
+<td align="left">0.01</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
-<td align="left">0</td>
+<td align="left">1</td>
 </tr>
 </tbody>
 </table><p><em>Diferença Máxima de População entre Grupos e Dataset</em></p>
@@ -405,20 +405,64 @@
 </tr>
 <tr>
 <td align="left">proporção</td>
-<td align="left">0.5609756097560976</td>
+<td align="left">0.561</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">-0.012708600770218181</td>
+<td align="left">-0.013</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
+<td align="left">0</td>
+</tr>
+</tbody>
+</table><p><em>Diferença Mínima de População entre Grupos e Dataset</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">Female</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">0.578</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
 <td align="left">1</td>
 </tr>
 </tbody>
-</table><p><em>Diferença Mínima de População entre Grupos e Dataset</em></p>
+</table><p><em>Maior proporção de população no grupo.</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">Male</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">0.444</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
+<td align="left">0</td>
+</tr>
+</tbody>
+</table><p><em>Menor proporção de população no grupo.</em></p>
 <h3>Insights - Resumo Clustering</h3>
 <p>Os seguintes insights resumidos foram obtidos a partir dos métodos de agrupamento apresentados:</p>
-<p>Grupo 0: Média maior que a população: Age, Média menor que a população: Spending Score (1-100)</p>
-<p>Grupo 1: Média menor que a população: Age, Média maior que a população: Spending Score (1-100)</p>
-<p>Grupo outlier: Média menor que a população: Spending Score (1-100)</p>
+<p>Grupo 0: <br>&emsp;Média menor que a população: Age<br>&emsp;Média maior que a população: Spending Score (1-100)</p>
+<p>Grupo 1: <br>&emsp;Média maior que a população: Age<br>&emsp;Média menor que a população: Spending Score (1-100)</p>
+<p>Grupo outlier: <br>&emsp;Média menor que a população: Spending Score (1-100)</p>

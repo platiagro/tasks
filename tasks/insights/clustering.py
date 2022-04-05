@@ -12,10 +12,10 @@ from insights.utils.filtering import column_filter
 from insights.markdown_generator.report import Report
 
 datasets = [
-    'data/avocado.csv',
-    'data/IBM-HR.csv',
-    'data/insurance.csv',
-    'data/creditcard.csv',
+    # 'data/avocado.csv',
+    # 'data/IBM-HR.csv',
+    # 'data/insurance.csv',
+    # 'data/creditcard.csv',
     'data/HousingData.csv',
     'data/winequality-red.csv',
     'data/winequality-white.csv',
@@ -30,10 +30,10 @@ datasets = [
     ]
 
 target_variables = {
-    'data/avocado.csv': 'AveragePrice',
-    'data/IBM-HR.csv': 'PerformanceRating',
-    'data/insurance.csv': 'charges',
-    'data/creditcard.csv': 'Class',
+    # 'data/avocado.csv': 'AveragePrice',
+    # 'data/IBM-HR.csv': 'PerformanceRating',
+    # 'data/insurance.csv': 'charges',
+    # 'data/creditcard.csv': 'Class',
     'data/HousingData.csv': 'MEDV',
     'data/winequality-red.csv': 'quality',
     'data/winequality-white.csv': 'quality',
@@ -48,10 +48,10 @@ target_variables = {
     }
 
 drop_columns = {
-    'data/avocado.csv': ['Date', 'Id'],
-    'data/IBM-HR.csv': [],
-    'data/insurance.csv': [],
-    'data/creditcard.csv': ['Time', 'Id'],
+    # 'data/avocado.csv': ['Date', 'Id'],
+    # 'data/IBM-HR.csv': [],
+    # 'data/insurance.csv': [],
+    # 'data/creditcard.csv': ['Time', 'Id'],
     'data/HousingData.csv': [],
     'data/winequality-red.csv': [],
     'data/winequality-white.csv': [],

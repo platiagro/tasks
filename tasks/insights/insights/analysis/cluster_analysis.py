@@ -255,28 +255,51 @@ def categorical_insights(categorical_group):
     
     maximum = {}
     minimun = {}
+    maximum_p = {}
+    minimun_p = {}
     
     for key in categorical_group:
         
-        pop_dif = categorical_group[key].iloc[3].to_numpy()
-        max_val = np.max(pop_dif)
+        pop_dif = categorical_group[key].loc['diferença da população'].to_numpy()
+        max_val = np.round(np.max(pop_dif), 3)
         argmax = np.argmax(pop_dif)
-        min_val = np.min(pop_dif)
+        min_val = np.round(np.min(pop_dif), 3)
         argmin = np.argmin(pop_dif)
         
         biggest = categorical_group[key].iloc[:, argmax]
+        biggest['proporção'] = np.round(biggest['proporção'], 3)
+        biggest['diferença da população'] = np.round(biggest['diferença da população'], 3)
         biggest.loc['grupo'] = argmax
         
         lowest = categorical_group[key].iloc[:, argmin]
+        lowest['proporção'] = np.round(lowest['proporção'], 3)
+        lowest['diferença da população'] = np.round(lowest['diferença da população'], 3)
         lowest.loc['grupo'] = argmin
 
-        maximum[key] = biggest
-        minimun[key] = lowest
+        maximum[key] = biggest.loc[['maior ocorrencia', 'contagem', 'proporção', 'diferença da população', 'grupo']]
+        minimun[key] = lowest.loc[['maior ocorrencia', 'contagem', 'proporção', 'diferença da população', 'grupo']]
+        
+        pop_dif = categorical_group[key].loc['proporção da classe'].to_numpy()
+        max_val = np.round(np.max(pop_dif), 3)
+        argmax = np.argmax(pop_dif)
+        min_val = np.round(np.min(pop_dif), 3)
+        argmin = np.argmin(pop_dif)
+        
+        biggest_p = categorical_group[key].iloc[:, argmax]
+        biggest_p['proporção da classe'] = np.round(biggest_p['proporção da classe'], 3)
+        biggest_p.loc['grupo'] = argmax
+        
+        lowest_p = categorical_group[key].iloc[:, argmin]
+        lowest_p['proporção da classe'] = np.round(lowest_p['proporção da classe'], 3)
+        lowest_p.loc['grupo'] = argmin
+
+        maximum_p[key] = biggest_p.loc[['maior classe proporcional', 'proporção da classe', 'grupo']]
+        minimun_p[key] = lowest_p.loc[['maior classe proporcional', 'proporção da classe', 'grupo']]
     
     schema['information'].append(
         {
             'type': 'text',
-            'info': NoEscape(r'É possível observar nas tabelas em ambas tabelas abaixo alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha Contagem mostra a contagem daquela classe dentro do grupo, A linha Proporção mostra a proporção da classe em relação a população do grupo, A linha Diferença da População mostra a diferença de proporção daquela população no grupo em relação a população geral. ')
+            'info': 'É possível observar nas tabelas em ambas tabelas abaixo alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha Contagem mostra a contagem daquela classe dentro do grupo, A linha Proporção mostra a proporção da classe em relação a população do grupo, A linha Diferença da População mostra a diferença de proporção daquela população no grupo em relação a população geral. '
         }
     )
     schema['information'].append(
@@ -288,12 +311,31 @@ def categorical_insights(categorical_group):
         }
     )
     
+    
     schema['information'].append(
         {
             'type': 'table', 
             'caption': 'Diferença Mínima de População entre Grupos e Dataset',
             'label': r'tab:notavelmin',
             'table': pd.DataFrame.from_dict(minimun)
+        }
+    )
+    
+    schema['information'].append(
+        {
+            'type': 'table', 
+            'caption': 'Maior proporção de população no grupo.',
+            'label': r'tab:notavelmax',
+            'table': pd.DataFrame.from_dict(maximum_p)
+        }
+    )
+    
+    schema['information'].append(
+        {
+            'type': 'table', 
+            'caption': 'Menor proporção de população no grupo.',
+            'label': r'tab:notavelmax',
+            'table': pd.DataFrame.from_dict(minimun_p)
         }
     )
         
@@ -333,14 +375,16 @@ def cluster_pivot(cluster_df, df, categorical_columns):
         diff = pd.Series(diff, name=f'diferença da população')
         
         pivot_normalized = pd.crosstab(cluster_df['cluster_group'], df[column], normalize='columns')
-        pivot_max_normalized = pd.Series(pivot_normalized.idxmax(axis=1), name=f'maior ocorrencia normalizada')
-        pivot_freq = pd.Series(pivot_normalized.max(axis=1), name=f'frequencia')
+        pivot_max_normalized = pd.Series(pivot_normalized.idxmax(axis=1), name=f'maior classe proporcional')
+        pivot_freq = pd.Series(pivot_normalized.max(axis=1), name=f'proporção da classe')
         
         dataframe = pd.DataFrame([
             pivot_max, 
             pivot_count, 
             pivot_pop, 
-            diff,  
+            diff,
+            pivot_max_normalized,
+            pivot_freq,
             ], columns=pivot.index)
         
         categorical_grouping[column] = dataframe

@@ -69,11 +69,11 @@
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">race/ethnicity</th>
-<th align="left">parental level of education</th>
-<th align="left">test preparation course</th>
-<th align="left">gender</th>
 <th align="left">lunch</th>
+<th align="left">gender</th>
+<th align="left">race/ethnicity</th>
+<th align="left">test preparation course</th>
+<th align="left">parental level of education</th>
 </tr>
 </thead>
 <tbody>
@@ -87,31 +87,31 @@
 </tr>
 <tr>
 <td align="left">unique</td>
+<td align="left">2</td>
+<td align="left">2</td>
 <td align="left">5</td>
+<td align="left">2</td>
 <td align="left">6</td>
-<td align="left">2</td>
-<td align="left">2</td>
-<td align="left">2</td>
 </tr>
 <tr>
 <td align="left">top</td>
-<td align="left">group C</td>
-<td align="left">some college</td>
-<td align="left">none</td>
-<td align="left">female</td>
 <td align="left">standard</td>
+<td align="left">female</td>
+<td align="left">group C</td>
+<td align="left">none</td>
+<td align="left">some college</td>
 </tr>
 <tr>
 <td align="left">freq</td>
-<td align="left">319</td>
-<td align="left">226</td>
-<td align="left">642</td>
-<td align="left">518</td>
 <td align="left">645</td>
+<td align="left">518</td>
+<td align="left">319</td>
+<td align="left">642</td>
+<td align="left">226</td>
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: DBscan</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/a8e63aba-6671-4cdf-a70b-e7a439482ef9.png" alt="Visualização dos outliers: DBscan" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/aebcdd01-738a-49cc-980d-ac9356df99d1.png" alt="Visualização dos outliers: DBscan" /></p>
 
 <p><em>Visualização dos outliers: DBscan</em></p>
 <h3>Isolation Forest</h3>
@@ -136,15 +136,15 @@
 </tr>
 <tr>
 <td align="left">mean</td>
-<td align="right">64.56</td>
-<td align="right">69.42</td>
-<td align="right">67.98</td>
+<td align="right">66.74</td>
+<td align="right">71.64</td>
+<td align="right">70.08</td>
 </tr>
 <tr>
 <td align="left">std</td>
-<td align="right">34.39</td>
-<td align="right">33.64</td>
-<td align="right">34.24</td>
+<td align="right">33.78</td>
+<td align="right">33.49</td>
+<td align="right">34.41</td>
 </tr>
 <tr>
 <td align="left">min</td>
@@ -154,21 +154,21 @@
 </tr>
 <tr>
 <td align="left">25%</td>
-<td align="right">29.00</td>
+<td align="right">30.00</td>
 <td align="right">34.00</td>
 <td align="right">33.00</td>
 </tr>
 <tr>
 <td align="left">50%</td>
 <td align="right">87.00</td>
-<td align="right">96.00</td>
-<td align="right">93.50</td>
+<td align="right">96.50</td>
+<td align="right">95.00</td>
 </tr>
 <tr>
 <td align="left">75%</td>
 <td align="right">96.00</td>
 <td align="right">100.00</td>
-<td align="right">99.75</td>
+<td align="right">100.00</td>
 </tr>
 <tr>
 <td align="left">max</td>
@@ -182,11 +182,11 @@
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">race/ethnicity</th>
-<th align="left">parental level of education</th>
-<th align="left">test preparation course</th>
-<th align="left">gender</th>
 <th align="left">lunch</th>
+<th align="left">gender</th>
+<th align="left">race/ethnicity</th>
+<th align="left">test preparation course</th>
+<th align="left">parental level of education</th>
 </tr>
 </thead>
 <tbody>
@@ -200,31 +200,31 @@
 </tr>
 <tr>
 <td align="left">unique</td>
+<td align="left">2</td>
+<td align="left">2</td>
 <td align="left">5</td>
+<td align="left">2</td>
 <td align="left">6</td>
-<td align="left">2</td>
-<td align="left">2</td>
-<td align="left">2</td>
 </tr>
 <tr>
 <td align="left">top</td>
-<td align="left">group E</td>
-<td align="left">some high school</td>
-<td align="left">none</td>
-<td align="left">female</td>
 <td align="left">standard</td>
+<td align="left">female</td>
+<td align="left">group D</td>
+<td align="left">none</td>
+<td align="left">some high school</td>
 </tr>
 <tr>
 <td align="left">freq</td>
-<td align="left">13</td>
-<td align="left">11</td>
 <td align="left">30</td>
 <td align="left">37</td>
+<td align="left">14</td>
 <td align="left">29</td>
+<td align="left">10</td>
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: Isolation Forest</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/72c9e71e-0dad-4b2e-b1f1-b42da3f1e925.png" alt="Visualização dos outliers: Isolation Forest" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/1612fe86-b89f-412a-9377-f6f85229be51.png" alt="Visualização dos outliers: Isolation Forest" /></p>
 
 <p><em>Visualização dos outliers: Isolation Forest</em></p>
 <h2>Análise de Cluster</h2>
@@ -242,27 +242,27 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">(73.6, 86.8]</td>
-<td align="right">0.02</td>
-<td align="right">0.98</td>
+<td align="left">(59.6, 72.4]</td>
+<td align="right">0.50</td>
+<td align="right">0.50</td>
 </tr>
 <tr>
-<td align="left">(60.4, 73.6]</td>
-<td align="right">0.44</td>
-<td align="right">0.56</td>
-</tr>
-<tr>
-<td align="left">(33.934, 47.2]</td>
+<td align="left">(85.2, 98.0]</td>
 <td align="right">1.00</td>
 <td align="right">0.00</td>
 </tr>
 <tr>
-<td align="left">(47.2, 60.4]</td>
-<td align="right">1.00</td>
-<td align="right">0.00</td>
+<td align="left">(72.4, 85.2]</td>
+<td align="right">0.97</td>
+<td align="right">0.03</td>
 </tr>
 <tr>
-<td align="left">(86.8, 100.0]</td>
+<td align="left">(46.8, 59.6]</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+</tr>
+<tr>
+<td align="left">(33.936, 46.8]</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
 </tr>
@@ -281,27 +281,27 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">(73.6, 86.8]</td>
-<td align="right">0.98</td>
-<td align="right">0.02</td>
+<td align="left">(59.6, 72.4]</td>
+<td align="right">0.50</td>
+<td align="right">0.50</td>
 </tr>
 <tr>
-<td align="left">(60.4, 73.6]</td>
-<td align="right">0.56</td>
-<td align="right">0.44</td>
-</tr>
-<tr>
-<td align="left">(33.934, 47.2]</td>
+<td align="left">(85.2, 98.0]</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
 </tr>
 <tr>
-<td align="left">(47.2, 60.4]</td>
-<td align="right">0.00</td>
-<td align="right">1.00</td>
+<td align="left">(72.4, 85.2]</td>
+<td align="right">0.03</td>
+<td align="right">0.97</td>
 </tr>
 <tr>
-<td align="left">(86.8, 100.0]</td>
+<td align="left">(46.8, 59.6]</td>
+<td align="right">1.00</td>
+<td align="right">0.00</td>
+</tr>
+<tr>
+<td align="left">(33.936, 46.8]</td>
 <td align="right">1.00</td>
 <td align="right">0.00</td>
 </tr>
@@ -340,21 +340,21 @@
 <tbody>
 <tr>
 <td align="left">math score</td>
-<td align="right">8.84</td>
-<td align="right">-11.02</td>
-<td align="right">-1.61</td>
+<td align="right">-11.06</td>
+<td align="right">8.91</td>
+<td align="right">0.69</td>
 </tr>
 <tr>
 <td align="left">reading score</td>
-<td align="right">9.23</td>
-<td align="right">-11.49</td>
-<td align="right">0.26</td>
+<td align="right">-11.48</td>
+<td align="right">9.26</td>
+<td align="right">2.60</td>
 </tr>
 <tr>
 <td align="left">writing score</td>
+<td align="right">-11.86</td>
 <td align="right">9.56</td>
-<td align="right">-11.90</td>
-<td align="right">-0.08</td>
+<td align="right">2.13</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Média entre População - Grupos</em></p>
@@ -370,83 +370,83 @@
 <tbody>
 <tr>
 <td align="left">math score</td>
-<td align="right">0.66</td>
 <td align="right">-0.82</td>
-<td align="right">-0.12</td>
+<td align="right">0.66</td>
+<td align="right">0.05</td>
 </tr>
 <tr>
 <td align="left">reading score</td>
-<td align="right">0.72</td>
 <td align="right">-0.89</td>
-<td align="right">0.02</td>
+<td align="right">0.72</td>
+<td align="right">0.20</td>
 </tr>
 <tr>
 <td align="left">writing score</td>
-<td align="right">0.71</td>
 <td align="right">-0.88</td>
-<td align="right">-0.01</td>
+<td align="right">0.71</td>
+<td align="right">0.16</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Variância entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/c07b4261-cf9a-4ae2-9488-c8ed124c4ef5.png" alt="Diferença de Média entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/952a537a-3df0-415b-997f-eb738d2d4496.png" alt="Diferença de Média entre População - Grupos" /></p>
 
 <p><em>Diferença de Média entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/343ee6af-aa4f-4391-934c-4d63c242903f.png" alt="Diferença de Variância entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-StudentsPerformance/figures/af351900-edd0-475f-9dd4-e6412c5cecfe.png" alt="Diferença de Variância entre População - Grupos" /></p>
 
 <p><em>Diferença de Variância entre População - Grupos</em></p>
-<p>A maior diferença populacional positiva foi detectada na feature writing score e no grupo 0, com valor de 9.56. A maior variação negativa foi na feature writing score e no grupo 1, com o valor registrado de -11.90</p>
+<p>A maior diferença populacional positiva foi detectada na feature writing score e no grupo 1, com valor de 9.56. A maior variação negativa foi na feature writing score e no grupo 0, com o valor registrado de -11.86</p>
 <h3>Insights - Variáveis Categóricas</h3>
 <p>É possível observar nas tabelas em ambas tabelas abaixo alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha Contagem mostra a contagem daquela classe dentro do grupo, A linha Proporção mostra a proporção da classe em relação a população do grupo, A linha Diferença da População mostra a diferença de proporção daquela população no grupo em relação a população geral. </p>
 <table>
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">race/ethnicity</th>
-<th align="left">parental level of education</th>
-<th align="left">test preparation course</th>
-<th align="left">gender</th>
 <th align="left">lunch</th>
+<th align="left">gender</th>
+<th align="left">race/ethnicity</th>
+<th align="left">test preparation course</th>
+<th align="left">parental level of education</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">maior ocorrencia</td>
-<td align="left">group C</td>
-<td align="left">high school</td>
-<td align="left">none</td>
-<td align="left">male</td>
 <td align="left">standard</td>
+<td align="left">male</td>
+<td align="left">group C</td>
+<td align="left">none</td>
+<td align="left">high school</td>
 </tr>
 <tr>
 <td align="left">contagem</td>
-<td align="left">174</td>
-<td align="left">103</td>
-<td align="left">315</td>
-<td align="left">236</td>
 <td align="left">390</td>
+<td align="left">235</td>
+<td align="left">174</td>
+<td align="left">315</td>
+<td align="left">103</td>
 </tr>
 <tr>
 <td align="left">proporção</td>
-<td align="left">0.3301707779886148</td>
-<td align="left">0.24349881796690306</td>
-<td align="left">0.7446808510638298</td>
-<td align="left">0.557919621749409</td>
-<td align="left">0.7400379506641366</td>
+<td align="left">0.741</td>
+<td align="left">0.554</td>
+<td align="left">0.331</td>
+<td align="left">0.743</td>
+<td align="left">0.243</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">0.0059602516728253785</td>
-<td align="left">0.04665671270374516</td>
-<td align="left">0.1004703247480403</td>
-<td align="left">0.06423541122309323</td>
-<td align="left">0.09161689803255768</td>
+<td align="left">0.094</td>
+<td align="left">0.061</td>
+<td align="left">0.006</td>
+<td align="left">0.098</td>
+<td align="left">0.046</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
+<td align="left">1</td>
 <td align="left">0</td>
 <td align="left">1</td>
-<td align="left">1</td>
-<td align="left">1</td>
+<td align="left">0</td>
 <td align="left">0</td>
 </tr>
 </tbody>
@@ -455,57 +455,133 @@
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">race/ethnicity</th>
-<th align="left">parental level of education</th>
-<th align="left">test preparation course</th>
-<th align="left">gender</th>
 <th align="left">lunch</th>
+<th align="left">gender</th>
+<th align="left">race/ethnicity</th>
+<th align="left">test preparation course</th>
+<th align="left">parental level of education</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">maior ocorrencia</td>
-<td align="left">group C</td>
-<td align="left">associate's degree</td>
-<td align="left">none</td>
-<td align="left">female</td>
 <td align="left">standard</td>
+<td align="left">female</td>
+<td align="left">group C</td>
+<td align="left">none</td>
+<td align="left">associate's degree</td>
 </tr>
 <tr>
 <td align="left">contagem</td>
-<td align="left">134</td>
+<td align="left">225</td>
+<td align="left">292</td>
+<td align="left">135</td>
+<td align="left">298</td>
 <td align="left">127</td>
-<td align="left">297</td>
-<td align="left">294</td>
-<td align="left">226</td>
 </tr>
 <tr>
 <td align="left">proporção</td>
-<td align="left">0.31678486997635935</td>
-<td align="left">0.2409867172675522</td>
-<td align="left">0.5635673624288425</td>
-<td align="left">0.5578747628083491</td>
-<td align="left">0.5342789598108747</td>
+<td align="left">0.531</td>
+<td align="left">0.555</td>
+<td align="left">0.318</td>
+<td align="left">0.567</td>
+<td align="left">0.241</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">-0.007425656339430098</td>
-<td align="left">0.013618296214920611</td>
-<td align="left">-0.08064316388694692</td>
-<td align="left">0.05155897333466497</td>
-<td align="left">-0.1141420928207042</td>
+<td align="left">-0.117</td>
+<td align="left">0.049</td>
+<td align="left">-0.007</td>
+<td align="left">-0.079</td>
+<td align="left">0.014</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
+<td align="left">0</td>
 <td align="left">1</td>
 <td align="left">0</td>
-<td align="left">0</td>
-<td align="left">0</td>
+<td align="left">1</td>
 <td align="left">1</td>
 </tr>
 </tbody>
 </table><p><em>Diferença Mínima de População entre Grupos e Dataset</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">lunch</th>
+<th align="left">gender</th>
+<th align="left">race/ethnicity</th>
+<th align="left">test preparation course</th>
+<th align="left">parental level of education</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">standard</td>
+<td align="left">female</td>
+<td align="left">group E</td>
+<td align="left">completed</td>
+<td align="left">bachelor's degree</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">0.634</td>
+<td align="left">0.607</td>
+<td align="left">0.685</td>
+<td align="left">0.677</td>
+<td align="left">0.651</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table><p><em>Maior proporção de população no grupo.</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">lunch</th>
+<th align="left">gender</th>
+<th align="left">race/ethnicity</th>
+<th align="left">test preparation course</th>
+<th align="left">parental level of education</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">free/reduced</td>
+<td align="left">male</td>
+<td align="left">group A</td>
+<td align="left">none</td>
+<td align="left">high school</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">0.594</td>
+<td align="left">0.501</td>
+<td align="left">0.624</td>
+<td align="left">0.514</td>
+<td align="left">0.551</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+</tbody>
+</table><p><em>Menor proporção de população no grupo.</em></p>
 <h3>Insights - Resumo Clustering</h3>
 <p>Os seguintes insights resumidos foram obtidos a partir dos métodos de agrupamento apresentados:</p>
-<p>Grupo 0: <br>&emsp;Média maior que a população: math score<br>&emsp;Média maior que a população: reading score<br>&emsp;Média maior que a população: writing score</p>
-<p>Grupo 1: <br>&emsp;Média menor que a população: math score<br>&emsp;Média menor que a população: reading score<br>&emsp;Média menor que a população: writing score<br>&emsp;Presença maior de população na feature test preparation course: none</p>
+<p>Grupo 0: <br>&emsp;Média menor que a população: math score<br>&emsp;Média menor que a população: reading score<br>&emsp;Média menor que a população: writing score</p>
+<p>Grupo 1: <br>&emsp;Média maior que a população: math score<br>&emsp;Média maior que a população: reading score<br>&emsp;Média maior que a população: writing score</p>

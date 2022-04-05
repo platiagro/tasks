@@ -276,15 +276,15 @@
 <thead>
 <tr>
 <th align="left"></th>
+<th align="left">JobRole</th>
 <th align="left">MaritalStatus</th>
+<th align="left">Over18</th>
+<th align="left">Attrition</th>
 <th align="left">Department</th>
 <th align="left">BusinessTravel</th>
-<th align="left">Gender</th>
-<th align="left">Attrition</th>
-<th align="left">JobRole</th>
-<th align="left">OverTime</th>
-<th align="left">Over18</th>
 <th align="left">EducationField</th>
+<th align="left">OverTime</th>
+<th align="left">Gender</th>
 </tr>
 </thead>
 <tbody>
@@ -302,43 +302,43 @@
 </tr>
 <tr>
 <td align="left">unique</td>
-<td align="left">3</td>
-<td align="left">3</td>
-<td align="left">3</td>
-<td align="left">2</td>
-<td align="left">2</td>
 <td align="left">9</td>
-<td align="left">2</td>
+<td align="left">3</td>
 <td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">3</td>
 <td align="left">6</td>
+<td align="left">2</td>
+<td align="left">2</td>
 </tr>
 <tr>
 <td align="left">top</td>
+<td align="left">Sales Executive</td>
 <td align="left">Married</td>
+<td align="left">Y</td>
+<td align="left">No</td>
 <td align="left">Research &amp; Development</td>
 <td align="left">Travel_Rarely</td>
-<td align="left">Male</td>
-<td align="left">No</td>
-<td align="left">Sales Executive</td>
-<td align="left">No</td>
-<td align="left">Y</td>
 <td align="left">Life Sciences</td>
+<td align="left">No</td>
+<td align="left">Male</td>
 </tr>
 <tr>
 <td align="left">freq</td>
+<td align="left">326</td>
 <td align="left">673</td>
+<td align="left">1470</td>
+<td align="left">1233</td>
 <td align="left">961</td>
 <td align="left">1043</td>
-<td align="left">882</td>
-<td align="left">1233</td>
-<td align="left">326</td>
-<td align="left">1054</td>
-<td align="left">1470</td>
 <td align="left">606</td>
+<td align="left">1054</td>
+<td align="left">882</td>
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: DBscan</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/e5a22f61-855e-4bac-867b-84a6ff7f833a.png" alt="Visualização dos outliers: DBscan" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/51a77bf1-9a56-4fc3-8353-5adfc3308ba6.png" alt="Visualização dos outliers: DBscan" /></p>
 
 <p><em>Visualização dos outliers: DBscan</em></p>
 <h3>Isolation Forest</h3>
@@ -409,76 +409,76 @@
 </tr>
 <tr>
 <td align="left">mean</td>
-<td align="right">47.96</td>
-<td align="right">795.97</td>
-<td align="right">10.53</td>
-<td align="right">3.11</td>
+<td align="right">48.14</td>
+<td align="right">757.89</td>
+<td align="right">10.20</td>
+<td align="right">2.99</td>
 <td align="right">1.00</td>
-<td align="right">999.78</td>
-<td align="right">2.47</td>
-<td align="right">69.73</td>
-<td align="right">2.45</td>
+<td align="right">982.55</td>
+<td align="right">2.66</td>
+<td align="right">67.89</td>
+<td align="right">2.58</td>
 <td align="right">3.88</td>
-<td align="right">2.34</td>
-<td align="right">14410.66</td>
-<td align="right">15217.91</td>
-<td align="right">3.46</td>
-<td align="right">17.09</td>
+<td align="right">2.55</td>
+<td align="right">14478.19</td>
+<td align="right">15478.73</td>
+<td align="right">3.43</td>
+<td align="right">17.55</td>
 <td align="right">3.42</td>
-<td align="right">2.77</td>
+<td align="right">2.85</td>
 <td align="right">80.00</td>
-<td align="right">0.84</td>
-<td align="right">26.05</td>
-<td align="right">2.86</td>
-<td align="right">2.76</td>
-<td align="right">18.73</td>
-<td align="right">8.24</td>
-<td align="right">7.99</td>
-<td align="right">8.28</td>
+<td align="right">0.97</td>
+<td align="right">26.03</td>
+<td align="right">2.77</td>
+<td align="right">2.70</td>
+<td align="right">18.66</td>
+<td align="right">8.49</td>
+<td align="right">7.42</td>
+<td align="right">8.42</td>
 </tr>
 <tr>
 <td align="left">std</td>
-<td align="right">7.89</td>
-<td align="right">452.07</td>
-<td align="right">10.23</td>
+<td align="right">8.44</td>
+<td align="right">432.96</td>
+<td align="right">10.13</td>
 <td align="right">1.18</td>
 <td align="right">0.00</td>
-<td align="right">640.98</td>
-<td align="right">1.20</td>
-<td align="right">22.03</td>
-<td align="right">0.85</td>
-<td align="right">1.19</td>
-<td align="right">1.13</td>
-<td align="right">5441.40</td>
-<td align="right">8072.09</td>
-<td align="right">2.84</td>
-<td align="right">4.85</td>
+<td align="right">632.65</td>
+<td align="right">1.15</td>
+<td align="right">22.04</td>
+<td align="right">0.84</td>
+<td align="right">1.22</td>
+<td align="right">1.09</td>
+<td align="right">5519.76</td>
+<td align="right">7908.13</td>
+<td align="right">2.85</td>
+<td align="right">4.74</td>
 <td align="right">0.50</td>
-<td align="right">1.21</td>
+<td align="right">1.19</td>
 <td align="right">0.00</td>
-<td align="right">0.94</td>
-<td align="right">8.24</td>
-<td align="right">1.56</td>
-<td align="right">0.70</td>
-<td align="right">10.42</td>
-<td align="right">5.00</td>
-<td align="right">5.49</td>
-<td align="right">4.52</td>
+<td align="right">1.02</td>
+<td align="right">8.52</td>
+<td align="right">1.53</td>
+<td align="right">0.81</td>
+<td align="right">10.55</td>
+<td align="right">5.03</td>
+<td align="right">5.70</td>
+<td align="right">4.55</td>
 </tr>
 <tr>
 <td align="left">min</td>
 <td align="right">19.00</td>
-<td align="right">119.00</td>
+<td align="right">136.00</td>
 <td align="right">1.00</td>
 <td align="right">1.00</td>
 <td align="right">1.00</td>
-<td align="right">33.00</td>
+<td align="right">10.00</td>
 <td align="right">1.00</td>
 <td align="right">30.00</td>
 <td align="right">1.00</td>
 <td align="right">1.00</td>
 <td align="right">1.00</td>
-<td align="right">2325.00</td>
+<td align="right">2028.00</td>
 <td align="right">2125.00</td>
 <td align="right">0.00</td>
 <td align="right">11.00</td>
@@ -496,21 +496,21 @@
 </tr>
 <tr>
 <td align="left">25%</td>
-<td align="right">42.50</td>
-<td align="right">368.00</td>
+<td align="right">44.00</td>
+<td align="right">360.25</td>
 <td align="right">2.00</td>
-<td align="right">2.25</td>
+<td align="right">2.00</td>
 <td align="right">1.00</td>
-<td align="right">407.00</td>
-<td align="right">1.00</td>
-<td align="right">55.25</td>
+<td align="right">376.75</td>
+<td align="right">2.00</td>
+<td align="right">52.50</td>
 <td align="right">2.00</td>
 <td align="right">3.00</td>
+<td align="right">2.00</td>
+<td align="right">10673.00</td>
+<td align="right">8023.25</td>
 <td align="right">1.00</td>
-<td align="right">10526.75</td>
-<td align="right">7120.75</td>
-<td align="right">1.00</td>
-<td align="right">12.00</td>
+<td align="right">13.00</td>
 <td align="right">3.00</td>
 <td align="right">2.00</td>
 <td align="right">80.00</td>
@@ -519,67 +519,67 @@
 <td align="right">2.00</td>
 <td align="right">2.00</td>
 <td align="right">10.00</td>
-<td align="right">5.00</td>
-<td align="right">2.00</td>
-<td align="right">7.00</td>
+<td align="right">6.00</td>
+<td align="right">1.25</td>
+<td align="right">6.00</td>
 </tr>
 <tr>
 <td align="left">50%</td>
-<td align="right">49.50</td>
-<td align="right">695.50</td>
-<td align="right">6.50</td>
+<td align="right">50.00</td>
+<td align="right">671.50</td>
+<td align="right">6.00</td>
 <td align="right">3.00</td>
 <td align="right">1.00</td>
-<td align="right">1053.50</td>
+<td align="right">1036.50</td>
 <td align="right">3.00</td>
-<td align="right">71.50</td>
+<td align="right">68.50</td>
 <td align="right">3.00</td>
 <td align="right">4.00</td>
-<td align="right">2.00</td>
-<td align="right">16774.00</td>
-<td align="right">17317.50</td>
 <td align="right">3.00</td>
-<td align="right">16.00</td>
+<td align="right">16907.50</td>
+<td align="right">17394.50</td>
+<td align="right">3.00</td>
+<td align="right">18.00</td>
 <td align="right">3.00</td>
 <td align="right">3.00</td>
 <td align="right">80.00</td>
 <td align="right">1.00</td>
-<td align="right">26.50</td>
+<td align="right">26.00</td>
 <td align="right">3.00</td>
 <td align="right">3.00</td>
 <td align="right">20.00</td>
 <td align="right">8.00</td>
-<td align="right">10.50</td>
+<td align="right">7.00</td>
 <td align="right">9.00</td>
 </tr>
 <tr>
 <td align="left">75%</td>
 <td align="right">55.00</td>
-<td align="right">1218.50</td>
-<td align="right">20.00</td>
+<td align="right">1191.25</td>
+<td align="right">20.75</td>
 <td align="right">4.00</td>
 <td align="right">1.00</td>
-<td align="right">1572.00</td>
+<td align="right">1535.00</td>
 <td align="right">4.00</td>
-<td align="right">91.00</td>
+<td align="right">88.00</td>
 <td align="right">3.00</td>
 <td align="right">5.00</td>
 <td align="right">3.00</td>
-<td align="right">19125.00</td>
-<td align="right">22095.00</td>
+<td align="right">19143.25</td>
+<td align="right">22249.50</td>
 <td align="right">5.00</td>
 <td align="right">22.00</td>
 <td align="right">4.00</td>
 <td align="right">4.00</td>
 <td align="right">80.00</td>
-<td align="right">1.00</td>
-<td align="right">32.75</td>
-<td align="right">3.75</td>
+<td align="right">1.75</td>
+<td align="right">33.00</td>
 <td align="right">3.00</td>
-<td align="right">26.00</td>
-<td align="right">11.75</td>
+<td align="right">3.00</td>
+<td align="right">25.75</td>
+<td align="right">12.00</td>
 <td align="right">13.00</td>
-<td align="right">11.00</td>
+<td align="right">11.75</td>
 </tr>
 <tr>
 <td align="left">max</td>
@@ -595,7 +595,7 @@
 <td align="right">5.00</td>
 <td align="right">4.00</td>
 <td align="right">19999.00</td>
-<td align="right">26542.00</td>
+<td align="right">26703.00</td>
 <td align="right">9.00</td>
 <td align="right">25.00</td>
 <td align="right">4.00</td>
@@ -616,15 +616,15 @@
 <thead>
 <tr>
 <th align="left"></th>
+<th align="left">JobRole</th>
 <th align="left">MaritalStatus</th>
+<th align="left">Over18</th>
+<th align="left">Attrition</th>
 <th align="left">Department</th>
 <th align="left">BusinessTravel</th>
-<th align="left">Gender</th>
-<th align="left">Attrition</th>
-<th align="left">JobRole</th>
-<th align="left">OverTime</th>
-<th align="left">Over18</th>
 <th align="left">EducationField</th>
+<th align="left">OverTime</th>
+<th align="left">Gender</th>
 </tr>
 </thead>
 <tbody>
@@ -642,49 +642,49 @@
 </tr>
 <tr>
 <td align="left">unique</td>
-<td align="left">3</td>
-<td align="left">3</td>
-<td align="left">3</td>
-<td align="left">2</td>
-<td align="left">2</td>
 <td align="left">8</td>
-<td align="left">2</td>
+<td align="left">3</td>
 <td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">3</td>
 <td align="left">6</td>
+<td align="left">2</td>
+<td align="left">2</td>
 </tr>
 <tr>
 <td align="left">top</td>
+<td align="left">Manager</td>
 <td align="left">Married</td>
+<td align="left">Y</td>
+<td align="left">No</td>
 <td align="left">Research &amp; Development</td>
 <td align="left">Travel_Rarely</td>
+<td align="left">Medical</td>
+<td align="left">No</td>
 <td align="left">Male</td>
-<td align="left">No</td>
-<td align="left">Manager</td>
-<td align="left">No</td>
-<td align="left">Y</td>
-<td align="left">Life Sciences</td>
 </tr>
 <tr>
 <td align="left">freq</td>
-<td align="left">34</td>
-<td align="left">46</td>
-<td align="left">48</td>
-<td align="left">46</td>
-<td align="left">65</td>
-<td align="left">31</td>
-<td align="left">58</td>
+<td align="left">28</td>
+<td align="left">36</td>
 <td align="left">74</td>
-<td align="left">33</td>
+<td align="left">67</td>
+<td align="left">45</td>
+<td align="left">52</td>
+<td align="left">29</td>
+<td align="left">57</td>
+<td align="left">42</td>
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: Isolation Forest</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/f5cc2b1b-ca10-4adf-b308-1097d7e93654.png" alt="Visualização dos outliers: Isolation Forest" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/d3024220-feb2-4645-92c4-e8fc5c4b1571.png" alt="Visualização dos outliers: Isolation Forest" /></p>
 
 <p><em>Visualização dos outliers: Isolation Forest</em></p>
 <h2>Análise de Cluster</h2>
 <p>O clustering ou análise de agrupamento de dados é o conjunto de técnicas de prospecção de dados (data mining) que visa fazer agrupamentos automáticos de dados segundo o seu grau de semelhança. O critério de semelhança faz parte da definição do problema e, dependendo, do algoritmo. A cada conjunto de dados resultante do processo dá-se o nome de grupo, aglomerado ou agrupamento (cluster). O procedimento de agrupamento (clustering) também pode ser aplicado a bases de texto utilizando algoritmos de prospeção de texto (text mining), onde o algoritmo procura agrupar textos que falem sobre o mesmo assunto e separar textos de conteúdo diferentes. </p>
 <h3>Feature Permutation 3 dim.</h3>
-<p>A melhor separação de grupos ocorreu nas features: ['EmployeeCount', 'JobLevel', 'TrainingTimesLastYear'] com uma quantidade de 9 grupos. A análise multidimensional em 3 dimensões fornece insights de quais features são mais importantes e que distinguem grupos entre si. Esta análise é realizada realizando a permutação das features do dataset.</p>
+<p>A melhor separação de grupos ocorreu nas features: ['EmployeeNumber', 'NumCompaniesWorked', 'TotalWorkingYears'] com uma quantidade de 3 grupos. A análise multidimensional em 3 dimensões fornece insights de quais features são mais importantes e que distinguem grupos entre si. Esta análise é realizada realizando a permutação das features do dataset.</p>
 <p>A matriz de separação abaixo mostra a distribuição populacional normalizada dentro de cada grupo de cluster. Note que valores maiores significam que há maior presença daquela população dentro daquele grupo. Este tipo de tabela também pode ser chamado de matriz de confusão, do inglês Confusion Matrix.</p>
 <table>
 <thead>
@@ -693,38 +693,20 @@
 <th align="right">0</th>
 <th align="right">1</th>
 <th align="right">2</th>
-<th align="right">3</th>
-<th align="right">4</th>
-<th align="right">5</th>
-<th align="right">6</th>
-<th align="right">7</th>
-<th align="right">8</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="right">3</td>
-<td align="right">0.16</td>
-<td align="right">0.12</td>
-<td align="right">0.09</td>
-<td align="right">0.13</td>
-<td align="right">0.17</td>
-<td align="right">0.16</td>
-<td align="right">0.05</td>
-<td align="right">0.06</td>
-<td align="right">0.07</td>
+<td align="right">0.34</td>
+<td align="right">0.32</td>
+<td align="right">0.34</td>
 </tr>
 <tr>
 <td align="right">4</td>
-<td align="right">0.17</td>
-<td align="right">0.10</td>
-<td align="right">0.08</td>
-<td align="right">0.16</td>
-<td align="right">0.14</td>
-<td align="right">0.19</td>
-<td align="right">0.05</td>
-<td align="right">0.02</td>
-<td align="right">0.09</td>
+<td align="right">0.36</td>
+<td align="right">0.32</td>
+<td align="right">0.32</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
@@ -747,8 +729,8 @@
 </tr>
 <tr>
 <td align="right">4</td>
-<td align="right">0.42</td>
-<td align="right">0.58</td>
+<td align="right">0.57</td>
+<td align="right">0.43</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
@@ -764,18 +746,18 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">EmployeeCount - JobLevel - TrainingTimesLastYear</td>
-<td align="right">0.69</td>
+<td align="left">EmployeeNumber - NumCompaniesWorked - TotalWorkingYears</td>
+<td align="right">0.60</td>
 <td align="right">nan</td>
 </tr>
 <tr>
-<td align="left">EmployeeCount - NumCompaniesWorked - YearsSinceLastPromotion</td>
+<td align="left">EnvironmentSatisfaction - MonthlyIncome - YearsAtCompany</td>
+<td align="right">0.56</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">EmployeeCount - WorkLifeBalance - YearsAtCompany</td>
 <td align="right">0.48</td>
-<td align="right">nan</td>
-</tr>
-<tr>
-<td align="left">NumCompaniesWorked - TotalWorkingYears - WorkLifeBalance</td>
-<td align="right">0.42</td>
 <td align="right">nan</td>
 </tr>
 <tr>
@@ -800,27 +782,27 @@
 <tbody>
 <tr>
 <td align="left">Age</td>
-<td align="right">0.27</td>
-<td align="right">-0.26</td>
-<td align="right">11.62</td>
+<td align="right">-0.27</td>
+<td align="right">0.28</td>
+<td align="right">11.81</td>
 </tr>
 <tr>
 <td align="left">DailyRate</td>
-<td align="right">-8.33</td>
-<td align="right">7.96</td>
-<td align="right">-6.86</td>
+<td align="right">7.39</td>
+<td align="right">-7.65</td>
+<td align="right">-46.96</td>
 </tr>
 <tr>
 <td align="left">DistanceFromHome</td>
 <td align="right">-0.05</td>
-<td align="right">0.05</td>
-<td align="right">1.41</td>
+<td align="right">0.06</td>
+<td align="right">1.06</td>
 </tr>
 <tr>
 <td align="left">Education</td>
-<td align="right">-0.03</td>
-<td align="right">0.03</td>
-<td align="right">0.21</td>
+<td align="right">0.02</td>
+<td align="right">-0.02</td>
+<td align="right">0.08</td>
 </tr>
 <tr>
 <td align="left">EmployeeCount</td>
@@ -830,75 +812,75 @@
 </tr>
 <tr>
 <td align="left">EmployeeNumber</td>
-<td align="right">-3.31</td>
-<td align="right">3.16</td>
-<td align="right">-26.41</td>
+<td align="right">-0.42</td>
+<td align="right">0.43</td>
+<td align="right">-44.55</td>
 </tr>
 <tr>
 <td align="left">EnvironmentSatisfaction</td>
-<td align="right">0.06</td>
+<td align="right">-0.05</td>
+<td align="right">0.05</td>
 <td align="right">-0.06</td>
-<td align="right">-0.26</td>
 </tr>
 <tr>
 <td align="left">HourlyRate</td>
-<td align="right">-0.53</td>
-<td align="right">0.50</td>
-<td align="right">4.04</td>
+<td align="right">0.44</td>
+<td align="right">-0.45</td>
+<td align="right">2.11</td>
 </tr>
 <tr>
 <td align="left">JobInvolvement</td>
-<td align="right">-0.00</td>
-<td align="right">0.00</td>
-<td align="right">-0.30</td>
+<td align="right">0.01</td>
+<td align="right">-0.01</td>
+<td align="right">-0.16</td>
 </tr>
 <tr>
 <td align="left">JobLevel</td>
-<td align="right">0.04</td>
 <td align="right">-0.03</td>
+<td align="right">0.03</td>
 <td align="right">1.91</td>
 </tr>
 <tr>
 <td align="left">JobSatisfaction</td>
-<td align="right">0.00</td>
 <td align="right">-0.00</td>
-<td align="right">-0.41</td>
+<td align="right">0.00</td>
+<td align="right">-0.18</td>
 </tr>
 <tr>
 <td align="left">MonthlyIncome</td>
-<td align="right">153.81</td>
-<td align="right">-146.92</td>
-<td align="right">8326.91</td>
+<td align="right">-114.35</td>
+<td align="right">118.36</td>
+<td align="right">8398.02</td>
 </tr>
 <tr>
 <td align="left">MonthlyRate</td>
-<td align="right">6270.69</td>
-<td align="right">-5989.65</td>
-<td align="right">952.76</td>
+<td align="right">-6032.77</td>
+<td align="right">6243.83</td>
+<td align="right">1227.41</td>
 </tr>
 <tr>
 <td align="left">NumCompaniesWorked</td>
-<td align="right">-0.03</td>
-<td align="right">0.03</td>
-<td align="right">0.81</td>
+<td align="right">0.01</td>
+<td align="right">-0.01</td>
+<td align="right">0.78</td>
 </tr>
 <tr>
 <td align="left">PercentSalaryHike</td>
-<td align="right">-0.17</td>
-<td align="right">0.16</td>
-<td align="right">1.98</td>
+<td align="right">0.14</td>
+<td align="right">-0.15</td>
+<td align="right">2.47</td>
 </tr>
 <tr>
 <td align="left">PerformanceRating</td>
-<td align="right">-0.02</td>
 <td align="right">0.02</td>
+<td align="right">-0.02</td>
 <td align="right">0.28</td>
 </tr>
 <tr>
 <td align="left">RelationshipSatisfaction</td>
-<td align="right">-0.02</td>
-<td align="right">0.01</td>
-<td align="right">0.06</td>
+<td align="right">0.03</td>
+<td align="right">-0.03</td>
+<td align="right">0.15</td>
 </tr>
 <tr>
 <td align="left">StandardHours</td>
@@ -908,51 +890,51 @@
 </tr>
 <tr>
 <td align="left">StockOptionLevel</td>
-<td align="right">-0.04</td>
 <td align="right">0.04</td>
-<td align="right">0.05</td>
+<td align="right">-0.04</td>
+<td align="right">0.19</td>
 </tr>
 <tr>
 <td align="left">TotalWorkingYears</td>
-<td align="right">0.15</td>
-<td align="right">-0.15</td>
-<td align="right">15.56</td>
+<td align="right">-0.11</td>
+<td align="right">0.12</td>
+<td align="right">15.53</td>
 </tr>
 <tr>
 <td align="left">TrainingTimesLastYear</td>
-<td align="right">0.06</td>
-<td align="right">-0.06</td>
-<td align="right">0.07</td>
+<td align="right">-0.05</td>
+<td align="right">0.05</td>
+<td align="right">-0.03</td>
 </tr>
 <tr>
 <td align="left">WorkLifeBalance</td>
-<td align="right">-0.01</td>
 <td align="right">0.01</td>
-<td align="right">-0.00</td>
+<td align="right">-0.01</td>
+<td align="right">-0.06</td>
 </tr>
 <tr>
 <td align="left">YearsAtCompany</td>
-<td align="right">0.01</td>
-<td align="right">-0.01</td>
-<td align="right">12.34</td>
+<td align="right">0.11</td>
+<td align="right">-0.12</td>
+<td align="right">12.27</td>
 </tr>
 <tr>
 <td align="left">YearsInCurrentRole</td>
-<td align="right">-0.05</td>
-<td align="right">0.05</td>
-<td align="right">4.23</td>
+<td align="right">0.11</td>
+<td align="right">-0.12</td>
+<td align="right">4.48</td>
 </tr>
 <tr>
 <td align="left">YearsSinceLastPromotion</td>
-<td align="right">0.04</td>
-<td align="right">-0.04</td>
-<td align="right">6.11</td>
+<td align="right">-0.01</td>
+<td align="right">0.01</td>
+<td align="right">5.51</td>
 </tr>
 <tr>
 <td align="left">YearsWithCurrManager</td>
-<td align="right">-0.10</td>
-<td align="right">0.10</td>
-<td align="right">4.38</td>
+<td align="right">0.16</td>
+<td align="right">-0.16</td>
+<td align="right">4.52</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Média entre População - Grupos</em></p>
@@ -968,27 +950,27 @@
 <tbody>
 <tr>
 <td align="left">Age</td>
-<td align="right">0.03</td>
 <td align="right">-0.03</td>
-<td align="right">1.32</td>
+<td align="right">0.03</td>
+<td align="right">1.34</td>
 </tr>
 <tr>
 <td align="left">DailyRate</td>
-<td align="right">-0.02</td>
 <td align="right">0.02</td>
 <td align="right">-0.02</td>
+<td align="right">-0.12</td>
 </tr>
 <tr>
 <td align="left">DistanceFromHome</td>
 <td align="right">-0.01</td>
 <td align="right">0.01</td>
-<td align="right">0.18</td>
+<td align="right">0.13</td>
 </tr>
 <tr>
 <td align="left">Education</td>
-<td align="right">-0.03</td>
-<td align="right">0.03</td>
-<td align="right">0.20</td>
+<td align="right">0.02</td>
+<td align="right">-0.02</td>
+<td align="right">0.08</td>
 </tr>
 <tr>
 <td align="left">EmployeeCount</td>
@@ -998,75 +980,75 @@
 </tr>
 <tr>
 <td align="left">EmployeeNumber</td>
-<td align="right">-0.01</td>
-<td align="right">0.01</td>
-<td align="right">-0.04</td>
+<td align="right">-0.00</td>
+<td align="right">0.00</td>
+<td align="right">-0.07</td>
 </tr>
 <tr>
 <td align="left">EnvironmentSatisfaction</td>
-<td align="right">0.06</td>
-<td align="right">-0.05</td>
-<td align="right">-0.24</td>
+<td align="right">-0.04</td>
+<td align="right">0.05</td>
+<td align="right">-0.06</td>
 </tr>
 <tr>
 <td align="left">HourlyRate</td>
-<td align="right">-0.03</td>
 <td align="right">0.02</td>
-<td align="right">0.20</td>
+<td align="right">-0.02</td>
+<td align="right">0.10</td>
 </tr>
 <tr>
 <td align="left">JobInvolvement</td>
-<td align="right">-0.00</td>
-<td align="right">0.00</td>
-<td align="right">-0.43</td>
+<td align="right">0.01</td>
+<td align="right">-0.01</td>
+<td align="right">-0.22</td>
 </tr>
 <tr>
 <td align="left">JobLevel</td>
-<td align="right">0.03</td>
 <td align="right">-0.03</td>
+<td align="right">0.03</td>
 <td align="right">1.88</td>
 </tr>
 <tr>
 <td align="left">JobSatisfaction</td>
-<td align="right">0.00</td>
 <td align="right">-0.00</td>
-<td align="right">-0.37</td>
+<td align="right">0.00</td>
+<td align="right">-0.17</td>
 </tr>
 <tr>
 <td align="left">MonthlyIncome</td>
-<td align="right">0.04</td>
 <td align="right">-0.03</td>
-<td align="right">1.95</td>
+<td align="right">0.03</td>
+<td align="right">1.97</td>
 </tr>
 <tr>
 <td align="left">MonthlyRate</td>
-<td align="right">0.89</td>
 <td align="right">-0.85</td>
-<td align="right">0.13</td>
+<td align="right">0.88</td>
+<td align="right">0.17</td>
 </tr>
 <tr>
 <td align="left">NumCompaniesWorked</td>
-<td align="right">-0.01</td>
-<td align="right">0.01</td>
-<td align="right">0.33</td>
+<td align="right">0.00</td>
+<td align="right">-0.00</td>
+<td align="right">0.31</td>
 </tr>
 <tr>
 <td align="left">PercentSalaryHike</td>
-<td align="right">-0.05</td>
-<td align="right">0.05</td>
-<td align="right">0.56</td>
+<td align="right">0.04</td>
+<td align="right">-0.04</td>
+<td align="right">0.70</td>
 </tr>
 <tr>
 <td align="left">PerformanceRating</td>
-<td align="right">-0.06</td>
 <td align="right">0.05</td>
+<td align="right">-0.05</td>
 <td align="right">0.81</td>
 </tr>
 <tr>
 <td align="left">RelationshipSatisfaction</td>
-<td align="right">-0.01</td>
-<td align="right">0.01</td>
-<td align="right">0.06</td>
+<td align="right">0.03</td>
+<td align="right">-0.03</td>
+<td align="right">0.14</td>
 </tr>
 <tr>
 <td align="left">StandardHours</td>
@@ -1076,135 +1058,135 @@
 </tr>
 <tr>
 <td align="left">StockOptionLevel</td>
-<td align="right">-0.05</td>
 <td align="right">0.04</td>
-<td align="right">0.05</td>
+<td align="right">-0.04</td>
+<td align="right">0.22</td>
 </tr>
 <tr>
 <td align="left">TotalWorkingYears</td>
-<td align="right">0.02</td>
 <td align="right">-0.02</td>
+<td align="right">0.02</td>
 <td align="right">2.25</td>
 </tr>
 <tr>
 <td align="left">TrainingTimesLastYear</td>
-<td align="right">0.05</td>
 <td align="right">-0.04</td>
-<td align="right">0.05</td>
+<td align="right">0.04</td>
+<td align="right">-0.02</td>
 </tr>
 <tr>
 <td align="left">WorkLifeBalance</td>
-<td align="right">-0.01</td>
 <td align="right">0.01</td>
-<td align="right">-0.01</td>
+<td align="right">-0.02</td>
+<td align="right">-0.09</td>
 </tr>
 <tr>
 <td align="left">YearsAtCompany</td>
-<td align="right">0.00</td>
-<td align="right">-0.00</td>
-<td align="right">2.41</td>
+<td align="right">0.02</td>
+<td align="right">-0.02</td>
+<td align="right">2.40</td>
 </tr>
 <tr>
 <td align="left">YearsInCurrentRole</td>
-<td align="right">-0.02</td>
-<td align="right">0.02</td>
-<td align="right">1.24</td>
+<td align="right">0.03</td>
+<td align="right">-0.03</td>
+<td align="right">1.32</td>
 </tr>
 <tr>
 <td align="left">YearsSinceLastPromotion</td>
-<td align="right">0.02</td>
-<td align="right">-0.02</td>
-<td align="right">2.23</td>
+<td align="right">-0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.99</td>
 </tr>
 <tr>
 <td align="left">YearsWithCurrManager</td>
-<td align="right">-0.03</td>
-<td align="right">0.03</td>
-<td align="right">1.30</td>
+<td align="right">0.05</td>
+<td align="right">-0.05</td>
+<td align="right">1.35</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Variância entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/fa10a303-0e5c-4420-9198-c41d5d0189d3.png" alt="Diferença de Média entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/767d7304-c44f-4881-9f70-572529141df3.png" alt="Diferença de Média entre População - Grupos" /></p>
 
 <p><em>Diferença de Média entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/1aa24986-7bd0-4b40-82f5-2f3fffdfd9bf.png" alt="Diferença de Variância entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-IBM-HR/figures/21644223-2a73-47e5-83d7-6d5f8fd31d13.png" alt="Diferença de Variância entre População - Grupos" /></p>
 
 <p><em>Diferença de Variância entre População - Grupos</em></p>
-<p>A maior diferença populacional positiva foi detectada na feature MonthlyIncome e no grupo outlier, com valor de 8326.91. A maior variação negativa foi na feature MonthlyRate e no grupo 1, com o valor registrado de -5989.65</p>
+<p>A maior diferença populacional positiva foi detectada na feature MonthlyIncome e no grupo outlier, com valor de 8398.02. A maior variação negativa foi na feature MonthlyRate e no grupo 0, com o valor registrado de -6032.77</p>
 <h3>Insights - Variáveis Categóricas</h3>
 <p>É possível observar nas tabelas em ambas tabelas abaixo alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha Contagem mostra a contagem daquela classe dentro do grupo, A linha Proporção mostra a proporção da classe em relação a população do grupo, A linha Diferença da População mostra a diferença de proporção daquela população no grupo em relação a população geral. </p>
 <table>
 <thead>
 <tr>
 <th align="left"></th>
+<th align="left">JobRole</th>
 <th align="left">MaritalStatus</th>
+<th align="left">Over18</th>
+<th align="left">Attrition</th>
 <th align="left">Department</th>
 <th align="left">BusinessTravel</th>
-<th align="left">Gender</th>
-<th align="left">Attrition</th>
-<th align="left">JobRole</th>
-<th align="left">OverTime</th>
-<th align="left">Over18</th>
 <th align="left">EducationField</th>
+<th align="left">OverTime</th>
+<th align="left">Gender</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">maior ocorrencia</td>
+<td align="left">Sales Executive</td>
 <td align="left">Married</td>
+<td align="left">Y</td>
+<td align="left">No</td>
 <td align="left">Research &amp; Development</td>
 <td align="left">Travel_Rarely</td>
-<td align="left">Male</td>
-<td align="left">No</td>
-<td align="left">Sales Executive</td>
-<td align="left">No</td>
-<td align="left">Y</td>
 <td align="left">Life Sciences</td>
+<td align="left">No</td>
+<td align="left">Male</td>
 </tr>
 <tr>
 <td align="left">contagem</td>
-<td align="left">340</td>
-<td align="left">468</td>
-<td align="left">488</td>
-<td align="left">444</td>
-<td align="left">599</td>
-<td align="left">157</td>
-<td align="left">516</td>
-<td align="left">682</td>
+<td align="left">156</td>
+<td align="left">338</td>
+<td align="left">710</td>
+<td align="left">597</td>
+<td align="left">451</td>
+<td align="left">490</td>
 <td align="left">295</td>
+<td align="left">513</td>
+<td align="left">443</td>
 </tr>
 <tr>
 <td align="left">proporção</td>
-<td align="left">0.47619047619047616</td>
-<td align="left">0.6554621848739496</td>
-<td align="left">0.7155425219941349</td>
-<td align="left">0.6218487394957983</td>
-<td align="left">0.8389355742296919</td>
-<td align="left">0.23020527859237536</td>
-<td align="left">0.7226890756302521</td>
+<td align="left">0.227</td>
+<td align="left">0.476</td>
 <td align="left">1.0</td>
-<td align="left">0.43255131964809385</td>
+<td align="left">0.841</td>
+<td align="left">0.657</td>
+<td align="left">0.714</td>
+<td align="left">0.43</td>
+<td align="left">0.723</td>
+<td align="left">0.624</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">0.018454086505662437</td>
-<td align="left">1.805879945104838e-05</td>
-<td align="left">0.002791805661756741</td>
-<td align="left">0.0229948713009559</td>
-<td align="left">0.0022593564646489206</td>
-<td align="left">0.0031279146955272286</td>
-<td align="left">0.00922202691965035</td>
+<td align="left">0.002</td>
+<td align="left">0.02</td>
 <td align="left">0.0</td>
-<td align="left">0.022092866926030796</td>
+<td align="left">0.006</td>
+<td align="left">0.001</td>
+<td align="left">0.004</td>
+<td align="left">0.016</td>
+<td align="left">0.008</td>
+<td align="left">0.022</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
 <td align="left">1</td>
-<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
 <td align="left">0</td>
 <td align="left">1</td>
 <td align="left">1</td>
-<td align="left">0</td>
 <td align="left">1</td>
 <td align="left">0</td>
 <td align="left">0</td>
@@ -1215,82 +1197,190 @@
 <thead>
 <tr>
 <th align="left"></th>
+<th align="left">JobRole</th>
 <th align="left">MaritalStatus</th>
+<th align="left">Over18</th>
+<th align="left">Attrition</th>
 <th align="left">Department</th>
 <th align="left">BusinessTravel</th>
-<th align="left">Gender</th>
-<th align="left">Attrition</th>
-<th align="left">JobRole</th>
-<th align="left">OverTime</th>
-<th align="left">Over18</th>
 <th align="left">EducationField</th>
+<th align="left">OverTime</th>
+<th align="left">Gender</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">maior ocorrencia</td>
+<td align="left">Sales Executive</td>
 <td align="left">Married</td>
+<td align="left">Y</td>
+<td align="left">No</td>
 <td align="left">Research &amp; Development</td>
 <td align="left">Travel_Rarely</td>
-<td align="left">Male</td>
-<td align="left">No</td>
-<td align="left">Sales Executive</td>
-<td align="left">No</td>
-<td align="left">Y</td>
 <td align="left">Life Sciences</td>
+<td align="left">No</td>
+<td align="left">Male</td>
 </tr>
 <tr>
 <td align="left">contagem</td>
+<td align="left">159</td>
 <td align="left">299</td>
-<td align="left">447</td>
-<td align="left">507</td>
-<td align="left">392</td>
+<td align="left">710</td>
 <td align="left">569</td>
-<td align="left">160</td>
-<td align="left">480</td>
-<td align="left">682</td>
-<td align="left">278</td>
+<td align="left">465</td>
+<td align="left">501</td>
+<td align="left">283</td>
+<td align="left">484</td>
+<td align="left">397</td>
 </tr>
 <tr>
 <td align="left">proporção</td>
-<td align="left">0.43841642228739003</td>
-<td align="left">0.655425219941349</td>
-<td align="left">0.7100840336134454</td>
-<td align="left">0.5747800586510264</td>
-<td align="left">0.8343108504398827</td>
-<td align="left">0.22408963585434175</td>
-<td align="left">0.7038123167155426</td>
+<td align="left">0.224</td>
+<td align="left">0.436</td>
 <td align="left">1.0</td>
-<td align="left">0.38935574229691877</td>
+<td align="left">0.829</td>
+<td align="left">0.655</td>
+<td align="left">0.706</td>
+<td align="left">0.399</td>
+<td align="left">0.706</td>
+<td align="left">0.579</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">-0.0193199673974237</td>
-<td align="left">-1.8906133149587667e-05</td>
-<td align="left">-0.002666682718932778</td>
-<td align="left">-0.024073809543815994</td>
-<td align="left">-0.002365367325160239</td>
-<td align="left">-0.0029877280425063824</td>
-<td align="left">-0.009654731995059174</td>
+<td align="left">-0.002</td>
+<td align="left">-0.02</td>
 <td align="left">0.0</td>
-<td align="left">-0.021102710425144278</td>
+<td align="left">-0.006</td>
+<td align="left">-0.001</td>
+<td align="left">-0.004</td>
+<td align="left">-0.015</td>
+<td align="left">-0.009</td>
+<td align="left">-0.023</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table><p><em>Diferença Mínima de População entre Grupos e Dataset</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">JobRole</th>
+<th align="left">MaritalStatus</th>
+<th align="left">Over18</th>
+<th align="left">Attrition</th>
+<th align="left">Department</th>
+<th align="left">BusinessTravel</th>
+<th align="left">EducationField</th>
+<th align="left">OverTime</th>
+<th align="left">Gender</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">Human Resources</td>
+<td align="left">Married</td>
+<td align="left">Y</td>
+<td align="left">No</td>
+<td align="left">Human Resources</td>
+<td align="left">Travel_Frequently</td>
+<td align="left">Other</td>
+<td align="left">No</td>
+<td align="left">Male</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">0.577</td>
+<td align="left">0.531</td>
+<td align="left">0.509</td>
+<td align="left">0.512</td>
+<td align="left">0.559</td>
+<td align="left">0.525</td>
+<td align="left">0.6</td>
+<td align="left">0.515</td>
+<td align="left">0.527</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
 <td align="left">0</td>
 <td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+</tbody>
+</table><p><em>Maior proporção de população no grupo.</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">JobRole</th>
+<th align="left">MaritalStatus</th>
+<th align="left">Over18</th>
+<th align="left">Attrition</th>
+<th align="left">Department</th>
+<th align="left">BusinessTravel</th>
+<th align="left">EducationField</th>
+<th align="left">OverTime</th>
+<th align="left">Gender</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">Manager</td>
+<td align="left">Single</td>
+<td align="left">Y</td>
+<td align="left">Yes</td>
+<td align="left">Sales</td>
+<td align="left">Non-Travel</td>
+<td align="left">Life Sciences</td>
+<td align="left">Yes</td>
+<td align="left">Female</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">0.568</td>
+<td align="left">0.526</td>
+<td align="left">0.491</td>
+<td align="left">0.509</td>
+<td align="left">0.496</td>
+<td align="left">0.5</td>
+<td align="left">0.51</td>
+<td align="left">0.506</td>
+<td align="left">0.52</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
 <td align="left">1</td>
-<td align="left">0</td>
-<td align="left">0</td>
 <td align="left">1</td>
-<td align="left">0</td>
-<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
 <td align="left">1</td>
 </tr>
 </tbody>
-</table><p><em>Diferença Mínima de População entre Grupos e Dataset</em></p>
+</table><p><em>Menor proporção de população no grupo.</em></p>
 <h3>Insights - Resumo Clustering</h3>
 <p>Os seguintes insights resumidos foram obtidos a partir dos métodos de agrupamento apresentados:</p>
-<p>Grupo 0: Média maior que a população: MonthlyRate</p>
-<p>Grupo 1: Média menor que a população: MonthlyRate</p>
-<p>Grupo outlier: Média maior que a população: Age, Média maior que a população: JobLevel, Média maior que a população: MonthlyIncome, Média maior que a população: PercentSalaryHike, Média maior que a população: PerformanceRating, Média maior que a população: TotalWorkingYears, Média maior que a população: YearsAtCompany, Média maior que a população: YearsInCurrentRole, Média maior que a população: YearsSinceLastPromotion, Média maior que a população: YearsWithCurrManager</p>
+<p>Grupo 0: <br>&emsp;Média menor que a população: MonthlyRate</p>
+<p>Grupo 1: <br>&emsp;Média maior que a população: MonthlyRate</p>
+<p>Grupo outlier: <br>&emsp;Média maior que a população: Age<br>&emsp;Média maior que a população: JobLevel<br>&emsp;Média maior que a população: MonthlyIncome<br>&emsp;Média maior que a população: PercentSalaryHike<br>&emsp;Média maior que a população: PerformanceRating<br>&emsp;Média maior que a população: TotalWorkingYears<br>&emsp;Média maior que a população: YearsAtCompany<br>&emsp;Média maior que a população: YearsInCurrentRole<br>&emsp;Média maior que a população: YearsSinceLastPromotion<br>&emsp;Média maior que a população: YearsWithCurrManager</p>

@@ -78,8 +78,8 @@
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">Genre</th>
 <th align="left">Author</th>
+<th align="left">Genre</th>
 </tr>
 </thead>
 <tbody>
@@ -90,22 +90,22 @@
 </tr>
 <tr>
 <td align="left">unique</td>
-<td align="left">2</td>
 <td align="left">248</td>
+<td align="left">2</td>
 </tr>
 <tr>
 <td align="left">top</td>
-<td align="left">Non Fiction</td>
 <td align="left">Jeff Kinney</td>
+<td align="left">Non Fiction</td>
 </tr>
 <tr>
 <td align="left">freq</td>
-<td align="left">310</td>
 <td align="left">12</td>
+<td align="left">310</td>
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: DBscan</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/56366220-792e-46cb-a15e-8b17fc392ed4.png" alt="Visualização dos outliers: DBscan" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/6ffee5d2-af07-488e-8133-a095e57d32bc.png" alt="Visualização dos outliers: DBscan" /></p>
 
 <p><em>Visualização dos outliers: DBscan</em></p>
 <h3>Isolation Forest</h3>
@@ -132,17 +132,17 @@
 </tr>
 <tr>
 <td align="left">mean</td>
-<td align="right">4.31</td>
-<td align="right">29899.43</td>
-<td align="right">34.04</td>
-<td align="right">2013.71</td>
+<td align="right">4.35</td>
+<td align="right">32085.21</td>
+<td align="right">33.43</td>
+<td align="right">2014.14</td>
 </tr>
 <tr>
 <td align="left">std</td>
-<td align="right">0.43</td>
-<td align="right">28257.21</td>
-<td align="right">27.49</td>
-<td align="right">3.13</td>
+<td align="right">0.44</td>
+<td align="right">27605.06</td>
+<td align="right">27.59</td>
+<td align="right">3.06</td>
 </tr>
 <tr>
 <td align="left">min</td>
@@ -154,20 +154,20 @@
 <tr>
 <td align="left">25%</td>
 <td align="right">4.00</td>
-<td align="right">6476.00</td>
-<td align="right">13.50</td>
+<td align="right">8104.75</td>
+<td align="right">12.75</td>
 <td align="right">2012.00</td>
 </tr>
 <tr>
 <td align="left">50%</td>
-<td align="right">4.45</td>
-<td align="right">14226.50</td>
+<td align="right">4.50</td>
+<td align="right">25417.00</td>
 <td align="right">20.00</td>
 <td align="right">2014.00</td>
 </tr>
 <tr>
 <td align="left">75%</td>
-<td align="right">4.70</td>
+<td align="right">4.72</td>
 <td align="right">57271.00</td>
 <td align="right">46.00</td>
 <td align="right">2016.00</td>
@@ -185,8 +185,8 @@
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">Genre</th>
 <th align="left">Author</th>
+<th align="left">Genre</th>
 </tr>
 </thead>
 <tbody>
@@ -197,22 +197,22 @@
 </tr>
 <tr>
 <td align="left">unique</td>
+<td align="left">19</td>
 <td align="left">2</td>
-<td align="left">18</td>
 </tr>
 <tr>
 <td align="left">top</td>
-<td align="left">Fiction</td>
 <td align="left">Gillian Flynn</td>
+<td align="left">Fiction</td>
 </tr>
 <tr>
 <td align="left">freq</td>
-<td align="left">16</td>
 <td align="left">3</td>
+<td align="left">18</td>
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: Isolation Forest</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/bf142abc-fc2b-4a22-8d58-7366924b35a6.png" alt="Visualização dos outliers: Isolation Forest" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/46547d71-6db8-4594-80d1-6a645794cb38.png" alt="Visualização dos outliers: Isolation Forest" /></p>
 
 <p><em>Visualização dos outliers: Isolation Forest</em></p>
 <h2>Análise de Cluster</h2>
@@ -238,74 +238,74 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">(4.5, 4.7]</td>
-<td align="right">0.23</td>
-<td align="right">0.11</td>
-<td align="right">0.02</td>
-<td align="right">0.19</td>
+<td align="left">(4.7, 4.9]</td>
+<td align="right">0.13</td>
 <td align="right">0.15</td>
-<td align="right">0.03</td>
-<td align="right">0.04</td>
-<td align="right">0.03</td>
-<td align="right">0.12</td>
-<td align="right">0.07</td>
-</tr>
-<tr>
-<td align="left">(4.1, 4.3]</td>
-<td align="right">0.22</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">0.06</td>
 <td align="right">0.09</td>
-<td align="right">0.25</td>
-<td align="right">0.03</td>
-<td align="right">0.19</td>
-<td align="right">0.00</td>
-<td align="right">0.19</td>
-<td align="right">0.03</td>
+<td align="right">0.09</td>
+<td align="right">0.04</td>
+<td align="right">0.17</td>
+<td align="right">0.10</td>
+<td align="right">0.17</td>
 </tr>
 <tr>
 <td align="left">(3.899, 4.1]</td>
-<td align="right">0.53</td>
+<td align="right">0.00</td>
+<td align="right">0.06</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.25</td>
+<td align="right">0.00</td>
+<td align="right">0.06</td>
+<td align="right">0.56</td>
+<td align="right">0.06</td>
+<td align="right">0.00</td>
+</tr>
+<tr>
+<td align="left">(4.5, 4.7]</td>
 <td align="right">0.07</td>
+<td align="right">0.11</td>
+<td align="right">0.01</td>
+<td align="right">0.06</td>
+<td align="right">0.15</td>
+<td align="right">0.04</td>
+<td align="right">0.03</td>
+<td align="right">0.23</td>
+<td align="right">0.09</td>
+<td align="right">0.20</td>
+</tr>
+<tr>
+<td align="left">(4.1, 4.3]</td>
+<td align="right">0.03</td>
+<td align="right">0.19</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
-<td align="right">0.27</td>
-<td align="right">0.07</td>
+<td align="right">0.25</td>
+<td align="right">0.22</td>
+<td align="right">0.03</td>
+<td align="right">0.22</td>
 <td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.07</td>
-<td align="right">0.00</td>
+<td align="right">0.06</td>
 </tr>
 <tr>
 <td align="left">(4.3, 4.5]</td>
-<td align="right">0.21</td>
-<td align="right">0.07</td>
+<td align="right">0.03</td>
+<td align="right">0.14</td>
 <td align="right">0.00</td>
-<td align="right">0.10</td>
-<td align="right">0.26</td>
-<td align="right">0.07</td>
+<td align="right">0.06</td>
+<td align="right">0.27</td>
 <td align="right">0.05</td>
 <td align="right">0.00</td>
-<td align="right">0.22</td>
-<td align="right">0.03</td>
-</tr>
-<tr>
-<td align="left">(4.7, 4.9]</td>
+<td align="right">0.20</td>
+<td align="right">0.06</td>
 <td align="right">0.17</td>
-<td align="right">0.10</td>
-<td align="right">0.01</td>
-<td align="right">0.17</td>
-<td align="right">0.09</td>
-<td align="right">0.10</td>
-<td align="right">0.09</td>
-<td align="right">0.00</td>
-<td align="right">0.14</td>
-<td align="right">0.13</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
 <h3>Multidimensional</h3>
-<p>A melhor separação de grupos ocorreu nas features: ['User Rating', 'Reviews', 'Price', 'Year'] com uma quantidade de 7 grupos. A análise multidimensional de clusters é semelhante a análise bi-dimensional ou tri-dimensional, mas sua principal diferença é que utiliza todas as features disponíveis no dataset.</p>
+<p>A melhor separação de grupos ocorreu nas features: ['User Rating', 'Reviews', 'Price', 'Year'] com uma quantidade de 8 grupos. A análise multidimensional de clusters é semelhante a análise bi-dimensional ou tri-dimensional, mas sua principal diferença é que utiliza todas as features disponíveis no dataset.</p>
 <p>A matriz de separação abaixo mostra a distribuição populacional normalizada dentro de cada grupo de cluster. Note que valores maiores significam que há maior presença daquela população dentro daquele grupo. Este tipo de tabela também pode ser chamado de matriz de confusão, do inglês Confusion Matrix.</p>
 <table>
 <thead>
@@ -318,58 +318,64 @@
 <th align="right">4</th>
 <th align="right">5</th>
 <th align="right">6</th>
+<th align="right">7</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">(4.5, 4.7]</td>
-<td align="right">0.22</td>
-<td align="right">0.08</td>
-<td align="right">0.08</td>
-<td align="right">0.24</td>
-<td align="right">0.02</td>
+<td align="left">(4.7, 4.9]</td>
+<td align="right">0.10</td>
+<td align="right">0.16</td>
+<td align="right">0.12</td>
 <td align="right">0.23</td>
-<td align="right">0.11</td>
-</tr>
-<tr>
-<td align="left">(4.1, 4.3]</td>
-<td align="right">0.28</td>
-<td align="right">0.03</td>
-<td align="right">0.19</td>
-<td align="right">0.38</td>
-<td align="right">0.00</td>
-<td align="right">0.09</td>
-<td align="right">0.03</td>
+<td align="right">0.01</td>
+<td align="right">0.04</td>
+<td align="right">0.13</td>
+<td align="right">0.20</td>
 </tr>
 <tr>
 <td align="left">(3.899, 4.1]</td>
-<td align="right">0.60</td>
-<td align="right">0.07</td>
-<td align="right">0.00</td>
-<td align="right">0.27</td>
+<td align="right">0.25</td>
+<td align="right">0.06</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
-<td align="right">0.07</td>
+<td align="right">0.00</td>
+<td align="right">0.06</td>
+<td align="right">0.00</td>
+<td align="right">0.62</td>
+</tr>
+<tr>
+<td align="left">(4.5, 4.7]</td>
+<td align="right">0.19</td>
+<td align="right">0.14</td>
+<td align="right">0.10</td>
+<td align="right">0.22</td>
+<td align="right">0.01</td>
+<td align="right">0.04</td>
+<td align="right">0.09</td>
+<td align="right">0.22</td>
+</tr>
+<tr>
+<td align="left">(4.1, 4.3]</td>
+<td align="right">0.25</td>
+<td align="right">0.00</td>
+<td align="right">0.22</td>
+<td align="right">0.19</td>
+<td align="right">0.00</td>
+<td align="right">0.03</td>
+<td align="right">0.03</td>
+<td align="right">0.28</td>
 </tr>
 <tr>
 <td align="left">(4.3, 4.5]</td>
+<td align="right">0.29</td>
+<td align="right">0.13</td>
+<td align="right">0.11</td>
 <td align="right">0.18</td>
-<td align="right">0.07</td>
-<td align="right">0.08</td>
-<td align="right">0.40</td>
 <td align="right">0.00</td>
-<td align="right">0.20</td>
-<td align="right">0.08</td>
-</tr>
-<tr>
-<td align="left">(4.7, 4.9]</td>
-<td align="right">0.19</td>
-<td align="right">0.10</td>
-<td align="right">0.12</td>
-<td align="right">0.17</td>
-<td align="right">0.01</td>
-<td align="right">0.22</td>
-<td align="right">0.19</td>
+<td align="right">0.00</td>
+<td align="right">0.05</td>
+<td align="right">0.24</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
@@ -386,23 +392,23 @@
 <tbody>
 <tr>
 <td align="left">Reviews - Price - Year</td>
+<td align="right">0.58</td>
+<td align="right">nan</td>
+</tr>
+<tr>
+<td align="left">User Rating - Reviews - Year</td>
 <td align="right">0.57</td>
 <td align="right">nan</td>
 </tr>
 <tr>
 <td align="left">User Rating - Reviews - Price</td>
-<td align="right">0.57</td>
-<td align="right">nan</td>
-</tr>
-<tr>
-<td align="left">User Rating - Reviews - Year</td>
-<td align="right">0.56</td>
+<td align="right">0.55</td>
 <td align="right">nan</td>
 </tr>
 <tr>
 <td align="left">User Rating - Reviews - Price - Year</td>
 <td align="right">nan</td>
-<td align="right">0.57</td>
+<td align="right">0.56</td>
 </tr>
 </tbody>
 </table><p><em>Análise de score do agrupamento.</em></p>
@@ -420,53 +426,58 @@
 <th align="right">4</th>
 <th align="right">5</th>
 <th align="right">6</th>
+<th align="right">7</th>
 <th align="right">outlier</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">User Rating</td>
+<td align="right">-0.07</td>
+<td align="right">0.05</td>
+<td align="right">-0.01</td>
+<td align="right">0.03</td>
+<td align="right">0.11</td>
+<td align="right">0.04</td>
+<td align="right">0.10</td>
 <td align="right">-0.05</td>
-<td align="right">0.03</td>
-<td align="right">0.03</td>
-<td align="right">-0.06</td>
-<td align="right">0.09</td>
-<td align="right">0.03</td>
-<td align="right">0.09</td>
-<td align="right">-0.32</td>
+<td align="right">-0.28</td>
 </tr>
 <tr>
 <td align="left">Reviews</td>
-<td align="right">-5180.74</td>
-<td align="right">16891.35</td>
-<td align="right">4313.43</td>
-<td align="right">-8640.02</td>
-<td align="right">37575.49</td>
-<td align="right">-1313.67</td>
-<td align="right">10520.23</td>
-<td align="right">18908.78</td>
+<td align="right">-9034.23</td>
+<td align="right">13014.61</td>
+<td align="right">1514.13</td>
+<td align="right">-2382.30</td>
+<td align="right">39130.99</td>
+<td align="right">20526.77</td>
+<td align="right">7250.83</td>
+<td align="right">-6120.10</td>
+<td align="right">21211.81</td>
 </tr>
 <tr>
 <td align="left">Price</td>
-<td align="right">-0.69</td>
-<td align="right">-1.62</td>
-<td align="right">-1.45</td>
-<td align="right">1.31</td>
-<td align="right">-0.98</td>
-<td align="right">2.16</td>
-<td align="right">-2.72</td>
-<td align="right">22.06</td>
+<td align="right">1.42</td>
+<td align="right">-2.89</td>
+<td align="right">-1.94</td>
+<td align="right">1.65</td>
+<td align="right">-1.01</td>
+<td align="right">-0.07</td>
+<td align="right">-1.18</td>
+<td align="right">0.49</td>
+<td align="right">21.42</td>
 </tr>
 <tr>
 <td align="left">Year</td>
-<td align="right">0.29</td>
-<td align="right">1.10</td>
-<td align="right">1.47</td>
-<td align="right">-2.20</td>
-<td align="right">0.13</td>
-<td align="right">0.48</td>
-<td align="right">1.27</td>
-<td align="right">-0.30</td>
+<td align="right">-2.42</td>
+<td align="right">1.59</td>
+<td align="right">0.80</td>
+<td align="right">0.79</td>
+<td align="right">0.41</td>
+<td align="right">0.24</td>
+<td align="right">1.16</td>
+<td align="right">-0.57</td>
+<td align="right">0.15</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Média entre População - Grupos</em></p>
@@ -481,93 +492,98 @@
 <th align="right">4</th>
 <th align="right">5</th>
 <th align="right">6</th>
+<th align="right">7</th>
 <th align="right">outlier</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">User Rating</td>
-<td align="right">-0.25</td>
-<td align="right">0.17</td>
-<td align="right">0.13</td>
-<td align="right">-0.29</td>
-<td align="right">0.47</td>
-<td align="right">0.17</td>
-<td align="right">0.47</td>
-<td align="right">-1.64</td>
+<td align="right">-0.37</td>
+<td align="right">0.25</td>
+<td align="right">-0.03</td>
+<td align="right">0.16</td>
+<td align="right">0.54</td>
+<td align="right">0.19</td>
+<td align="right">0.52</td>
+<td align="right">-0.23</td>
+<td align="right">-1.41</td>
 </tr>
 <tr>
 <td align="left">Reviews</td>
-<td align="right">-0.56</td>
-<td align="right">1.83</td>
-<td align="right">0.47</td>
-<td align="right">-0.94</td>
-<td align="right">4.07</td>
-<td align="right">-0.14</td>
-<td align="right">1.14</td>
-<td align="right">2.05</td>
+<td align="right">-1.00</td>
+<td align="right">1.43</td>
+<td align="right">0.17</td>
+<td align="right">-0.26</td>
+<td align="right">4.31</td>
+<td align="right">2.26</td>
+<td align="right">0.80</td>
+<td align="right">-0.67</td>
+<td align="right">2.34</td>
 </tr>
 <tr>
 <td align="left">Price</td>
-<td align="right">-0.09</td>
-<td align="right">-0.21</td>
-<td align="right">-0.19</td>
-<td align="right">0.17</td>
+<td align="right">0.18</td>
+<td align="right">-0.37</td>
+<td align="right">-0.25</td>
+<td align="right">0.21</td>
 <td align="right">-0.13</td>
-<td align="right">0.28</td>
-<td align="right">-0.35</td>
-<td align="right">2.85</td>
+<td align="right">-0.01</td>
+<td align="right">-0.15</td>
+<td align="right">0.06</td>
+<td align="right">2.74</td>
 </tr>
 <tr>
 <td align="left">Year</td>
-<td align="right">0.09</td>
-<td align="right">0.35</td>
-<td align="right">0.47</td>
-<td align="right">-0.69</td>
-<td align="right">0.04</td>
-<td align="right">0.15</td>
-<td align="right">0.40</td>
-<td align="right">-0.10</td>
+<td align="right">-0.76</td>
+<td align="right">0.50</td>
+<td align="right">0.25</td>
+<td align="right">0.25</td>
+<td align="right">0.13</td>
+<td align="right">0.08</td>
+<td align="right">0.36</td>
+<td align="right">-0.18</td>
+<td align="right">0.05</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Variância entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/a72791b1-fdc5-4565-8fc7-2653b7cac5b2.png" alt="Diferença de Média entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/222df2ba-98cf-4205-b8b7-689a1bdbfb60.png" alt="Diferença de Média entre População - Grupos" /></p>
 
 <p><em>Diferença de Média entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/34d7c6f3-6c7b-4e9e-9d5e-3e1ad6ca6eaf.png" alt="Diferença de Variância entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-bestsellerswithcategories/figures/f263a8e6-7f9d-4408-939d-8ccac80edf32.png" alt="Diferença de Variância entre População - Grupos" /></p>
 
 <p><em>Diferença de Variância entre População - Grupos</em></p>
-<p>A maior diferença populacional positiva foi detectada na feature Reviews e no grupo 4, com valor de 37575.49. A maior variação negativa foi na feature Reviews e no grupo 3, com o valor registrado de -8640.02</p>
+<p>A maior diferença populacional positiva foi detectada na feature Reviews e no grupo 4, com valor de 39130.99. A maior variação negativa foi na feature Reviews e no grupo 0, com o valor registrado de -9034.23</p>
 <h3>Insights - Variáveis Categóricas</h3>
 <p>É possível observar nas tabelas em ambas tabelas abaixo alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha Contagem mostra a contagem daquela classe dentro do grupo, A linha Proporção mostra a proporção da classe em relação a população do grupo, A linha Diferença da População mostra a diferença de proporção daquela população no grupo em relação a população geral. </p>
 <table>
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">Genre</th>
 <th align="left">Author</th>
+<th align="left">Genre</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">maior ocorrencia</td>
-<td align="left">Fiction</td>
 <td align="left">John Green</td>
+<td align="left">Fiction</td>
 </tr>
 <tr>
 <td align="left">contagem</td>
-<td align="left">7</td>
-<td align="left">4</td>
+<td align="left">3</td>
+<td align="left">5</td>
 </tr>
 <tr>
 <td align="left">proporção</td>
+<td align="left">0.6</td>
 <td align="left">1.0</td>
-<td align="left">0.5714285714285714</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">0.5708812260536398</td>
-<td align="left">0.5618500273672687</td>
+<td align="left">0.592</td>
+<td align="left">0.575</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
@@ -580,43 +596,97 @@
 <thead>
 <tr>
 <th align="left"></th>
-<th align="left">Genre</th>
 <th align="left">Author</th>
+<th align="left">Genre</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">maior ocorrencia</td>
+<td align="left">Patrick Lencioni</td>
 <td align="left">Non Fiction</td>
-<td align="left">Gary Chapman</td>
 </tr>
 <tr>
 <td align="left">contagem</td>
-<td align="left">26</td>
-<td align="left">6</td>
+<td align="left">5</td>
+<td align="left">64</td>
 </tr>
 <tr>
 <td align="left">proporção</td>
-<td align="left">0.5098039215686274</td>
-<td align="left">0.045112781954887216</td>
+<td align="left">0.052</td>
+<td align="left">0.593</td>
 </tr>
 <tr>
 <td align="left">diferença da população</td>
-<td align="left">-0.061077304485012474</td>
-<td align="left">0.024039985020021314</td>
+<td align="left">0.043</td>
+<td align="left">0.018</td>
 </tr>
 <tr>
 <td align="left">grupo</td>
-<td align="left">2</td>
+<td align="left">0</td>
 <td align="left">3</td>
 </tr>
 </tbody>
 </table><p><em>Diferença Mínima de População entre Grupos e Dataset</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Author</th>
+<th align="left">Genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">Adam Gasiewski</td>
+<td align="left">Non Fiction</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">1.0</td>
+<td align="left">0.257</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
+<td align="left">0</td>
+<td align="left">7</td>
+</tr>
+</tbody>
+</table><p><em>Maior proporção de população no grupo.</em></p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Author</th>
+<th align="left">Genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">maior classe proporcional</td>
+<td align="left">Adam Gasiewski</td>
+<td align="left">Fiction</td>
+</tr>
+<tr>
+<td align="left">proporção da classe</td>
+<td align="left">1.0</td>
+<td align="left">0.023</td>
+</tr>
+<tr>
+<td align="left">grupo</td>
+<td align="left">0</td>
+<td align="left">4</td>
+</tr>
+</tbody>
+</table><p><em>Menor proporção de população no grupo.</em></p>
 <h3>Insights - Resumo Clustering</h3>
 <p>Os seguintes insights resumidos foram obtidos a partir dos métodos de agrupamento apresentados:</p>
-<p>Grupo 0: <br>&emsp;Média menor que a população: Reviews</p>
-<p>Grupo 1: <br>&emsp;Média maior que a população: Reviews<br>&emsp;Presença maior de população na feature Author: Suzanne Collins</p>
-<p>Grupo 3: <br>&emsp;Média menor que a população: Reviews<br>&emsp;Média menor que a população: Year<br>&emsp;Presença maior de população na feature Genre: Non Fiction</p>
-<p>Grupo 4: <br>&emsp;Média maior que a população: Reviews<br>&emsp;Presença maior de população na feature Genre: Fiction<br>&emsp;Presença maior de população na feature Author: John Green</p>
-<p>Grupo 6: <br>&emsp;Média maior que a população: Reviews<br>&emsp;Presença maior de população na feature Genre: Fiction<br>&emsp;Presença maior de população na feature Author: Dr. Seuss</p>
+<p>Grupo 0: <br>&emsp;Média menor que a população: Reviews<br>&emsp;Média menor que a população: Year<br>&emsp;Presença maior de população na feature Genre: Non Fiction</p>
+<p>Grupo 1: <br>&emsp;Média maior que a população: Reviews<br>&emsp;Média maior que a população: Year<br>&emsp;Presença maior de população na feature Genre: Fiction</p>
+<p>Grupo 2: <br>&emsp;Presença maior de população na feature Genre: Fiction</p>
+<p>Grupo 4: <br>&emsp;Média maior que a população: User Rating<br>&emsp;Média maior que a população: Reviews<br>&emsp;Presença maior de população na feature Author: John Green<br>&emsp;Presença maior de população na feature Genre: Fiction</p>
+<p>Grupo 5: <br>&emsp;Média maior que a população: Reviews<br>&emsp;Presença maior de população na feature Author: Laura Hillenbrand<br>&emsp;Presença maior de população na feature Genre: Fiction</p>
+<p>Grupo 6: <br>&emsp;Média maior que a população: User Rating<br>&emsp;Média maior que a população: Reviews<br>&emsp;Presença maior de população na feature Author: Eric Carle</p>
+<p>Grupo 7: <br>&emsp;Média menor que a população: Reviews</p>
 <p>Grupo outlier: <br>&emsp;Média menor que a população: User Rating<br>&emsp;Média maior que a população: Reviews<br>&emsp;Média maior que a população: Price</p>

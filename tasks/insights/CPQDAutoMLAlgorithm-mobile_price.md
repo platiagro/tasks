@@ -241,7 +241,7 @@
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: DBscan</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/4a4d1cc9-85ce-4ade-9248-8f35c1d2af72.png" alt="Visualização dos outliers: DBscan" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/d16831aa-cb01-4cb7-b2f4-05f08d9229e0.png" alt="Visualização dos outliers: DBscan" /></p>
 
 <p><em>Visualização dos outliers: DBscan</em></p>
 <h3>Isolation Forest</h3>
@@ -302,55 +302,55 @@
 </tr>
 <tr>
 <td align="left">mean</td>
-<td align="right">1288.62</td>
-<td align="right">0.49</td>
-<td align="right">1.80</td>
-<td align="right">0.56</td>
-<td align="right">7.53</td>
-<td align="right">0.26</td>
-<td align="right">34.71</td>
-<td align="right">0.55</td>
-<td align="right">136.37</td>
-<td align="right">4.19</td>
-<td align="right">12.52</td>
-<td align="right">865.48</td>
-<td align="right">1427.99</td>
-<td align="right">2217.77</td>
-<td align="right">13.65</td>
-<td align="right">6.53</td>
-<td align="right">10.92</td>
-<td align="right">0.41</td>
+<td align="right">1296.58</td>
+<td align="right">0.53</td>
+<td align="right">1.72</td>
+<td align="right">0.48</td>
+<td align="right">7.10</td>
+<td align="right">0.30</td>
+<td align="right">34.55</td>
+<td align="right">0.57</td>
+<td align="right">138.10</td>
+<td align="right">5.25</td>
+<td align="right">13.31</td>
+<td align="right">916.20</td>
+<td align="right">1465.87</td>
+<td align="right">2403.29</td>
+<td align="right">12.75</td>
+<td align="right">6.76</td>
+<td align="right">10.55</td>
+<td align="right">0.45</td>
 <td align="right">0.51</td>
 <td align="right">0.51</td>
-<td align="right">1.75</td>
+<td align="right">1.91</td>
 </tr>
 <tr>
 <td align="left">std</td>
-<td align="right">470.43</td>
+<td align="right">494.45</td>
 <td align="right">0.50</td>
-<td align="right">0.91</td>
+<td align="right">0.89</td>
 <td align="right">0.50</td>
-<td align="right">6.49</td>
-<td align="right">0.44</td>
-<td align="right">21.98</td>
-<td align="right">0.35</td>
-<td align="right">39.86</td>
-<td align="right">2.59</td>
-<td align="right">6.95</td>
-<td align="right">628.92</td>
-<td align="right">498.85</td>
-<td align="right">1286.52</td>
-<td align="right">4.85</td>
-<td align="right">5.96</td>
-<td align="right">6.71</td>
-<td align="right">0.49</td>
+<td align="right">6.02</td>
+<td align="right">0.46</td>
+<td align="right">20.57</td>
+<td align="right">0.34</td>
+<td align="right">41.71</td>
+<td align="right">2.54</td>
+<td align="right">7.10</td>
+<td align="right">642.36</td>
+<td align="right">482.42</td>
+<td align="right">1234.45</td>
+<td align="right">5.05</td>
+<td align="right">5.90</td>
+<td align="right">6.70</td>
 <td align="right">0.50</td>
 <td align="right">0.50</td>
-<td align="right">1.23</td>
+<td align="right">0.50</td>
+<td align="right">1.20</td>
 </tr>
 <tr>
 <td align="left">min</td>
-<td align="right">512.00</td>
+<td align="right">501.00</td>
 <td align="right">0.00</td>
 <td align="right">0.50</td>
 <td align="right">0.00</td>
@@ -361,9 +361,9 @@
 <td align="right">80.00</td>
 <td align="right">1.00</td>
 <td align="right">0.00</td>
-<td align="right">1.00</td>
+<td align="right">4.00</td>
 <td align="right">512.00</td>
-<td align="right">262.00</td>
+<td align="right">273.00</td>
 <td align="right">5.00</td>
 <td align="right">0.00</td>
 <td align="right">2.00</td>
@@ -374,23 +374,23 @@
 </tr>
 <tr>
 <td align="left">25%</td>
-<td align="right">866.25</td>
+<td align="right">811.25</td>
 <td align="right">0.00</td>
-<td align="right">0.90</td>
+<td align="right">0.88</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
 <td align="right">0.00</td>
-<td align="right">12.75</td>
-<td align="right">0.10</td>
-<td align="right">101.25</td>
-<td align="right">2.00</td>
-<td align="right">6.00</td>
-<td align="right">248.75</td>
-<td align="right">923.25</td>
-<td align="right">1048.75</td>
-<td align="right">9.00</td>
+<td align="right">15.75</td>
+<td align="right">0.20</td>
+<td align="right">97.75</td>
+<td align="right">3.00</td>
+<td align="right">7.00</td>
+<td align="right">282.75</td>
+<td align="right">1041.25</td>
+<td align="right">1266.25</td>
+<td align="right">8.00</td>
 <td align="right">1.00</td>
-<td align="right">4.75</td>
+<td align="right">4.00</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
@@ -398,23 +398,23 @@
 </tr>
 <tr>
 <td align="left">50%</td>
-<td align="right">1331.00</td>
-<td align="right">0.00</td>
-<td align="right">2.00</td>
+<td align="right">1359.00</td>
 <td align="right">1.00</td>
+<td align="right">1.90</td>
+<td align="right">0.00</td>
 <td align="right">6.00</td>
 <td align="right">0.00</td>
-<td align="right">35.50</td>
-<td align="right">0.60</td>
-<td align="right">130.50</td>
-<td align="right">4.00</td>
-<td align="right">15.00</td>
+<td align="right">33.00</td>
+<td align="right">0.65</td>
+<td align="right">131.50</td>
+<td align="right">6.00</td>
+<td align="right">16.50</td>
 <td align="right">852.00</td>
-<td align="right">1643.50</td>
-<td align="right">2309.50</td>
-<td align="right">16.00</td>
-<td align="right">4.00</td>
-<td align="right">10.00</td>
+<td align="right">1661.00</td>
+<td align="right">2724.00</td>
+<td align="right">14.00</td>
+<td align="right">5.00</td>
+<td align="right">9.00</td>
 <td align="right">0.00</td>
 <td align="right">1.00</td>
 <td align="right">1.00</td>
@@ -422,21 +422,21 @@
 </tr>
 <tr>
 <td align="left">75%</td>
-<td align="right">1712.25</td>
+<td align="right">1722.75</td>
 <td align="right">1.00</td>
-<td align="right">2.62</td>
+<td align="right">2.60</td>
 <td align="right">1.00</td>
-<td align="right">14.00</td>
+<td align="right">12.00</td>
 <td align="right">1.00</td>
-<td align="right">56.00</td>
+<td align="right">52.00</td>
 <td align="right">0.90</td>
-<td align="right">179.75</td>
-<td align="right">7.00</td>
+<td align="right">185.00</td>
+<td align="right">8.00</td>
 <td align="right">19.00</td>
-<td align="right">1454.75</td>
-<td align="right">1849.25</td>
-<td align="right">3496.50</td>
-<td align="right">18.00</td>
+<td align="right">1545.75</td>
+<td align="right">1884.00</td>
+<td align="right">3564.25</td>
+<td align="right">17.00</td>
 <td align="right">12.25</td>
 <td align="right">18.00</td>
 <td align="right">1.00</td>
@@ -446,7 +446,7 @@
 </tr>
 <tr>
 <td align="left">max</td>
-<td align="right">1989.00</td>
+<td align="right">1995.00</td>
 <td align="right">1.00</td>
 <td align="right">3.00</td>
 <td align="right">1.00</td>
@@ -457,7 +457,7 @@
 <td align="right">200.00</td>
 <td align="right">8.00</td>
 <td align="right">20.00</td>
-<td align="right">1878.00</td>
+<td align="right">1960.00</td>
 <td align="right">1995.00</td>
 <td align="right">3978.00</td>
 <td align="right">19.00</td>
@@ -484,13 +484,13 @@
 </tr>
 </tbody>
 </table><p><em>Descrição Features Categóricas dos Outliers: Isolation Forest</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/b810f148-9ac1-43b7-99ef-c8d1df741597.png" alt="Visualização dos outliers: Isolation Forest" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/c31182d3-cd77-4b7f-a368-a4402a6b72ce.png" alt="Visualização dos outliers: Isolation Forest" /></p>
 
 <p><em>Visualização dos outliers: Isolation Forest</em></p>
 <h2>Análise de Cluster</h2>
 <p>O clustering ou análise de agrupamento de dados é o conjunto de técnicas de prospecção de dados (data mining) que visa fazer agrupamentos automáticos de dados segundo o seu grau de semelhança. O critério de semelhança faz parte da definição do problema e, dependendo, do algoritmo. A cada conjunto de dados resultante do processo dá-se o nome de grupo, aglomerado ou agrupamento (cluster). O procedimento de agrupamento (clustering) também pode ser aplicado a bases de texto utilizando algoritmos de prospeção de texto (text mining), onde o algoritmo procura agrupar textos que falem sobre o mesmo assunto e separar textos de conteúdo diferentes. </p>
 <h3>Feature Permutation 3 dim.</h3>
-<p>A melhor separação de grupos ocorreu nas features: ['dual<em>sim', 'mobile</em>wt', 'sc_h'] com uma quantidade de 2 grupos. A análise multidimensional em 3 dimensões fornece insights de quais features são mais importantes e que distinguem grupos entre si. Esta análise é realizada realizando a permutação das features do dataset.</p>
+<p>A melhor separação de grupos ocorreu nas features: ['clock<em>speed', 'ram', 'price</em>range'] com uma quantidade de 2 grupos. A análise multidimensional em 3 dimensões fornece insights de quais features são mais importantes e que distinguem grupos entre si. Esta análise é realizada realizando a permutação das features do dataset.</p>
 <p>A matriz de separação abaixo mostra a distribuição populacional normalizada dentro de cada grupo de cluster. Note que valores maiores significam que há maior presença daquela população dentro daquele grupo. Este tipo de tabela também pode ser chamado de matriz de confusão, do inglês Confusion Matrix.</p>
 <table>
 <thead>
@@ -502,24 +502,24 @@
 </thead>
 <tbody>
 <tr>
-<td align="right">3</td>
-<td align="right">0.47</td>
-<td align="right">0.53</td>
-</tr>
-<tr>
 <td align="right">2</td>
-<td align="right">0.55</td>
-<td align="right">0.45</td>
-</tr>
-<tr>
-<td align="right">0</td>
-<td align="right">0.52</td>
-<td align="right">0.48</td>
+<td align="right">0.85</td>
+<td align="right">0.15</td>
 </tr>
 <tr>
 <td align="right">1</td>
-<td align="right">0.50</td>
-<td align="right">0.50</td>
+<td align="right">0.20</td>
+<td align="right">0.80</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">1.00</td>
+<td align="right">0.00</td>
+</tr>
+<tr>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
@@ -536,24 +536,24 @@
 </thead>
 <tbody>
 <tr>
-<td align="right">3</td>
-<td align="right">0.00</td>
-<td align="right">1.00</td>
-</tr>
-<tr>
 <td align="right">2</td>
 <td align="right">0.15</td>
 <td align="right">0.85</td>
 </tr>
 <tr>
-<td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">0.00</td>
-</tr>
-<tr>
 <td align="right">1</td>
 <td align="right">0.79</td>
 <td align="right">0.21</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+</tr>
+<tr>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">0.00</td>
 </tr>
 </tbody>
 </table><p><em>Matriz de separação do melhor agrupamento</em></p>
@@ -569,18 +569,18 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">dual_sim - mobile_wt - sc_h</td>
-<td align="right">0.61</td>
+<td align="left">clock_speed - ram - price_range</td>
+<td align="right">0.62</td>
 <td align="right">nan</td>
 </tr>
 <tr>
-<td align="left">n_cores - px_width - price_range</td>
-<td align="right">0.55</td>
+<td align="left">battery_power - dual_sim - three_g</td>
+<td align="right">0.56</td>
 <td align="right">nan</td>
 </tr>
 <tr>
-<td align="left">blue - n_cores - px_height</td>
-<td align="right">0.53</td>
+<td align="left">px_height - ram - sc_h</td>
+<td align="right">0.52</td>
 <td align="right">nan</td>
 </tr>
 <tr>
@@ -605,129 +605,129 @@
 <tbody>
 <tr>
 <td align="left">battery_power</td>
-<td align="right">1.75</td>
-<td align="right">-1.68</td>
-<td align="right">52.74</td>
+<td align="right">1.20</td>
+<td align="right">-1.16</td>
+<td align="right">61.12</td>
 </tr>
 <tr>
 <td align="left">blue</td>
 <td align="right">-0.01</td>
 <td align="right">0.01</td>
-<td align="right">-0.01</td>
+<td align="right">0.04</td>
 </tr>
 <tr>
 <td align="left">clock_speed</td>
-<td align="right">0.00</td>
-<td align="right">-0.00</td>
-<td align="right">0.29</td>
+<td align="right">0.01</td>
+<td align="right">-0.01</td>
+<td align="right">0.21</td>
 </tr>
 <tr>
 <td align="left">dual_sim</td>
 <td align="right">-0.02</td>
-<td align="right">0.01</td>
-<td align="right">0.05</td>
+<td align="right">0.02</td>
+<td align="right">-0.03</td>
 </tr>
 <tr>
 <td align="left">fc</td>
-<td align="right">-0.08</td>
-<td align="right">0.07</td>
-<td align="right">3.39</td>
+<td align="right">-0.05</td>
+<td align="right">0.05</td>
+<td align="right">2.94</td>
 </tr>
 <tr>
 <td align="left">four_g</td>
 <td align="right">-0.01</td>
 <td align="right">0.01</td>
-<td align="right">-0.28</td>
+<td align="right">-0.23</td>
 </tr>
 <tr>
 <td align="left">int_memory</td>
 <td align="right">-0.58</td>
 <td align="right">0.56</td>
-<td align="right">2.80</td>
+<td align="right">2.64</td>
 </tr>
 <tr>
 <td align="left">m_dep</td>
 <td align="right">0.01</td>
 <td align="right">-0.01</td>
-<td align="right">0.05</td>
+<td align="right">0.07</td>
 </tr>
 <tr>
 <td align="left">mobile_wt</td>
-<td align="right">0.08</td>
-<td align="right">-0.08</td>
-<td align="right">-4.08</td>
+<td align="right">0.00</td>
+<td align="right">-0.00</td>
+<td align="right">-2.26</td>
 </tr>
 <tr>
 <td align="left">n_cores</td>
-<td align="right">-0.02</td>
-<td align="right">0.02</td>
-<td align="right">-0.35</td>
+<td align="right">-0.03</td>
+<td align="right">0.03</td>
+<td align="right">0.77</td>
 </tr>
 <tr>
 <td align="left">pc</td>
-<td align="right">-0.19</td>
+<td align="right">-0.20</td>
 <td align="right">0.19</td>
-<td align="right">2.74</td>
+<td align="right">3.57</td>
 </tr>
 <tr>
 <td align="left">px_height</td>
-<td align="right">18.03</td>
-<td align="right">-17.28</td>
-<td align="right">231.97</td>
+<td align="right">20.66</td>
+<td align="right">-20.06</td>
+<td align="right">285.36</td>
 </tr>
 <tr>
 <td align="left">px_width</td>
-<td align="right">8.64</td>
-<td align="right">-8.28</td>
-<td align="right">185.76</td>
+<td align="right">11.12</td>
+<td align="right">-10.80</td>
+<td align="right">225.64</td>
 </tr>
 <tr>
 <td align="left">ram</td>
-<td align="right">-943.74</td>
-<td align="right">904.82</td>
-<td align="right">98.48</td>
+<td align="right">-939.77</td>
+<td align="right">912.47</td>
+<td align="right">293.77</td>
 </tr>
 <tr>
 <td align="left">sc_h</td>
-<td align="right">-0.07</td>
-<td align="right">0.07</td>
-<td align="right">1.41</td>
+<td align="right">-0.08</td>
+<td align="right">0.08</td>
+<td align="right">0.47</td>
 </tr>
 <tr>
 <td align="left">sc_w</td>
-<td align="right">-0.16</td>
-<td align="right">0.16</td>
-<td align="right">0.80</td>
+<td align="right">-0.20</td>
+<td align="right">0.20</td>
+<td align="right">1.05</td>
 </tr>
 <tr>
 <td align="left">talk_time</td>
-<td align="right">0.06</td>
-<td align="right">-0.06</td>
-<td align="right">-0.10</td>
+<td align="right">0.02</td>
+<td align="right">-0.02</td>
+<td align="right">-0.49</td>
 </tr>
 <tr>
 <td align="left">three_g</td>
 <td align="right">-0.01</td>
 <td align="right">0.01</td>
-<td align="right">-0.37</td>
+<td align="right">-0.33</td>
 </tr>
 <tr>
 <td align="left">touch_screen</td>
-<td align="right">0.02</td>
-<td align="right">-0.02</td>
+<td align="right">0.01</td>
+<td align="right">-0.01</td>
 <td align="right">0.01</td>
 </tr>
 <tr>
 <td align="left">wifi</td>
-<td align="right">-0.01</td>
+<td align="right">-0.02</td>
 <td align="right">0.01</td>
 <td align="right">0.00</td>
 </tr>
 <tr>
 <td align="left">price_range</td>
-<td align="right">-0.92</td>
-<td align="right">0.88</td>
-<td align="right">0.26</td>
+<td align="right">-0.91</td>
+<td align="right">0.89</td>
+<td align="right">0.43</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Média entre População - Grupos</em></p>
@@ -745,109 +745,109 @@
 <td align="left">battery_power</td>
 <td align="right">0.00</td>
 <td align="right">-0.00</td>
-<td align="right">0.12</td>
+<td align="right">0.14</td>
 </tr>
 <tr>
 <td align="left">blue</td>
 <td align="right">-0.02</td>
 <td align="right">0.02</td>
-<td align="right">-0.01</td>
+<td align="right">0.07</td>
 </tr>
 <tr>
 <td align="left">clock_speed</td>
-<td align="right">0.00</td>
-<td align="right">-0.00</td>
-<td align="right">0.36</td>
+<td align="right">0.01</td>
+<td align="right">-0.01</td>
+<td align="right">0.26</td>
 </tr>
 <tr>
 <td align="left">dual_sim</td>
 <td align="right">-0.03</td>
 <td align="right">0.03</td>
-<td align="right">0.11</td>
+<td align="right">-0.06</td>
 </tr>
 <tr>
 <td align="left">fc</td>
-<td align="right">-0.02</td>
-<td align="right">0.02</td>
-<td align="right">0.82</td>
+<td align="right">-0.01</td>
+<td align="right">0.01</td>
+<td align="right">0.70</td>
 </tr>
 <tr>
 <td align="left">four_g</td>
-<td align="right">-0.01</td>
+<td align="right">-0.02</td>
 <td align="right">0.01</td>
-<td align="right">-0.55</td>
+<td align="right">-0.47</td>
 </tr>
 <tr>
 <td align="left">int_memory</td>
 <td align="right">-0.03</td>
 <td align="right">0.03</td>
-<td align="right">0.16</td>
+<td align="right">0.15</td>
 </tr>
 <tr>
 <td align="left">m_dep</td>
 <td align="right">0.02</td>
 <td align="right">-0.02</td>
-<td align="right">0.19</td>
+<td align="right">0.24</td>
 </tr>
 <tr>
 <td align="left">mobile_wt</td>
 <td align="right">0.00</td>
 <td align="right">-0.00</td>
-<td align="right">-0.12</td>
+<td align="right">-0.06</td>
 </tr>
 <tr>
 <td align="left">n_cores</td>
 <td align="right">-0.01</td>
 <td align="right">0.01</td>
-<td align="right">-0.15</td>
+<td align="right">0.34</td>
 </tr>
 <tr>
 <td align="left">pc</td>
 <td align="right">-0.03</td>
 <td align="right">0.03</td>
-<td align="right">0.46</td>
+<td align="right">0.60</td>
 </tr>
 <tr>
 <td align="left">px_height</td>
-<td align="right">0.04</td>
-<td align="right">-0.04</td>
-<td align="right">0.54</td>
+<td align="right">0.05</td>
+<td align="right">-0.05</td>
+<td align="right">0.67</td>
 </tr>
 <tr>
 <td align="left">px_width</td>
-<td align="right">0.02</td>
-<td align="right">-0.02</td>
-<td align="right">0.44</td>
+<td align="right">0.03</td>
+<td align="right">-0.03</td>
+<td align="right">0.53</td>
 </tr>
 <tr>
 <td align="left">ram</td>
-<td align="right">-0.88</td>
-<td align="right">0.84</td>
-<td align="right">0.09</td>
+<td align="right">-0.87</td>
+<td align="right">0.85</td>
+<td align="right">0.27</td>
 </tr>
 <tr>
 <td align="left">sc_h</td>
 <td align="right">-0.02</td>
 <td align="right">0.02</td>
-<td align="right">0.34</td>
+<td align="right">0.11</td>
 </tr>
 <tr>
 <td align="left">sc_w</td>
-<td align="right">-0.04</td>
-<td align="right">0.04</td>
-<td align="right">0.19</td>
+<td align="right">-0.05</td>
+<td align="right">0.05</td>
+<td align="right">0.25</td>
 </tr>
 <tr>
 <td align="left">talk_time</td>
-<td align="right">0.01</td>
-<td align="right">-0.01</td>
-<td align="right">-0.02</td>
+<td align="right">0.00</td>
+<td align="right">-0.00</td>
+<td align="right">-0.09</td>
 </tr>
 <tr>
 <td align="left">three_g</td>
 <td align="right">-0.03</td>
 <td align="right">0.03</td>
-<td align="right">-0.89</td>
+<td align="right">-0.79</td>
 </tr>
 <tr>
 <td align="left">touch_screen</td>
@@ -857,31 +857,33 @@
 </tr>
 <tr>
 <td align="left">wifi</td>
-<td align="right">-0.02</td>
-<td align="right">0.02</td>
+<td align="right">-0.03</td>
+<td align="right">0.03</td>
 <td align="right">0.01</td>
 </tr>
 <tr>
 <td align="left">price_range</td>
-<td align="right">-0.83</td>
-<td align="right">0.79</td>
-<td align="right">0.24</td>
+<td align="right">-0.82</td>
+<td align="right">0.80</td>
+<td align="right">0.39</td>
 </tr>
 </tbody>
 </table><p><em>Diferença de Variância entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/392b2216-a930-4eb3-ac4e-bd1fb0d59104.png" alt="Diferença de Média entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/4ddbe9ad-85d5-4f73-9172-bf182370b75f.png" alt="Diferença de Média entre População - Grupos" /></p>
 
 <p><em>Diferença de Média entre População - Grupos</em></p>
-<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/e96c374b-07bd-4cb3-9cb8-061975dd7fe1.png" alt="Diferença de Variância entre População - Grupos" /></p>
+<p><img src="insights/markdown_generator/CPQDAutoMLAlgorithm-mobile_price/figures/66f5a67d-1ea7-45fd-8a6d-fdb852a14951.png" alt="Diferença de Variância entre População - Grupos" /></p>
 
 <p><em>Diferença de Variância entre População - Grupos</em></p>
-<p>A maior diferença populacional positiva foi detectada na feature ram e no grupo 1, com valor de 904.82. A maior variação negativa foi na feature ram e no grupo 0, com o valor registrado de -943.74</p>
+<p>A maior diferença populacional positiva foi detectada na feature ram e no grupo 1, com valor de 912.47. A maior variação negativa foi na feature ram e no grupo 0, com o valor registrado de -939.77</p>
 <h3>Insights - Variáveis Categóricas</h3>
 <p>É possível observar nas tabelas em ambas tabelas abaixo alguns dados notáveis extraídos dos grupos da base de dados. Estas tabelas de diferenças máximas e mínimas visam demonstrar as diferenças de distribuição entre a população e os grupos. A linha Contagem mostra a contagem daquela classe dentro do grupo, A linha Proporção mostra a proporção da classe em relação a população do grupo, A linha Diferença da População mostra a diferença de proporção daquela população no grupo em relação a população geral. </p>
 <p><em>Diferença Máxima de População entre Grupos e Dataset</em></p>
 <p><em>Diferença Mínima de População entre Grupos e Dataset</em></p>
+<p><em>Maior proporção de população no grupo.</em></p>
+<p><em>Menor proporção de população no grupo.</em></p>
 <h3>Insights - Resumo Clustering</h3>
 <p>Os seguintes insights resumidos foram obtidos a partir dos métodos de agrupamento apresentados:</p>
 <p>Grupo 0: <br>&emsp;Média menor que a população: ram<br>&emsp;Média menor que a população: price_range</p>
 <p>Grupo 1: <br>&emsp;Média maior que a população: ram<br>&emsp;Média maior que a população: price_range</p>
-<p>Grupo outlier: <br>&emsp;Média maior que a população: fc<br>&emsp;Média menor que a população: four<em>g<br>&emsp;Média maior que a população: px</em>height<br>&emsp;Média menor que a população: three_g</p>
+<p>Grupo outlier: <br>&emsp;Média maior que a população: fc<br>&emsp;Média maior que a população: pc<br>&emsp;Média maior que a população: px<em>height<br>&emsp;Média maior que a população: px</em>width<br>&emsp;Média menor que a população: three_g</p>
