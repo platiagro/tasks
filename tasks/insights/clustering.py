@@ -67,8 +67,9 @@ drop_columns = {
 
 for i, dataset in enumerate(datasets):
     name = dataset.split('/')[1].split('.')[0]
-    report = Report('CPQD AutoML Algorithm - '+str(name))
     
+    report = Report('Relatorio AutoStats CPQD: Clustering - '+str(name))
+
     target = target_variables[dataset]
     
     df = pd.read_csv(dataset).iloc[:20_000]

@@ -465,7 +465,7 @@ class time_feature_eng():
   def report_begin(self, ):
       
       # Report #
-    report = Report('Relatório AutoML CPQD')
+    report = Report('Relatório AutoStats CPQD: Features Temporais - Siklee')
     
     schema = {'section_title': 'Criação de features Temporais', 'information': []}
         
