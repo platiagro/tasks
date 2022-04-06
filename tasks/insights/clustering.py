@@ -16,17 +16,18 @@ datasets = [
     # 'data/IBM-HR.csv',
     # 'data/insurance.csv',
     # 'data/creditcard.csv',
-    'data/HousingData.csv',
-    'data/winequality-red.csv',
-    'data/winequality-white.csv',
-    'data/titanic.csv',
-    'data/Mall_Customers.csv',
-    'data/Iris.csv',
-    'data/HousePrices.csv',
-    'data/StudentsPerformance.csv',
-    'data/mobile_price.csv',
-    'data/Churn_Modelling.csv',
-    'data/bestsellers with categories.csv'
+    # 'data/HousingData.csv',
+    # 'data/winequality-red.csv',
+    # 'data/winequality-white.csv',
+    # 'data/titanic.csv',
+    # 'data/Mall_Customers.csv',
+    # 'data/Iris.csv',
+    # 'data/HousePrices.csv',
+    # 'data/StudentsPerformance.csv',
+    # 'data/mobile_price.csv',
+    # 'data/Churn_Modelling.csv',
+    # 'data/bestsellers with categories.csv'
+    'data/siklee.csv'
     ]
 
 target_variables = {
@@ -34,17 +35,18 @@ target_variables = {
     # 'data/IBM-HR.csv': 'PerformanceRating',
     # 'data/insurance.csv': 'charges',
     # 'data/creditcard.csv': 'Class',
-    'data/HousingData.csv': 'MEDV',
-    'data/winequality-red.csv': 'quality',
-    'data/winequality-white.csv': 'quality',
-    'data/titanic.csv': 'Survived',
-    'data/Mall_Customers.csv': 'Spending Score (1-100)',
-    'data/Iris.csv': 'variety',
-    'data/HousePrices.csv': 'SalePrice',
-    'data/StudentsPerformance.csv': 'writing score',
-    'data/mobile_price.csv': 'price_range',
-    'data/Churn_Modelling.csv': 'Exited',
-    'data/bestsellers with categories.csv': 'User Rating'
+    # 'data/HousingData.csv': 'MEDV',
+    # 'data/winequality-red.csv': 'quality',
+    # 'data/winequality-white.csv': 'quality',
+    # 'data/titanic.csv': 'Survived',
+    # 'data/Mall_Customers.csv': 'Spending Score (1-100)',
+    # 'data/Iris.csv': 'variety',
+    # 'data/HousePrices.csv': 'SalePrice',
+    # 'data/StudentsPerformance.csv': 'writing score',
+    # 'data/mobile_price.csv': 'price_range',
+    # 'data/Churn_Modelling.csv': 'Exited',
+    # 'data/bestsellers with categories.csv': 'User Rating'
+    'data/siklee.csv': 'Dia da Semana'
     }
 
 drop_columns = {
@@ -52,17 +54,42 @@ drop_columns = {
     # 'data/IBM-HR.csv': [],
     # 'data/insurance.csv': [],
     # 'data/creditcard.csv': ['Time', 'Id'],
-    'data/HousingData.csv': [],
-    'data/winequality-red.csv': [],
-    'data/winequality-white.csv': [],
-    'data/titanic.csv': ['PassengerId', 'Name', 'Ticket', 'Cabin'],
-    'data/Mall_Customers.csv': ['CustomerID'],
-    'data/Iris.csv': [],
-    'data/HousePrices.csv': ['Id', 'MiscFeature', 'MiscVal', 'SaleType', 'SaleCondition'],
-    'data/StudentsPerformance.csv': [],
-    'data/mobile_price.csv': [],
-    'data/Churn_Modelling.csv': ['RowNumber', 'CustomerId', 'Surname'],
-    'data/bestsellers with categories.csv': ['Name']    
+    # 'data/HousingData.csv': [],
+    # 'data/winequality-red.csv': [],
+    # 'data/winequality-white.csv': [],
+    # 'data/titanic.csv': ['PassengerId', 'Name', 'Ticket', 'Cabin'],
+    # 'data/Mall_Customers.csv': ['CustomerID'],
+    # 'data/Iris.csv': [],
+    # 'data/HousePrices.csv': ['Id', 'MiscFeature', 'MiscVal', 'SaleType', 'SaleCondition'],
+    # 'data/StudentsPerformance.csv': [],
+    # 'data/mobile_price.csv': [],
+    # 'data/Churn_Modelling.csv': ['RowNumber', 'CustomerId', 'Surname'],
+    # 'data/bestsellers with categories.csv': ['Name']    
+    'data/siklee.csv': [
+        'Data de emissao', 
+        'Data de apresentacao', 
+        'Nome do medico', 
+        'Numero de registro',
+        'Cnpj', 
+        'Endereco',
+        'Cidade', 
+        'Estado', 
+        'Cep', 
+        'Telefone', 
+        'Nome funcionario',
+        'Cpf funcionario', 
+        'Rg funcionario', 
+        'Acesso funcionario',
+        'Tipo de atestado', 
+        'Descricao do afastamento',
+        'Name [Funcionario]', 
+        'Cpf [Funcionario]', 
+        'Rg [Funcionario]',
+        'Data nascimento [Funcionario]', 
+        'Cnpj [Empresa]',
+        'Tempo de Dispensa (%)',
+        'Mes']
+
     }
 
 for i, dataset in enumerate(datasets):
@@ -79,7 +106,7 @@ for i, dataset in enumerate(datasets):
     df = df_to_float(df)
     
     df = df_nan_process(df)
-            
+                
     # Outlier determination
     schema, filtered_df, outliers_df = outlier_analysis(df)
     
