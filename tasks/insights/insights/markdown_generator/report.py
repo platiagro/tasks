@@ -34,14 +34,18 @@ class Report():
     def create_figure(self, information):
         figure = information['figure']
         figure = self.process_plotly(figure) if information['package'] == 'plotly' else self.process_matplotlib(figure)
-        figure_str = f'![{information["caption"]}]({figure})\n\n*{information["caption"]}*'
+        if information["caption"] is not None:
+            figure_str = f'![{information["caption"]}]({figure})\n\n*{information["caption"]}*'
+        else:
+            figure_str = f'![]({figure})'
         self.add_line(figure_str)
         
     def create_table(self, information):
         df = information['table']
         markdown_table = df.to_markdown(floatfmt='.2f')
         self.html += markdown.markdown(markdown_table, extensions=['tables'])
-        self.add_line(f'*{information["caption"]}*')
+        if information["caption"] is not None:
+            self.add_line(f'*{information["caption"]}*')
     
     def add_line(self, paragraph):
         self.html += markdown2.markdown(paragraph)
