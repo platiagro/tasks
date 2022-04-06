@@ -473,15 +473,14 @@ class time_feature_eng():
     
         dict(
             type='text',
-            info="""
-            Uma das etapas do componente de insights é a criação de novas featres temporais, e ela se torna
-            importante para esse componente, pois, essas novas features melhoram a performace dos modelos
-            de Machine Learning.\n
-            Para criar essas novas features foi utilizada médias moveis agrupadas por uma coluna categórica,
-            então, se a base de dados possui mais de uma coluna categórica haverá mais de um agrupamento, e
-            assim gerando várias features novas.\n
-            A cada agrupamento, quando é calculado as médias moveis, é calculado também o desvio padrão
-            da mesma."""  
+            info="Uma das etapas do componente de insights é a criação de novas featres temporais, e ela se torna\
+            importante para esse componente, pois, essas novas features melhoram a performace dos modelos\
+            de Machine Learning.\
+            <br>Para criar essas novas features foi utilizada médias moveis agrupadas por uma coluna categórica,\
+            então, se a base de dados possui mais de uma coluna categórica haverá mais de um agrupamento, e\
+            assim gerando várias features novas.\
+            <br>A cada agrupamento, quando é calculado as médias moveis, é calculado também o desvio padrão\
+            da mesma."
         )  
     )
     
