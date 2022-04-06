@@ -139,3 +139,4 @@ __no__repo*
 # Files locally generated
 .bashrc
 .conda/
+.local
