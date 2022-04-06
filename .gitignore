@@ -140,3 +140,4 @@ __no__repo*
 .bashrc
 .conda/
 .local
+*mlruns/
