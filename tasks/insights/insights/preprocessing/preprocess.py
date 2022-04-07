@@ -18,7 +18,7 @@ def df_to_float(df):
 
 def num_2_cat(df, column):
     if df[column].nunique() > 5:
-        series = pd.cut(df[column], 5).astype(str)
+        series = pd.cut(df[column], 5)
     else:
         series = df[column]
     return series

@@ -6,6 +6,8 @@ import numpy as np
 
 from insights.analysis.outliers_analysis import outlier_analysis
 from insights.analysis.cluster_analysis import cluster_analysis
+from insights.analysis.general_analysis import general_analysis
+
 from insights.preprocessing.preprocess import df_to_float, num_2_cat, df_nan_process
 from insights.utils.filtering import column_filter
 
@@ -13,58 +15,55 @@ from insights.markdown_generator.report import Report
 
 datasets = [
     # 'data/avocado.csv',
-    # 'data/IBM-HR.csv',
-    # 'data/insurance.csv',
-    # 'data/creditcard.csv',
-    # 'data/HousingData.csv',
-    # 'data/winequality-red.csv',
-    # 'data/winequality-white.csv',
-    # 'data/titanic.csv',
-    # 'data/Mall_Customers.csv',
-    # 'data/Iris.csv',
-    # 'data/HousePrices.csv',
-    # 'data/StudentsPerformance.csv',
-    # 'data/mobile_price.csv',
-    # 'data/Churn_Modelling.csv',
-    # 'data/bestsellers with categories.csv'
+    'data/IBM-HR.csv',
+    'data/insurance.csv',
+    'data/HousingData.csv',
+    'data/winequality-red.csv',
+    'data/winequality-white.csv',
+    'data/titanic.csv',
+    'data/Mall_Customers.csv',
+    'data/Iris.csv',
+    'data/HousePrices.csv',
+    'data/StudentsPerformance.csv',
+    'data/mobile_price.csv',
+    'data/Churn_Modelling.csv',
+    'data/bestsellers with categories.csv',
     'data/siklee.csv'
     ]
 
 target_variables = {
-    # 'data/avocado.csv': 'AveragePrice',
-    # 'data/IBM-HR.csv': 'PerformanceRating',
-    # 'data/insurance.csv': 'charges',
-    # 'data/creditcard.csv': 'Class',
-    # 'data/HousingData.csv': 'MEDV',
-    # 'data/winequality-red.csv': 'quality',
-    # 'data/winequality-white.csv': 'quality',
-    # 'data/titanic.csv': 'Survived',
-    # 'data/Mall_Customers.csv': 'Spending Score (1-100)',
-    # 'data/Iris.csv': 'variety',
-    # 'data/HousePrices.csv': 'SalePrice',
-    # 'data/StudentsPerformance.csv': 'writing score',
-    # 'data/mobile_price.csv': 'price_range',
-    # 'data/Churn_Modelling.csv': 'Exited',
-    # 'data/bestsellers with categories.csv': 'User Rating'
-    'data/siklee.csv': 'Dia da Semana'
+    'data/avocado.csv': 'AveragePrice',
+    'data/IBM-HR.csv': 'PerformanceRating',
+    'data/insurance.csv': 'charges',
+    'data/HousingData.csv': 'MEDV',
+    'data/winequality-red.csv': 'quality',
+    'data/winequality-white.csv': 'quality',
+    'data/titanic.csv': 'Survived',
+    'data/Mall_Customers.csv': 'Spending Score (1-100)',
+    'data/Iris.csv': 'variety',
+    'data/HousePrices.csv': 'SalePrice',
+    'data/StudentsPerformance.csv': 'writing score',
+    'data/mobile_price.csv': 'price_range',
+    'data/Churn_Modelling.csv': 'Exited',
+    'data/bestsellers with categories.csv': 'User Rating',
+    'data/siklee.csv': 'Tempo de Entrega'
     }
 
 drop_columns = {
-    # 'data/avocado.csv': ['Date', 'Id'],
-    # 'data/IBM-HR.csv': [],
-    # 'data/insurance.csv': [],
-    # 'data/creditcard.csv': ['Time', 'Id'],
-    # 'data/HousingData.csv': [],
-    # 'data/winequality-red.csv': [],
-    # 'data/winequality-white.csv': [],
-    # 'data/titanic.csv': ['PassengerId', 'Name', 'Ticket', 'Cabin'],
-    # 'data/Mall_Customers.csv': ['CustomerID'],
-    # 'data/Iris.csv': [],
-    # 'data/HousePrices.csv': ['Id', 'MiscFeature', 'MiscVal', 'SaleType', 'SaleCondition'],
-    # 'data/StudentsPerformance.csv': [],
-    # 'data/mobile_price.csv': [],
-    # 'data/Churn_Modelling.csv': ['RowNumber', 'CustomerId', 'Surname'],
-    # 'data/bestsellers with categories.csv': ['Name']    
+    'data/avocado.csv': ['Date', 'Id'],
+    'data/IBM-HR.csv': [],
+    'data/insurance.csv': [],
+    'data/HousingData.csv': [],
+    'data/winequality-red.csv': [],
+    'data/winequality-white.csv': [],
+    'data/titanic.csv': ['PassengerId', 'Name', 'Ticket', 'Cabin'],
+    'data/Mall_Customers.csv': ['CustomerID'],
+    'data/Iris.csv': [],
+    'data/HousePrices.csv': ['Id', 'MiscFeature', 'MiscVal', 'SaleType', 'SaleCondition'],
+    'data/StudentsPerformance.csv': [],
+    'data/mobile_price.csv': [],
+    'data/Churn_Modelling.csv': ['RowNumber', 'CustomerId', 'Surname'],
+    'data/bestsellers with categories.csv': ['Name'],
     'data/siklee.csv': [
         'Data de emissao', 
         'Data de apresentacao', 
@@ -93,6 +92,8 @@ drop_columns = {
     }
 
 for i, dataset in enumerate(datasets):
+    print(f'Processing dataset: {dataset}')
+    
     name = dataset.split('/')[1].split('.')[0]
     
     report = Report('Relatorio AutoStats CPQD: Clustering - '+str(name))
@@ -106,6 +107,10 @@ for i, dataset in enumerate(datasets):
     df = df_to_float(df)
     
     df = df_nan_process(df)
+    
+    schema = general_analysis(df, target)
+    
+    report.add_section(schema)
                 
     # Outlier determination
     schema, filtered_df, outliers_df = outlier_analysis(df)

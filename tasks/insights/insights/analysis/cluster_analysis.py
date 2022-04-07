@@ -411,9 +411,9 @@ def group_analysis(numerical_grouping, categorical_grouping):
         for column in df.columns:
             if df[column].loc['diferença da população'] > 0.1:
                 if column in group_info:
-                    group_info[column] += [f'Presença maior de população na feature {group}: '+df[column].loc['maior ocorrencia']]
+                    group_info[column] += [f'Presença maior de população na feature {group}: {df[column].loc["maior ocorrencia"]}']
                 else:
-                    group_info[column] = [f'Presença maior de população na feature {group}: '+df[column].loc['maior ocorrencia']]
+                    group_info[column] = [f'Presença maior de população na feature {group}: {df[column].loc["maior ocorrencia"]}']
     
     group_info = {k: group_info[k] for k in sorted(group_info)}
                  
