@@ -12,6 +12,7 @@ on:
     branches:
     - main
     - v*-branch
+    - develop
     paths:
     - tasks/nlp-question-generator/**
     - tests/datasets.py
@@ -22,6 +23,7 @@ on:
     branches:
     - main
     - v*-branch
+    - develop
     paths:
     - tasks/nlp-question-generator/**
     - tests/datasets.py
