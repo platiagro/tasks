@@ -5,6 +5,7 @@ on:
     branches:
     - main
     - v*-branch
+    - develop
     paths:
     - init-job/**
     - tasks/**
@@ -15,6 +16,7 @@ on:
     branches:
     - main
     - v*-branch
+    - develop
     paths:
     - init-job/**
     - tasks/**
