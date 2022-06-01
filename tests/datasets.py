@@ -172,6 +172,14 @@ def imdb_testdata():
     }
     return data
 
+def landspaces_test_data():
+    data = {
+        "data": {
+            "ndarray": [["landspaces","The CPDQ is the largest research center in Brazil"]],
+            "names":["filename","text"]
+        },
+    }
+    return data
 
 def coco():
     name = "coco.zip"
@@ -342,6 +350,31 @@ def paracrawl_test_data():
     }
     return data
 
+def papers():
+    name = "papers.zip"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
+
+def landspaces():
+    name = "landspaces.csv"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/samples/{name}"
+    content = requests.get(url).content
+
+    os.makedirs("/tmp/data", exist_ok=True)
+
+    path = f"/tmp/data/{name}"
+    with open(path, "wb") as f:
+        f.write(content)
+
+    metadata(name=name)
 
 def hymenoptera():
     name = "hymenoptera.zip"
@@ -399,6 +432,18 @@ def metadata(name, df=None):
 
 def clean():
     shutil.rmtree("/tmp/data")
+
+def pdf_testdata():
+    name = f"landspaces.pdf"
+    url = f"https://raw.githubusercontent.com/platiagro/datasets/master/tests/resources/{name}"
+
+    imbytes = requests.get(url).content
+
+    data = {
+        "binData": b64encode(imbytes).decode(),
+    }
+
+    return data
 
 def image_testdata(kind: str = 'objects', ext: str = 'jpg'):
 
