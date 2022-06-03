@@ -9,9 +9,9 @@
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
         "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
+        "cpuRequest": "600m",
         "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryRequest": "600Mi"
     },
     {
         "name": "Google Drive",
@@ -23,9 +23,9 @@
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
         "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
+        "cpuRequest": "600m",
         "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryRequest": "600Mi"
     },
     {
         "name": "Classificador AutoML",
@@ -39,8 +39,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "4Gi",
-        "memoryRequest": "4Gi"
+        "memoryLimit": "2Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressor AutoML",
@@ -54,8 +54,8 @@
         "artifacts": [],
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
-        "memoryLimit": "4Gi",
-        "memoryRequest": "4Gi"
+        "memoryLimit": "2Gi",
+        "memoryRequest": "1Gi"
     },
     {
         "name": "Regressão Logística",
@@ -70,7 +70,7 @@
         "cpuLimit": "1000m",
         "cpuRequest": "1000m",
         "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryRequest": "600Mi"
     },
     {
         "name": "Regressão Linear",
@@ -82,10 +82,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "500m",
+        "cpuRequest": "500m",
+        "memoryLimit": "800Mi",
+        "memoryRequest": "500Mi"
     },
     {
         "name": "Classificador SVM",
@@ -112,10 +112,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "800m",
+        "cpuRequest": "800m",
+        "memoryLimit": "800Mi",
+        "memoryRequest": "500Mi"
     },
     {
         "name": "Classificador MLP",
@@ -142,10 +142,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "800m",
+        "cpuRequest": "800m",
+        "memoryLimit": "800Mi",
+        "memoryRequest": "500Mi"
     },
     {
         "name": "Classificador Random Forest",
@@ -172,10 +172,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "800m",
+        "cpuRequest": "800m",
+        "memoryLimit": "800Mi",
+        "memoryRequest": "500Mi"
     },
     {
         "name": "Análise Descritiva",
@@ -188,9 +188,9 @@
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
         "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
+        "cpuRequest": "600m",
         "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryRequest": "600Mi"
     },
     {
         "name": "Scatter Matrix",
@@ -203,9 +203,9 @@
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
         "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
+        "cpuRequest": "600m",
         "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryRequest": "600Mi"
     },
     {
         "name": "Distribuição",
@@ -218,9 +218,9 @@
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
         "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
+        "cpuRequest": "600m",
         "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "memoryRequest": "600Mi"
     },
     {
         "name": "Remove Linhas",
@@ -232,25 +232,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
-    },
-    {
-        "name": "Feature Tools",
-        "description": "Usa a biblioteca Feature Tools para Feature Engineering.",
-        "path": "/tasks/feature-tools",
-        "category": "FEATURE_ENGINEERING",
-        "tags": ["FEATURE_ENGINEERING"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "500m",
+        "cpuRequest": "300m",
+        "memoryLimit": "500Mi",
+        "memoryRequest": "300Mi"
     },
     {
         "name": "Seleção Manual de Atributos",
@@ -262,10 +247,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "500m",
+        "cpuRequest": "300m",
+        "memoryLimit": "500Mi",
+        "memoryRequest": "300Mi"
     },
     {
         "name": "Agrupamento de Atributos Categóricos",
@@ -292,10 +277,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "500m",
+        "cpuRequest": "300m",
+        "memoryLimit": "500Mi",
+        "memoryRequest": "300Mi"
     },
     {
         "name": "Detecção de Anomalias por Isolation Forest",
@@ -352,10 +337,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "800m",
+        "cpuRequest": "800m",
+        "memoryLimit": "800Mi",
+        "memoryRequest": "800Mi"
     },
     {
         "name": "Seleção de Atributos por Método de Eliminação Recursiva",
@@ -382,25 +367,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
-    },
-    {
-        "name": "Simulated Annealing",
-        "description": "Aplica a estratégia simulated annealing para Feature Engineering.",
-        "path": "/tasks/simulated-annealing",
-        "category": "FEATURE_ENGINEERING",
-        "tags": ["FEATURE_ENGINEERING"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "800m",
+        "cpuRequest": "800m",
+        "memoryLimit": "800Mi",
+        "memoryRequest": "800Mi"
     },
     {
         "name": "Transformation Graph",
@@ -427,10 +397,10 @@
         "arguments": null,
         "image": "platiagro/platiagro-experiment-image:0.3.0",
         "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "1Gi",
-        "memoryRequest": "1Gi"
+        "cpuLimit": "500m",
+        "cpuRequest": "300m",
+        "memoryLimit": "500Mi",
+        "memoryRequest": "300Mi"
     },
     {
         "name": "Criação de Atributos Temporais",
@@ -461,269 +431,5 @@
         "cpuRequest": "1000m",
         "memoryLimit": "1Gi",
         "memoryRequest": "1Gi"
-    },
-    {
-        "name": "Hands-On AgTech - Visão Computacional",
-        "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional.",
-        "path": "/tasks/hands-on-agtech-computer-vision",
-        "category": "DEFAULT",
-        "tags": ["DEFAULT"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image-gpu:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "16Gi",
-        "memoryRequest": "10Gi"
-    },
-    {
-        "name": "(w/input) Hands-On AgTech - Visão Computacional",
-        "description": "Reconhecimento de objetos com dataset CIFAR-10 e visão computacional recebendo um conjunto reduzido de input do usuário.",
-        "path": "/tasks/hands-on-agtech-computer-vision-w-input",
-        "category": "DEFAULT",
-        "tags": ["DEFAULT"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image-gpu:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "16Gi",
-        "memoryRequest": "10Gi"
-    },
-    {
-        "name": "Face Detection",
-        "description": "Utiliza a biblioteca facenet-pytorch, a qual disponibiliza o algorítimo MTCNN.",
-        "path": "/tasks/cv-mtcnn-face-detection",
-        "category": "COMPUTER_VISION",
-        "tags": ["COMPUTER_VISION"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "5Gi",
-        "memoryRequest": "5Gi"
-    },
-    {
-        "name": "OCR (Optical Character Recognition)",
-        "description": "Utiliza a biblioteca Pytesseract para converter textos em imagem para string.",
-        "path": "/tasks/cv-ocr",
-        "category": "COMPUTER_VISION",
-        "tags": ["COMPUTER_VISION"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "2Gi",
-        "memoryRequest": "2Gi"
-    },
-    {
-        "name": "YOLO (You Only Look Once)",
-        "description": "Utiliza uma biblioteca do Yolov4 para detecção e classificação de objetos em imagens.",
-        "path": "/tasks/cv-yolo",
-        "category": "COMPUTER_VISION",
-        "tags": ["COMPUTER_VISION"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "2Gi",
-        "memoryRequest": "2Gi"
-    },
-    {
-        "name": "Fast AutoCV",
-        "description": "Classifica imagens utilizando as redes ResNet-18, ResNet-50 e VGG16",
-        "path": "/tasks/cv-fast-autocv",
-        "category": "COMPUTER_VISION",
-        "tags": ["COMPUTER_VISION"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "16Gi",
-        "memoryRequest": "10Gi"
-    },
-    {
-        "name": "AutoKeras AutoCV para Classificação de Imagens",
-        "description": "Faz a busca por arquiteturas e hyperparâmetros que melhor configuram o modelo para a base de dados fornecida",
-        "path": "/tasks/cv-autokeras-autocv-image-classification",
-        "category": "COMPUTER_VISION",
-        "tags": ["COMPUTER_VISION"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "16Gi",
-        "memoryRequest": "10Gi"
-    },
-    {
-        "name": "GloVe Embeddings Bag",
-        "description": "Classifica sentenças com base nos pacotes de Embeddings GloVe disponiblizado pela Stanford",
-        "path": "/tasks/nlp-glove-embeddings-sentence-classification",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "10Gi",
-        "memoryRequest": "10Gi"
-    },
-    {
-        "name": "Sparse Document Retriever",
-        "description": "Ranqueia textos de acordo com um outro texto de entrada através das estratégias TF-IDF, BM25 ou Glove Embeddings",
-        "path": "/tasks/nlp-sparse-document-retriever",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [{
-            "url": "https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt",
-            "name": "glove_s300_portugues.txt"
-        }],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "10Gi",
-        "memoryRequest": "10Gi"
-    },
-    {
-        "name": "Dense Document Retriever",
-        "description": "Ranqueia textos de acordo com um outro texto de entrada atravésde vetores densos a partir do algorítimo DPR",
-        "path": "/tasks/nlp-dense-document-retriever",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "20Gi",
-        "memoryRequest": "20Gi"
-    },
-    {
-        "name": "Question Generator",
-        "description": "Gerguntas referentes a passagens de texto passadas pelo usuário",
-        "path": "/tasks/nlp-question-generator",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [{
-            "url": "https://storage.googleapis.com/platiagro/Vident/squad-train-v1.1.json",
-            "name": "squad-train-v1.1.json"
-        },{
-            "url": "https://storage.googleapis.com/platiagro/Vident/squad-dev-v1.1.json",
-            "name": "squad-dev-v1.1.json"
-        },{
-            "url": "https://storage.googleapis.com/platiagro/Vident/default_qgenerator_squad_pt.ckpt",
-            "name": "default_qgenerator_squad_pt.ckpt"
-        },{
-            "url": "https://storage.googleapis.com/platiagro/Vident/glove_s300_portugues.txt",
-            "name": "glove_s300_portugues.txt"
-        }],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "20Gi",
-        "memoryRequest": "20Gi"
-    },
-    {
-        "name": "Document Reader",
-        "description": "Procura a resposta para uma determinada pergunta dentro de um conjunto de contextos e retorna a porcentagem de certeza da reposta",
-        "path": "/tasks/nlp-sparse-document-retriever",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [{
-            "url": "https://storage.googleapis.com/platiagro/Vident/squad-train-v1.1.json",
-            "name": "squad-train-v1.1.json"
-        },{
-            "url": "https://storage.googleapis.com/platiagro/Vident/squad-dev-v1.1.json",
-            "name": "squad-dev-v1.1.json"
-        },{
-            "url": "https://storage.googleapis.com/platiagro/Vident/default_document_reader_squad_pt.ckpt",
-            "name": "default_document_reader_squad_pt.ckpt"
-        }],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "20Gi",
-        "memoryRequest": "20Gi"
-    },
-    {
-        "name": "Tradutor",
-        "description": "Componente de tradução multilingual, traduz textos entre diferentes idiomas",
-        "path": "/tasks/translator",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "8Gi",
-        "memoryRequest": "8Gi"
-    },
-    {
-        "name": "Chunker",
-        "description": "Componente de janelamento de textos, aplica janelamento em textos mantendo uma porção de sobreposição em partes consecutivas",
-        "path": "/tasks/chunker",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "2Gi",
-        "memoryRequest": "2Gi"
-    },
-    {
-        "name": "Reader",
-        "description": "Componente de Reader (Pergunta e Resposta) de textos, aplica perguntas sobre textos e gera uma resposta.",
-        "path": "/tasks/reader",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "8Gi",
-        "memoryRequest": "8Gi"
-    },
-    {
-        "name": "Retriever",
-        "description": "Componente de Retriever de textos, aplica perguntas sobre textos e ordena os textos de acordo com a probabilidade de encontrar a resposta em cada às perguntas feitas.",
-        "path": "/tasks/retriever",
-        "category": "NLP",
-        "tags": ["NLP"],
-        "commands": null,
-        "arguments": null,
-        "image": "platiagro/platiagro-experiment-image:0.3.0",
-        "artifacts": [],
-        "cpuLimit": "1000m",
-        "cpuRequest": "1000m",
-        "memoryLimit": "8Gi",
-        "memoryRequest": "8Gi"
     }
 ]

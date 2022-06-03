@@ -49,6 +49,9 @@ jobs:
         elif [[ ${{ github.ref }} =~ ^refs/heads/v.*-branch$ ]]; then
           echo ::set-output name=TAG::${VERSION}
           echo ::set-output name=COMMIT::${{ github.sha }}
+        elif [ ${{ github.ref }} = "refs/heads/develop" ]; then
+            echo ::set-output name=TAG::DEVELOP
+            echo ::set-output name=COMMIT::${{ github.sha }}
         else
           echo ::set-output name=TAG::${VERSION}-${{ github.event.pull_request.head.sha }}
           echo ::set-output name=COMMIT::${{ github.event.pull_request.head.sha }}

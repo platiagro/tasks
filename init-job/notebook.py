@@ -71,7 +71,7 @@ def create_persistent_volume_claim(name):
                 ],
                 "resources": {
                     "requests": {
-                        "storage": "10Gi",
+                        "storage": "1Gi",
                     },
                 }
             },
