@@ -4,24 +4,13 @@ on:
   push:
     branches:
     - main
-    - v*-branch
     - develop
-    paths:
-    - init-job/**
-    - tasks/**
-    - config.json
-    - Dockerfile
+
 
   pull_request:
     branches:
     - main
-    - v*-branch
     - develop
-    paths:
-    - init-job/**
-    - tasks/**
-    - config.json
-    - Dockerfile
 
 jobs:
   build:
