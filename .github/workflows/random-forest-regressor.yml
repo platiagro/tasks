@@ -1,12 +1,6 @@
 name: Random Forest Regressor
 
 on:
-  schedule:
-    # Since tasks rely on the docker image "docker.io/platiagro/platiagro-notebook-image",
-    # we schedule a run to check if any changes (eg. on requirements.txt) broke any tests
-    # Runs once a week (on Sundays 4:30pm)
-    - cron:  '30 16 * * 0'
-
   push:
     branches:
     - main
@@ -43,8 +37,8 @@ jobs:
       minio:
         image: bitnami/minio:latest
         env:
-          MINIO_ACCESS_KEY: minio
-          MINIO_SECRET_KEY: minio123
+          MINIO_ROOT_USER: minio
+          MINIO_ROOT_PASSWORD: minio123
         ports:
         - 9000:9000
 
