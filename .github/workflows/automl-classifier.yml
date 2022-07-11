@@ -12,22 +12,22 @@ on:
     - main
     - v*-branch
     - develop
-    paths:
-    - tasks/automl-classifier/**
-    - tests/datasets.py
-    - tests/server.py
-    - tests/test_automl_classifier.py
+    # paths:
+    # - tasks/automl-classifier/**
+    # - tests/datasets.py
+    # - tests/server.py
+    # - tests/test_automl_classifier.py
 
   pull_request:
     branches:
     - main
     - v*-branch
     - develop
-    paths:
-    - tasks/automl-classifier/**
-    - tests/datasets.py
-    - tests/server.py
-    - tests/test_automl_classifier.py
+    # paths:
+    # - tasks/automl-classifier/**
+    # - tests/datasets.py
+    # - tests/server.py
+    # - tests/test_automl_classifier.py
 
 jobs:
   build:
