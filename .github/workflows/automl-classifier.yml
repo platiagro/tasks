@@ -1,6 +1,7 @@
 name: AutoML Classifier
 
 on:
+  workflow_dispatch:
   # schedule:
   #   # Since tasks rely on the docker image "docker.io/platiagro/platiagro-notebook-image",
   #   # we schedule a run to check if any changes (eg. on requirements.txt) broke any tests
