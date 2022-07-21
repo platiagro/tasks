@@ -11,7 +11,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 
-class TestAutoMLClassifier(unittest.TestCase):
+class TestNormalizer(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -20,9 +20,8 @@ class TestAutoMLClassifier(unittest.TestCase):
         os.environ["RUN_ID"] = RUN_ID
 
         datasets.iris()
-        datasets.titanic()
 
-        os.chdir("tasks/automl-classifier")
+        os.chdir("tasks/data-split")
 
     def tearDown(self):
         datasets.clean()
@@ -34,18 +33,6 @@ class TestAutoMLClassifier(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-                target="Species",
-
-                filter_type="remover",
-                model_features="",
-
-                one_hot_features="",
-
-                time_left_for_this_task=30,
-                per_run_time_limit=30,
-                ensemble_size=5,
-
-                method="predict_proba",
             ),
         )
 
@@ -58,8 +45,8 @@ class TestAutoMLClassifier(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 class + 3 probas
-        self.assertEqual(len(names), 8)
+        self.assertEqual(len(ndarray[0]), 6)  # 5 features + 1 new feature
+        self.assertEqual(len(names), 6)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -67,19 +54,7 @@ class TestAutoMLClassifier(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
-                target="Survived",
-
-                filter_type="remover",
-                model_features="",
-
-                one_hot_features="",
-
-                time_left_for_this_task=30,
-                per_run_time_limit=30,
-                ensemble_size=5,
-
-                method="predict_proba",
-            ),
+            )
         )
 
         papermill.execute_notebook(
@@ -91,5 +66,5 @@ class TestAutoMLClassifier(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
+        self.assertEqual(len(ndarray[0]), 14)  # 13 features  + 1 new feature
         self.assertEqual(len(names), 14)

@@ -431,5 +431,20 @@
         "cpuRequest": "1000m",
         "memoryLimit": "1Gi",
         "memoryRequest": "1Gi"
+    },
+    {
+        "name": "Data Split",
+        "description": "Separa conjunto de dados em treinamento, validação e teste.",
+        "path": "/tasks/data-split",
+        "category": "FEATURE_ENGINEERING",
+        "tags": ["FEATURE_ENGINEERING"],
+        "commands": null,
+        "arguments": null,
+        "image": "platiagro/platiagro-experiment-image:0.3.0",
+        "artifacts": [],
+        "cpuLimit": "1000m",
+        "cpuRequest": "1000m",
+        "memoryLimit": "1Gi",
+        "memoryRequest": "1Gi"
     }
 ]
