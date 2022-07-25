@@ -6,11 +6,12 @@ import papermill
 
 from tests import datasets, server
 
+
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-
+PATH = "/dev/null"
 class TestNormalizer(unittest.TestCase):
 
     def setUp(self):
@@ -30,7 +31,7 @@ class TestNormalizer(unittest.TestCase):
     def test_experiment_iris(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
-            "/dev/null",
+            PATH,
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
             ),
@@ -38,7 +39,7 @@ class TestNormalizer(unittest.TestCase):
 
         papermill.execute_notebook(
             "Deployment.ipynb",
-            "/dev/null",
+            PATH,
         )
         data = datasets.iris_testdata()
         with server.Server() as s:
@@ -51,7 +52,7 @@ class TestNormalizer(unittest.TestCase):
     def test_experiment_titanic(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
-            "/dev/null",
+            PATH,
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
             )
@@ -59,7 +60,7 @@ class TestNormalizer(unittest.TestCase):
 
         papermill.execute_notebook(
             "Deployment.ipynb",
-            "/dev/null",
+            PATH,
         )
         data = datasets.titanic_testdata()
         with server.Server() as s:

@@ -10,7 +10,7 @@ EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-
+PATH = "/dev/null"
 class TestAutoMLClassifier(unittest.TestCase):
 
     def setUp(self):
@@ -31,7 +31,7 @@ class TestAutoMLClassifier(unittest.TestCase):
     def test_experiment_iris(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
-            "/dev/null",
+            PATH,
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
                 target="Species",
@@ -51,7 +51,7 @@ class TestAutoMLClassifier(unittest.TestCase):
 
         papermill.execute_notebook(
             "Deployment.ipynb",
-            "/dev/null",
+            PATH,
         )
         data = datasets.iris_testdata()
         with server.Server() as s:
@@ -64,7 +64,7 @@ class TestAutoMLClassifier(unittest.TestCase):
     def test_experiment_titanic(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
-            "/dev/null",
+            PATH,
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
                 target="Survived",
@@ -84,7 +84,7 @@ class TestAutoMLClassifier(unittest.TestCase):
 
         papermill.execute_notebook(
             "Deployment.ipynb",
-            "/dev/null",
+            PATH,
         )
         data = datasets.titanic_testdata()
         with server.Server() as s:
