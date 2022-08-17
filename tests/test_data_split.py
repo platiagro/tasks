@@ -12,7 +12,7 @@ OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
 PATH = "/dev/null"
-class TestNormalizer(unittest.TestCase):
+class TestDataSplit(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -21,6 +21,7 @@ class TestNormalizer(unittest.TestCase):
         os.environ["RUN_ID"] = RUN_ID
 
         datasets.iris()
+        datasets.titanic()
 
         os.chdir("tasks/data-split")
 
