@@ -6,12 +6,13 @@ import papermill
 
 from tests import datasets, server
 
+
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
 
-
-class TestRandomForestClassifier(unittest.TestCase):
+PATH = "/dev/null"
+class TestDataSplit(unittest.TestCase):
 
     def setUp(self):
         # Set environment variables needed to run notebooks
@@ -22,7 +23,7 @@ class TestRandomForestClassifier(unittest.TestCase):
         datasets.iris()
         datasets.titanic()
 
-        os.chdir("tasks/random-forest-classifier")
+        os.chdir("tasks/data-split")
 
     def tearDown(self):
         datasets.clean()
@@ -31,69 +32,41 @@ class TestRandomForestClassifier(unittest.TestCase):
     def test_experiment_iris(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
-            "/dev/null",
+            PATH,
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-                target="Species",
-
-                filter_type="remover",
-                model_features="",
-
-                one_hot_features="",
-
-                n_estimators=10,
-                criterion="gini",
-                max_depth=None,
-                max_features="auto",
-                class_weight=None,
-
-                method="predict_proba",
             ),
         )
 
         papermill.execute_notebook(
             "Deployment.ipynb",
-            "/dev/null",
+            PATH,
         )
         data = datasets.iris_testdata()
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 class + 3 probas
-        self.assertEqual(len(names), 8)
+        self.assertEqual(len(ndarray[0]), 6)  # 5 features + 1 new feature
+        self.assertEqual(len(names), 6)
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
-            "/dev/null",
+            PATH,
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
-                target="Survived",
-
-                filter_type="remover",
-                model_features="",
-
-                one_hot_features="",
-
-                n_estimators=10,
-                criterion="gini",
-                max_depth=None,
-                max_features="auto",
-                class_weight=None,
-
-                method="predict_proba",
-            ),
+            )
         )
 
         papermill.execute_notebook(
             "Deployment.ipynb",
-            "/dev/null",
+            PATH,
         )
         data = datasets.titanic_testdata()
         with server.Server() as s:
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
+        self.assertEqual(len(ndarray[0]), 14)  # 13 features  + 1 new feature
         self.assertEqual(len(names), 14)
