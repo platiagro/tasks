@@ -1,10 +1,12 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
 from tests import datasets, server
+from tests.utils import mock_log_metric
 
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())

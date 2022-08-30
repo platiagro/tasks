@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -9,6 +10,7 @@ from tests import datasets
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
+
 
 
 class TestFastAutoCV(unittest.TestCase):
@@ -49,3 +51,4 @@ class TestFastAutoCV(unittest.TestCase):
                 momentum=0.1,
             ),
         )
+        

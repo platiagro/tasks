@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -9,6 +10,7 @@ from tests import datasets, server
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
+
 
 
 class TestAutoMLRegressor(unittest.TestCase):
@@ -28,6 +30,7 @@ class TestAutoMLRegressor(unittest.TestCase):
         os.chdir("../../")
 
     def test_experiment_boston(self):
+
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
@@ -55,5 +58,6 @@ class TestAutoMLRegressor(unittest.TestCase):
             response = s.test(data=data)
         names = response["names"]
         ndarray = response["ndarray"]
+        
         self.assertEqual(len(ndarray[0]), 14)  # 13 features + 1 prediction
         self.assertEqual(len(names), 14)

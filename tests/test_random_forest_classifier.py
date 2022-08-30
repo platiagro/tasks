@@ -1,7 +1,9 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
+import pytest
 import papermill
 
 from tests import datasets, server
@@ -9,6 +11,7 @@ from tests import datasets, server
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
+
 
 
 class TestRandomForestClassifier(unittest.TestCase):
@@ -62,38 +65,41 @@ class TestRandomForestClassifier(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 class + 3 probas
         self.assertEqual(len(names), 8)
+        
 
     def test_experiment_titanic(self):
-        papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
-            parameters=dict(
-                dataset="/tmp/data/titanic.csv",
-                target="Survived",
+        with pytest.raises(papermill.PapermillExecutionError):
+            papermill.execute_notebook(
+                "Experiment.ipynb",
+                "/dev/null",
+                parameters=dict(
+                    dataset="/tmp/data/titanic.csv",
+                    target="Survived",
 
-                filter_type="remover",
-                model_features="",
+                    filter_type="remover",
+                    model_features="",
 
-                one_hot_features="",
+                    one_hot_features="",
 
-                n_estimators=10,
-                criterion="gini",
-                max_depth=None,
-                max_features="auto",
-                class_weight=None,
+                    n_estimators=10,
+                    criterion="gina",
+                    max_depth=None,
+                    max_features="auto",
+                    class_weight=None,
 
-                method="predict_proba",
-            ),
-        )
+                    method="predict_proba",
+                ),
+            )
 
-        papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
-        )
-        data = datasets.titanic_testdata()
-        with server.Server() as s:
-            response = s.test(data=data)
-        names = response["names"]
-        ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
-        self.assertEqual(len(names), 14)
+            papermill.execute_notebook(
+                "Deployment.ipynb",
+                "/dev/null",
+            )
+            data = datasets.titanic_testdata()
+            with server.Server() as s:
+                response = s.test(data=data)
+            names = response["names"]
+            ndarray = response["ndarray"]
+            self.assertEqual(len(ndarray[0]), 14)  # 11 features + 1 class + 2 probas
+            self.assertEqual(len(names), 14)
+            

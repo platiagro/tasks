@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -9,6 +10,7 @@ from tests import datasets, server
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
+
 
 
 class TestKmeansClustering(unittest.TestCase):
@@ -35,10 +37,10 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-                
-                filter_type = "remover",
-                model_features = "Species",
-                
+
+                filter_type="remover",
+                model_features="Species",
+
                 n_clusters=3,
                 n_init=10,
                 max_iter=300,
@@ -57,6 +59,7 @@ class TestKmeansClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 8)  # 4 features + 1 cluster + 3 distance to clusters
         self.assertEqual(len(names), 8)
+        
 
     def test_experiment_titanic(self):
         papermill.execute_notebook(
@@ -64,9 +67,9 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/titanic.csv",
-                
-                filter_type = "remover",
-                model_features = "Survived",
+
+                filter_type="remover",
+                model_features="Survived",
 
                 n_clusters=3,
                 n_init=10,
@@ -86,6 +89,7 @@ class TestKmeansClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 15)  # 11 features+ 1 cluster + 3 distance to clusters
         self.assertEqual(len(names), 15)
+        
 
     def test_experiment_boston(self):
         papermill.execute_notebook(
@@ -93,9 +97,9 @@ class TestKmeansClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
-                
-                filter_type = "remover",
-                model_features = "medv",
+
+                filter_type="remover",
+                model_features="medv",
 
                 n_clusters=3,
                 n_init=10,
@@ -115,3 +119,4 @@ class TestKmeansClustering(unittest.TestCase):
         ndarray = response["ndarray"]
         self.assertEqual(len(ndarray[0]), 17)  # 13 features+ 1 cluster + 3 distance to clusters
         self.assertEqual(len(names), 17)
+        

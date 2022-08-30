@@ -1,6 +1,7 @@
 import os
 import unittest
 import uuid
+from unittest import mock
 
 import papermill
 
@@ -9,6 +10,7 @@ from tests import datasets, server
 EXPERIMENT_ID = str(uuid.uuid4())
 OPERATOR_ID = str(uuid.uuid4())
 RUN_ID = str(uuid.uuid4())
+
 
 
 class TestCVOCR(unittest.TestCase):
@@ -53,7 +55,7 @@ class TestCVOCR(unittest.TestCase):
 
         for ext in ['png', 'jpg']:
             data = datasets.image_testdata(kind='text',  ext=ext)
-            
+
             with server.Server() as s:
                 response = s.test(data=data, timeout=10)
 
@@ -62,7 +64,7 @@ class TestCVOCR(unittest.TestCase):
                 xmin, ymin, xmax, ymax, text = bbox
                 self.assertGreater(xmax, xmin, "BoundingBox incorreta.")
                 self.assertGreater(ymax, ymin, "BoundingBox incorreta.")
-
+        
 
     """
     def test_experiment_ocr_output_nparray(self):

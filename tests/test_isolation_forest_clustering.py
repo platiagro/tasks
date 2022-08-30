@@ -1,7 +1,10 @@
 import os
 import unittest
 import uuid
+from unittest import mock
+from json.decoder import JSONDecodeError
 
+import pytest
 import papermill
 
 from tests import datasets, server
@@ -36,9 +39,9 @@ class TestIsolationForestClustering(unittest.TestCase):
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/iris.csv",
-                
-                filter_type = "remover",
-                model_features = "Species",
+
+                filter_type="remover",
+                model_features="Species",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -58,43 +61,15 @@ class TestIsolationForestClustering(unittest.TestCase):
         self.assertEqual(len(ndarray[0]), 5)  # 4 features + 1 anomaly score
         self.assertEqual(len(names), 5)
 
-    def test_experiment_titanic(self):
-        papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
-            parameters=dict(
-                dataset="/tmp/data/titanic.csv",
-                
-                filter_type = "remover",
-                model_features = "Survived",
-
-                max_samples="auto",
-                contamination=0.1,
-                max_features=1.0,
-            ),
-        )
-
-        papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
-        )
-        data = datasets.titanic_testdata()
-        with server.Server() as s:
-            response = s.test(data=data)
-        names = response["names"]
-        ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 12)  # 11 features + 1 anomaly score
-        self.assertEqual(len(names), 12)
-
     def test_experiment_boston(self):
         papermill.execute_notebook(
             "Experiment.ipynb",
             "/dev/null",
             parameters=dict(
                 dataset="/tmp/data/boston.csv",
-                
-                filter_type = "remover",
-                model_features = "medv",
+
+                filter_type="remover",
+                model_features="medv",
 
                 max_samples="auto",
                 contamination=0.1,
@@ -115,29 +90,58 @@ class TestIsolationForestClustering(unittest.TestCase):
         self.assertEqual(len(names), 14)
 
     def test_hotel_bookings(self):
-        papermill.execute_notebook(
-            "Experiment.ipynb",
-            "/dev/null",
-            parameters=dict(
-                dataset="/tmp/data/hotel_bookings.csv",
-                
-                filter_type = "remover",
-                model_features = "is_canceled",
+        with pytest.raises(JSONDecodeError):
+            papermill.execute_notebook(
+                "Experiment.ipynb",
+                "/dev/null",
+                parameters=dict(
 
-                max_samples="auto",
-                contamination=0.1,
-                max_features=1.0,
-            ),
-        )
+                    filter_type="remover",
+                    model_features="is_canceled",
 
-        papermill.execute_notebook(
-            "Deployment.ipynb",
-            "/dev/null",
-        )
-        data = datasets.hotel_bookings_testdata()
-        with server.Server() as s:
-            response = s.test(data=data)
-        names = response["names"]
-        ndarray = response["ndarray"]
-        self.assertEqual(len(ndarray[0]), 32)  # 31 features + 1 anomaly score
-        self.assertEqual(len(names), 32)
+                    max_samples="auto",
+                    contamination=0.1,
+                    max_features=1.0,
+                ),
+            )
+            papermill.execute_notebook(
+                "Deployment.ipynb",
+                "/dev/null",
+            )
+            data = datasets.hotel_bookings_testdata()
+            with server.Server() as s:
+                response = s.test(data=data)
+            names = response["names"]
+            ndarray = response["ndarray"]
+
+            self.assertEqual(len(ndarray[0]), 32)  # 31 features + 1 anomaly score
+            self.assertEqual(len(names), 32)
+
+    def test_experiment_titanic(self):
+        with pytest.raises(papermill.PapermillExecutionError):
+            papermill.execute_notebook(
+                "Experiment.ipynb",
+                "/dev/null",
+                parameters=dict(
+                    dataset="/tmp/data/titanic.csv",
+
+                    filter_type="remover",
+                    model_features="Survived",
+
+                    max_samples="auto",
+                    contamination=0.1,
+                    max_features=105665,
+                ),
+            )
+
+            papermill.execute_notebook(
+                "Deployment.ipynb",
+                "/dev/null",
+            )
+            data = datasets.titanic_testdata()
+            with server.Server() as s:
+                response = s.test(data=data)
+            names = response["names"]
+            ndarray = response["ndarray"]
+            self.assertEqual(len(ndarray[0]), 12)  # 11 features + 1 anomaly score
+            self.assertEqual(len(names), 12)
